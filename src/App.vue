@@ -37,4 +37,11 @@ $pink-color: rgb(244, 143, 177);
 page {
   background-color: #{$grey-background-color};
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 </style>

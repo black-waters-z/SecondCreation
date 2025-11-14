@@ -11,18 +11,38 @@
     },
     {
       "path": "pages/user/index",
-      "style": { "navigationBarTitleText": "我的" }
+      "style": {
+        "navigationBarTitleText": "我的",
+        "h5": {
+          "navigationStyle": "custom"
+        }
+      }
     },
     {
       "path": "pages/store/index",
-      "style": { "navigationBarTitleText": "仓库" }
+      "style": {
+        "navigationBarTitleText": "仓库",
+        "h5": {
+          "navigationStyle": "custom"
+        }
+      }
     },
     {
       "path": "pages/more/index",
-      "style": { "navigationBarTitleText": "仓库" }
+      "style": {
+        "navigationBarTitleText": "仓库",
+        "h5": {
+          "navigationStyle": "custom"
+        }
+      }
     },
     {
-      "path": "pages/NoFound/index"
+      "path": "pages/NoFound/index",
+      "style": {
+        "h5": {
+          "navigationStyle": "custom"
+        }
+      }
     }
   ],
   "globalStyle": {
@@ -39,43 +59,43 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3CC51F",
+    "selectedColor": "#db639b",
     "backgroundColor": "#FFFFFF",
-    "borderStyle": "black",
+    "borderStyle": "white",
+    "height": "50px",
     "list": [
       {
         "pagePath": "pages/store/index",
-        "text": "我的",
-        "iconPath": "static/logo.png",
-        "selectedIconPath": "static/candy.png"
+        "text": "粮仓",
+        "iconPath": "static/icon/store-grey.png",
+        "selectedIconPath": "static/icon/store-pink.png"
       },
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/logo.png",
-        "selectedIconPath": "static/candy.png"
+        "iconPath": "static/icon/home-grey.png",
+        "selectedIconPath": "static/icon/home-pink.png"
       },
       {
         "pagePath": "pages/more/index",
         "text": "更多",
-        "iconPath": "static/logo.png",
-        "selectedIconPath": "static/candy.png"
+        "iconPath": "static/icon/notice-grey.png",
+        "selectedIconPath": "static/icon/notice-pink.png"
       },
       {
         "pagePath": "pages/user/index",
         "text": "我的",
-        "iconPath": "static/logo.png",
-        "selectedIconPath": "static/candy.png"
+        "iconPath": "static/icon/user-grey.png",
+        "selectedIconPath": "static/icon/user-pink.png"
       }
     ],
     "midButton": {
-      "iconPath": "static/candy.png",
-      "selectedIconPath": "static/candy.png",
+      "iconPath": "/static/icon/post.png",
       "iconWidth": "40px",
       "height": "60px",
       "text": "发布",
       "top": "-40px",
-      "backgroundImage": "",
+      "backgroundImage": "/static/icon/circle.png",
       "circle": true
     }
   }

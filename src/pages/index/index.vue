@@ -38,11 +38,6 @@ import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
 import Notice from "./components/Notice.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
-import { useHeadBarStore } from "@/store/useHeadBar";
-import { storeToRefs } from "pinia";
-import { onShow } from "@dcloudio/uni-app";
-
-const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
 
 const info = ref([
   { content: "内容 A" },
@@ -65,10 +60,6 @@ if (process.env.NODE_ENV === "development") {
 
 onMounted(async () => {
   // 切换成底部tab的时候head的active要消失
-});
-
-onShow(() => {
-  activeNavigatorIndex.value = -1;
 });
 </script>
 

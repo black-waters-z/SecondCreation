@@ -1,9 +1,9 @@
 <template>
   <view>
     <!-- #ifdef MP-WEIXIN  -->
-    <button class="middle-button" @click="clickMiddleButton">
+    <view class="middle-button" @click="clickMiddleButton">
       <b>{{ buttonText }}</b>
-    </button>
+    </view>
     <!-- #endif -->
   </view>
 </template>
@@ -28,6 +28,10 @@ const clickMiddleButton = function () {
   transform: translateY(50%);
   z-index: 2000;
   width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   aspect-ratio: 1/1;
   text-align: center;
   border-radius: 1000rpx;

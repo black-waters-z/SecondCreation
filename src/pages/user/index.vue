@@ -1,9 +1,20 @@
 <template>
-  <head-bar></head-bar>
+  <view class="content">
+    <post-sheet></post-sheet>
+    <post-sheet-show></post-sheet-show>
+  </view>
 </template>
 
 <script setup lang="ts">
-import HeadBar from "@/components/common/HeadBar.vue";
+import PostSheet from "@/components/common/PostSheet.vue";
+import PostSheetShow from "@/components/common/PostSheetShow.vue";
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+</style>

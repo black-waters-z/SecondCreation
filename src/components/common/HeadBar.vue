@@ -128,7 +128,7 @@ const handleNavigator = (idx: number) => {
     .navigation-text-active {
       font-size: 30rpx;
       color: palevioletred !important;
-      transition: 0.3s;
+      transition: 0.3s ease-in-out;
       height: 40rpx;
       font-weight: 700;
     }
