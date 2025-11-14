@@ -35,8 +35,10 @@
 import { usePostSheetStore } from "@/store/usePostSheet";
 import { storeToRefs } from "pinia";
 import PostChoice from "./PostChoice.vue";
+import { ref } from "vue";
 const postSheetStore = usePostSheetStore();
 const { visible } = storeToRefs(postSheetStore);
+
 </script>
 
 <style lang="less" scoped>
@@ -74,4 +76,6 @@ const { visible } = storeToRefs(postSheetStore);
   width: 50%;
   height: 50%;
 }
+
+
 </style>

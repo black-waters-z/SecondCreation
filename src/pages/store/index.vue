@@ -1,9 +1,9 @@
 <template>
-  <head-bar></head-bar>
+  <view>
+    <head-bar></head-bar>
+  </view>
 </template>
 
 <script setup lang="ts">
 import HeadBar from "@/components/common/HeadBar.vue";
 </script>
-
-<style scoped lang="scss"></style>

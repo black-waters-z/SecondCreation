@@ -19,69 +19,31 @@
         </swiper-item>
       </swiper>
     </uni-swiper-dot>
-    <view class="navigation-module">
-      <view class="navigation">
-        <!-- <image class="navigation-img" src="@/static/paint.png" /> -->
-        <uni-icons fontFamily="CustomFont" size="30" class="navigation__pink">
-          {{ "&#xe6af;" }}
-        </uni-icons>
-        <text class="navigation-text">{{ ArticleModule.paint }}</text>
-      </view>
-      <view class="navigation">
-        <!-- <image class="navigation-img" src="@/static/write.png" /> -->
-        <uni-icons fontFamily="CustomFont" size="30" class="navigation__pink">
-          {{ "&#xe782;" }}
-        </uni-icons>
-        <text class="navigation-text">{{ ArticleModule.write }}</text>
-      </view>
-      <view class="navigation">
-        <!-- <image class="navigation-img" src="@/static/candy.png" /> -->
-        <uni-icons fontFamily="CustomFont" size="30" class="navigation__pink">
-          {{ "&#xe65b;" }}
-        </uni-icons>
-        <text class="navigation-text">{{ ArticleModule.candy }}</text>
-      </view>
-      <view class="navigation">
-        <!-- <image class="navigation-img" src="@/static/communicate.png" /> -->
-        <uni-icons fontFamily="CustomFont" size="30" class="navigation__pink">
-          {{ "&#xe6f0;" }}
-        </uni-icons>
-        <text class="navigation-text">{{ ArticleModule.communicate }}</text>
-      </view>
-      <view class="navigation">
-        <!-- <image class="navigation-img" src="@/static/video.png" /> -->
-        <uni-icons fontFamily="CustomFont" size="30" class="navigation__pink">
-          {{ "&#xe678;" }}
-        </uni-icons>
-        <text class="navigation-text">{{ ArticleModule.video }}</text>
-      </view>
-    </view>
+
     <notice></notice>
-    <!-- #ifdef MP-WEIXIN  -->
-    <button id="middle-button" @click="clickMiddleButton">
-      <b>{{ buttonText }}</b>
-    </button>
-    <!-- #endif -->
     <hot :hot-title="HotTime.day"> </hot>
     <hot :hot-title="HotTime.week"> </hot>
     <hot :hot-title="HotTime.month"> </hot>
     <foot />
     <post-sheet></post-sheet>
+    <post-sheet-show></post-sheet-show>
   </view>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { apiRequest } from "@/utils/request";
+import { computed, onMounted, ref } from "vue";
 import { HotTime, ArticleModule } from "./types/index";
-import { usePostSheetStore } from "@/store/usePostSheet";
 import Foot from "@/components/common/Foot.vue";
 import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
 import Notice from "./components/Notice.vue";
-const postSheetStore = usePostSheetStore();
-const buttonText = ref("+");
-const { toggle } = postSheetStore;
+import PostSheetShow from "@/components/common/PostSheetShow.vue";
+import { useHeadBarStore } from "@/store/useHeadBar";
+import { storeToRefs } from "pinia";
+import { onShow } from "@dcloudio/uni-app";
+
+const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
+
 const info = ref([
   { content: "内容 A" },
   { content: "内容 B" },
@@ -102,14 +64,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 onMounted(async () => {
-  // const result = await apiRequest("/health", { method: "GET" });
-  // console.log("aaa", result);
+  // 切换成底部tab的时候head的active要消失
 });
 
-const clickMiddleButton = function () {
-  toggle();
-  buttonText.value = buttonText.value == "+" ? "-" : "+";
-};
+onShow(() => {
+  activeNavigatorIndex.value = -1;
+});
 </script>
 
 <style scoped lang="scss">
@@ -119,10 +79,6 @@ const clickMiddleButton = function () {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  .navigation-text {
-    font-size: 25rpx;
-    color: var(--font-title-color);
   }
 
   .swiper-box {
@@ -137,53 +93,6 @@ const clickMiddleButton = function () {
     width: 100%;
     height: 100%;
     background-color: white;
-  }
-
-  .navigation-module {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 98%;
-    margin-top: 10rpx;
-    border-radius: 16rpx;
-    background-color: white;
-    padding: 10rpx 0 10rpx 0;
-  }
-
-  #middle-button {
-    position: fixed;
-    right: -20rpx;
-    bottom: 150rpx;
-    transform: translateY(50%);
-    z-index: 2000;
-    width: 100rpx;
-    aspect-ratio: 1/1;
-    text-align: center;
-    border-radius: 1000rpx;
-    background-color: white;
-  }
-
-  #middle-button:active {
-    background-color: antiquewhite;
-  }
-
-  .navigation {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 30rpx;
-    font-weight: 700;
-    font-family: var(--text-title-family);
-
-    &__pink {
-      color: var(--pink-color) !important;
-
-      span {
-        width: 100rpx;
-      }
-    }
   }
 
   .navigation-img {
