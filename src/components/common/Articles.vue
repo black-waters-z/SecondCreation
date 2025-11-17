@@ -75,7 +75,7 @@ onMounted(() => {
     width: 100%;
     margin-top: 16rpx;
     border-radius: 12rpx;
-    height: 200rpx;
+    aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;

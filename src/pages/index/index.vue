@@ -1,5 +1,8 @@
 <template>
   <view class="content">
+    <!-- #ifdef MP-WEIXIN -->
+    <search-bar></search-bar>
+    <!-- #endif -->
     <uni-swiper-dot
       :info="info"
       :current="current"
@@ -19,7 +22,9 @@
         </swiper-item>
       </swiper>
     </uni-swiper-dot>
-
+    <!-- #ifdef H5 -->
+    <search-bar></search-bar>
+    <!-- #endif -->
     <notice></notice>
     <hot :hot-title="HotTime.day"> </hot>
     <hot :hot-title="HotTime.week"> </hot>
@@ -38,7 +43,7 @@ import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
 import Notice from "./components/Notice.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
-
+import SearchBar from "@/components/common/SearchBar.vue";
 const info = ref([
   { content: "内容 A" },
   { content: "内容 B" },

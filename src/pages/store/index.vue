@@ -1,6 +1,7 @@
 <template>
   <view class="content">
     <head-bar></head-bar>
+    <Filter v-model="filterIndex"></Filter>
     <div class="store-container">
       <articles :zone="activeNavigatorIndex"></articles>
     </div>
@@ -16,13 +17,17 @@ import Articles from "@/components/common/Articles.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
 import ToTop from "@/components/common/ToTop.vue";
+import Filter from "@/components/common/Filter.vue";
 import { useHeadBarStore } from "@/store/useHeadBar";
 import { onLaunch, onShow } from "@dcloudio/uni-app";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
 onShow(() => {
   if (activeNavigatorIndex.value === -1) activeNavigatorIndex.value = 0;
 });
+
+const filterIndex = ref<number>(0);
 </script>
 
 <style lang="scss" scoped>
@@ -33,11 +38,8 @@ onShow(() => {
   justify-content: center;
 }
 .store-container {
-  // #ifdef MP-WEIXIN
-  margin-top: 80rpx;
-  // #endif
+  margin-top: 140rpx;
   width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
 }
