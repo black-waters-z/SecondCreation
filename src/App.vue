@@ -32,10 +32,11 @@ $pink-color: rgb(244, 143, 177);
   --font-title-color: #1f2933;
   --grey-background-color: #{$grey-background-color};
   --pink-color: #{$pink-color};
+  --status-bar-height: 50px;
 }
 
 page {
-  background-color: #{$grey-background-color};
+  background-color: $grey-background-color;
 }
 
 .content {
@@ -43,5 +44,6 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--grey-background-color);
 }
 </style>

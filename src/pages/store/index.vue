@@ -1,5 +1,6 @@
 <template>
   <view class="content">
+    <head-nav></head-nav>
     <head-bar></head-bar>
     <Filter v-model="filterIndex"></Filter>
     <div class="store-container">
@@ -16,6 +17,7 @@ import HeadBar from "@/components/common/HeadBar.vue";
 import Articles from "@/components/common/Articles.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
+import HeadNav from "@/components/common/HeadNav.vue";
 import ToTop from "@/components/common/ToTop.vue";
 import Filter from "@/components/common/Filter.vue";
 import { useHeadBarStore } from "@/store/useHeadBar";

@@ -88,11 +88,14 @@ const handleNavigator = (idx: number) => {
     background-color: white;
     display: flex;
     align-items: flex-end;
-    justify-content: center;
     column-gap: 10rpx;
     position: fixed;
     left: 0px;
-    top: 0px;
+    top: 0rpx;
+    // #ifdef MP-WEIXIN
+    top: 80rpx;
+    padding-top: 20rpx;
+    // #endif
     z-index: 1000;
     height: 60rpx;
 

@@ -1,27 +1,27 @@
 <template>
   <view class="content">
-    <!-- #ifdef MP-WEIXIN -->
-    <search-bar></search-bar>
-    <!-- #endif -->
-    <uni-swiper-dot
-      :info="info"
-      :current="current"
-      field="content"
-      :mode="mode"
-    >
-      <swiper
-        class="swiper-box"
-        autoplay
-        circular
-        interval="3000"
-        duration="500"
-        @change="change"
+    <head-nav></head-nav>
+    <view class="content__head">
+      <uni-swiper-dot
+        :info="info"
+        :current="current"
+        field="content"
+        :mode="mode"
       >
-        <swiper-item v-for="(item, index) in info" :key="index">
-          <image class="swiper-item" src="@/static/homepic1.png"> </image>
-        </swiper-item>
-      </swiper>
-    </uni-swiper-dot>
+        <swiper
+          class="swiper-box"
+          autoplay
+          circular
+          interval="3000"
+          duration="500"
+          @change="change"
+        >
+          <swiper-item v-for="(item, index) in info" :key="index">
+            <image class="swiper-item" src="@/static/homepic1.png"> </image>
+          </swiper-item>
+        </swiper>
+      </uni-swiper-dot>
+    </view>
     <!-- #ifdef H5 -->
     <search-bar></search-bar>
     <!-- #endif -->
@@ -44,6 +44,7 @@ import PostSheet from "@/components/common/PostSheet.vue";
 import Notice from "./components/Notice.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
 import SearchBar from "@/components/common/SearchBar.vue";
+import HeadNav from "@/components/common/HeadNav.vue";
 const info = ref([
   { content: "内容 A" },
   { content: "内容 B" },
@@ -75,6 +76,12 @@ onMounted(async () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    &__head {
+      //#ifdef MP-WEIXIN
+      margin-top: 0rpx;
+      //#endif
+    }
   }
 
   .swiper-box {
@@ -88,7 +95,6 @@ onMounted(async () => {
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: white;
   }
 
   .navigation-img {
@@ -113,7 +119,6 @@ onMounted(async () => {
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: white;
     border-radius: 18px;
   }
 }

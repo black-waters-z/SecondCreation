@@ -1,5 +1,6 @@
 <template>
   <view class="content">
+    <head-nav></head-nav>
     <view class="content__user">
       <user-bar></user-bar>
       <support-pay></support-pay>
@@ -22,6 +23,8 @@ import PostSheetShow from "@/components/common/PostSheetShow.vue";
 import UserBar from "./components/UserBar.vue";
 import SupportPay from "./components/SupportPay.vue";
 import ReadNav from "./components/ReadNav.vue";
+import HeadNav from "@/components/common/HeadNav.vue";
+
 import { ref } from "vue";
 
 const login = ref(false);

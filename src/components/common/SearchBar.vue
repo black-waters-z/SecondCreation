@@ -8,6 +8,10 @@
   </view>
 </template>
 
+<script setup lang="ts">
+//
+</script>
+
 <style scoped lang="scss">
 @font-face {
   font-family: CustomFont;
@@ -24,10 +28,10 @@ $icon-grey: #707070;
   align-items: center;
   position: fixed;
   z-index: 2000;
-  top: 0;
 
   // #ifdef MP-WEIXIN
   transform: translateX(-50%);
+  top: 80rpx;
   // #endif
 
   // #ifdef H5

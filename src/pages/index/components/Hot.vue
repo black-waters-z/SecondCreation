@@ -25,7 +25,6 @@ withDefaults(defineProps<{ hotTitle: HotTime }>(), {
 <style lang="scss" scoped>
 .hot-container {
   width: 100vw;
-  background-color: var(--grey-background-color);
   display: flex;
   flex-direction: column;
   align-items: center;

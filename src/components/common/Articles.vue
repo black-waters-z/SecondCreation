@@ -1,7 +1,7 @@
 <template>
   <view class="ranks">
     <view v-for="(item, index) in article" :key="index" class="rank-card">
-      <view class="rank-card__title">{{
+      <view class="rank-card__title" @click="goToArticle">{{
         item.title || `热门内容 ${index + 1}`
       }}</view>
       <view class="rank-card__author">{{ item.author || "匿名作者" }}</view>
@@ -13,6 +13,12 @@
 
 <script lang="ts" setup>
 import { onMounted } from "vue";
+
+function goToArticle() {
+  uni.navigateTo({
+    url: "../article/index",
+  });
+}
 
 const props = withDefaults(defineProps<{ article?: any; zone?: number }>(), {
   article: () => [

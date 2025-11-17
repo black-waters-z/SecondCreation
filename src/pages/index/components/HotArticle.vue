@@ -27,6 +27,7 @@ withDefaults(defineProps<{ article?: RankArticle[] }>(), {
 </script>
 
 <style scoped lang="scss">
+$grey-background-color: rgb(248, 248, 248);
 .ranks {
   width: 95vw;
   column-count: 2;

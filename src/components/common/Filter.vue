@@ -35,6 +35,9 @@ $grey-background-color: rgb(248, 248, 248);
   position: fixed;
   left: 0;
   top: 70rpx;
+  // #ifdef MP-WEIXIN
+  top: 160rpx;
+  // #endif
   height: 70rpx;
   font-size: 30rpx;
   background-color: white;

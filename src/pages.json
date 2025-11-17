@@ -3,38 +3,29 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "濑名紫阳花 x 甘织玲奈子",
-        "h5": {
-          "navigationStyle": "custom"
-        }
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/user/index",
       "style": {
-        "navigationBarTitleText": "我的",
-        "h5": {
-          "navigationStyle": "custom"
-        }
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/store/index",
       "style": {
-        "navigationBarTitleText": "仓库",
-        "h5": {
-          "navigationStyle": "custom"
-        }
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/more/index",
       "style": {
-        "navigationBarTitleText": "仓库",
-        "h5": {
-          "navigationStyle": "custom"
-        }
+        "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/article/index"
     },
     {
       "path": "pages/NoFound/index",
@@ -49,7 +40,7 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#f2f2f2"
+    "backgroundColor": "#F8F8F8"
   },
   "easycom": {
     "autoscan": true,

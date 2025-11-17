@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view :style="{ marginTop: '20rpx' }">
     <view class="bar" v-for="(favorite, index) in favorites">
       <view class="image"></view>
       <view class="bar__text">
@@ -7,8 +7,8 @@
         <view class="introduction">{{ favorite.introduction }}</view>
       </view>
       <view class="bar__more">
-        <uni-icons fontFamily="CustomFont" color="grey" size="24">
-          &#xe647;
+        <uni-icons fontFamily="CustomFont" color="grey" size="12">
+          &#xe605;
         </uni-icons>
       </view>
     </view>
@@ -44,15 +44,14 @@ withDefaults(defineProps<{ favorites?: Favorite[] }>(), {
   border-radius: 8px;
   display: flex;
   align-items: center;
-  margin-top: 20rpx;
   gap: 10rpx;
 
   .image {
     background-color: rgb(173, 173, 173);
     opacity: 0.5;
-    width: 200rpx;
-    height: 120rpx;
-    border-radius: 16rpx;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 1000rpx;
     margin-left: 20rpx;
   }
 
@@ -60,6 +59,8 @@ withDefaults(defineProps<{ favorites?: Favorite[] }>(), {
     display: flex;
     height: 120rpx;
     flex-direction: column;
+    flex: 1;
+    border-bottom: 1px solid #f8f8f8;
 
     .title {
       font-weight: 600;
@@ -75,7 +76,10 @@ withDefaults(defineProps<{ favorites?: Favorite[] }>(), {
   }
 
   &__more {
-    height: 110rpx;
+    height: 100rpx;
+    width: 50rpx;
+    display: flex;
+    align-items: center;
   }
 }
 </style>
