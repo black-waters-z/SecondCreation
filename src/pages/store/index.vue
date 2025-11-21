@@ -34,13 +34,11 @@ const filterIndex = ref<number>(0);
 
 <style lang="scss" scoped>
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  // #ifdef MP-WEIXIN
+  margin-top: 240rpx;
+  // #endif
 }
 .store-container {
-  margin-top: 140rpx;
   width: 100vw;
   display: flex;
   justify-content: center;

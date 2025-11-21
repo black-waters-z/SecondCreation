@@ -16,7 +16,7 @@ import { onMounted } from "vue";
 
 function goToArticle() {
   uni.navigateTo({
-    url: "../article/index",
+    url: `../article/index?art_id=${1}`,
   });
 }
 
@@ -52,6 +52,8 @@ onMounted(() => {
 <style scoped lang="scss">
 .ranks {
   width: 95vw;
+  height: 100%;
+  top: 0;
   column-count: 2;
   column-gap: 20rpx;
   box-sizing: border-box;
