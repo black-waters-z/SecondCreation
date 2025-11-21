@@ -38,12 +38,12 @@ $pink-color: rgb(244, 143, 177);
 page {
   background-color: $grey-background-color;
 }
-
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  overflow: auto;
+  height: calc(100vh - 240rpx);
   background-color: var(--grey-background-color);
 }
 </style>

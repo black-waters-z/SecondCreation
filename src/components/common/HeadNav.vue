@@ -19,11 +19,4 @@
   );
   left: 0;
 }
-
-.bar {
-  width: 100vw;
-  top: 0;
-  min-height: 80rpx;
-  left: 0;
-}
 </style>

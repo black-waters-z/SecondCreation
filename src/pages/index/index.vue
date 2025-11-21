@@ -1,6 +1,7 @@
 <template>
   <view class="content">
     <head-nav></head-nav>
+    <view> </view>
     <view class="content__head">
       <uni-swiper-dot
         :info="info"
@@ -25,7 +26,7 @@
     <!-- #ifdef H5 -->
     <search-bar></search-bar>
     <!-- #endif -->
-    <notice></notice>
+    <character-nav></character-nav>
     <hot :hot-title="HotTime.day"> </hot>
     <hot :hot-title="HotTime.week"> </hot>
     <hot :hot-title="HotTime.month"> </hot>
@@ -45,6 +46,7 @@ import Notice from "./components/Notice.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
 import SearchBar from "@/components/common/SearchBar.vue";
 import HeadNav from "@/components/common/HeadNav.vue";
+import CharacterNav from "./components/CharacterNav.vue";
 const info = ref([
   { content: "内容 A" },
   { content: "内容 B" },
@@ -75,7 +77,10 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    // #ifdef MP-WEIXIN
+    margin-top: 80rpx;
+    // #endif
+    height: calc(100vh - 80rpx);
 
     &__head {
       //#ifdef MP-WEIXIN

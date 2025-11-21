@@ -10,13 +10,14 @@
       <uni-icons type="fire-filled" size="15" color="black"> </uni-icons>
     </view>
     <div class="hot-articles">
-      <hot-article></hot-article>
+      <Articles :zone="0"></Articles>
     </div>
   </view>
 </template>
 <script setup lang="ts">
 import { HotTime } from "../types/index";
 import HotArticle from "./HotArticle.vue";
+import Articles from "@/components/common/Articles.vue";
 withDefaults(defineProps<{ hotTitle: HotTime }>(), {
   hotTitle: HotTime.day,
 });

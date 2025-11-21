@@ -47,7 +47,9 @@ const writeNavItems = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // #ifdef MP-WEIXIN
+  margin-top: 80rpx;
+  // #endif
 
   &__user {
     width: 100vw;
