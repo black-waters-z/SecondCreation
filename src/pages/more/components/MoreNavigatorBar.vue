@@ -1,24 +1,44 @@
 <template>
   <view class="content bar">
     <view class="navigator">
-      <uni-icons fontFamily="CustomFont" color="grey" size="24">
-        &#xe89c;
+      <uni-icons
+        fontFamily="CustomFont"
+        color="palevioletred"
+        size="24"
+        class="icon"
+      >
+        &#xe600;
       </uni-icons>
       官方消息
     </view>
     <view class="navigator">
-      <uni-icons fontFamily="CustomFont" color="grey" size="24">
-        &#xe89c; </uni-icons
+      <uni-icons
+        fontFamily="CustomFont"
+        color="palevioletred"
+        size="24"
+        class="icon"
+      >
+        &#xe64d; </uni-icons
       >回复
     </view>
     <view class="navigator">
-      <uni-icons fontFamily="CustomFont" color="grey" size="24">
-        &#xe89c; </uni-icons
+      <uni-icons
+        fontFamily="CustomFont"
+        color="palevioletred"
+        size="24"
+        class="icon"
+      >
+        &#xe651; </uni-icons
       >点赞
     </view>
     <view class="navigator">
-      <uni-icons fontFamily="CustomFont" color="grey" size="24">
-        &#xe89c; </uni-icons
+      <uni-icons
+        fontFamily="CustomFont"
+        color="palevioletred"
+        size="24"
+        class="icon"
+      >
+        &#xe636; </uni-icons
       >私信
     </view>
   </view>
@@ -47,6 +67,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    .icon {
+      font-weight: 800;
+      margin-bottom: 10rpx;
+    }
   }
 }
 </style>

@@ -68,7 +68,6 @@ $grey-background-color: rgb(248, 248, 248);
 
   &__text {
     background-color: #e5e7eb;
-    min-height: 100rpx;
     border-radius: 12rpx;
     padding: 10rpx;
     margin-top: 16rpx;

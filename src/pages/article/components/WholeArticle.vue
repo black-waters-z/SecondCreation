@@ -24,6 +24,7 @@
             v-if="like"
             @click="like = !like"
             class="icon"
+            color="darkred"
             >&#xe62b;
           </uni-icons>
           <uni-icons
@@ -70,10 +71,20 @@ onMounted(() => {
   font-family: CustomFont;
   src: url("../../../static/iconfont.ttf");
 }
+
+// #ifdef MP-WEIXIN
+$whole-article-container__margin-top: 80rpx;
+// #endif
+
+// #ifdef H5
+$whole-article-container__margin-top: 0rpx;
+// #endif
+
 .whole-article-container {
   width: 100vw;
   display: flex;
   justify-content: center;
+  margin-top: $whole-article-container__margin-top;
 
   &__article {
     width: 98vw;
@@ -133,9 +144,8 @@ onMounted(() => {
 
       &__interact {
         float: right;
-
         .icon {
-          margin-right: 10rpx;
+          margin-right: 15rpx;
         }
       }
     }

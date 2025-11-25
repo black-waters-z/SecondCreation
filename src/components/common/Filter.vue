@@ -1,5 +1,5 @@
 <template>
-  <view class="filter-container">
+  <view class="filter-container" :style="{ marginTop: marginTop }">
     <!-- 筛选条件 -->
     <text
       v-for="(value, index) in filters"
@@ -11,10 +11,17 @@
 </template>
 
 <script setup lang="ts">
-const filters = ["最热", "本月最热", "本周最热", "最新"];
-const props = withDefaults(defineProps<{ modelValue?: number }>(), {
-  modelValue: 0,
-});
+const props = withDefaults(
+  defineProps<{
+    modelValue?: number;
+    filters?: Array<string>;
+    marginTop?: string;
+  }>(),
+  {
+    modelValue: 0,
+    filters: () => ["最热", "本月最热", "本周最热", "最新"],
+  }
+);
 const emit = defineEmits<{
   (e: "update:modelValue", value: number): void;
 }>();

@@ -11,12 +11,12 @@
     </view>
     <div class="hot-articles">
       <Articles :zone="0"></Articles>
+      <Articles :zone="1"></Articles>
     </div>
   </view>
 </template>
 <script setup lang="ts">
 import { HotTime } from "../types/index";
-import HotArticle from "./HotArticle.vue";
 import Articles from "@/components/common/Articles.vue";
 withDefaults(defineProps<{ hotTitle: HotTime }>(), {
   hotTitle: HotTime.day,
@@ -46,4 +46,11 @@ withDefaults(defineProps<{ hotTitle: HotTime }>(), {
   }
 }
 /* #endif */
+
+.hot-articles {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

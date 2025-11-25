@@ -1,7 +1,16 @@
 <template>
   <view class="character-nav-container">
-    <view v-for="(value, index) in characters">
-      <view class="character-avatar"> </view>
+    <view v-for="(value, index) in characters" class="character-div">
+      <navigator url="/pages/character/index" hover-class="navigator-hover">
+        <view class="character-avatar">
+          <image
+            v-if="value.avatar"
+            :src="value.avatar"
+            mode="scaleToFill"
+            class="character-avatar__image"
+          />
+        </view>
+      </navigator>
       <text class="character-name">{{ value.name }}</text>
     </view>
   </view>
@@ -9,9 +18,11 @@
 
 <script setup lang="ts">
 const characters = [
-  { name: "character", avatar: "url" },
-  { name: "character", avatar: "url" },
-  { name: "character", avatar: "url" },
+  { name: "甘织玲奈子", avatar: "/static/avatar/avatar1.jpg" },
+  { name: "濑名紫阳花", avatar: "/static/avatar/avatar3.jpg" },
+  { name: "甘织玲奈子", avatar: "/static/avatar/avatar1.jpg" },
+  { name: "濑名紫阳花", avatar: "/static/avatar/avatar3.jpg" },
+  { name: "甘织玲奈子", avatar: "/static/avatar/avatar1.jpg" },
 ];
 </script>
 
@@ -24,19 +35,34 @@ const characters = [
   gap: 20rpx;
   display: flex;
   flex-direction: row !important;
-  justify-content: flex-start !important;
+  justify-content: center;
   padding: 10rpx;
+
+  .character-div {
+    flex: 1;
+    margin-left: 10rpx;
+    width: 100rpx;
+    height: 100rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .character-avatar {
     width: 80rpx;
     height: 80rpx;
     border-radius: 1000rpx;
-    background-color: #dad7d7;
-    margin-left: 10rpx;
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      border-radius: 1000rpx;
+    }
   }
 
   .character-name {
-    font-size: 23rpx;
+    font-size: 20rpx;
+    line-height: 1;
   }
 }
 </style>

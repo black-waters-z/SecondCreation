@@ -3,25 +3,7 @@
     <head-nav></head-nav>
     <view> </view>
     <view class="content__head">
-      <uni-swiper-dot
-        :info="info"
-        :current="current"
-        field="content"
-        :mode="mode"
-      >
-        <swiper
-          class="swiper-box"
-          autoplay
-          circular
-          interval="3000"
-          duration="500"
-          @change="change"
-        >
-          <swiper-item v-for="(item, index) in info" :key="index">
-            <image class="swiper-item" src="@/static/homepic1.png"> </image>
-          </swiper-item>
-        </swiper>
-      </uni-swiper-dot>
+      <common-swiper></common-swiper>
     </view>
     <!-- #ifdef H5 -->
     <search-bar></search-bar>
@@ -39,25 +21,16 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { HotTime, ArticleModule } from "./types/index";
+import CommonSwiper from "@/components/common/CommonSwiper.vue";
 import Foot from "@/components/common/Foot.vue";
 import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
-import Notice from "./components/Notice.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
+// #ifdef H5
 import SearchBar from "@/components/common/SearchBar.vue";
+// #endif
 import HeadNav from "@/components/common/HeadNav.vue";
 import CharacterNav from "./components/CharacterNav.vue";
-const info = ref([
-  { content: "内容 A" },
-  { content: "内容 B" },
-  { content: "内容 C" },
-]);
-const current = ref(0);
-const mode = ref<"round" | "round-dot">("round"); // keep whatever modes you use
-
-const change = (e: any) => {
-  current.value = e.detail.current;
-};
 
 if (process.env.NODE_ENV === "development") {
   console.log(import.meta.env.DEV);

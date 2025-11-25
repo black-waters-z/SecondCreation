@@ -6,8 +6,8 @@
       </uni-icons>
     </view>
     <view class="user-info">
-      <view class="user-info__name"
-        >name
+      <view class="user-info__name">
+        <view>name&nbsp;&nbsp;</view>
         <uni-icons
           fontFamily="CustomFont"
           color="black"
@@ -73,8 +73,7 @@ defineProps();
       position: relative;
 
       &__icon {
-        position: absolute;
-        right: 40rpx;
+        margin-right: 40rpx;
         top: 10rpx;
       }
     }

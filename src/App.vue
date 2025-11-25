@@ -46,4 +46,8 @@ page {
   height: calc(100vh - 240rpx);
   background-color: var(--grey-background-color);
 }
+
+.content::-webkit-scrollbar {
+  display: none;
+}
 </style>

@@ -31,6 +31,12 @@
       }
     },
     {
+      "path": "pages/character/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/NoFound/index",
       "style": {
         "h5": {
