@@ -11,6 +11,7 @@
     </view>
     <div class="hot-articles">
       <Articles :zone="0"></Articles>
+      <Articles :zone="1"></Articles>
     </div>
   </view>
 </template>
@@ -45,4 +46,11 @@ withDefaults(defineProps<{ hotTitle: HotTime }>(), {
   }
 }
 /* #endif */
+
+.hot-articles {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

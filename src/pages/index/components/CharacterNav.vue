@@ -39,6 +39,7 @@ const characters = [
   padding: 10rpx;
 
   .character-div {
+    flex: 1;
     margin-left: 10rpx;
     width: 100rpx;
     height: 100rpx;

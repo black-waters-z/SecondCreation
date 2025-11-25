@@ -1,13 +1,8 @@
 <template>
   <view class="content">
     <head-nav></head-nav>
-    <go-back></go-back>
-    <uni-title type="h3" title="角色百科 "></uni-title>
-    <Filter
-      v-model="filterIndex"
-      :filters="filters"
-      margin-top="70rpx"
-    ></Filter>
+    <go-back title="角色百科"></go-back>
+    <Filter v-model="filterIndex" :filters="filters" margin-top="0rpx"></Filter>
     <!-- 点击了哪个，就显示哪个。 -->
     <CharacterSimpleInfo></CharacterSimpleInfo>
   </view>

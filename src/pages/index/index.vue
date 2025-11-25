@@ -3,27 +3,7 @@
     <head-nav></head-nav>
     <view> </view>
     <view class="content__head">
-      <uni-swiper-dot
-        :info="info"
-        :current="current"
-        field="content"
-        :mode="mode"
-        :dotsStyles="dotStyles"
-      >
-        <swiper
-          class="swiper-box"
-          autoplay
-          circular
-          interval="3000"
-          duration="500"
-          @change="change"
-        >
-          <swiper-item v-for="(item, index) in info" :key="index">
-            <image mode="aspectFill" class="swiper-item" :src="item.content">
-            </image>
-          </swiper-item>
-        </swiper>
-      </uni-swiper-dot>
+      <common-swiper></common-swiper>
     </view>
     <!-- #ifdef H5 -->
     <search-bar></search-bar>
@@ -41,6 +21,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { HotTime, ArticleModule } from "./types/index";
+import CommonSwiper from "@/components/common/CommonSwiper.vue";
 import Foot from "@/components/common/Foot.vue";
 import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
@@ -50,25 +31,6 @@ import SearchBar from "@/components/common/SearchBar.vue";
 // #endif
 import HeadNav from "@/components/common/HeadNav.vue";
 import CharacterNav from "./components/CharacterNav.vue";
-
-const dotStyles = {
-  color: "pink",
-  backgroundColor: "grey",
-  border: "grey",
-  selectedBackgroundColor: "pink",
-  selectedBorder: "pink",
-};
-
-const info = ref([
-  { content: "/static/homepic/homepic3.png" },
-  { content: "/static/homepic/homepic2.png" },
-]);
-const current = ref(0);
-const mode = ref<"round" | "round-dot">("round"); // keep whatever modes you use
-
-const change = (e: any) => {
-  current.value = e.detail.current;
-};
 
 if (process.env.NODE_ENV === "development") {
   console.log(import.meta.env.DEV);

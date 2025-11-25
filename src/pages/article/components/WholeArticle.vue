@@ -24,6 +24,7 @@
             v-if="like"
             @click="like = !like"
             class="icon"
+            color="darkred"
             >&#xe62b;
           </uni-icons>
           <uni-icons
@@ -143,9 +144,8 @@ $whole-article-container__margin-top: 0rpx;
 
       &__interact {
         float: right;
-
         .icon {
-          margin-right: 10rpx;
+          margin-right: 15rpx;
         }
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <view class="content">
     <head-nav></head-nav>
-    <view>12</view>
+    <common-swiper :styles="{ width: '100vw', height: '30vw' }"></common-swiper>
     <MoreNavigatorBar> </MoreNavigatorBar>
     <favorite-bar></favorite-bar>
   </view>
@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import MoreNavigatorBar from "./components/MoreNavigatorBar.vue";
 import FavoriteBar from "./components/FavoriteBar.vue";
+import CommonSwiper from "@/components/common/CommonSwiper.vue";
 import HeadNav from "@/components/common/HeadNav.vue";
 </script>
 
