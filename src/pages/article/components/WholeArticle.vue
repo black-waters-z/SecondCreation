@@ -70,10 +70,20 @@ onMounted(() => {
   font-family: CustomFont;
   src: url("../../../static/iconfont.ttf");
 }
+
+// #ifdef MP-WEIXIN
+$whole-article-container__margin-top: 80rpx;
+// #endif
+
+// #ifdef H5
+$whole-article-container__margin-top: 0rpx;
+// #endif
+
 .whole-article-container {
   width: 100vw;
   display: flex;
   justify-content: center;
+  margin-top: $whole-article-container__margin-top;
 
   &__article {
     width: 98vw;

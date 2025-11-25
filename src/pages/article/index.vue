@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="content">
     <head-nav></head-nav>
     <go-back></go-back>
     <whole-article :art_id="art_id"></whole-article>
@@ -21,4 +21,8 @@ onLoad((option) => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content {
+  align-items: flex-start;
+}
+</style>

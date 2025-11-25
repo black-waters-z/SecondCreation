@@ -16,7 +16,6 @@
 </template>
 <script setup lang="ts">
 import { HotTime } from "../types/index";
-import HotArticle from "./HotArticle.vue";
 import Articles from "@/components/common/Articles.vue";
 withDefaults(defineProps<{ hotTitle: HotTime }>(), {
   hotTitle: HotTime.day,

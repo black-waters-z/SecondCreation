@@ -1,8 +1,9 @@
 <template>
-  <!-- #ifdef MP-WEIXIN -->
-  <view class="status_bar"> </view>
-  <view class="bar"> </view>
-  <!-- #endif -->
+  <view>
+    <!-- #ifdef MP-WEIXIN -->
+    <view class="status_bar"> </view>
+    <!-- #endif -->
+  </view>
 </template>
 
 <style scoped lang="scss">

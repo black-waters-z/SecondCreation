@@ -4,7 +4,7 @@
   <view
     :class="visible ? `post-sheet-container active` : `post-sheet-container`"
   >
-  <view :style="{display:'flex'}">
+  <view :style="{display:'flex',justifyContent:'center'}">
     <post-choice text="发布文章" backgroundcolor="antiquewhite">
       <template #icon>
         <uni-icons  fontFamily="CustomFont" size="30">
@@ -49,7 +49,6 @@ const { visible } = storeToRefs(postSheetStore);
 
 
 .post-sheet-container {
-  width: calc(90vw - 60rpx);
   background-color: white;
   position: fixed;
   z-index: 500;
@@ -59,7 +58,7 @@ const { visible } = storeToRefs(postSheetStore);
   transform: translateY(70vh);
   padding: 30rpx;
   /* #ifdef MP-WEIXIN */
-  transform: translate(50%, 0vh); /* 兼顾 X/Y 两个方向 */
+  transform: translate(-50%, 70vh); /* 兼顾 X/Y 两个方向 */
   bottom: 30rpx;
   /* #endif */
   transition: 0.3s;

@@ -8,6 +8,7 @@
         :current="current"
         field="content"
         :mode="mode"
+        :dotsStyles="dotStyles"
       >
         <swiper
           class="swiper-box"
@@ -18,7 +19,8 @@
           @change="change"
         >
           <swiper-item v-for="(item, index) in info" :key="index">
-            <image class="swiper-item" src="@/static/homepic1.png"> </image>
+            <image mode="aspectFill" class="swiper-item" :src="item.content">
+            </image>
           </swiper-item>
         </swiper>
       </uni-swiper-dot>
@@ -42,15 +44,24 @@ import { HotTime, ArticleModule } from "./types/index";
 import Foot from "@/components/common/Foot.vue";
 import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
-import Notice from "./components/Notice.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
+// #ifdef H5
 import SearchBar from "@/components/common/SearchBar.vue";
+// #endif
 import HeadNav from "@/components/common/HeadNav.vue";
 import CharacterNav from "./components/CharacterNav.vue";
+
+const dotStyles = {
+  color: "pink",
+  backgroundColor: "grey",
+  border: "grey",
+  selectedBackgroundColor: "pink",
+  selectedBorder: "pink",
+};
+
 const info = ref([
-  { content: "内容 A" },
-  { content: "内容 B" },
-  { content: "内容 C" },
+  { content: "/static/homepic/homepic3.png" },
+  { content: "/static/homepic/homepic2.png" },
 ]);
 const current = ref(0);
 const mode = ref<"round" | "round-dot">("round"); // keep whatever modes you use

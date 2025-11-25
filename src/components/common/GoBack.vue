@@ -11,8 +11,17 @@ function goBack() {
 </script>
 
 <style scoped lang="scss">
+// #ifdef MP-WEIXIN
+$go-back-container__top: 80rpx;
+// #endif
+
+// #ifdef H5
+$go-back-container__top: 0rpx;
+// #endif
+
 .go-back-container {
   width: calc(100vw - 20rpx);
+  display: flex;
   justify-content: flex-start !important;
   align-items: flex-start !important;
   padding: {
@@ -21,6 +30,8 @@ function goBack() {
   }
   background-color: white;
   position: fixed;
-  z-index: 2000;
+  z-index: 1000;
+  top: $go-back-container__top;
+  left: 0;
 }
 </style>

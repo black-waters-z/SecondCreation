@@ -5,15 +5,14 @@
     @click="navigateTo"
   >
     <slot name="icon"> </slot>
-    <text>
+    <text v-if="text" class="text">
       {{ text }}
     </text>
   </view>
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ text: string; backgroundcolor: string }>(), {
-  text: "error",
+withDefaults(defineProps<{ text?: string; backgroundcolor: string }>(), {
   backgroundcolor: "antiquewhite",
 });
 
@@ -24,8 +23,8 @@ function navigateTo() {
 
 <style scoped>
 .post-choice {
-  width: 150rpx;
-  height: 150rpx;
+  width: 100rpx;
+  height: 100rpx;
   padding: 20rpx;
   border-radius: 1000px;
   display: flex;
@@ -33,5 +32,9 @@ function navigateTo() {
   justify-content: center;
   align-items: center;
   margin: 10rpx;
+}
+
+.text {
+  font-size: 20rpx;
 }
 </style>

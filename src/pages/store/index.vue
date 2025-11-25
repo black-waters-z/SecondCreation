@@ -1,11 +1,11 @@
 <template>
-  <view class="content">
+  <view class="store-content">
     <head-nav></head-nav>
     <head-bar></head-bar>
     <Filter v-model="filterIndex"></Filter>
-    <div class="store-container">
+    <view class="store-container">
       <articles :zone="activeNavigatorIndex"></articles>
-    </div>
+    </view>
     <to-top></to-top>
     <post-sheet></post-sheet>
     <post-sheet-show></post-sheet-show>
@@ -33,7 +33,12 @@ const filterIndex = ref<number>(0);
 </script>
 
 <style lang="scss" scoped>
-.content {
+.store-content {
+  width: 100vw;
+  margin-top: 140rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   // #ifdef MP-WEIXIN
   margin-top: 240rpx;
   // #endif

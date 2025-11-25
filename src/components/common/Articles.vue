@@ -5,7 +5,13 @@
         item.title || `热门内容 ${index + 1}`
       }}</view>
       <view class="rank-card__author">{{ item.author || "匿名作者" }}</view>
-      <view v-if="zone === 0" class="rank-card__cover">图片内容</view>
+      <view v-if="zone === 0" class="rank-card__cover">
+        <image
+          class="rank-card__cover__image"
+          :src="article?.image ?? '/static/character/character1.png'"
+          mode="aspectFill"
+        />
+      </view>
       <view v-if="zone === 1" class="rank-card__text">文章内容</view>
     </view>
   </view>
@@ -63,18 +69,19 @@ onMounted(() => {
 .rank-card {
   break-inside: avoid;
   margin-bottom: 20rpx;
-  padding: 20rpx;
   background: white;
   border-radius: 16rpx;
 
   &__title {
+    padding: 0 20rpx;
+    padding-top: 10rpx;
     font-size: 28rpx;
     font-weight: 700;
     color: #1f2933;
   }
 
   &__author {
-    margin-top: 10rpx;
+    padding: 0 20rpx;
     font-size: 22rpx;
     color: #6b7280;
   }
@@ -87,8 +94,14 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e5e7eb;
     color: #9ca3af;
+    position: relative;
+
+    &__image {
+      width: calc(100% - 5rpx);
+      height: calc(100% - 5rpx);
+      border-radius: 12rpx;
+    }
   }
 
   &__text {
