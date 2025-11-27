@@ -11,7 +11,7 @@ function goBack() {
 }
 
 withDefaults(defineProps<{ title?: string }>(), {
-  title: "12",
+  title: "",
 });
 </script>
 

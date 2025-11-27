@@ -7,25 +7,26 @@
   <view :style="{display:'flex',justifyContent:'center'}">
     <post-choice text="发布文章" backgroundcolor="antiquewhite">
       <template #icon>
-        <uni-icons  fontFamily="CustomFont" size="30">
+        <uni-icons  fontFamily="CustomFont" size="33">
           {{ '&#xe649' }}
         </uni-icons>
       </template>
     </post-choice>
     <post-choice text="发布图片" backgroundcolor="antiquewhite">
       <template #icon>
-        <uni-icons  fontFamily="CustomFont" size="30">
+        <uni-icons  fontFamily="CustomFont" size="33">
           {{ '&#xe668;' }}
         </uni-icons>
       </template>
     </post-choice>
     <post-choice text="上传视频" backgroundcolor="antiquewhite">
       <template #icon>
-        <uni-icons  fontFamily="CustomFont" size="30">
+        <uni-icons  fontFamily="CustomFont" size="33">
           {{ '&#xe64a;' }}
         </uni-icons>
       </template>
     </post-choice>
+
   </view>
 
   </view>
@@ -49,6 +50,8 @@ const { visible } = storeToRefs(postSheetStore);
 
 
 .post-sheet-container {
+  width: 80%;
+  height: 500rpx;
   background-color: white;
   position: fixed;
   z-index: 500;

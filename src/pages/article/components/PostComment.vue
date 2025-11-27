@@ -16,9 +16,12 @@ const value = ref("");
 <style lang="scss" scoped>
 .post-comment-container {
   width: 100vw;
-  height: 100rpx;
   display: flex;
   justify-content: center;
+  margin: {
+    top: 20rpx;
+    bottom: 10rpx;
+  }
 
   &__text-area {
     width: 98vw;

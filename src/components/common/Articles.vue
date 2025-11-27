@@ -1,5 +1,6 @@
 <template>
-  <view class="ranks">
+  <!-- styles可以传入grid的列数 -->
+  <view class="ranks" :style="styles">
     <view v-for="(item, index) in article" :key="index" class="rank-card">
       <view class="rank-card__title" @click="goToArticle">{{
         item.title || `热门内容 ${index + 1}`
@@ -52,17 +53,20 @@ function goToArticle() {
   });
 }
 
-const props = withDefaults(defineProps<{ article?: any; zone?: number }>(), {
-  article: () => [
-    { title: "", author: "", image: "/static/character/character1.png" },
-    { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-    { title: "", author: "" },
-    { title: "", author: "" },
-    { title: "", author: "" },
-    { title: "1221121", author: "wangwu" },
-  ],
-  zone: 0,
-});
+const props = withDefaults(
+  defineProps<{ article?: any; zone?: number; styles?: any }>(),
+  {
+    article: () => [
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+    ],
+    zone: 0,
+  }
+);
 
 onMounted(() => {
   console.log(props.zone);
