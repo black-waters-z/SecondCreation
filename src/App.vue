@@ -26,17 +26,15 @@ onHide(() => {
 $background-color: white;
 $grey-background-color: rgb(248, 248, 248);
 $pink-color: rgb(244, 143, 177);
-:root {
+
+page {
+  background-color: $grey-background-color;
   --text-title-family: "Source Han Sans";
   --background-color: white;
   --font-title-color: #1f2933;
   --grey-background-color: #{$grey-background-color};
   --pink-color: #{$pink-color};
   --status-bar-height: 50px;
-}
-
-page {
-  background-color: $grey-background-color;
 }
 .content {
   display: flex;

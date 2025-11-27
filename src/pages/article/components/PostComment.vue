@@ -19,6 +19,7 @@ const value = ref("");
   height: 100rpx;
   display: flex;
   justify-content: center;
+  margin-top: 30rpx;
 
   &__text-area {
     width: 98vw;

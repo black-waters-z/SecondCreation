@@ -1,7 +1,10 @@
 <template>
   <view class="content">
     <head-nav></head-nav>
-    <common-swiper :styles="{ width: '100vw', height: '30vw' }"></common-swiper>
+    <common-swiper
+      :styles="{ width: '100vw', height: '30vw' }"
+      :swiper-info="swiperInfo"
+    ></common-swiper>
     <MoreNavigatorBar> </MoreNavigatorBar>
     <favorite-bar></favorite-bar>
   </view>
@@ -12,6 +15,15 @@ import MoreNavigatorBar from "./components/MoreNavigatorBar.vue";
 import FavoriteBar from "./components/FavoriteBar.vue";
 import CommonSwiper from "@/components/common/CommonSwiper.vue";
 import HeadNav from "@/components/common/HeadNav.vue";
+
+const swiperInfo = [
+  {
+    swiperImg: "/static/homepic/homepic3.png",
+  },
+  {
+    swiperImg: "/static/homepic/homepic2.png",
+  },
+];
 </script>
 
 <style lang="scss" scoped></style>

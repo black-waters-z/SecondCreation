@@ -31,7 +31,7 @@ const login = ref(false);
 
 const readNavItems = [
   { icon: "\ue63b", label: "历史记录" },
-  { icon: "\ue634", label: "收藏" },
+  { icon: "\ue634", label: "收藏", type: "FavoriteComponent" },
   { icon: "\ue635", label: "喜欢" },
 ];
 

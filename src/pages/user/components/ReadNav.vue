@@ -4,6 +4,7 @@
       v-for="item in navItems"
       :key="item.label"
       class="read-nav-container__icon"
+      @click="goToIconNavigatePage(item?.type)"
     >
       <uni-icons fontFamily="CustomFont" color="grey" size="25">
         {{ item.icon }}
@@ -17,8 +18,16 @@
 interface NavItems {
   icon: string;
   label: string;
+  type?: string;
 }
 defineProps<{ navItems: NavItems[] }>();
+
+const goToIconNavigatePage = (componentType: string | undefined) => {
+  console.log(componentType);
+  uni.navigateTo({
+    url: `/pages/iconNavigate/index?icon=${componentType}`,
+  });
+};
 </script>
 
 <style scoped lang="scss">

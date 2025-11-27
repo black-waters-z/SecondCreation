@@ -9,6 +9,9 @@
         <view class="article__title">title</view>
         <view class="article__content">I like a big cat.</view>
         <br />
+        <view class="article__post-time">
+          <text>2022-03-03</text>
+        </view>
         <view class="article__interact">
           <uni-icons
             fontFamily="CustomFont"
@@ -60,6 +63,17 @@ const interactInfo = ref({
 });
 
 const { like, favorite } = toRefs(interactInfo.value);
+const activeShow = ref(false);
+
+const toggleLike = () => {
+  like.value = !like.value;
+  if (like.value) {
+    activeShow.value = true;
+    setTimeout(() => {
+      activeShow.value = false;
+    }, 1000);
+  }
+};
 
 onMounted(() => {
   console.log(props.art_id);
@@ -85,17 +99,17 @@ $whole-article-container__margin-top: 0rpx;
   display: flex;
   justify-content: center;
   margin-top: $whole-article-container__margin-top;
+  z-index: 600;
 
   &__article {
-    width: 98vw;
+    width: 100vw;
     margin-top: 160rpx;
     background-color: white;
-    border-radius: 16rpx;
     padding-bottom: 20rpx;
-    margin-bottom: 30rpx;
+    box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.1);
+    position: relative;
 
     .author {
-      position: absolute;
       width: 200rpx;
       height: 100rpx;
       border-radius: 1000rpx;
@@ -125,7 +139,7 @@ $whole-article-container__margin-top: 0rpx;
     }
 
     .article {
-      margin-top: 100rpx;
+      font-size: 26rpx;
       margin: {
         left: 40rpx;
         right: 40rpx;
@@ -139,13 +153,25 @@ $whole-article-container__margin-top: 0rpx;
       &__content {
         margin: {
           top: 20rpx;
+          bottom: 20rpx;
         }
       }
 
+      &__post-time {
+        position: absolute;
+        bottom: 10rpx;
+        left: 40rpx;
+        font-size: 23rpx;
+        color: grey;
+      }
+
       &__interact {
-        float: right;
+        position: absolute;
+        bottom: 10rpx;
+        right: 20rpx;
         .icon {
           margin-right: 15rpx;
+          bottom: 0;
         }
       }
     }

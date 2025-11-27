@@ -5,9 +5,6 @@
     <view class="content__head">
       <common-swiper></common-swiper>
     </view>
-    <!-- #ifdef H5 -->
-    <search-bar></search-bar>
-    <!-- #endif -->
     <character-nav></character-nav>
     <hot :hot-title="HotTime.day"> </hot>
     <hot :hot-title="HotTime.week"> </hot>
@@ -26,9 +23,6 @@ import Foot from "@/components/common/Foot.vue";
 import Hot from "./components/Hot.vue";
 import PostSheet from "@/components/common/PostSheet.vue";
 import PostSheetShow from "@/components/common/PostSheetShow.vue";
-// #ifdef H5
-import SearchBar from "@/components/common/SearchBar.vue";
-// #endif
 import HeadNav from "@/components/common/HeadNav.vue";
 import CharacterNav from "./components/CharacterNav.vue";
 
