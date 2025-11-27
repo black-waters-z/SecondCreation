@@ -158,9 +158,6 @@ $whole-article-container__margin-top: 0rpx;
       }
 
       &__post-time {
-        position: absolute;
-        bottom: 10rpx;
-        left: 40rpx;
         font-size: 23rpx;
         color: grey;
       }

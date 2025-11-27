@@ -43,31 +43,7 @@ withDefaults(
     comments: Comment[];
   }>(),
   {
-    comments: () => [
-      {
-        id: 0,
-        content: "默认评论",
-        user: "匿名用户",
-        time: new Date("2022-01-01"),
-        avatar: "",
-        secondComment: [
-          {
-            id: 1,
-            content: "默认二级评论1",
-            user: "匿名用户1",
-            time: new Date("2022-01-01"),
-            avatar: "",
-          },
-          {
-            id: 2,
-            content: "默认二级评论2",
-            user: "匿名用户2",
-            time: new Date("2022-01-01"),
-            avatar: "",
-          },
-        ],
-      },
-    ],
+    comments: () => [],
   }
 );
 </script>

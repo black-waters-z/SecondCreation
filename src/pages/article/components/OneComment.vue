@@ -1,5 +1,11 @@
 <template>
-  <view class="oneComment">
+  <view
+    class="oneComment"
+    :style="{
+      width: type === 'second' ? '90%' : '95%',
+      transform: type === 'second' ? 'scale(0.9)' : 'scale(1)',
+    }"
+  >
     <view class="oneComment__user">
       <view class="oneComment__user__avatar">
         <image :src="comment.avatar" mode="scaleToFill" />
@@ -34,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { Comment, ref } from "vue";
 
 interface OneComment {
   id: number;
@@ -68,6 +74,8 @@ const showText = ref<string>("展开回复");
   border-bottom: 1rpx solid #f0f0f0;
   right: 0;
   background-color: white;
+  float: right;
+  transition-origin: top left;
 
   &__not-user-avatar {
     flex: 1;
