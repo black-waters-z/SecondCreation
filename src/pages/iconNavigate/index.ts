@@ -1,5 +1,5 @@
-import FavoriteComponent from "@/components/icon/FavoriteComponent.vue";
-import LikeComponent from "@/components/icon/LikeComponent.vue";
+import FavoriteComponent from "@/components/icon/FavoriteComponent/index.vue";
+import LikeComponent from "@/components/icon/LikeComponent/index.vue";
 export const componentMap = {
   FavoriteComponent,
   LikeComponent,

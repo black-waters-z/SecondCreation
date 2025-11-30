@@ -10,6 +10,8 @@
       <text>创作中心</text>
       <read-nav :nav-items="writeNavItems"> </read-nav>
       <text>其他服务</text>
+      <read-nav :nav-items="readNavItems"> </read-nav>
+      <read-nav :nav-items="writeNavItems"> </read-nav>
     </view>
 
     <post-sheet></post-sheet>

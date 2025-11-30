@@ -2,7 +2,7 @@
   <view>
     <go-back :title="goBackTitle"></go-back>
     <!-- #ifdef H5 -->
-    <component :is="component"></component>
+    <component :is="component ?? null"></component>
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN  -->
     <FavoriteComponent
@@ -34,8 +34,8 @@ onLoad((options) => {
 // #endif
 
 // #ifdef MP-WEIXIN
-import FavoriteComponent from "@/components/icon/FavoriteComponent.vue";
-import LikeComponent from "@/components/icon/LikeComponent.vue";
+import FavoriteComponent from "@/components/icon/FavoriteComponent/index.vue";
+import LikeComponent from "@/components/icon/LikeComponent/index.vue";
 let componentKey = ref("");
 onLoad((options) => {
   componentKey.value = options?.icon;
@@ -54,7 +54,6 @@ onLoad((options) => {
   // #ifdef H5
   padding-top: 80rpx;
   height: calc(100vh - 80rpx);
-
   // #endif
 }
 </style>

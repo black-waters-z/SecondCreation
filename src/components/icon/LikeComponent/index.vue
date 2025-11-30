@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import Articles from "../common/Articles.vue";
+import Articles from "../../common/Articles.vue";
 
 const articlesWithFilter = [0, 1];
 </script>
