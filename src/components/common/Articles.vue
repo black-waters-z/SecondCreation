@@ -115,6 +115,7 @@ const startLoadTimeout = (index: number) => {
   loadTimers[index] = setTimeout(() => {
     if (!coverLoaded.value[index]) {
       loadComplete.value[index] = true;
+      clearLoadTimeout(index); // 超时后也清掉引用
     }
   }, fallbackDelay);
 };
