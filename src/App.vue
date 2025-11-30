@@ -26,7 +26,12 @@ onHide(() => {
 $background-color: white;
 $grey-background-color: rgb(248, 248, 248);
 $pink-color: rgb(244, 143, 177);
-
+// #ifdef MP-WEIXIN
+$content-margin-top: 0rpx;
+// #endif
+// #ifdef H5
+$content-margin-top: 80rpx;
+// #endif
 page {
   background-color: $grey-background-color;
   --text-title-family: "Source Han Sans";
@@ -35,13 +40,14 @@ page {
   --grey-background-color: #{$grey-background-color};
   --pink-color: #{$pink-color};
   --status-bar-height: 50px;
+
+  --content-margin-top: $content-margin-top;
 }
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  height: calc(100vh - 240rpx);
   background-color: var(--grey-background-color);
 }
 

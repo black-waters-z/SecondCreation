@@ -29,16 +29,25 @@ import { ref } from "vue";
 
 const login = ref(false);
 
+enum NavLabelEnum {
+  HISTORY = "历史记录",
+  FAVORITE = "收藏",
+  LIKE = "喜欢",
+  ARTICLE_MANAGE = "文章管理",
+  DRAFT = "草稿箱",
+  ARTICLE_DATA = "文章数据",
+}
+
 const readNavItems = [
-  { icon: "\ue63b", label: "历史记录" },
-  { icon: "\ue634", label: "收藏", type: "FavoriteComponent" },
-  { icon: "\ue635", label: "喜欢" },
+  { icon: "\ue63b", label: NavLabelEnum.HISTORY },
+  { icon: "\ue634", label: NavLabelEnum.FAVORITE, type: "FavoriteComponent" },
+  { icon: "\ue635", label: NavLabelEnum.LIKE, type: "LikeComponent" },
 ];
 
 const writeNavItems = [
-  { icon: "\ue652", label: "文章管理" },
-  { icon: "\ue64f", label: "草稿箱" },
-  { icon: "\ue627", label: "文章数据" },
+  { icon: "\ue652", label: NavLabelEnum.ARTICLE_MANAGE },
+  { icon: "\ue64f", label: NavLabelEnum.DRAFT },
+  { icon: "\ue627", label: NavLabelEnum.ARTICLE_DATA },
 ];
 </script>
 

@@ -63,6 +63,30 @@ const props = withDefaults(
       { title: "", author: "" },
       { title: "", author: "" },
       { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
     ],
     zone: 0,
   }
@@ -130,7 +154,6 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 .ranks {
   width: 95vw;
-  height: 100%;
   top: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -214,7 +237,6 @@ onBeforeUnmount(() => {
   }
 
   &__text {
-    min-height: 150rpx;
     border-radius: 12rpx;
     margin-top: 16rpx;
     display: flex;
@@ -225,7 +247,8 @@ onBeforeUnmount(() => {
 
     &__container {
       background-color: white;
-      width: calc(90% - 20rpx);
+      width: calc(80%);
+      height: 100rpx;
       background-color: #e5e7eb;
       border-radius: 12rpx;
       position: relative;

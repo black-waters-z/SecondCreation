@@ -1,5 +1,7 @@
 import FavoriteComponent from "@/components/icon/FavoriteComponent.vue";
-
-export default {
-  FavoriteComponent: FavoriteComponent,
+import LikeComponent from "@/components/icon/LikeComponent.vue";
+export const componentMap = {
+  FavoriteComponent,
+  LikeComponent,
 };
+export type componentKey = keyof typeof componentMap;

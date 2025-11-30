@@ -30,7 +30,12 @@ const articlesWithFilter = [0, 1];
 
 .swiper {
   width: 100vw;
+  // #ifdef MP-WEIXIN
   height: calc(100vh - 150rpx);
+  // #endif
+  // #ifdef H5
+  height: calc(100vh - 80rpx);
+  // #endif
 }
 
 .swiper-pane {
@@ -39,5 +44,9 @@ const articlesWithFilter = [0, 1];
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.uni-swiper-slide-frame {
+  overflow-y: auto;
 }
 </style>
