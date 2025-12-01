@@ -26,17 +26,10 @@
 import { nextTick, onMounted, ref } from "vue";
 import { getCurrentInstance } from "vue";
 import Article from "@/components/common/Article.vue";
+import type { Article as ArticleType } from "@/types/index";
 const instance = getCurrentInstance();
 
-interface Article {
-  id?: number;
-  title: string;
-  author: string;
-  image?: string;
-  content?: string;
-}
-
-const props = withDefaults(defineProps<{ articleLists: Article[] }>(), {
+const props = withDefaults(defineProps<{ articleLists: ArticleType[] }>(), {
   articleLists: () => [
     { title: "", author: "", image: "/static/character/character1.png" },
     { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
@@ -51,28 +44,27 @@ const props = withDefaults(defineProps<{ articleLists: Article[] }>(), {
   ],
 });
 
-const articleList1 = ref<Article[]>([]);
-const articleList2 = ref<Article[]>([]);
-const articleList3 = ref<Article[]>([]);
+const articleList1 = ref<ArticleType[]>([]);
+const articleList2 = ref<ArticleType[]>([]);
+const articleList3 = ref<ArticleType[]>([]);
 
 const columSelectors = ["#col1", "#col2", "#col3"];
 const columnLists = [articleList1, articleList2, articleList3];
 
-const getColHeight = (selector: string) => {
-  let info: any;
-  uni
-    .createSelectorQuery()
-    .in(instance?.proxy || null)
-    .select(selector)
-    .boundingClientRect((res) => {
-      info = Array.isArray(res) ? res[0] : res;
-      console.log(selector, " 高度：", info?.height);
-    })
-    .exec();
-  return info?.height;
-};
-const getColumnIndex = () => {
-  const heights = columSelectors.map((col) => getColHeight(col) ?? 0);
+const query = uni.createSelectorQuery().in(instance?.proxy);
+const getColHeight = (selector: string) =>
+  new Promise<number>((resolve) => {
+    query
+      .select(selector)
+      .boundingClientRect((res) => {
+        const info = Array.isArray(res) ? res[0] : res;
+        resolve(info?.height ?? 0);
+      })
+      .exec();
+  });
+
+const getColumnIndex = async () => {
+  const heights = await Promise.all(columSelectors.map(getColHeight));
   let minIndex = 0;
   let minHeight = heights[0];
 
@@ -86,14 +78,15 @@ const getColumnIndex = () => {
   return minIndex;
 };
 
-const mountMenu = (index = 0) => {
+const mountMenu = async (index = 0) => {
   if (index >= props.articleLists.length) {
     return;
   }
-  const targetColumnIndex = getColumnIndex();
+  const targetColumnIndex = await getColumnIndex();
   columnLists[targetColumnIndex].value.push(props.articleLists[index]);
 
-  nextTick(() => mountMenu(index + 1));
+  await nextTick();
+  mountMenu(index + 1);
 };
 
 onMounted(() => {

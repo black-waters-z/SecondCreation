@@ -1,9 +1,9 @@
 <template>
   <view class="rank-card">
     <view class="rank-card__title" @click="goToArticle">{{
-      article.title || "标题"
+      article?.title || "标题"
     }}</view>
-    <view class="rank-card__author">{{ article.author || "匿名作者" }}</view>
+    <view class="rank-card__author">{{ article?.author || "匿名作者" }}</view>
     <view v-if="zone === 0" class="rank-card__cover">
       <image
         v-if="!loadComplete"
@@ -11,7 +11,7 @@
           'rank-card__cover__image',
           coverLoaded && 'rank-card__cover__image--visible',
         ]"
-        :src="article.image"
+        :src="article?.image"
         mode="aspectFill"
         @load="handleImageLoad"
         @error="handleImageError"
@@ -42,16 +42,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
+import type { Article as ArticleType } from "@/types/index";
 
 const props = withDefaults(
-  defineProps<{ article?: any; zone?: number; styles?: any }>(),
+  defineProps<{ article?: ArticleType; zone?: number; styles?: any }>(),
   {
-    article: () => ({
-      title: "这是标题",
-      author: "作者",
-      image: "/static/character/character1.png",
-    }),
     zone: 0,
   }
 );
@@ -88,6 +84,10 @@ function goToArticle() {
 
 onMounted(() => {
   startLoadTimeout();
+});
+
+onUnmounted(() => {
+  clearLoadTimeout();
 });
 </script>
 

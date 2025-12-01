@@ -10,8 +10,6 @@
       <text>创作中心</text>
       <read-nav :nav-items="writeNavItems"> </read-nav>
       <text>其他服务</text>
-      <read-nav :nav-items="readNavItems"> </read-nav>
-      <read-nav :nav-items="writeNavItems"> </read-nav>
     </view>
 
     <post-sheet></post-sheet>
@@ -41,7 +39,7 @@ enum NavLabelEnum {
 }
 
 const readNavItems = [
-  { icon: "\ue63b", label: NavLabelEnum.HISTORY },
+  { icon: "\ue63b", label: NavLabelEnum.HISTORY, type: "HistoryComponent" },
   { icon: "\ue634", label: NavLabelEnum.FAVORITE, type: "FavoriteComponent" },
   { icon: "\ue635", label: NavLabelEnum.LIKE, type: "LikeComponent" },
 ];

@@ -9,6 +9,9 @@
       v-if="componentKey === 'FavoriteComponent'"
     ></FavoriteComponent>
     <LikeComponent v-if="componentKey === 'LikeComponent'"></LikeComponent>
+    <history-component
+      v-if="componentKey === 'HistoryComponent'"
+    ></history-component>
     <!-- #endif -->
   </view>
 </template>
@@ -36,6 +39,7 @@ onLoad((options) => {
 // #ifdef MP-WEIXIN
 import FavoriteComponent from "@/components/icon/FavoriteComponent/index.vue";
 import LikeComponent from "@/components/icon/LikeComponent/index.vue";
+import HistoryComponent from "@/components/icon/HistoryComponent/index.vue";
 let componentKey = ref("");
 onLoad((options) => {
   componentKey.value = options?.icon;

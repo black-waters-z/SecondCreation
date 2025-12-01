@@ -24,11 +24,13 @@ defineProps<{ navItems: NavItems[] }>();
 
 const goToIconNavigatePage = (
   componentType: string | undefined,
-  goBackTitle: string | undefined
+  goBackTitle: string | number | boolean
 ) => {
   console.log(componentType);
   uni.navigateTo({
-    url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${goBackTitle}`,
+    url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${encodeURIComponent(
+      goBackTitle
+    )}`,
   });
 };
 </script>
