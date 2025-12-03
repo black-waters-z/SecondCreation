@@ -23,7 +23,7 @@ import { ref, shallowRef } from "vue";
 
 const goBackTitle = ref("");
 onLoad((options) => {
-  goBackTitle.value = options?.goBackTitle;
+  goBackTitle.value = decodeURIComponent(options?.goBackTitle);
 });
 
 // #ifdef H5

@@ -43,6 +43,8 @@ $go-back-container__top: 0rpx;
     position: absolute;
     margin-left: 50%;
     transform: translateX(-50%);
+    font-size: 24rpx;
+    font-weight: 700;
   }
 }
 </style>

@@ -49,6 +49,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/aiPlay/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
@@ -69,6 +75,7 @@
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "height": "50px",
+    "iconWidth": "40rpx",
     "list": [
       {
         "pagePath": "pages/store/index",
