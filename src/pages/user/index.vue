@@ -51,7 +51,7 @@ const writeNavItems = [
 ];
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .content {
   display: flex;
   flex-direction: column;
@@ -61,18 +61,19 @@ const writeNavItems = [
   // #endif
 
   &__user {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: white;
     padding-bottom: 20rpx;
+    position: relative;
   }
 
   &__read-nav {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 }
 </style>

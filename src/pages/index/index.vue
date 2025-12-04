@@ -1,7 +1,6 @@
 <template>
   <view class="content">
     <head-nav></head-nav>
-    <view> </view>
     <view class="content__head">
       <common-swiper></common-swiper>
     </view>
@@ -23,7 +22,12 @@
       <template #refresher>
         <refresh></refresh>
       </template>
-      <water-fall :waterFallColNum="2"></water-fall>
+      <match-media :max-width="599">
+        <water-fall :waterFallColNum="2"></water-fall>
+      </match-media>
+      <match-media :min-width="600">
+        <water-fall :waterFallColNum="3"></water-fall>
+      </match-media>
     </scroll-view>
     <post-sheet></post-sheet>
     <post-sheet-show></post-sheet-show>
@@ -89,7 +93,7 @@ onMounted(() => {
 onMounted(async () => {});
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .scroll-Y {
   flex: 1;
   min-height: calc(100vh - 220rpx);
@@ -99,59 +103,29 @@ onMounted(async () => {});
   padding-top: 20rpx !important;
 }
 
-@media screen and (max-width: 600px) {
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // #ifdef MP-WEIXIN
-    margin-top: 80rpx;
-    // #endif
-    height: calc(100vh - 80rpx);
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // #ifdef MP-WEIXIN
+  margin-top: 80rpx;
+  // #endif
+  height: calc(100vh - 80rpx);
 
-    &__head {
-      //#ifdef MP-WEIXIN
-      margin-top: 0rpx;
-      //#endif
-    }
-  }
-
-  .swiper-box {
-    width: 100vw;
-    height: 60vw;
-  }
-
-  .swiper-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .navigation-img {
-    width: 16vw;
-    height: 16vw;
-  }
-
-  .navigation text {
-    margin-top: 10rpx;
+  &__head {
+    //#ifdef MP-WEIXIN
+    margin-top: 0rpx;
+    //#endif
   }
 }
 
-@media screen and (min-width: 600px) {
-  .swiper-box {
-    width: 600px;
-    height: 360px;
-    border-radius: 12rpx;
-  }
-
-  .swiper-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    border-radius: 18px;
+@media screen and (min-width: 750px) {
+  .content {
+    width: 60vw;
+    position: relative;
+    &__head {
+      display: none;
+    }
   }
 }
 </style>

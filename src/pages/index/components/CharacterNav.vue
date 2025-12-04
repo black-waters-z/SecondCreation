@@ -44,7 +44,10 @@ const characters = [
   src: url("../../../static/iconfont.ttf");
 }
 .character-nav-container {
-  width: calc(95vw - 20rpx);
+  width: 100%;
+  // #ifdef MP-WEIXIN
+  width: calc(98vw - 20rpx);
+  // #endif
   border-radius: 16rpx;
   background-color: white;
   margin-top: 10rpx;

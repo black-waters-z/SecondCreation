@@ -38,7 +38,10 @@ defineProps();
 }
 
 .user-bar-container {
+  width: 100%;
+  // #ifdef MP-WEIXIN
   width: 100vw;
+  // #endif
   background-color: white;
   border-radius: 16rpx;
   display: flex;

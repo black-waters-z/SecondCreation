@@ -42,13 +42,14 @@ const goToIconNavigatePage = (
 }
 
 .read-nav-container {
-  width: 94vw;
+  width: 100%;
   border-radius: 16rpx;
   height: 150rpx;
   background-color: white;
   margin: 20rpx 0;
   display: flex;
   align-items: center;
+  transform: scale(0.95);
 
   &__icon {
     flex: 1;
