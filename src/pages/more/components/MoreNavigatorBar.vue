@@ -49,7 +49,7 @@
 <style lang="scss" scoped>
 @font-face {
   font-family: CustomFont;
-  src: url("../../static/iconfont.ttf");
+  src: url("../../../static/iconfont.ttf");
 }
 
 .bar {
@@ -60,6 +60,8 @@
   margin-top: 20rpx;
   flex-direction: row;
   padding: 20rpx 0;
+  font-size: 25rpx;
+
   .navigator {
     width: 20%;
     flex: 1;

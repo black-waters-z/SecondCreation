@@ -3,7 +3,7 @@
 // 定义请求配置类型
 interface RequestConfig {
   url: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD';
+  method?: "GET" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "HEAD";
   data?: any;
   header?: Record<string, string>;
   timeout?: number;
@@ -17,28 +17,28 @@ interface UniResponse<T = any> {
   cookies: string[];
 }
 
-const baseURL = import.meta.env.VITE_API_BASE || '/api';
+const baseURL = import.meta.env.VITE_API_BASE || "/api";
 
 // 统一的请求方法
 export const request = <T = any>(config: RequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
     const {
       url,
-      method = 'GET',
+      method = "GET",
       data = {},
       header = {},
-      timeout = 15000
+      timeout = 15000,
     } = config;
 
     // 处理完整的 URL
-    const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
+    const fullUrl = url.startsWith("http") ? url : `${baseURL}${url}`;
 
     // 设置请求头
     const headers = {
-      'content-type': 'application/json',
+      "content-type": "application/json",
       // 可以在这里注入 token、平台信息等
       // 'Authorization': uni.getStorageSync('token') ? `Bearer ${uni.getStorageSync('token')}` : '',
-      ...header
+      ...header,
     };
 
     uni.request({
@@ -47,7 +47,7 @@ export const request = <T = any>(config: RequestConfig): Promise<T> => {
       data,
       header: headers,
       timeout,
-      success: (res:any) => {
+      success: (res: any) => {
         // 状态码在 200-299 之间视为成功
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data);
@@ -61,9 +61,9 @@ export const request = <T = any>(config: RequestConfig): Promise<T> => {
       },
       fail: (err) => {
         // 网络错误等
-        const error = new Error(err.errMsg || 'Network Error');
+        const error = new Error(err.errMsg || "Network Error");
         reject(error);
-      }
+      },
     });
   });
 };
@@ -71,11 +71,11 @@ export const request = <T = any>(config: RequestConfig): Promise<T> => {
 // 请求拦截（模拟）
 const requestInterceptor = (config: RequestConfig): RequestConfig => {
   // 可以在这里统一添加 token
-  const token = uni.getStorageSync('token');
+  const token = uni.getStorageSync("token");
   if (token) {
     config.header = {
       ...config.header,
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     };
   }
   return config;
@@ -89,50 +89,50 @@ const responseInterceptor = {
   },
   error: (error: Error) => {
     // 统一错误处理
-    let errorMessage = '网络错误';
+    let errorMessage = "网络错误";
 
-    if (error.message.includes('HTTP Error')) {
+    if (error.message.includes("HTTP Error")) {
       const statusCode = (error as any).statusCode;
       switch (statusCode) {
         case 401:
-          errorMessage = '未授权，请重新登录';
+          errorMessage = "未授权，请重新登录";
           // 可以跳转到登录页
           // uni.navigateTo({ url: '/pages/login/login' });
           break;
         case 403:
-          errorMessage = '拒绝访问';
+          errorMessage = "拒绝访问";
           break;
         case 404:
-          errorMessage = '请求地址不存在';
+          errorMessage = "请求地址不存在";
           break;
         case 500:
-          errorMessage = '服务器内部错误';
+          errorMessage = "服务器内部错误";
           break;
         default:
           errorMessage = `请求失败: ${statusCode}`;
       }
-    } else if (error.message.includes('Network Error')) {
-      errorMessage = '网络连接失败，请检查网络';
+    } else if (error.message.includes("Network Error")) {
+      errorMessage = "网络连接失败，请检查网络";
     }
 
     uni.showToast({
       title: errorMessage,
-      icon: 'none',
-      duration: 3000
+      icon: "none",
+      duration: 3000,
     });
 
     return Promise.reject(error);
-  }
+  },
 };
 
 // 包装的请求方法，包含拦截器
 export function apiRequest<T = any>(
   url: string,
-  options: Omit<RequestConfig, 'url'> = {}
+  options: Omit<RequestConfig, "url"> = {}
 ): Promise<T> {
   const config = requestInterceptor({
     url,
-    ...options
+    ...options,
   });
 
   return request<T>(config)
@@ -144,41 +144,41 @@ export function apiRequest<T = any>(
 export const get = <T = any>(
   url: string,
   data?: any,
-  config?: Omit<RequestConfig, 'url' | 'method' | 'data'>
-) => apiRequest<T>(url, { ...config, method: 'GET', data });
+  config?: Omit<RequestConfig, "url" | "method" | "data">
+) => apiRequest<T>(url, { ...config, method: "GET", data });
 
 export const post = <T = any>(
   url: string,
   data?: any,
-  config?: Omit<RequestConfig, 'url' | 'method' | 'data'>
-) => apiRequest<T>(url, { ...config, method: 'POST', data });
+  config?: Omit<RequestConfig, "url" | "method" | "data">
+) => apiRequest<T>(url, { ...config, method: "POST", data });
 
 export const put = <T = any>(
   url: string,
   data?: any,
-  config?: Omit<RequestConfig, 'url' | 'method' | 'data'>
-) => apiRequest<T>(url, { ...config, method: 'PUT', data });
+  config?: Omit<RequestConfig, "url" | "method" | "data">
+) => apiRequest<T>(url, { ...config, method: "PUT", data });
 
 export const del = <T = any>(
   url: string,
   data?: any,
-  config?: Omit<RequestConfig, 'url' | 'method' | 'data'>
-) => apiRequest<T>(url, { ...config, method: 'DELETE', data });
+  config?: Omit<RequestConfig, "url" | "method" | "data">
+) => apiRequest<T>(url, { ...config, method: "DELETE", data });
 
 // 文件上传
 export const upload = <T = any>(
   url: string,
   filePath: string,
   formData: Record<string, any> = {},
-  config?: Omit<RequestConfig, 'url' | 'method' | 'data'>
+  config?: Omit<RequestConfig, "url" | "method" | "data">
 ): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
+    const fullUrl = url.startsWith("http") ? url : `${baseURL}${url}`;
 
     uni.uploadFile({
       url: fullUrl,
       filePath,
-      name: 'file',
+      name: "file",
       formData,
       header: config?.header,
       success: (res) => {
@@ -195,7 +195,7 @@ export const upload = <T = any>(
       },
       fail: (err) => {
         reject(new Error(err.errMsg));
-      }
+      },
     });
   });
 };

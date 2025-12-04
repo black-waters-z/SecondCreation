@@ -4,7 +4,7 @@
       v-for="item in navItems"
       :key="item.label"
       class="read-nav-container__icon"
-      @click="goToIconNavigatePage(item?.type)"
+      @click="goToIconNavigatePage(item?.type, item?.label)"
     >
       <uni-icons fontFamily="CustomFont" color="grey" size="25">
         {{ item.icon }}
@@ -22,10 +22,15 @@ interface NavItems {
 }
 defineProps<{ navItems: NavItems[] }>();
 
-const goToIconNavigatePage = (componentType: string | undefined) => {
+const goToIconNavigatePage = (
+  componentType: string | undefined,
+  goBackTitle: string | number | boolean
+) => {
   console.log(componentType);
   uni.navigateTo({
-    url: `/pages/iconNavigate/index?icon=${componentType}`,
+    url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${encodeURIComponent(
+      goBackTitle
+    )}`,
   });
 };
 </script>
@@ -37,13 +42,14 @@ const goToIconNavigatePage = (componentType: string | undefined) => {
 }
 
 .read-nav-container {
-  width: 94vw;
+  width: 100%;
   border-radius: 16rpx;
   height: 150rpx;
   background-color: white;
   margin: 20rpx 0;
   display: flex;
   align-items: center;
+  transform: scale(0.95);
 
   &__icon {
     flex: 1;

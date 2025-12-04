@@ -49,6 +49,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/aiPlay/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
@@ -56,6 +62,20 @@
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
+  },
+  "topWindow": {
+    "path": "components/responsive/top-window.vue",
+    "style": {
+      "height": "44px",
+      "backgroundColor": "#ffffff"
+    }
+  },
+  "leftWindow": {
+    "path": "components/responsive/left-window.vue",
+    "style": {
+      "width": "300px",
+      "backgroundColor": "#ffffff"
+    }
   },
   "easycom": {
     "autoscan": true,
@@ -69,6 +89,7 @@
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "height": "50px",
+    "iconWidth": "40rpx",
     "list": [
       {
         "pagePath": "pages/store/index",

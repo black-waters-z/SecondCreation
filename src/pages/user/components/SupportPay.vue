@@ -15,7 +15,10 @@
 <style lang="scss" scoped>
 .support-pay-container {
   margin-top: 20rpx;
-  width: calc(98vw - 40rpx);
+  width: calc(98% - 40rpx);
+  // #ifdef MP-WEIXIN
+  width: calc(90vw - 20rpx);
+  // #endif
   background-color: rgba(255, 191, 202, 0.3);
   border-radius: 16rpx;
   padding: 15rpx 10rpx;

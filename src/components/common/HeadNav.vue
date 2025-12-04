@@ -16,7 +16,7 @@
   background-image: linear-gradient(
     180deg,
     rgba(245, 193, 215, 1) 0%,
-    rgb(255, 255, 255) 100%
+    rgba(255, 255, 255, 1) 100%
   );
   left: 0;
 }

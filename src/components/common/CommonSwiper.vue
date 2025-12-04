@@ -43,8 +43,8 @@ type CSSProperties = Record<string, string | number | undefined>;
 withDefaults(
   defineProps<{
     styles?: {
-      width: string;
-      height: string;
+      width?: string;
+      height?: string;
     };
     swiperInfo: {
       swiperImg: string;
@@ -86,7 +86,7 @@ withDefaults(
         },
       },
     ],
-    styles: () => ({ width: "100vw", height: "60vw" }),
+    styles: () => ({}),
   }
 );
 
@@ -105,11 +105,13 @@ const change = (e: any) => {
   current.value = e.detail.current;
 };
 
+// #ifdef MP-WEIXIN
 defineOptions({
   options: {
     styleIsolation: "shared", // 允许样式穿透（微信小程序）
   },
 });
+// #endif
 </script>
 
 <style lang="scss" scoped>
@@ -124,6 +126,7 @@ defineOptions({
   justify-content: center;
   width: 100%;
   height: 100%;
+  background-color: none;
 }
 
 .navigation-img {
@@ -145,6 +148,7 @@ defineOptions({
   align-items: center;
   background-color: antiquewhite;
   box-shadow: 0 0 20rpx 0 rgba(0, 0, 0, 0.3);
+
   .avatar {
     width: 80rpx;
     height: 80rpx;
@@ -165,21 +169,5 @@ defineOptions({
 ::v-deep .uni-swiper__dots-box {
   justify-content: flex-end !important;
   margin-right: 30rpx;
-}
-
-@media screen and (min-width: 600px) {
-  .swiper-box {
-    width: 600px;
-    height: 360px;
-    border-radius: 12rpx;
-  }
-
-  .swiper-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    border-radius: 18px;
-  }
 }
 </style>

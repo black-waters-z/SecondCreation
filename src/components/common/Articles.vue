@@ -1,58 +1,18 @@
 <template>
   <!-- styles可以传入grid的列数 -->
   <view class="ranks" :style="styles">
-    <view v-for="(item, index) in article" :key="index" class="rank-card">
-      <view class="rank-card__title" @click="goToArticle">{{
-        item.title || `热门内容 ${index + 1}`
-      }}</view>
-      <view class="rank-card__author">{{ item.author || "匿名作者" }}</view>
-      <view v-if="zone === 0" class="rank-card__cover">
-        <image
-          v-if="!loadComplete[index]"
-          :class="[
-            'rank-card__cover__image',
-            coverLoaded[index] && 'rank-card__cover__image--visible',
-          ]"
-          :src="item.image"
-          mode="aspectFill"
-          @load="handleImageLoad(index)"
-          @error="handleImageError(index)"
-        />
-        <image
-          v-if="loadComplete[index]"
-          :class="[
-            'rank-card__cover__image',
-            !coverLoaded[index] && 'rank-card__cover__image--visible',
-          ]"
-          :src="'/static/common/ImageLoadError.jpg'"
-          mode="aspectFill"
-        />
-        <view
-          v-if="!coverLoaded[index] && !loadComplete[index]"
-          class="rank-card__cover__loading"
-        >
-          <view class="rank-card__cover__loading-spinner"></view>
-          <text class="rank-card__cover__loading-text">加载中...</text>
-        </view>
-      </view>
-      <view v-if="zone === 1" class="rank-card__text">
-        <view class="rank-card__text__container">
-          <text class="rank-card__text__container__text">这是文章的内容。</text>
-        </view>
-      </view>
-    </view>
+    <Article
+      v-for="(item, index) in article"
+      :key="index"
+      :article="item"
+      :zone="zone"
+    >
+    </Article>
   </view>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, ref, watch } from "vue";
-
-function goToArticle() {
-  uni.navigateTo({
-    url: `../article/index?art_id=${1}`,
-  });
-}
-
+import Article from "./Article.vue";
 const props = withDefaults(
   defineProps<{ article?: any; zone?: number; styles?: any }>(),
   {
@@ -63,74 +23,144 @@ const props = withDefaults(
       { title: "", author: "" },
       { title: "", author: "" },
       { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
+      { title: "", author: "", image: "/static/character/character1.png" },
+      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "", author: "" },
+      { title: "1221121", author: "wangwu" },
     ],
     zone: 0,
   }
 );
+// import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-onMounted(() => {
-  console.log(props.zone);
-});
+// function goToArticle() {
+//   uni.navigateTo({
+//     url: `../article/index?art_id=${1}`,
+//   });
+// }
 
-const coverLoaded = ref<Record<number, boolean>>({});
-const loadComplete = ref<Record<number, boolean>>({});
-const loadTimers: Record<number, ReturnType<typeof setTimeout> | undefined> =
-  {};
-const fallbackDelay = 10000;
+// const props = withDefaults(
+//   defineProps<{ article?: any; zone?: number; styles?: any }>(),
+//   {
+//     article: () => [
+//       { title: "", author: "", image: "/static/character/character1.png" },
+//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "1221121", author: "wangwu" },
+//       { title: "", author: "", image: "/static/character/character1.png" },
+//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "1221121", author: "wangwu" },
+//       { title: "", author: "", image: "/static/character/character1.png" },
+//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "1221121", author: "wangwu" },
+//       { title: "", author: "", image: "/static/character/character1.png" },
+//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "1221121", author: "wangwu" },
+//       { title: "", author: "", image: "/static/character/character1.png" },
+//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "", author: "" },
+//       { title: "1221121", author: "wangwu" },
+//     ],
+//     zone: 0,
+//   }
+// );
 
-const clearLoadTimeout = (index: number) => {
-  const timer = loadTimers[index];
-  if (timer) {
-    clearTimeout(timer);
-    delete loadTimers[index];
-  }
-};
+// onMounted(() => {
+//   console.log(props.zone);
+// });
 
-const startLoadTimeout = (index: number) => {
-  clearLoadTimeout(index);
-  loadTimers[index] = setTimeout(() => {
-    if (!coverLoaded.value[index]) {
-      loadComplete.value[index] = true;
-    }
-  }, fallbackDelay);
-};
+// const coverLoaded = ref<Record<number, boolean>>({});
+// const loadComplete = ref<Record<number, boolean>>({});
+// const loadTimers: Record<number, ReturnType<typeof setTimeout> | undefined> =
+//   {};
+// const fallbackDelay = 10000;
 
-const ensureCoverState = () => {
-  props.article.forEach((_: any, index: number) => {
-    if (!(index in coverLoaded.value)) {
-      coverLoaded.value[index] = false;
-      loadComplete.value[index] = false;
-      startLoadTimeout(index);
-    }
-  });
-};
+// const clearLoadTimeout = (index: number) => {
+//   const timer = loadTimers[index];
+//   if (timer) {
+//     clearTimeout(timer);
+//     delete loadTimers[index];
+//   }
+// };
 
-watch(() => props.article.length, ensureCoverState, { immediate: true });
+// const startLoadTimeout = (index: number) => {
+//   clearLoadTimeout(index);
+//   loadTimers[index] = setTimeout(() => {
+//     if (!coverLoaded.value[index]) {
+//       loadComplete.value[index] = true;
+//       clearLoadTimeout(index); // 超时后也清掉引用
+//     }
+//   }, fallbackDelay);
+// };
 
-const handleImageLoad = (index: number) => {
-  coverLoaded.value[index] = true;
-  loadComplete.value[index] = false;
-  clearLoadTimeout(index);
-};
+// const ensureCoverState = () => {
+//   props.article.forEach((_: any, index: number) => {
+//     if (!(index in coverLoaded.value)) {
+//       coverLoaded.value[index] = false;
+//       loadComplete.value[index] = false;
+//       startLoadTimeout(index);
+//     }
+//   });
+// };
 
-const handleImageError = (index: number) => {
-  coverLoaded.value[index] = false;
-  loadComplete.value[index] = true;
-  clearLoadTimeout(index);
-};
+// watch(() => props.article.length, ensureCoverState, { immediate: true });
 
-onBeforeUnmount(() => {
-  Object.keys(loadTimers).forEach((key) => {
-    const index = Number(key);
-    clearLoadTimeout(index);
-  });
-});
+// const handleImageLoad = (index: number) => {
+//   coverLoaded.value[index] = true;
+//   loadComplete.value[index] = false;
+//   clearLoadTimeout(index);
+// };
+
+// const handleImageError = (index: number) => {
+//   coverLoaded.value[index] = false;
+//   loadComplete.value[index] = true;
+//   clearLoadTimeout(index);
+// };
+
+// onBeforeUnmount(() => {
+//   Object.keys(loadTimers).forEach((key) => {
+//     const index = Number(key);
+//     clearLoadTimeout(index);
+//   });
+// });
 </script>
 
 <style scoped lang="scss">
 .ranks {
   width: 95vw;
-  height: 100%;
   top: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -214,7 +244,6 @@ onBeforeUnmount(() => {
   }
 
   &__text {
-    min-height: 150rpx;
     border-radius: 12rpx;
     margin-top: 16rpx;
     display: flex;
@@ -225,7 +254,8 @@ onBeforeUnmount(() => {
 
     &__container {
       background-color: white;
-      width: calc(90% - 20rpx);
+      width: calc(80%);
+      height: 100rpx;
       background-color: #e5e7eb;
       border-radius: 12rpx;
       position: relative;
