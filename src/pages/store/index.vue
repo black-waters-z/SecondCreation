@@ -3,8 +3,16 @@
     <head-nav></head-nav>
     <head-bar></head-bar>
     <Filter v-model="filterIndex"></Filter>
-    <view class="store-container">
-      <articles :zone="activeNavigatorIndex"></articles>
+    <view style="width: 100%; overflow-y: scroll">
+      <articles
+        :zone="activeNavigatorIndex"
+        style="width: 100%"
+        :styles="{
+          'grid-template-columns': isMobile
+            ? 'repeat(2, 1fr)'
+            : 'repeat(5, 1fr)',
+        }"
+      ></articles>
     </view>
     <to-top></to-top>
     <post-sheet></post-sheet>
@@ -28,11 +36,22 @@ const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
 onShow(() => {
   if (activeNavigatorIndex.value === -1) activeNavigatorIndex.value = 0;
 });
+const info = uni.getSystemInfoSync();
+const isMobile =
+  info.platform === "android" ||
+  info.platform === "ios" ||
+  info.deviceType === "phone" ||
+  info.windowWidth <= 600;
 
 const filterIndex = ref<number>(0);
 </script>
 
 <style lang="scss" scoped>
+.scroll-Y {
+  flex: 1;
+  min-height: calc(100vh - 220rpx);
+}
+
 .store-content {
   width: 100vw;
   margin-top: 140rpx;
@@ -47,5 +66,32 @@ const filterIndex = ref<number>(0);
   width: 100vw;
   display: flex;
   justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // #ifdef MP-WEIXIN
+  margin-top: 80rpx;
+  // #endif
+  height: calc(100vh - 80rpx);
+
+  &__head {
+    //#ifdef MP-WEIXIN
+    margin-top: 0rpx;
+    //#endif
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .store-content {
+    height: 100%;
+    margin-top: 0;
+  }
+
+  .uni-scroll-view-refresher {
+    background-color: white !important;
+  }
 }
 </style>

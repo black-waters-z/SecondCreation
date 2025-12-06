@@ -35,7 +35,9 @@
     </view>
     <view v-if="zone === 1" class="rank-card__text">
       <view class="rank-card__text__container">
-        <text class="rank-card__text__container__text">这是文章的内容。</text>
+        <text class="rank-card__text__container__text"
+          >在很久很久以前，有个被遗忘在山谷里的小村庄。</text
+        >
       </view>
     </view>
   </view>
@@ -97,6 +99,7 @@ onUnmounted(() => {
   margin-bottom: 20rpx;
   background: white;
   border-radius: 16rpx;
+  border: 1px solid rgba(229, 231, 235, 0.5);
 
   &__title {
     padding: 0 20rpx;
@@ -125,8 +128,8 @@ onUnmounted(() => {
     overflow: hidden;
 
     &__image {
-      width: calc(100% - 5rpx);
-      height: calc(100% - 5rpx);
+      width: 100%;
+      aspect-ratio: 1/1;
       border-radius: 12rpx;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -177,8 +180,7 @@ onUnmounted(() => {
 
     &__container {
       background-color: white;
-      width: calc(80%);
-      height: 100rpx;
+      width: 80%;
       background-color: #e5e7eb;
       border-radius: 12rpx;
       position: relative;
@@ -187,6 +189,15 @@ onUnmounted(() => {
       color: #1f2933;
       letter-spacing: 1px;
       overflow: hidden;
+      &__text {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 13;
+        white-space: normal;
+      }
     }
   }
 }

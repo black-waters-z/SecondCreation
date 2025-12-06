@@ -73,8 +73,7 @@
   "leftWindow": {
     "path": "components/responsive/left-window.vue",
     "style": {
-      "width": "300px",
-      "backgroundColor": "#ffffff"
+      "width": "200px"
     }
   },
   "easycom": {

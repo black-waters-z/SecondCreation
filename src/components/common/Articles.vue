@@ -51,121 +51,17 @@ const props = withDefaults(
     zone: 0,
   }
 );
-// import { onBeforeUnmount, onMounted, ref, watch } from "vue";
-
-// function goToArticle() {
-//   uni.navigateTo({
-//     url: `../article/index?art_id=${1}`,
-//   });
-// }
-
-// const props = withDefaults(
-//   defineProps<{ article?: any; zone?: number; styles?: any }>(),
-//   {
-//     article: () => [
-//       { title: "", author: "", image: "/static/character/character1.png" },
-//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "1221121", author: "wangwu" },
-//       { title: "", author: "", image: "/static/character/character1.png" },
-//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "1221121", author: "wangwu" },
-//       { title: "", author: "", image: "/static/character/character1.png" },
-//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "1221121", author: "wangwu" },
-//       { title: "", author: "", image: "/static/character/character1.png" },
-//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "1221121", author: "wangwu" },
-//       { title: "", author: "", image: "/static/character/character1.png" },
-//       { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "", author: "" },
-//       { title: "1221121", author: "wangwu" },
-//     ],
-//     zone: 0,
-//   }
-// );
-
-// onMounted(() => {
-//   console.log(props.zone);
-// });
-
-// const coverLoaded = ref<Record<number, boolean>>({});
-// const loadComplete = ref<Record<number, boolean>>({});
-// const loadTimers: Record<number, ReturnType<typeof setTimeout> | undefined> =
-//   {};
-// const fallbackDelay = 10000;
-
-// const clearLoadTimeout = (index: number) => {
-//   const timer = loadTimers[index];
-//   if (timer) {
-//     clearTimeout(timer);
-//     delete loadTimers[index];
-//   }
-// };
-
-// const startLoadTimeout = (index: number) => {
-//   clearLoadTimeout(index);
-//   loadTimers[index] = setTimeout(() => {
-//     if (!coverLoaded.value[index]) {
-//       loadComplete.value[index] = true;
-//       clearLoadTimeout(index); // 超时后也清掉引用
-//     }
-//   }, fallbackDelay);
-// };
-
-// const ensureCoverState = () => {
-//   props.article.forEach((_: any, index: number) => {
-//     if (!(index in coverLoaded.value)) {
-//       coverLoaded.value[index] = false;
-//       loadComplete.value[index] = false;
-//       startLoadTimeout(index);
-//     }
-//   });
-// };
-
-// watch(() => props.article.length, ensureCoverState, { immediate: true });
-
-// const handleImageLoad = (index: number) => {
-//   coverLoaded.value[index] = true;
-//   loadComplete.value[index] = false;
-//   clearLoadTimeout(index);
-// };
-
-// const handleImageError = (index: number) => {
-//   coverLoaded.value[index] = false;
-//   loadComplete.value[index] = true;
-//   clearLoadTimeout(index);
-// };
-
-// onBeforeUnmount(() => {
-//   Object.keys(loadTimers).forEach((key) => {
-//     const index = Number(key);
-//     clearLoadTimeout(index);
-//   });
-// });
 </script>
 
 <style scoped lang="scss">
 .ranks {
-  width: 95vw;
+  width: 98%;
   top: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
+  gap: 5rpx;
   box-sizing: border-box;
+  margin: 0 auto;
   margin-top: 20rpx;
 }
 

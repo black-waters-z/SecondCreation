@@ -4,11 +4,14 @@
     <view class="content__head">
       <common-swiper></common-swiper>
     </view>
-    <character-nav></character-nav>
+    <match-media :max-width="599" style="width: 95%; margin: 0 auto">
+      <character-nav></character-nav>
+    </match-media>
+    <!-- 窄屏瀑布流 -->
     <scroll-view
       :scroll-top="scrollTop"
       scroll-y="true"
-      class="scroll-Y"
+      class="mobile-scroll scroll-Y"
       refresher-enabled="true"
       refresher-default-style="none"
       :refresher-triggered="triggered"
@@ -22,13 +25,17 @@
       <template #refresher>
         <refresh></refresh>
       </template>
-      <match-media :max-width="599">
-        <water-fall :waterFallColNum="2"></water-fall>
-      </match-media>
-      <match-media :min-width="600">
-        <water-fall :waterFallColNum="3"></water-fall>
-      </match-media>
+      <water-fall :waterFallColNum="2"></water-fall>
     </scroll-view>
+    <!-- 宽屏瀑布流 -->
+    <match-media :min-width="600" style="width: 100%">
+      <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y">
+        <template #refresher>
+          <refresh></refresh>
+        </template>
+        <water-fall :waterFallColNum="5"></water-fall>
+      </scroll-view>
+    </match-media>
     <post-sheet></post-sheet>
     <post-sheet-show></post-sheet-show>
   </view>
@@ -119,13 +126,20 @@ onMounted(async () => {});
   }
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 600px) {
   .content {
-    width: 60vw;
     position: relative;
     &__head {
       display: none;
     }
+
+    .mobile-scroll {
+      display: none;
+    }
+  }
+
+  .uni-scroll-view-refresher {
+    background-color: white !important;
   }
 }
 </style>

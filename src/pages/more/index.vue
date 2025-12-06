@@ -4,6 +4,7 @@
     <common-swiper
       :styles="{ width: '100vw', height: '30vw' }"
       :swiper-info="swiperInfo"
+      class="nomobile-disappear"
     ></common-swiper>
     <MoreNavigatorBar> </MoreNavigatorBar>
     <ai-room-nav></ai-room-nav>

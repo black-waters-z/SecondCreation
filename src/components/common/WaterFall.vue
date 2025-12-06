@@ -101,7 +101,7 @@ onMounted(() => {
 .waterfall {
   display: flex;
   width: 100%;
-  gap: 16rpx;
+  gap: 10rpx;
   padding: 20rpx;
   box-sizing: border-box;
   padding-top: 80rpx;

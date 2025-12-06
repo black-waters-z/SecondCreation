@@ -44,16 +44,13 @@ const characters = [
   src: url("../../../static/iconfont.ttf");
 }
 .character-nav-container {
-  width: 100%;
-  // #ifdef MP-WEIXIN
-  width: calc(98vw - 20rpx);
-  // #endif
+  width: calc(100% - 20rpx);
   border-radius: 16rpx;
   background-color: white;
   margin-top: 10rpx;
   gap: 20rpx;
   display: flex;
-  flex-direction: row !important;
+  flex-direction: row;
   justify-content: flex-start;
   padding: 10rpx;
 
@@ -86,6 +83,23 @@ const characters = [
   .character-name {
     font-size: 20rpx;
     line-height: 1.4;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .character-nav-container {
+    .character-div {
+      width: 100%;
+      flex-direction: row;
+      cursor: pointer;
+
+      .character-name {
+        flex: 1;
+        margin-left: 20px;
+        font-weight: 700;
+        font-size: 30rpx;
+      }
+    }
   }
 }
 </style>

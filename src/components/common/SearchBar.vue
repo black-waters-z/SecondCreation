@@ -19,7 +19,6 @@
 $icon-grey: #707070;
 
 .search-bar-container {
-  width: 100vw;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -38,13 +37,21 @@ $icon-grey: #707070;
   // #endif
 
   .search-container {
-    width: 60vw;
+    width: 300px;
+    height: 40px;
     background-color: #707070;
     opacity: 0.2;
     border-radius: 1000px;
     color: white;
     text-align: center;
     margin: 5rpx 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    uni-text {
+      margin-left: 30px;
+    }
   }
 }
 </style>

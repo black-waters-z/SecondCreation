@@ -137,4 +137,27 @@ const handleNavigator = (idx: number) => {
     }
   }
 }
+
+// #ifdef H5
+@media screen and (min-width: 600px) {
+  .navigation-module {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    > * {
+      flex: 1;
+    }
+
+    .navigation {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+  }
+}
+
+// #endif
 </style>
