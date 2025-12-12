@@ -53,10 +53,9 @@ for (let id_num = 1; id_num <= props.waterFallColNum; id_num++) {
   columnLists[id_num - 1] = ref<Object[]>([]);
   columSelectors[id_num - 1] = `#col${id_num}`;
 }
-
-const query = uni.createSelectorQuery().in(instance?.proxy);
 const getColHeight = (selector: string) =>
   new Promise<number>((resolve) => {
+    const query = uni.createSelectorQuery().in(instance?.proxy);
     query
       .select(selector)
       .boundingClientRect((res) => {
@@ -93,7 +92,7 @@ const mountMenu = async (index = 0) => {
 };
 
 onMounted(() => {
-  mountMenu();
+  mountMenu(0);
 });
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-  <view class="post-comment-container">
-    <view class="post-comment-container__text-area">
+  <view class="post-comment-container w-100">
+    <view class="post-comment-container__text-area w-100">
       <view class="comment">发评论</view>
       <button class="button">发送</button>
     </view>
@@ -15,7 +15,6 @@ const value = ref("");
 
 <style lang="scss" scoped>
 .post-comment-container {
-  width: 100vw;
   display: flex;
   justify-content: center;
   margin: {
@@ -24,7 +23,6 @@ const value = ref("");
   }
 
   &__text-area {
-    width: 98vw;
     height: 70rpx;
     border-radius: 16rpx;
     display: flex;

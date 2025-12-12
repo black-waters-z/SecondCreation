@@ -1,11 +1,11 @@
 <template>
   <view class="content">
-    <view class="icon-component-container">
-      <swiper class="swiper">
+    <view class="icon-component-container w-100">
+      <swiper class="swiper w-100">
         <swiper-item v-for="value in articlesWithFilter">
           <view class="swiper-pane">
             <Articles
-              :styles="{ 'grid-template-columns': 'repeat(3, 1fr)' }"
+              :styles="{ 'grid-template-columns': 'repeat(3, minmax(0,1fr))' }"
               :zone="value"
             ></Articles>
           </view>
@@ -29,7 +29,6 @@ const articlesWithFilter = [0, 1];
 }
 
 .swiper {
-  width: 100vw;
   // #ifdef MP-WEIXIN
   height: calc(100vh - 150rpx);
   // #endif

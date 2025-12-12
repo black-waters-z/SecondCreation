@@ -81,28 +81,27 @@ const handleNavigator = (idx: number) => {
   font-family: CustomFont;
   src: url("../../static/iconfont.ttf");
 }
-@media screen and (max-width: 600px) {
-  .navigation-module {
-    width: 100vw;
-    padding: 10rpx 0;
-    background-color: white;
-    display: flex;
-    align-items: flex-end;
-    column-gap: 10rpx;
-    position: fixed;
-    left: 0px;
-    top: 0rpx;
-    // #ifdef MP-WEIXIN
-    top: 80rpx;
-    padding-top: 20rpx;
-    // #endif
-    z-index: 1000;
-    height: 60rpx;
+.navigation-module {
+  width: 100%;
+  padding: 10rpx 0;
+  background-color: white;
+  display: flex;
+  align-items: flex-end;
+  column-gap: 10rpx;
+  position: fixed;
+  left: 0px;
+  top: 0rpx;
+  // #ifdef MP-WEIXIN
+  top: 80rpx;
+  padding-top: 20rpx;
+  // #endif
+  z-index: 1000;
+  height: 60rpx;
 
-    :nth-child(1) {
-      margin-left: 10rpx;
-    }
+  :nth-child(1) {
+    margin-left: 10rpx;
   }
+
   .navigation {
     display: flex;
     justify-content: center;
@@ -143,6 +142,7 @@ const handleNavigator = (idx: number) => {
   .navigation-module {
     width: 100%;
     display: flex;
+    position: relative;
     justify-content: center;
     > * {
       flex: 1;

@@ -48,7 +48,6 @@ page {
 
   --content-margin-top: $content-margin-top;
   display: flex;
-  background-color: white;
 }
 .content {
   width: 100%;
@@ -60,6 +59,22 @@ page {
 
 .content::-webkit-scrollbar {
   display: none;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.uni-scroll-view-refresher {
+  background-color: var(--grey-background-color) !important;
 }
 
 // #ifdef MP-WEIXIN || APP-PLUS

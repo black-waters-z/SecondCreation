@@ -1,17 +1,26 @@
 <template>
   <view class="content">
-    <head-nav></head-nav>
+    <head-nav show-search></head-nav>
+    <!-- #ifdef H5 -->
     <view class="content__head">
       <common-swiper></common-swiper>
     </view>
-    <match-media :max-width="599" style="width: 95%; margin: 0 auto">
-      <character-nav></character-nav>
+    <!-- #endif -->
+    <!-- #ifdef MP-WEIXIN -->
+    <match-media :max-width="599" style="margin-top: 70rpx">
+      <character-nav class="character-nav"></character-nav>
     </match-media>
+    <!-- #endif -->
+    <!-- #ifdef H5 -->
+    <match-media :max-width="599" style="width: 95%; margin: 0rpx auto">
+      <character-nav class="character-nav"></character-nav>
+    </match-media>
+    <!-- #endif -->
     <!-- 窄屏瀑布流 -->
     <scroll-view
       :scroll-top="scrollTop"
       scroll-y="true"
-      class="mobile-scroll scroll-Y"
+      class="mobile-scroll scroll-Y w-100"
       refresher-enabled="true"
       refresher-default-style="none"
       :refresher-triggered="triggered"
@@ -23,7 +32,7 @@
       @refresherabort="onAbort"
     >
       <template #refresher>
-        <refresh></refresh>
+        <refresh class="w-100"></refresh>
       </template>
       <water-fall :waterFallColNum="2"></water-fall>
     </scroll-view>
@@ -58,6 +67,11 @@ if (process.env.NODE_ENV === "development") {
   console.log("生产环境");
 }
 
+defineOptions({
+  options: {
+    styleIsolation: "shared", // 或者 "shared"
+  },
+});
 const scrollTop = ref(0);
 const old = reactive({
   scrollTop: 0,
@@ -103,11 +117,7 @@ onMounted(async () => {});
 <style lang="scss">
 .scroll-Y {
   flex: 1;
-  min-height: calc(100vh - 220rpx);
-}
-
-::v-deep .waterfall {
-  padding-top: 20rpx !important;
+  min-height: calc(100vh - 350rpx);
 }
 
 .content {
@@ -123,6 +133,10 @@ onMounted(async () => {});
     //#ifdef MP-WEIXIN
     margin-top: 0rpx;
     //#endif
+  }
+
+  .waterfall {
+    padding: 0.2rem 0.3rem !important;
   }
 }
 
@@ -142,4 +156,22 @@ onMounted(async () => {});
     background-color: white !important;
   }
 }
+
+// #ifdef MP-WEIXIN
+.character-nav {
+  position: fixed;
+  top: 140rpx;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding-top: 10rpx;
+}
+
+.waterfall {
+}
+
+.scroll-Y {
+  margin-top: 140rpx;
+}
+// #endif
 </style>

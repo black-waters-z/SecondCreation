@@ -1,9 +1,5 @@
 <template>
   <view class="rank-card">
-    <view class="rank-card__title" @click="goToArticle">{{
-      article?.title || "标题"
-    }}</view>
-    <view class="rank-card__author">{{ article?.author || "匿名作者" }}</view>
     <view v-if="zone === 0" class="rank-card__cover">
       <image
         v-if="!loadComplete"
@@ -40,6 +36,10 @@
         >
       </view>
     </view>
+    <view class="rank-card__title" @click="goToArticle">{{
+      article?.title || "标题"
+    }}</view>
+    <view class="rank-card__author">{{ article?.author || "匿名作者" }}</view>
   </view>
 </template>
 
@@ -117,7 +117,6 @@ onUnmounted(() => {
 
   &__cover {
     width: 100%;
-    margin-top: 16rpx;
     border-radius: 12rpx;
     aspect-ratio: 1/1;
     display: flex;

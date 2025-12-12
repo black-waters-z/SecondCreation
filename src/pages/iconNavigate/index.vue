@@ -1,11 +1,15 @@
 <template>
-  <view>
+  <view class="w-100">
     <go-back :title="goBackTitle"></go-back>
     <!-- #ifdef H5 -->
-    <component :is="component ?? null"></component>
+    <component
+      class="w-100 h-100 overflow-y-scroll"
+      :is="component ?? null"
+    ></component>
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN  -->
     <FavoriteComponent
+      class="w-100"
       v-if="componentKey === 'FavoriteComponent'"
     ></FavoriteComponent>
     <LikeComponent v-if="componentKey === 'LikeComponent'"></LikeComponent>

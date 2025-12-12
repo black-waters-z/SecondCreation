@@ -1,19 +1,17 @@
 <template>
-  <view class="store-content">
+  <view class="store-content w-100">
     <head-nav></head-nav>
     <head-bar></head-bar>
     <Filter v-model="filterIndex"></Filter>
-    <view style="width: 100%; overflow-y: scroll">
-      <articles
-        :zone="activeNavigatorIndex"
-        style="width: 100%"
-        :styles="{
-          'grid-template-columns': isMobile
-            ? 'repeat(2, 1fr)'
-            : 'repeat(5, 1fr)',
-        }"
-      ></articles>
-    </view>
+    <articles
+      :zone="activeNavigatorIndex"
+      :styles="{
+        'grid-template-columns': isMobile
+          ? 'repeat(2, minmax(0, 1fr))'
+          : 'repeat(5, minmax(0, 1fr))',
+        'overflow-y': 'auto',
+      }"
+    ></articles>
     <to-top></to-top>
     <post-sheet></post-sheet>
     <post-sheet-show></post-sheet-show>
@@ -53,7 +51,7 @@ const filterIndex = ref<number>(0);
 }
 
 .store-content {
-  width: 100vw;
+  box-sizing: border-box;
   margin-top: 140rpx;
   display: flex;
   flex-direction: column;
@@ -63,7 +61,7 @@ const filterIndex = ref<number>(0);
   // #endif
 }
 .store-container {
-  width: 100vw;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
 }

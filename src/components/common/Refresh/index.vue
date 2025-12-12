@@ -1,7 +1,7 @@
 <template>
   <view class="refresh-container">
     <view class="circle"> </view>
-    <text>loading...</text>
+    <text>加载中...</text>
   </view>
 </template>
 <script setup lang="ts"></script>

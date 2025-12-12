@@ -1,6 +1,6 @@
 <template>
-  <view class="whole-article-container">
-    <view class="whole-article-container__article">
+  <view class="whole-article-container w-100">
+    <view class="whole-article-container__article w-100">
       <view class="author">
         <view class="author__avatar"></view>
         <view class="author__name">name</view>
@@ -95,14 +95,12 @@ $whole-article-container__margin-top: 0rpx;
 // #endif
 
 .whole-article-container {
-  width: 100vw;
   display: flex;
   justify-content: center;
   margin-top: $whole-article-container__margin-top;
   z-index: 600;
 
   &__article {
-    width: 100vw;
     margin-top: 160rpx;
     background-color: white;
     padding-bottom: 20rpx;

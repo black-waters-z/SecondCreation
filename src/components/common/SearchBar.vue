@@ -1,14 +1,23 @@
 <template>
   <view class="search-bar-container">
-    <div class="search-container">
-      <uni-icons fontFamily="CustomFont" color="white" size="15"
+    <view class="search-container" :style="{ width: width, height: height }">
+      <uni-icons
+        fontFamily="CustomFont"
+        color="white"
+        size="15"
+        class="search-container__icon"
         >{{ "&#xe60d;" }}
       </uni-icons>
-    </div>
+    </view>
   </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  height: string;
+  width: string;
+}>();
+</script>
 
 <style scoped lang="scss">
 @font-face {
@@ -23,13 +32,7 @@ $icon-grey: #707070;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
   z-index: 2000;
-
-  // #ifdef MP-WEIXIN
-  transform: translateX(-50%);
-  top: 80rpx;
-  // #endif
 
   // #ifdef H5
   position: sticky;
@@ -51,6 +54,16 @@ $icon-grey: #707070;
 
     uni-text {
       margin-left: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-bar-container {
+    .search-container {
+      &__icon {
+        margin-left: 30rpx;
+      }
     }
   }
 }
