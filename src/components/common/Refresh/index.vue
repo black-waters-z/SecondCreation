@@ -16,7 +16,7 @@
     height: 40rpx;
     border-radius: 50%;
     border: 2px solid pink;
-    border-top: 2px solid var(--pink-color);
+    border-top: 2px solid $pink-color;
     animation: refresh 1s infinite;
     margin-right: 20rpx;
   }

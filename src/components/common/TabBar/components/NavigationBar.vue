@@ -64,7 +64,7 @@ function goToPath(path: string, index: number) {
 }
 
 .active {
-  color: var(--pink-color);
+  color: $pink-color;
   background-color: #f3f4f6;
 }
 </style>

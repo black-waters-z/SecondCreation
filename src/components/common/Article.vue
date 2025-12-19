@@ -158,7 +158,7 @@ onUnmounted(() => {
       height: 40rpx;
       border-radius: 50%;
       border: 4rpx solid rgba(244, 143, 177, 0.3);
-      border-top-color: var(--pink-color);
+      border-top-color: $pink-color;
       animation: rank-card-spin 1s linear infinite;
     }
 
@@ -188,6 +188,7 @@ onUnmounted(() => {
       color: #1f2933;
       letter-spacing: 1px;
       overflow: hidden;
+      height: 220px;
       &__text {
         width: 100%;
         overflow: hidden;

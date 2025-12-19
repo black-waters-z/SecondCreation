@@ -1,21 +1,23 @@
 <template>
   <view class="content">
     <head-nav show-search></head-nav>
-    <!-- #ifdef H5 -->
-    <view class="content__head">
-      <common-swiper></common-swiper>
-    </view>
-    <!-- #endif -->
     <!-- #ifdef MP-WEIXIN -->
-    <match-media :max-width="599" style="margin-top: 70rpx">
+    <match-media :max-width="599" style="margin-top: 70rpx" class="nav">
       <character-nav class="character-nav"></character-nav>
     </match-media>
     <!-- #endif -->
     <!-- #ifdef H5 -->
-    <match-media :max-width="599" style="width: 95%; margin: 0rpx auto">
-      <character-nav class="character-nav"></character-nav>
+    <match-media
+      :max-width="599"
+      style="width: 100%; margin: 0rpx auto"
+      class="nav"
+    >
+      <image src="/static/logo.png" mode="scaleToFill" class="logo"></image>
+      <uni-icons type="bars" size="30"></uni-icons>
+      <uni-icons type="search" size="30"></uni-icons>
     </match-media>
     <!-- #endif -->
+
     <!-- 窄屏瀑布流 -->
     <scroll-view
       :scroll-top="scrollTop"
@@ -34,6 +36,13 @@
       <template #refresher>
         <refresh class="w-100"></refresh>
       </template>
+      <!-- #ifdef H5 -->
+      <view class="content__head">
+        <common-swiper></common-swiper>
+      </view>
+      <!-- #endif -->
+      <!-- 这里插入商品信息 -->
+      <home-product></home-product>
       <water-fall :waterFallColNum="2"></water-fall>
     </scroll-view>
     <!-- 宽屏瀑布流 -->
@@ -59,6 +68,7 @@ import HeadNav from "@/components/common/HeadNav.vue";
 import CharacterNav from "./components/CharacterNav.vue";
 import WaterFall from "@/components/common/WaterFall.vue";
 import Refresh from "@/components/common/Refresh/index.vue";
+import HomeProduct from "./components/HomeProduct.vue";
 
 if (process.env.NODE_ENV === "development") {
   console.log(import.meta.env.DEV);
@@ -115,6 +125,10 @@ onMounted(async () => {});
 </script>
 
 <style lang="scss">
+.title {
+  margin-left: 16rpx;
+  margin-top: 20rpx;
+}
 .scroll-Y {
   flex: 1;
   min-height: calc(100vh - 350rpx);
@@ -171,7 +185,50 @@ onMounted(async () => {});
 }
 
 .scroll-Y {
-  margin-top: 140rpx;
+  margin-top: 70rpx;
 }
+// #endif
+
+// #ifdef H5
+.content__head {
+  order: 2;
+}
+
+.nav {
+  order: 1;
+  z-index: 100;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    width: 130rpx;
+    height: 50rpx;
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 30rpx;
+    box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+    &::after {
+      clear: both;
+    }
+  }
+
+  .uni-icons {
+    float: right;
+    color: $text-muted !important;
+    font-size: 25px !important;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.scroll-Y {
+  order: 3;
+}
+
 // #endif
 </style>

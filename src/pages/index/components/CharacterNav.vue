@@ -2,22 +2,25 @@
   <view class="character-nav-container">
     <view v-for="(value, index) in characters" class="character-div">
       <navigator :url="value.navigatorUrl" hover-class="navigator-hover">
-        <view class="character-avatar">
-          <image
-            v-if="value.avatar"
-            :src="value.avatar"
-            mode="scaleToFill"
-            class="character-avatar__image"
-          />
-          <uni-icons
-            fontFamily="CustomFont"
-            :color="value.color"
-            size="25"
-            v-if="value.icon"
-          >
-            {{ value.icon }}
-          </uni-icons>
-        </view>
+        <match-media :min-width="600">
+          <view class="character-avatar">
+            <image
+              v-if="value.avatar"
+              :src="value.avatar"
+              mode="scaleToFill"
+              class="character-avatar__image"
+            />
+            <uni-icons
+              fontFamily="CustomFont"
+              :color="value?.color"
+              size="25"
+              v-if="value.icon"
+              class="icon-class"
+            >
+              {{ value.icon }}
+            </uni-icons>
+          </view>
+        </match-media>
       </navigator>
       <text class="character-name">{{ value.name }}</text>
     </view>
@@ -33,8 +36,8 @@ const characters = [
   },
   { name: "粮仓导航", avatar: "/static/avatar/avatar1.jpg" },
   { name: "火热合集", avatar: "/static/avatar/avatar1.jpg" },
-  { name: "官方公告", icon: "\ue600", color: "#ffc0cb" },
-  { name: "搜索", icon: "\ue60d", color: "#ffc0cb" },
+  { name: "官方公告", icon: "\ue600" },
+  { name: "搜索", icon: "\ue60d" },
 ];
 </script>
 
@@ -46,7 +49,6 @@ const characters = [
 .character-nav-container {
   width: calc(100% - 20rpx);
   border-radius: 16rpx;
-  background-color: white;
   margin-top: 10rpx;
   gap: 20rpx;
   display: flex;
@@ -58,7 +60,6 @@ const characters = [
     flex: 1;
     margin-left: 10rpx;
     width: 100rpx;
-    height: 100rpx;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +72,6 @@ const characters = [
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 800;
 
     &__image {
       width: 100%;
@@ -81,7 +81,7 @@ const characters = [
   }
 
   .character-name {
-    font-size: 20rpx;
+    font-size: 28rpx;
     line-height: 1.4;
   }
 }
@@ -96,10 +96,14 @@ const characters = [
       .character-name {
         flex: 1;
         margin-left: 20px;
-        font-weight: 700;
+        font-weight: 600;
         font-size: 30rpx;
       }
     }
   }
+}
+
+.icon-class {
+  color: pink !important;
 }
 </style>

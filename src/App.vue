@@ -21,32 +21,23 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
+@use "uni";
 @import "./static/iconfont.css";
 
-$background-color: white;
-$grey-background-color: rgb(253, 251, 251);
-$pink-color: rgb(244, 143, 177);
-// #ifdef MP-WEIXIN
-$content-margin-top: 0rpx;
-// #endif
-// #ifdef H5
-$content-margin-top: 80rpx;
-// #endif
-
 :root {
-  --pink-color: #{$pink-color};
+  --pink-color: $pink-color;
 }
 
 page {
-  background-color: $grey-background-color;
+  background-color: uni.$grey-background-color;
   --text-title-family: "Source Han Sans";
   --background-color: white;
   --font-title-color: #1f2933;
-  --grey-background-color: #{$grey-background-color};
-  --pink-color: #{$pink-color};
+  --grey-background-color: uni.$grey-background-color;
+  --pink-color: $pink-color;
   --status-bar-height: 50px;
 
-  --content-margin-top: $content-margin-top;
+  --content-margin-top: uni.$content-margin-top;
   display: flex;
 }
 .content {
@@ -55,6 +46,14 @@ page {
   flex-direction: column;
   align-items: center;
   overflow: auto;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
 }
 
 .content::-webkit-scrollbar {

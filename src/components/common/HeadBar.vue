@@ -118,7 +118,7 @@ const handleNavigator = (idx: number) => {
     }
 
     &__pink {
-      color: var(--pink-color) !important;
+      color: $pink-color !important;
       font-weight: 700;
     }
 

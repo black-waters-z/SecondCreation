@@ -129,7 +129,7 @@ const props = withDefaults(
       height: 40rpx;
       border-radius: 50%;
       border: 4rpx solid rgba(244, 143, 177, 0.3);
-      border-top-color: var(--pink-color);
+      border-top-color: $pink-color;
       animation: rank-card-spin 1s linear infinite;
     }
 
