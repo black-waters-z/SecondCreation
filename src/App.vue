@@ -21,40 +21,59 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
+@use "uni";
 @import "./static/iconfont.css";
 
-$background-color: white;
-$grey-background-color: rgb(248, 248, 248);
-$pink-color: rgb(244, 143, 177);
-// #ifdef MP-WEIXIN
-$content-margin-top: 0rpx;
-// #endif
-// #ifdef H5
-$content-margin-top: 80rpx;
-// #endif
+:root {
+  --pink-color: $pink-color;
+}
+
 page {
-  background-color: $grey-background-color;
+  background-color: uni.$grey-background-color;
   --text-title-family: "Source Han Sans";
   --background-color: white;
   --font-title-color: #1f2933;
-  --grey-background-color: #{$grey-background-color};
-  --pink-color: #{$pink-color};
+  --grey-background-color: uni.$grey-background-color;
+  --pink-color: $pink-color;
   --status-bar-height: 50px;
 
-  --content-margin-top: $content-margin-top;
+  --content-margin-top: uni.$content-margin-top;
   display: flex;
 }
 .content {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  background-color: var(--grey-background-color);
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
 }
 
 .content::-webkit-scrollbar {
   display: none;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.uni-scroll-view-refresher {
+  background-color: var(--grey-background-color) !important;
 }
 
 // #ifdef MP-WEIXIN || APP-PLUS
@@ -88,11 +107,9 @@ uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   gap: 0;
-  width: 100%;
 }
 
 .uni-app--showleftwindow uni-content {
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -100,17 +117,42 @@ uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
   flex-shrink: 0;
 }
 
-.uni-app--showleftwindow uni-main {
-  flex: 1;
-  max-width: 900px;
+.uni-top-window {
+  height: 80px !important;
+}
+
+uni-layout {
+  display: flex;
+  flex-direction: column;
 }
 
 // #endif
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 600px) {
+  .uni-app--showtabbar uni-page-wrapper {
+    height: 100%;
+  }
+  uni-content {
+    width: calc(100% - 100px);
+  }
   .content {
-    width: 60vw;
     position: relative;
+  }
+
+  .uni-app--showleftwindow uni-main,
+  uni-main {
+    min-height: auto;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+
+  page {
+    background-color: white;
+    height: 100%;
+  }
+
+  .nomobile-disappear {
+    display: none;
   }
 }
 </style>

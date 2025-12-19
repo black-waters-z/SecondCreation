@@ -81,28 +81,27 @@ const handleNavigator = (idx: number) => {
   font-family: CustomFont;
   src: url("../../static/iconfont.ttf");
 }
-@media screen and (max-width: 600px) {
-  .navigation-module {
-    width: 100vw;
-    padding: 10rpx 0;
-    background-color: white;
-    display: flex;
-    align-items: flex-end;
-    column-gap: 10rpx;
-    position: fixed;
-    left: 0px;
-    top: 0rpx;
-    // #ifdef MP-WEIXIN
-    top: 80rpx;
-    padding-top: 20rpx;
-    // #endif
-    z-index: 1000;
-    height: 60rpx;
+.navigation-module {
+  width: 100%;
+  padding: 10rpx 0;
+  background-color: white;
+  display: flex;
+  align-items: flex-end;
+  column-gap: 10rpx;
+  position: fixed;
+  left: 0px;
+  top: 0rpx;
+  // #ifdef MP-WEIXIN
+  top: 80rpx;
+  padding-top: 20rpx;
+  // #endif
+  z-index: 1000;
+  height: 60rpx;
 
-    :nth-child(1) {
-      margin-left: 10rpx;
-    }
+  :nth-child(1) {
+    margin-left: 10rpx;
   }
+
   .navigation {
     display: flex;
     justify-content: center;
@@ -119,7 +118,7 @@ const handleNavigator = (idx: number) => {
     }
 
     &__pink {
-      color: var(--pink-color) !important;
+      color: $pink-color !important;
       font-weight: 700;
     }
 
@@ -137,4 +136,28 @@ const handleNavigator = (idx: number) => {
     }
   }
 }
+
+// #ifdef H5
+@media screen and (min-width: 600px) {
+  .navigation-module {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    > * {
+      flex: 1;
+    }
+
+    .navigation {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+  }
+}
+
+// #endif
 </style>

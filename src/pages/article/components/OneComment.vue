@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { Comment, ref } from "vue";
+import { ref } from "vue";
 
 interface OneComment {
   id: number;
@@ -135,7 +135,7 @@ const showText = ref<string>("展开回复");
       display: flex;
       gap: 30rpx;
       font-size: 24rpx;
-      color: var(--pink-color);
+      color: $pink-color;
     }
   }
 }

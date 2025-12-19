@@ -55,6 +55,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-4080420251103001",
     "@dcloudio/uni-ui": "^1.5.11",
     "axios": "^1.13.2",
+    "lodash": "^4.17.21",
     "pinia": "^3.0.4",
     "vue": "^3.4.21",
     "vue-i18n": "^9.1.9"
@@ -66,6 +67,7 @@
     "@dcloudio/uni-stacktracey": "3.0.0-4080420251103001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4080420251103001",
     "@eslint/js": "^9.39.1",
+    "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.0",
     "@vue/devtools-api": "^8.0.3",
     "@vue/runtime-core": "^3.4.21",

@@ -7,16 +7,16 @@
 <script setup lang="ts"></script>
 <style scoped lang="scss">
 .refresh-container {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   .circle {
-    width: 20rpx;
-    height: 20rpx;
+    width: 40rpx;
+    height: 40rpx;
     border-radius: 50%;
-    border: 2px solid grey;
-    border-top: 2px solid var(--pink-color);
+    border: 2px solid pink;
+    border-top: 2px solid $pink-color;
     animation: refresh 1s infinite;
     margin-right: 20rpx;
   }
@@ -37,6 +37,12 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .refresh-container {
+    background-color: white;
   }
 }
 </style>

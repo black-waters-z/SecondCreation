@@ -65,4 +65,15 @@ $grey-background-color: rgb(248, 248, 248);
     border-bottom: 3px solid palevioletred;
   }
 }
+
+@media screen and (min-width: 600px) {
+  .filter-container {
+    position: relative;
+    width: 100%;
+    top: 0;
+    justify-content: flex-start;
+    gap: 80px;
+    font-size: 13px;
+  }
+}
 </style>

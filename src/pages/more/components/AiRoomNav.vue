@@ -1,19 +1,22 @@
 <template>
-  <view class="ai-room-nav">
-    <view class="ai-room-nav__container"> </view>
+  <view class="ai-room-nav w-100">
+    <view class="ai-room-nav__container w-100">
+      <AiRoom v-for="value in [1, 2, 3, 4, 5, 6, 7]" class="w-100"></AiRoom>
+    </view>
   </view>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AiRoom from "@/components/common/AiRoom/index.vue";
+</script>
 <style lang="scss">
 .ai-room-nav {
-  width: 100vw;
-  display: flex;
   justify-content: center;
   position: relative;
   &__container {
-    width: 70%;
-    height: 100rpx;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     background-color: white;
+    gap: 10px;
   }
 }
 </style>

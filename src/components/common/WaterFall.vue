@@ -1,4 +1,5 @@
 <template>
+  <text class="title">推荐</text>
   <view class="waterfall">
     <view class="waterfall__col" v-for="id_num in waterFallColNum">
       <view class="waterfall__inner" :id="`col${id_num}`">
@@ -53,10 +54,9 @@ for (let id_num = 1; id_num <= props.waterFallColNum; id_num++) {
   columnLists[id_num - 1] = ref<Object[]>([]);
   columSelectors[id_num - 1] = `#col${id_num}`;
 }
-
-const query = uni.createSelectorQuery().in(instance?.proxy);
 const getColHeight = (selector: string) =>
   new Promise<number>((resolve) => {
+    const query = uni.createSelectorQuery().in(instance?.proxy);
     query
       .select(selector)
       .boundingClientRect((res) => {
@@ -93,7 +93,7 @@ const mountMenu = async (index = 0) => {
 };
 
 onMounted(() => {
-  mountMenu();
+  mountMenu(0);
 });
 </script>
 
@@ -101,10 +101,9 @@ onMounted(() => {
 .waterfall {
   display: flex;
   width: 100%;
-  gap: 16rpx;
+  gap: 10rpx;
   padding: 20rpx;
   box-sizing: border-box;
-  padding-top: 80rpx;
 
   &__col {
     width: 25%;

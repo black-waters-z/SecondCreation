@@ -47,4 +47,10 @@ $go-back-container__top: 0rpx;
     font-weight: 700;
   }
 }
+
+@media screen and (min-width: 600px) {
+  .go-back-container {
+    display: none;
+  }
+}
 </style>

@@ -1,10 +1,10 @@
 <template>
-  <view class="article-page">
+  <view class="article-page content w-100">
     <head-nav></head-nav>
     <go-back></go-back>
     <whole-article :art_id="art_id"></whole-article>
     <post-comment></post-comment>
-    <view class="comment-box">
+    <view class="comment-box w-100">
       <comment-vue :comments="comments"></comment-vue>
       <comment-vue :comments="comments"></comment-vue>
       <comment-vue :comments="comments"></comment-vue>
@@ -56,12 +56,9 @@ const comments = ref([
 
 <style lang="scss" scoped>
 .article-page {
-  height: 100vh;
-  overflow-y: auto;
   scrollbar-width: none;
 
   .comment-box {
-    height: 80vh;
     overflow-y: auto;
     scrollbar-width: thin;
     z-index: 0;

@@ -4,9 +4,10 @@
     <common-swiper
       :styles="{ width: '100vw', height: '30vw' }"
       :swiper-info="swiperInfo"
+      class="nomobile-disappear"
     ></common-swiper>
     <MoreNavigatorBar> </MoreNavigatorBar>
-    <ai-room-nav></ai-room-nav>
+    <ai-room-nav class="ai-room"></ai-room-nav>
   </view>
 </template>
 
@@ -25,4 +26,8 @@ const swiperInfo = [
 ];
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.ai-room {
+  width: 98%;
+}
+</style>

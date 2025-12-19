@@ -5,7 +5,7 @@
       indicator-dots
       circular
       autoplay
-      indicator-active-color="var(--pink-color)"
+      indicator-active-color="$pink-color"
     >
       <swiper-item
         v-for="(avatar, index) in avatarList"
