@@ -10,7 +10,6 @@
       <swiper
         class="swiper-box"
         :style="{ ...styles }"
-        autoplay
         circular
         interval="3000"
         duration="500"
