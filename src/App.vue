@@ -76,6 +76,11 @@ page {
   background-color: var(--grey-background-color) !important;
 }
 
+.margin-y-10 {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+
 // #ifdef MP-WEIXIN || APP-PLUS
 ::-webkit-scrollbar {
   display: none;

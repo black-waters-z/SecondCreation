@@ -51,6 +51,7 @@ $icon-grey: #707070;
     display: flex;
     flex-direction: row;
     align-items: center;
+    cursor: pointer;
 
     uni-text {
       margin-left: 30px;

@@ -1,13 +1,26 @@
 <template>
   <!-- styles可以传入grid的列数 -->
-  <view class="ranks" :style="styles">
-    <Article
-      v-for="(item, index) in article"
-      :key="index"
-      :article="item"
-      :zone="zone"
-    >
-    </Article>
+  <view class="w-100 overflow-y-scroll articles-container">
+    <view class="ranks" :style="styles">
+      <Article
+        v-for="(item, index) in article"
+        :key="index"
+        :article="item"
+        :zone="zone"
+      >
+      </Article>
+    </view>
+    <!--  #ifdef H5 -->
+    <view class="ranks-pagination w-100">
+      <el-pagination
+        class="margin-y-10"
+        background
+        layout="prev, pager, next"
+        :total="100"
+      >
+      </el-pagination>
+    </view>
+    <!--  #endif -->
   </view>
 </template>
 
@@ -161,6 +174,24 @@ const props = withDefaults(
       letter-spacing: 1px;
       overflow: hidden;
     }
+  }
+}
+.ranks-pagination {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .ranks {
+    &-pagination {
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: 20rpx;
+      box-sizing: border-box;
+      padding-right: 100rpx;
+    }
+  }
+  :deep(.el-pagination.is-background .el-pager .is-active) {
+    background-color: $pink-color;
   }
 }
 

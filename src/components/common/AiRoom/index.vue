@@ -88,27 +88,24 @@
   }
 }
 
+.ai-room-container__room-info {
+  height: 100rpx;
+  background: linear-gradient(to top, #ffffff, #ffffffcc, #ffffff00);
+  backdrop-filter: blur(10rpx);
+  transition: height 0.5s ease-in-out, background-color 0.3s ease; // smooth both ways
+}
+
 @media screen and (min-width: 600px) {
   .ai-room-container {
     cursor: pointer;
     border: none;
     height: 300rpx;
+    box-shadow: 0 0 30px $pink-shadow-01;
+
     &:hover .ai-room-container__room-info {
       background-color: white;
-      animation: roomInfoExpand 0.5s ease-in-out forwards;
-      &__content {
-        display: block;
-      }
+      height: 100%;
     }
-  }
-}
-
-@keyframes roomInfoExpand {
-  0% {
-    height: 100rpx;
-  }
-  100% {
-    height: 100%; // 最终高度
   }
 }
 </style>

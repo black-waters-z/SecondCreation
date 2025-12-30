@@ -110,6 +110,7 @@ const handleNavigator = (idx: number) => {
     font-weight: 700;
     font-family: var(--text-title-family);
     transition: 0.3s;
+    cursor: pointer;
 
     :nth-child(2) {
       display: none;
