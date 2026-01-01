@@ -17,7 +17,9 @@ withDefaults(defineProps<{ text?: string; backgroundcolor: string }>(), {
 });
 
 function navigateTo() {
-  console.log("跳转到发布页面哦哦!");
+  uni.navigateTo({
+    url: `../post/index`,
+  });
 }
 </script>
 

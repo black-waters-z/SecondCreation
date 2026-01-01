@@ -39,6 +39,7 @@ import { storeToRefs } from "pinia";
 
 type ArticleModuleKey = keyof typeof ArticleModule;
 const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
+const { handleNavigator } = useHeadBarStore();
 
 interface NavigationItem {
   icon: string;
@@ -69,10 +70,6 @@ const navigatorHiddenStyle: CSSProperties = {
   width: "0",
   fontSize: "0",
   overflow: "hidden",
-};
-
-const handleNavigator = (idx: number) => {
-  activeNavigatorIndex.value = idx;
 };
 </script>
 

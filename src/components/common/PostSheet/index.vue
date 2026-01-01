@@ -36,16 +36,15 @@
 import { usePostSheetStore } from "@/store/usePostSheet";
 import { storeToRefs } from "pinia";
 import PostChoice from "./PostChoice.vue";
-import { ref } from "vue";
 const postSheetStore = usePostSheetStore();
 const { visible } = storeToRefs(postSheetStore);
 
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @font-face {
 	font-family: CustomFont;
-	src: url('../../static/iconfont.ttf');
+	src: url('../../../static/iconfont.ttf');
 }
 
 

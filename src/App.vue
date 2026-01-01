@@ -21,7 +21,8 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-@use "uni";
+@import "uni";
+@import "uview-plus/index.scss";
 @import "./static/iconfont.css";
 
 :root {
@@ -29,17 +30,18 @@ onHide(() => {
 }
 
 page {
-  background-color: uni.$grey-background-color;
+  background-color: $grey-background-color;
   --text-title-family: "Source Han Sans";
   --background-color: white;
   --font-title-color: #1f2933;
-  --grey-background-color: uni.$grey-background-color;
+  --grey-background-color: $grey-background-color;
   --pink-color: $pink-color;
   --status-bar-height: 50px;
 
-  --content-margin-top: uni.$content-margin-top;
+  --content-margin-top: $content-margin-top;
   display: flex;
 }
+
 .content {
   width: 100%;
   display: flex;
@@ -64,12 +66,28 @@ page {
   width: 100%;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .overflow-y-scroll {
   overflow-y: scroll;
 }
 
 .h-100 {
   height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.item-center {
+  align-items: center;
 }
 
 .uni-scroll-view-refresher {
@@ -94,6 +112,16 @@ page {
 
 /* 解决H5的问题 */
 // #ifdef H5
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
 uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
   display: none;
   width: 0 !important;

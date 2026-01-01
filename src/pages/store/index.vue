@@ -1,6 +1,7 @@
 <template>
   <view class="store-content w-100">
-    <head-nav></head-nav>
+    <head-nav class="w-full"></head-nav>
+    <active-nav type="icon"></active-nav>
     <head-bar></head-bar>
     <Filter v-model="filterIndex"></Filter>
     <articles
@@ -19,10 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import HeadBar from "@/components/common/HeadBar.vue";
+import ActiveNav from "@/components/common/ActiveNav/index.vue";
 import Articles from "@/components/common/Articles.vue";
-import PostSheet from "@/components/common/PostSheet.vue";
-import PostSheetShow from "@/components/common/PostSheetShow.vue";
+import PostSheet from "@/components/common/PostSheet/index.vue";
+import PostSheetShow from "@/components/common/PostSheet/PostSheetShow.vue";
 import HeadNav from "@/components/common/HeadNav.vue";
 import ToTop from "@/components/common/ToTop.vue";
 import Filter from "@/components/common/Filter.vue";

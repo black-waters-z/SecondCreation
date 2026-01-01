@@ -60,4 +60,10 @@ const { triggered, onPulling, onRefresh, onAbort, onRestore } = useScrollView();
     z-index: 1000;
   }
 }
+
+// #ifdef MP-WEIXIN
+.scroll-Y {
+  height: calc(100vh - 170rpx);
+}
+// #endif
 </style>

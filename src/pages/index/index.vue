@@ -1,5 +1,6 @@
 <template>
   <view class="content">
+    <!-- 首页头部 -->
     <head-nav show-search></head-nav>
     <!-- #ifdef MP-WEIXIN -->
     <match-media :max-width="599" style="margin-top: 70rpx" class="nav">
@@ -13,9 +14,13 @@
       class="nav"
     >
       <image src="/static/logo.png" mode="scaleToFill" class="logo"></image>
-      <uni-icons type="bars" size="30"></uni-icons>
+      <uni-icons type="bars" size="30" @click="toggleMobileNav"></uni-icons>
       <uni-icons type="search" size="30"></uni-icons>
     </match-media>
+    <character-mobile-nav
+      :is-show="showMobileNav"
+      @toggle-mobile-nav="toggleMobileNav"
+    ></character-mobile-nav>
     <!-- #endif -->
 
     <!-- 窄屏瀑布流 -->
@@ -45,6 +50,7 @@
       <home-product></home-product>
       <water-fall :waterFallColNum="2"></water-fall>
     </scroll-view>
+
     <!-- 宽屏瀑布流 -->
     <match-media :min-width="600" style="width: 100%">
       <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y">
@@ -62,13 +68,14 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
 import CommonSwiper from "@/components/common/CommonSwiper.vue";
-import PostSheet from "@/components/common/PostSheet.vue";
-import PostSheetShow from "@/components/common/PostSheetShow.vue";
+import PostSheet from "@/components/common/PostSheet/index.vue";
+import PostSheetShow from "@/components/common/PostSheet/PostSheetShow.vue";
 import HeadNav from "@/components/common/HeadNav.vue";
 import CharacterNav from "./components/CharacterNav.vue";
 import WaterFall from "@/components/common/WaterFall.vue";
 import Refresh from "@/components/common/Refresh/index.vue";
 import HomeProduct from "./components/HomeProduct.vue";
+import CharacterMobileNav from "./components/CharacterMobileNav.vue";
 
 if (process.env.NODE_ENV === "development") {
   console.log(import.meta.env.DEV);
@@ -76,6 +83,7 @@ if (process.env.NODE_ENV === "development") {
 } else {
   console.log("生产环境");
 }
+const showMobileNav = ref(false);
 
 defineOptions({
   options: {
@@ -86,6 +94,10 @@ const scrollTop = ref(0);
 const old = reactive({
   scrollTop: 0,
 });
+
+function toggleMobileNav() {
+  showMobileNav.value = !showMobileNav.value;
+}
 
 const triggered = ref<string | boolean>(false);
 let _freshing = false;
