@@ -57,7 +57,6 @@
   width: 95vw;
   height: 110rpx;
   border-radius: 8px;
-  margin-top: 20rpx;
   flex-direction: row;
   padding: 20rpx 0;
   font-size: 25rpx;

@@ -1,7 +1,11 @@
 <template>
   <view class="character-nav-container">
     <view v-for="(value, index) in characters" class="character-div">
-      <navigator :url="value.navigatorUrl" hover-class="navigator-hover">
+      <navigator
+        :url="value.navigatorUrl"
+        hover-class="navigator-hover"
+        class="character-nav-container__navigator"
+      >
         <match-media :min-width="600">
           <view class="character-avatar">
             <image
@@ -21,8 +25,8 @@
             </uni-icons>
           </view>
         </match-media>
+        <text class="character-name">{{ value.name }}</text>
       </navigator>
-      <text class="character-name">{{ value.name }}</text>
     </view>
   </view>
 </template>
@@ -91,7 +95,6 @@ const characters = [
     .character-div {
       width: 100%;
       flex-direction: row;
-      cursor: pointer;
 
       .character-name {
         flex: 1;
@@ -99,6 +102,21 @@ const characters = [
         font-weight: 600;
         font-size: 30rpx;
       }
+    }
+
+    .character-nav-container__navigator {
+      padding: 10rpx 30rpx;
+      width: 130px;
+      &:hover {
+        background-color: $navigation-hover-color;
+        cursor: pointer;
+        border-radius: 100px;
+      }
+    }
+
+    :deep(.navigator-wrap) {
+      display: flex;
+      align-items: center;
     }
   }
 }

@@ -1,30 +1,35 @@
 <template>
-  <view class="content">
-    <head-nav></head-nav>
-    <view class="content__user">
-      <user-bar></user-bar>
-      <support-pay></support-pay>
-    </view>
-    <view class="content__read-nav">
-      <read-nav :nav-items="readNavItems"> </read-nav>
-      <text>创作中心</text>
-      <read-nav :nav-items="writeNavItems"> </read-nav>
-      <text>其他服务</text>
-    </view>
+  <view class="w-full index-container">
+    <view class="w-full">
+      <head-nav class="w-full"></head-nav>
+      <view class="content__user">
+        <user-bar></user-bar>
+        <support-pay></support-pay>
+      </view>
+      <view class="content__read-nav">
+        <read-nav :nav-items="readNavItems"> </read-nav>
+        <text>创作中心</text>
+        <read-nav :nav-items="writeNavItems"> </read-nav>
+        <text>其他服务</text>
+      </view>
 
-    <post-sheet></post-sheet>
-    <post-sheet-show></post-sheet-show>
+      <post-sheet></post-sheet>
+      <post-sheet-show></post-sheet-show>
+    </view>
+    <match-media :min-width="600" class="item-center">
+      <ask-ai></ask-ai>
+    </match-media>
   </view>
 </template>
 
 <script setup lang="ts">
-import PostSheet from "@/components/common/PostSheet.vue";
-import PostSheetShow from "@/components/common/PostSheetShow.vue";
+import PostSheet from "@/components/common/PostSheet/index.vue";
+import PostSheetShow from "@/components/common/PostSheet/PostSheetShow.vue";
 import UserBar from "./components/UserBar.vue";
 import SupportPay from "./components/SupportPay.vue";
 import ReadNav from "./components/ReadNav.vue";
 import HeadNav from "@/components/common/HeadNav.vue";
-
+import AskAi from "./components/AskAi.vue";
 import { ref } from "vue";
 
 const login = ref(false);
@@ -55,7 +60,6 @@ const writeNavItems = [
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
   // #ifdef MP-WEIXIN
   margin-top: 80rpx;
   // #endif
@@ -76,4 +80,18 @@ const writeNavItems = [
     width: 100%;
   }
 }
+
+@media screen and (min-width: 600px) {
+  .index-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+  }
+}
+
+// #ifdef MP-WEIXIN
+.index-container {
+  margin-top: 80rpx;
+}
+// #endif
 </style>

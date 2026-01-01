@@ -13,7 +13,7 @@
  */
 
 /* 颜色变量 */
-
+@import 'uview-plus/theme.scss';
 /* 行为相关颜色 */
 $uni-color-primary: #007aff;
 $uni-color-success: #4cd964;
@@ -92,6 +92,8 @@ $pink-900: #831843;
 $pink-950: #500724;
 $pink-color: rgb(244, 143, 177);
 
+$pink-shadow-01:rgba(244, 143, 177, 0.1);
+$grey-shadow-02: rgba(84, 78, 80, 0.206);
 /* ===== Background ===== */
 $bg-page: #ffffff;
 $bg-card: #ffffff;
@@ -104,3 +106,5 @@ $text-muted: #6b7280; // gray-500
 
 /* ===== Border ===== */
 $border-color: #e5e7eb; // gray-200
+
+$navigation-hover-color: #f3f4f6;

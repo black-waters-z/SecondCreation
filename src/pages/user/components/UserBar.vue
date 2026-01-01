@@ -94,4 +94,9 @@ defineProps();
     }
   }
 }
+
+@media screen and (min-width: 600px) {
+  .user-bar-container {
+  }
+}
 </style>
