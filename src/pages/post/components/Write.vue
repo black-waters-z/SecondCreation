@@ -3,28 +3,15 @@
     <uni-forms :modelValue="formData" class="write-container__form">
       <uni-forms-item class="write-container__info flex" name="collection">
         <view class="write-container__info__addTo">
-          <select-collection
-            :collection-list="select"
-            v-model="formData.collection"
-          ></select-collection>
+          <select-collection :collection-list="select" v-model="formData.collection"></select-collection>
         </view>
         <text>{{ count }}字</text>
       </uni-forms-item>
       <uni-forms-item name="title">
-        <input
-          type="text"
-          v-model="formData.title"
-          placeholder="标题"
-          class="write-container__form__title"
-        />
+        <input type="text" v-model="formData.title" placeholder="标题" class="write-container__form__title" />
       </uni-forms-item>
       <uni-forms-item name="content">
-        <textarea
-          v-model="formData.content"
-          placeholder="输入文章内容"
-          placeholder-class="textarea-placeholder"
-          class="write-container__form__content w-full"
-        />
+        <textarea v-model="formData.content" placeholder="输入文章内容" placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
       </uni-forms-item>
     </uni-forms>
     <view class="write-container__button">
@@ -35,26 +22,49 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "vue";
-import SCButton from "@/components/common/SCButton/index.vue";
-import SelectCollection from "./SelectCollection.vue";
+import { computed, reactive } from 'vue';
+import SCButton from '@/components/common/SCButton/index.vue';
+import SelectCollection from './SelectCollection.vue';
+
+defineOptions({
+  options: {
+    styleIsolation: 'shared',
+  },
+});
 const formData = reactive({
-  title: "",
-  content: "",
-  collection: "",
+  title: '',
+  content: '',
+  collection: 0,
 });
 
-const select = ["111", "2222", "3333", "444", "5", "6", "7"];
+// 从数据库获取用户建立的合集
+const select = [
+  { id: 0, name: '默认合集' },
+  { id: 1, name: '合集1' },
+  { id: 2, name: '合集2' },
+];
 
 const count = computed(() => {
   return formData.content.length;
 });
 function writeSubmit() {
   console.log(formData);
+  uni.setStorage({
+    key: 'articleData',
+    data: formData,
+    success: () => {
+      uni.navigateTo({
+        url: './AddTag',
+      });
+    },
+    fail: () => {
+      console.log('本地保存文章内容失败');
+    },
+  });
 }
 
 function writeAddCraft() {
-  console.log("add craft");
+  console.log('add craft');
 }
 </script>
 
@@ -97,7 +107,7 @@ function writeAddCraft() {
     display: flex;
   }
   :deep(.uni-forms-item__content) {
-    display: flex;
+    display: flex !important;
   }
 
   :deep(.uni-forms-item) {

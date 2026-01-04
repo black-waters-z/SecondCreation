@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
-import { usePostSheetStore } from "./store/usePostSheet";
+import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
+import { usePostSheetStore } from './store/usePostSheet';
 
 onLaunch(() => {
   if (import.meta.env.DEV) {
-    console.log("App Launch");
+    console.log('App Launch');
   }
   const postSheetStore = usePostSheetStore();
   // #ifdef H5
@@ -14,16 +14,16 @@ onLaunch(() => {
   // #endif
 });
 onShow(() => {
-  console.log("App Show");
+  console.log('App Show');
 });
 onHide(() => {
-  console.log("App Hide");
+  console.log('App Hide');
 });
 </script>
 <style lang="scss">
-@import "uni";
-@import "uview-plus/index.scss";
-@import "./static/iconfont.css";
+@import 'uni';
+@import 'uview-plus/index.scss';
+@import './static/iconfont.css';
 
 :root {
   --pink-color: $pink-color;
@@ -31,7 +31,7 @@ onHide(() => {
 
 page {
   background-color: $grey-background-color;
-  --text-title-family: "Source Han Sans";
+  --text-title-family: 'Source Han Sans';
   --background-color: white;
   --font-title-color: #1f2933;
   --grey-background-color: $grey-background-color;
@@ -64,6 +64,10 @@ page {
 
 .w-100 {
   width: 100%;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 .w-full {
