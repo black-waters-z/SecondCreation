@@ -15,18 +15,21 @@
 <script setup lang="ts">
 // type: 按钮类型 button outline
 enum Button {
-  button = "button",
-  outline = "outline",
+  button = 'button',
+  outline = 'outline',
 }
 
 defineProps<{ type: string }>();
-defineEmits(["click"]);
+defineEmits(['click']);
 </script>
 
 <style lang="scss" scoped>
 .button {
   border-radius: 100px;
   box-sizing: border-box;
+  display: inline-flex;
+  margin-left: 0;
+  margin-right: 0;
   padding: {
     left: 20px;
     right: 20px;
