@@ -65,6 +65,7 @@ function writeSubmit() {
 
 function writeAddCraft() {
   console.log('add craft');
+  window.alert('草稿保存成功');
 }
 </script>
 
@@ -96,6 +97,7 @@ function writeAddCraft() {
   }
 
   &__button {
+    z-index: 100;
     border: none;
     position: fixed;
     width: 100%;

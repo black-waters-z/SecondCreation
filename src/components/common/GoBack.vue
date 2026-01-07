@@ -1,17 +1,24 @@
 <template>
-  <view @click="goBack" class="go-back-container">
-    <uni-icons type="left" size="30"></uni-icons>
+  <view class="go-back-container w-full">
+    <uni-icons type="left" size="20" @click="goBack"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
+    <search-bar class="go-back-container__search" v-if="type" :type="type" @search="onSearchFromChild"></search-bar>
   </view>
 </template>
 
 <script setup lang="ts">
+import SearchBar from './SearchBar.vue';
 function goBack() {
   uni.navigateBack();
 }
+const emit = defineEmits(['search']);
 
-withDefaults(defineProps<{ title?: string }>(), {
-  title: "",
+const onSearchFromChild = (text: string) => {
+  emit('search', text);
+};
+
+withDefaults(defineProps<{ title?: string; type?: string }>(), {
+  title: '',
 });
 </script>
 
@@ -25,19 +32,20 @@ $go-back-container__top: 0rpx;
 // #endif
 
 .go-back-container {
-  width: calc(100vw - 20rpx);
   display: flex;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-  padding: {
-    top: 20rpx;
-    left: 20rpx;
-  }
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20rpx;
   background-color: white;
   position: fixed;
   z-index: 1000;
   top: $go-back-container__top;
   left: 0;
+  min-height: 80rpx;
+
+  &__search {
+    flex: 1;
+  }
 
   &__title {
     position: absolute;

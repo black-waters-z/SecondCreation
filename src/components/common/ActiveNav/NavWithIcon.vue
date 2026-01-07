@@ -4,26 +4,13 @@
       <uni-icons
         fontFamily="CustomFont"
         :size="item.index === activeNavigatorIndex ? '30' : '20'"
-        :class="
-          item.index === activeNavigatorIndex
-            ? 'navigation__pink'
-            : 'navigation__grey'
-        "
+        :class="item.index === activeNavigatorIndex ? 'navigation__pink' : 'navigation__grey'"
         @click="handleNavigator(item.index)"
         :color="item.index === activeNavigatorIndex ? 'palevioletred' : '#999'"
       >
         {{ item.icon }}
       </uni-icons>
-      <text
-        :class="
-          item.index === activeNavigatorIndex ? 'navigation-text-active' : ''
-        "
-        :style="
-          item.index === activeNavigatorIndex
-            ? navigatorVisibleStyle
-            : navigatorHiddenStyle
-        "
-      >
+      <text :class="item.index === activeNavigatorIndex ? 'navigation-text-active' : ''" :style="item.index === activeNavigatorIndex ? navigatorVisibleStyle : navigatorHiddenStyle">
         {{ ArticleModule[item.text] }}
       </text>
     </view>
@@ -31,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import type { CSSProperties } from "vue";
-import { ArticleModule } from "@/pages/index/types/index";
-import { useHeadBarStore } from "@/store/useHeadBar";
-import { storeToRefs } from "pinia";
+import { onMounted, ref } from 'vue';
+import type { CSSProperties } from 'vue';
+import { ArticleModule } from '@/pages/index/types/index';
+import { useHeadBarStore } from '@/store/useHeadBar';
+import { storeToRefs } from 'pinia';
 
 type ArticleModuleKey = keyof typeof ArticleModule;
 const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
@@ -48,28 +35,28 @@ interface NavigationItem {
 }
 
 const navigationItems = ref<NavigationItem[]>([
-  { icon: "\ue6af", index: 0, text: "paint" },
-  { icon: "\ue782", index: 1, text: "write" },
-  { icon: "\ue65b", index: 2, text: "candy" },
-  { icon: "\ue6f0", index: 3, text: "communicate" },
-  { icon: "\ue678", index: 4, text: "video" },
+  { icon: '\ue6af', index: 0, text: 'paint' },
+  { icon: '\ue782', index: 1, text: 'write' },
+  { icon: '\ue65b', index: 2, text: 'candy' },
+  { icon: '\ue6f0', index: 3, text: 'communicate' },
+  { icon: '\ue678', index: 4, text: 'video' },
 ]);
 
 const navigatorVisibleStyle: CSSProperties = {
-  display: "flex",
-  transform: "scaleX(1)",
+  display: 'flex',
+  transform: 'scaleX(1)',
   opacity: 1,
-  fontSize: "30rpx",
-  overflow: "hidden",
+  fontSize: '30rpx',
+  overflow: 'hidden',
 };
 
 const navigatorHiddenStyle: CSSProperties = {
-  display: "flex",
-  transform: "scaleX(0)",
+  display: 'flex',
+  transform: 'scaleX(0)',
   opacity: 0,
-  width: "0",
-  fontSize: "0",
-  overflow: "hidden",
+  width: '0',
+  fontSize: '0',
+  overflow: 'hidden',
 };
 </script>
 
@@ -81,14 +68,6 @@ const navigatorHiddenStyle: CSSProperties = {
   display: flex;
   align-items: flex-end;
   column-gap: 10rpx;
-  position: fixed;
-  left: 0px;
-  top: 0rpx;
-  // #ifdef MP-WEIXIN
-  top: 80rpx;
-  padding-top: 20rpx;
-  // #endif
-  z-index: 1000;
   height: 60rpx;
 
   :nth-child(1) {

@@ -40,6 +40,11 @@ page {
 
   --content-margin-top: $content-margin-top;
   display: flex;
+  flex-direction: column;
+  height: calc(100vh - 90rpx);
+  // #ifdef MP-WEIXIN
+  height: 100vh;
+  // #endif
 }
 
 .content {
@@ -48,6 +53,8 @@ page {
   flex-direction: column;
   align-items: center;
   overflow: auto;
+  min-height: 0;
+  flex: 1; // 让内容区占满页面，在小程序内为子 scroll-view 提供高度参考
 }
 
 .absolute {
@@ -64,6 +71,16 @@ page {
 
 .w-100 {
   width: 100%;
+}
+
+.mh-0 {
+  min-height: 0;
+}
+
+.mt-80-weixin {
+  // #ifdef MP-WEIXIN
+  margin-top: 80rpx;
+  // #endif
 }
 
 .bg-white {
@@ -86,6 +103,25 @@ page {
   display: flex;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
+.position-sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.top-80 {
+  top: 80rpx;
+}
+
+.z-100 {
+  z-index: 100;
+}
 .justify-center {
   justify-content: center;
 }

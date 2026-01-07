@@ -1,34 +1,48 @@
 <template>
-  <!-- #ifdef MP-WEIXIN -->
-  <view class="status_bar w-100">
-    <view class="status_bar__logo-search" v-if="showSearch">
-      <image src="/static/logo.png" mode="scaleToFill" class="logo" />
-      <SearchBar
-        class="w-100 status_bar__search"
-        width="300rpx"
-        height="75rpx"
-      ></SearchBar>
+  <view class="w-full bg-white head-nav" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
+    <!-- #ifdef MP-WEIXIN -->
+    <view class="status_bar w-100">
+      <view class="status_bar__logo-search" v-if="showSearch">
+        <image src="/static/logo.png" mode="scaleToFill" class="logo" />
+        <SearchBar class="w-100 status_bar__search" width="300rpx" height="75rpx"></SearchBar>
+      </view>
     </view>
+    <!-- #endif -->
+    <!-- #ifdef H5 -->
+    <match-media :max-width="599" class="nav bg-white">
+      <image src="/static/logo.png" mode="scaleToFill" class="logo"></image>
+      <uni-icons type="bars" size="30" @click="toggleMobileNav"></uni-icons>
+      <navigator url="../search/index">
+        <uni-icons type="search" size="30"></uni-icons>
+      </navigator>
+    </match-media>
+    <character-mobile-nav :is-show="showMobileNav" @toggle-mobile-nav="toggleMobileNav"></character-mobile-nav>
+    <!-- #endif -->
   </view>
-  <!-- #endif -->
 </template>
 
 <script setup lang="ts">
-import SearchBar from "./SearchBar.vue";
+import SearchBar from './SearchBar.vue';
+import { ref } from 'vue';
+// #ifdef H5
+import CharacterMobileNav from '@/pages/index/components/CharacterMobileNav.vue';
+// #endif
 defineOptions({
   options: {
-    styleIsolation: "shared", // 或者 "shared"
+    styleIsolation: 'shared', // 或者 "shared"
   },
 });
 
 defineProps<{ showSearch: boolean }>();
+const showMobileNav = ref(false);
+function toggleMobileNav() {
+  showMobileNav.value = !showMobileNav.value;
+}
 </script>
 
 <style lang="scss">
 .status_bar {
   width: 100vw;
-  z-index: 1000;
-  position: fixed;
   top: 0;
   min-height: 80rpx;
   background: white;
@@ -38,13 +52,40 @@ defineProps<{ showSearch: boolean }>();
     display: flex;
     align-items: center;
     padding: 0 20rpx;
-    margin-top: 70rpx;
 
     .logo {
       width: 81.3px;
       height: 29.7px;
       margin-left: 20rpx;
     }
+  }
+}
+
+.head-nav {
+  z-index: 1000;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: white;
+
+  .logo {
+    width: 130rpx;
+    height: 50rpx;
+    margin-right: auto; // 左侧
+  }
+
+  .uni-icons {
+    color: $text-muted !important;
+    font-size: 25px !important;
+    margin-left: 10px; // 图标之间间距
+    float: right;
+  }
+  navigator {
+    display: inline-block;
+    float: right;
   }
 }
 

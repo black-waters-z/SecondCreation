@@ -1,9 +1,5 @@
 <template>
-  <view
-    class="post-choice"
-    :style="{ backgroundColor: backgroundcolor }"
-    @click="navigateTo"
-  >
+  <view class="post-choice" :style="{ backgroundColor: backgroundcolor }" @click="navigateTo">
     <slot name="icon"> </slot>
     <text v-if="text" class="text">
       {{ text }}
@@ -12,13 +8,13 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ text?: string; backgroundcolor: string }>(), {
-  backgroundcolor: "antiquewhite",
+const props = withDefaults(defineProps<{ text?: string; backgroundcolor: string; url: string }>(), {
+  backgroundcolor: 'antiquewhite',
 });
 
 function navigateTo() {
   uni.navigateTo({
-    url: `../post/index`,
+    url: props.url,
   });
 }
 </script>
