@@ -34,6 +34,7 @@ defineOptions({
 const formData = reactive({
   title: '',
   content: '',
+  author: '',
   collection: 0,
 });
 
@@ -99,7 +100,7 @@ function writeAddCraft() {
   &__button {
     z-index: 100;
     border: none;
-    position: fixed;
+    position: sticky;
     width: 100%;
     justify-content: center;
     left: 0;

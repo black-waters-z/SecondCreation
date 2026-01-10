@@ -4,48 +4,40 @@
     <view class="waterfall__col" v-for="id_num in waterFallColNum">
       <view class="waterfall__inner" :id="`col${id_num}`">
         <!-- zone之后要换成从数据库中查过来的 -->
-        <Article
-          v-for="(item, key) in columnLists[id_num - 1].value"
-          :article="item"
-          :key="key"
-          :zone="item.zone ?? Math.random() < 0.5 ? 0 : 1"
-        ></Article>
+        <Article v-for="(item, key) in columnLists[id_num - 1].value" :article="item" :key="key" :zone="item.zone ?? Math.random() < 0.5 ? 0 : 1"></Article>
       </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue";
-import { getCurrentInstance } from "vue";
-import Article from "@/components/common/Article.vue";
-import type { Article as ArticleType } from "@/types/index";
+import { nextTick, onMounted, ref } from 'vue';
+import { getCurrentInstance } from 'vue';
+import Article from '@/components/common/Article.vue';
+import type { Article as ArticleType } from '@/types/index';
 const instance = getCurrentInstance();
 
 defineOptions({
   options: {
-    styleIsolation: "shared", // 允许样式穿透（微信小程序）
+    styleIsolation: 'shared', // 允许样式穿透（微信小程序）
   },
 });
 
-const props = withDefaults(
-  defineProps<{ waterFallColNum: number; articleLists: ArticleType[] }>(),
-  {
-    waterFallColNum: 3,
-    articleLists: () => [
-      { title: "", author: "作者1", image: "/static/character/character1.png" },
-      { title: "", author: "作者2", content: "我是一只小小小鸟啊啊啊" },
-      { title: "", author: "作者3" },
-      { title: "", author: "作者4" },
-      { title: "", author: "作者5" },
-      { title: "1221121", author: "wangwu" },
-      { title: "", author: "作者3" },
-      { title: "", author: "作者4" },
-      { title: "", author: "作者5" },
-      { title: "1221121", author: "wangwu" },
-    ],
-  }
-);
+const props = withDefaults(defineProps<{ waterFallColNum: number; articleLists: ArticleType[] }>(), {
+  waterFallColNum: 3,
+  articleLists: () => [
+    { title: '', author: '作者1', image: '/static/character/character1.png' },
+    { title: '', author: '作者2', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '作者3' },
+    { title: '', author: '作者4' },
+    { title: '', author: '作者5' },
+    { title: '1221121', author: 'wangwu' },
+    { title: '', author: '作者3' },
+    { title: '', author: '作者4' },
+    { title: '', author: '作者5' },
+    { title: '1221121', author: 'wangwu' },
+  ],
+});
 
 const columnLists = [] as any;
 const columSelectors = [] as string[];

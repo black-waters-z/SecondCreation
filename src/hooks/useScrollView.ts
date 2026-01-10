@@ -1,17 +1,22 @@
-import { onMounted, ref } from "vue";
-
+import { onMounted, ref } from 'vue';
+enum RefreshType {
+  PullDown = 'PullDown',
+  Restore = 'Restore',
+  Loading = 'Loading',
+}
 export function useScrollView() {
-  const triggered = ref<string | boolean>(false);
+  const triggered = ref<string | boolean>(true);
   let isRefreshing = false;
-
+  const refreshType = ref<RefreshType>(RefreshType.PullDown);
   const onPulling = (e: Event) => {
     // console.log("onpulling", e);
+    refreshType.value = RefreshType.PullDown;
   };
 
   const onRefresh = () => {
     if (isRefreshing) return;
     isRefreshing = true;
-    console.log("鍒锋柊");
+    refreshType.value = RefreshType.Loading;
     setTimeout(() => {
       triggered.value = false;
       isRefreshing = false;
@@ -19,12 +24,12 @@ export function useScrollView() {
   };
 
   const onRestore = () => {
-    triggered.value = "restore";
-    console.log("onRestore");
+    triggered.value = 'restore';
+    refreshType.value = RefreshType.Restore;
   };
 
   const onAbort = () => {
-    console.log("onAbort");
+    console.log('onAbort');
   };
 
   onMounted(() => {
@@ -36,6 +41,7 @@ export function useScrollView() {
 
   return {
     triggered,
+    refreshType,
     onPulling,
     onRefresh,
     onRestore,

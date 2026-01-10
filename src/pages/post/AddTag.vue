@@ -1,14 +1,14 @@
 <template>
-  <view class="w-full add-tag">
-    <go-back title="发布文章"></go-back>
-    <post-setting v-model="workTags" placehodler="输入角色标签"></post-setting>
+  <page-wrapper show-head class="add-tag">
+    <go-back class="w-full" title="发布文章"></go-back>
+    <post-setting class="w-full" v-model="workTags" placehodler="输入角色标签"></post-setting>
     <view class="w-full bg-white add-tag-select">
       <select-collection :collection-list="collectionList" v-model="collection"></select-collection>
     </view>
     <view class="write-container__button">
       <SCButton @click="submit" type="button">发布</SCButton>
     </view>
-  </view>
+  </page-wrapper>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +16,7 @@ import GoBack from '@/components/common/GoBack.vue';
 import PostSetting from './components/PostSetting.vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import SelectCollection from './components/SelectCollection.vue';
-
+import PageWrapper from '@/components/container/PageContainer.vue';
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 const articleData = ref<any>({});
@@ -55,7 +55,9 @@ onLoad(() => {
 function submit() {
   delete articleData.value.collection;
   const result = {
-    ...articleData.value,
+    data: {
+      ...articleData.value,
+    },
     collection: collectionList[collection.value],
     tags: {
       ...workTags.value,
@@ -76,6 +78,7 @@ function submit() {
     box-sizing: border-box;
     padding: 40rpx;
     display: flex;
+    gap: 10rpx;
   }
 
   :deep(.add-tag-select .select-collection-container) {

@@ -73,6 +73,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/user/login",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

@@ -23,23 +23,12 @@ withDefaults(defineProps<{ title?: string; type?: string }>(), {
 </script>
 
 <style scoped lang="scss">
-// #ifdef MP-WEIXIN
-$go-back-container__top: 80rpx;
-// #endif
-
-// #ifdef H5
-$go-back-container__top: 0rpx;
-// #endif
-
 .go-back-container {
   display: flex;
   align-items: center;
   box-sizing: border-box;
   padding: 20rpx;
   background-color: white;
-  position: fixed;
-  z-index: 1000;
-  top: $go-back-container__top;
   left: 0;
   min-height: 80rpx;
 

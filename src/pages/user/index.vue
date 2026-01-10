@@ -3,7 +3,7 @@
     <head-nav class="w-full"></head-nav>
     <scroll-container class="w-full flex mh-0">
       <view class="content__user">
-        <user-bar></user-bar>
+        <user-bar :user-info="userInfo"></user-bar>
         <support-pay></support-pay>
       </view>
       <view class="content__read-nav">
@@ -12,9 +12,9 @@
         <read-nav :nav-items="writeNavItems"> </read-nav>
         <text>其他服务</text>
       </view>
-      <post-sheet></post-sheet>
-      <post-sheet-show></post-sheet-show>
     </scroll-container>
+    <post-sheet class="w-full"></post-sheet>
+    <post-sheet-show></post-sheet-show>
     <match-media :min-width="600" class="item-center">
       <ask-ai></ask-ai>
     </match-media>
@@ -30,10 +30,13 @@ import ReadNav from './components/ReadNav.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
 import AskAi from './components/AskAi.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import type { UserInfo } from './type';
+import { onLoad } from '@dcloudio/uni-app';
+import { navigateToLogin } from '@/utils/navigate';
+import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
 
-const login = ref(false);
-
+const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
   FAVORITE = '收藏',
@@ -54,6 +57,18 @@ const writeNavItems = [
   { icon: '\ue64f', label: NavLabelEnum.DRAFT },
   { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA },
 ];
+
+onLoad(() => {
+  const token = uni.getStorageSync('token');
+  if (!token) {
+    navigateToLogin();
+  }
+  const user = parseToken(token);
+  userInfo.value = {
+    id: user.uid,
+    name: user.sub,
+  };
+});
 </script>
 
 <style lang="scss" scoped>

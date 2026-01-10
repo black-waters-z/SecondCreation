@@ -2,11 +2,7 @@
   <view class="waterfall">
     <view class="waterfall__col">
       <view class="waterfall__inner" id="col1">
-        <Article
-          v-for="item in articleList1"
-          :article="item"
-          :zone="1"
-        ></Article>
+        <Article v-for="item in articleList1" :article="item" :zone="1"></Article>
       </view>
     </view>
     <view class="waterfall__col">
@@ -23,24 +19,24 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue";
-import { getCurrentInstance } from "vue";
-import Article from "@/components/common/Article.vue";
-import type { Article as ArticleType } from "@/types/index";
+import { nextTick, onMounted, ref } from 'vue';
+import { getCurrentInstance } from 'vue';
+import Article from '@/components/common/Article.vue';
+import type { Article as ArticleType } from '@/types/index';
 const instance = getCurrentInstance();
 
 const props = withDefaults(defineProps<{ articleLists: ArticleType[] }>(), {
   articleLists: () => [
-    { title: "", author: "", image: "/static/character/character1.png" },
-    { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-    { title: "", author: "" },
-    { title: "", author: "" },
-    { title: "", author: "" },
-    { title: "1221121", author: "wangwu" },
-    { title: "", author: "", image: "/static/character/character1.png" },
-    { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-    { title: "", author: "" },
-    { title: "", author: "" },
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '1221121', author: 'wangwu' },
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
   ],
 });
 
@@ -48,7 +44,7 @@ const articleList1 = ref<ArticleType[]>([]);
 const articleList2 = ref<ArticleType[]>([]);
 const articleList3 = ref<ArticleType[]>([]);
 
-const columSelectors = ["#col1", "#col2", "#col3"];
+const columSelectors = ['#col1', '#col2', '#col3'];
 const columnLists = [articleList1, articleList2, articleList3];
 
 const query = uni.createSelectorQuery().in(instance?.proxy);
@@ -99,9 +95,8 @@ onMounted(() => {
   display: flex;
   width: 100%;
   gap: 16rpx;
-  padding: 20rpx;
+  padding: 0 20rpx;
   box-sizing: border-box;
-  padding-top: 80rpx;
 
   &__col {
     width: 25%;

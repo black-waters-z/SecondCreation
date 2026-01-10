@@ -18,7 +18,7 @@
       ></articles>
     </scroll-container>
     <to-top></to-top>
-    <post-sheet></post-sheet>
+    <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
   </view>
 </template>

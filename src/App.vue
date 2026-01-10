@@ -130,6 +130,18 @@ page {
   align-items: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
 .uni-scroll-view-refresher {
   background-color: var(--grey-background-color) !important;
 }

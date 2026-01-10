@@ -30,6 +30,7 @@ defineEmits(['click']);
   display: inline-flex;
   margin-left: 0;
   margin-right: 0;
+  margin: 10rpx;
   padding: {
     left: 20px;
     right: 20px;
@@ -52,10 +53,14 @@ defineEmits(['click']);
 .button-outline {
   border: 2px solid $pink-300;
   color: $pink-300;
-  background-color: white;
+  background: none;
   transition: 0.3s ease;
   &:active {
     transform: scale(1.2);
   }
+}
+
+:deep(.uni-button:after) {
+  border: none;
 }
 </style>

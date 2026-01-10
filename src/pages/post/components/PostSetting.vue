@@ -15,11 +15,7 @@
       </view>
     </view>
     <!-- 交叉标签 -->
-    <view class="w-full cross-tag"
-      ><input class="cross-tag__input" v-model="crossTagLeft" confirm-type="done" @blur="addCrossTag" @confirm="addCrossTag" placeholder="攻" />
-      <text class="cross-tag__text">x</text>
-      <input class="cross-tag__input" v-model="crossTagRight" confirm-type="done" @blur="addCrossTag" @confirm="addCrossTag" placeholder="受" />
-    </view>
+    <input class="cross-tag__input" v-model="crossTag" confirm-type="done" @blur="addCrossTag" @confirm="addCrossTag" placeholder="输入交叉标签" />
     <view class="tags-container">
       <view class="tag" v-for="(tag, index) in crossTags" :key="index">
         <Tag :text="tag" @close-tag="removeCrossTag(index)" bg-color="pink"></Tag>
@@ -44,7 +40,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const { inputTag: workTag, tags: workTags, addTag: addWorkTag, removeTag: removeWorkTag } = useTags();
 const { inputTag: characterTag, tags: characterTags, addTag: addCharacterTag, removeTag: removeCharacterTag } = useTags();
-const { crossTagLeft, crossTagRight, tags: crossTags, addCrossTag: addCrossTag, removeTag: removeCrossTag } = useTags();
+const { inputTag: crossTag, tags: crossTags, addTag: addCrossTag, removeTag: removeCrossTag } = useTags();
 
 watch(
   [characterTags, crossTags, workTags],
@@ -60,13 +56,21 @@ watch(
 </script>
 <style lang="scss" scoped>
 .post-setting {
-  margin-top: 80rpx;
+  box-sizing: border-box;
   background-color: white;
   padding: 20rpx;
   .tags-container {
   }
   .tag {
     display: inline;
+
+    :deep(.u-tag) {
+      border-radius: 100px;
+    }
+
+    :deep(.u-tag__content) {
+      display: flex;
+    }
   }
 
   .cross-tag {
