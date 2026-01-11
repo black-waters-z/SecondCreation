@@ -16,7 +16,9 @@
       </view>
       <!-- #endif -->
       <!-- 这里插入商品信息 -->
+      <IntroductionNav>同人团宣</IntroductionNav>
       <home-product></home-product>
+      <introduction-nav>推荐</introduction-nav>
       <water-fall :waterFallColNum="2"></water-fall>
     </scroll-container>
 
@@ -47,6 +49,8 @@ import WaterFall from '@/components/common/WaterFall.vue';
 import Refresh from '@/components/common/Refresh/index.vue';
 import HomeProduct from './components/HomeProduct.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
+
 if (process.env.NODE_ENV === 'development') {
   console.log(import.meta.env.DEV);
   console.log('开发环境');

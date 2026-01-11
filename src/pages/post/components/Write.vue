@@ -1,6 +1,7 @@
 <template>
   <view class="w-full write-container">
     <uni-forms :modelValue="formData" class="write-container__form">
+      <slot></slot>
       <uni-forms-item class="write-container__info flex" name="collection">
         <view class="write-container__info__addTo">
           <select-collection :collection-list="select" v-model="formData.collection"></select-collection>
@@ -22,9 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
+import { computed, inject, reactive, unref } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import SelectCollection from './SelectCollection.vue';
+import { parseToken } from '@/utils/security';
+const images = inject('image_urls', [] as any);
 
 defineOptions({
   options: {
@@ -34,8 +37,9 @@ defineOptions({
 const formData = reactive({
   title: '',
   content: '',
-  author: '',
+  author_id: 0,
   collection: 0,
+  image_urls: [] as string[] | undefined,
 });
 
 // 从数据库获取用户建立的合集
@@ -49,7 +53,8 @@ const count = computed(() => {
   return formData.content.length;
 });
 function writeSubmit() {
-  console.log(formData);
+  formData.image_urls = Array.isArray(images) ? images : unref(images);
+  formData.author_id = parseToken(uni.getStorageSync('token')).uid;
   uni.setStorage({
     key: 'articleData',
     data: formData,

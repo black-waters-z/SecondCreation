@@ -2,9 +2,14 @@
   <view class="w-full flex">
     <view class="select-collection-container">
       <picker class="select-collection-container__picker" :range="nameList" range-key="" :value="index" @change="bindPickerChange">
-        <view class="flex">
-          <text>加入合集：</text>
-          <view class="uni-input">{{ collectionList[modelValue].name || collectionList[index].name }}</view>
+        <view class="flex item-center justify-center">
+          <text class="select-collection-container__picker__text">
+            <slot name="filterName"></slot>
+          </text>
+          <view class="uni-input select-collection-container__picker__text">{{ collectionList?.[index].name }}</view>
+          <text class="select-collection-container__picker__text">
+            <slot name="filterEnd"></slot>
+          </text>
         </view>
       </picker>
     </view>
@@ -28,6 +33,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void;
 }>();
 const nameList = computed(() => {
+  if (!props.collectionList) return ['NotFound'];
   return props.collectionList.map((item) => item.name);
 });
 
@@ -50,6 +56,12 @@ function bindPickerChange(e: any) {
     right: 20rpx;
     top: 5rpx;
     bottom: 5rpx;
+  }
+
+  &__picker {
+    &__text {
+      font-size: 30rpx;
+    }
   }
 }
 </style>

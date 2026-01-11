@@ -1,22 +1,7 @@
-<template>
-  <view class="content">
-    <view class="icon-component-container w-100">
-      <swiper class="swiper w-100">
-        <swiper-item v-for="value in articlesWithFilter">
-          <view class="swiper-pane">
-            <Articles
-              :styles="{ 'grid-template-columns': 'repeat(3, minmax(0,1fr))' }"
-              :zone="value"
-            ></Articles>
-          </view>
-        </swiper-item>
-      </swiper>
-    </view>
-  </view>
-</template>
+<template></template>
 
 <script setup lang="ts">
-import Articles from "../../common/Articles.vue";
+import Articles from '../../common/Articles.vue';
 
 const articlesWithFilter = [0, 1];
 </script>

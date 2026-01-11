@@ -1,5 +1,4 @@
 <template>
-  <text class="title">推荐</text>
   <view class="waterfall">
     <view class="waterfall__col" v-for="id_num in waterFallColNum">
       <view class="waterfall__inner" :id="`col${id_num}`">
@@ -15,6 +14,7 @@ import { nextTick, onMounted, ref } from 'vue';
 import { getCurrentInstance } from 'vue';
 import Article from '@/components/common/Article.vue';
 import type { Article as ArticleType } from '@/types/index';
+import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
 const instance = getCurrentInstance();
 
 defineOptions({

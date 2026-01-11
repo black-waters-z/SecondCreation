@@ -53,9 +53,9 @@ $icon-grey: #707070;
 
     &__input {
       // #ifdef MP-WEIXIN
-      width: 200rpx;
+      width: 14.625rem;
       // #endif
-      width: 500rpx !important;
+      width: 14.625rem !important;
       height: 55rpx !important;
       padding-left: 10rpx;
       padding-right: 10rpx;

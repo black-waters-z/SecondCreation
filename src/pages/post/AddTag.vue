@@ -19,6 +19,7 @@ import SelectCollection from './components/SelectCollection.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
+import { post } from '@/utils/request';
 const articleData = ref<any>({});
 
 const workTags = ref({
@@ -52,18 +53,34 @@ onLoad(() => {
   });
 });
 
-function submit() {
+async function submit() {
   delete articleData.value.collection;
   const result = {
     data: {
       ...articleData.value,
-    },
-    collection: collectionList[collection.value],
-    tags: {
-      ...workTags.value,
+      collection: collectionList[collection.value],
+      tags: {
+        ...workTags.value,
+      },
     },
   };
-  console.log(result);
+
+  // 开始插入或者查询tag的id
+  const tagResult = await post('/tags/articleTags', result.data.tags);
+  delete result.data.tags;
+  const postResult = await post('/articles', { ...result.data, tag_ids: tagResult.tag_ids });
+  console.log('postResult', postResult);
+
+  if (postResult) {
+    uni.showToast({
+      title: '发布成功',
+      icon: 'success', // 也可以是 'loading' 或 'none'
+      duration: 2000, // 显示时长，单位毫秒
+    });
+    setTimeout(() => {
+      uni.switchTab({ url: '/pages/user/index' });
+    }, 2000);
+  }
 }
 </script>
 

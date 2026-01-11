@@ -3,14 +3,20 @@
     <!-- #ifdef MP-WEIXIN -->
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
-        <image src="/static/logo.png" mode="scaleToFill" class="logo" />
+        <navigator open-type="switchTab" url="/pages/index/index" hover-class="navigator-hover">
+          <image src="/static/logo.png" mode="scaleToFill" class="logo" />
+        </navigator>
         <SearchBar class="w-100 status_bar__search" width="300rpx" height="75rpx"></SearchBar>
       </view>
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
     <match-media :max-width="599" class="nav bg-white">
-      <image src="/static/logo.png" mode="scaleToFill" class="logo"></image>
+      <view class="flex-1 flex">
+        <navigator open-type="switchTab" url="/pages/index/index">
+          <image src="/static/logo.png" mode="scaleToFill" class="logo" />
+        </navigator>
+      </view>
       <uni-icons type="bars" size="30" @click="toggleMobileNav"></uni-icons>
       <navigator url="../search/index">
         <uni-icons type="search" size="30"></uni-icons>

@@ -8,9 +8,9 @@
       </view>
       <view class="content__read-nav">
         <read-nav :nav-items="readNavItems"> </read-nav>
-        <text>创作中心</text>
+        <introduction-nav>创作中心</introduction-nav>
         <read-nav :nav-items="writeNavItems"> </read-nav>
-        <text>其他服务</text>
+        <introduction-nav>其他服务</introduction-nav>
       </view>
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
@@ -35,6 +35,7 @@ import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
 import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
+import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
 
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
@@ -71,7 +72,7 @@ onLoad(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .content {
   &__user {
     width: 100%;

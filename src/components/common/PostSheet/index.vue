@@ -34,9 +34,9 @@ type Choice = {
 
 const choices: Choice[] = [
   { text: '发布文章', icon: '\ue649', backgroundcolor: 'white', url: '../post/index?type=write', color: '#ffb2b2' },
-  { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index', color: '#ffb2b2' },
+  { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index?type=paint', color: '#ffb2b2' },
   { text: '汉化组', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#ffb2b2' },
-  { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
+  { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index?type=video', color: '#bebfc0' },
   { text: '创建聊天室', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
   { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
 ];

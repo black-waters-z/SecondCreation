@@ -41,7 +41,7 @@ page {
   --content-margin-top: $content-margin-top;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 90rpx);
+  height: calc(100vh - 100rpx);
   // #ifdef MP-WEIXIN
   height: 100vh;
   // #endif
