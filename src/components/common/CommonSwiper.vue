@@ -1,28 +1,10 @@
 <template>
   <view>
-    <uni-swiper-dot
-      :info="swiperInfo"
-      :current="current"
-      field="content"
-      :mode="mode"
-      :dotsStyles="dotStyles"
-    >
-      <swiper
-        class="swiper-box"
-        :style="{ ...styles }"
-        circular
-        interval="3000"
-        duration="500"
-        @change="change"
-      >
+    <uni-swiper-dot :info="swiperInfo" :current="current" field="content" :mode="mode" :dotsStyles="dotStyles">
+      <swiper class="swiper-box" :style="{ ...styles }" circular interval="3000" duration="500" @change="change">
         <swiper-item v-for="(item, index) in swiperInfo" :key="index">
-          <image mode="aspectFill" class="swiper-item" :src="item.swiperImg">
-          </image>
-          <view
-            class="author-info"
-            v-if="item.bottomBar"
-            :style="item.bottomBar?.style"
-          >
+          <image mode="aspectFill" class="swiper-item" :src="item.swiperImg"> </image>
+          <view class="author-info" v-if="item.bottomBar" :style="item.bottomBar?.style">
             <view class="avatar" :style="item.bottomBar?.avatarStyle"></view>
             <view class="author">{{ item.bottomBar.authorText }}</view>
           </view>
@@ -33,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 
 type CSSProperties = Record<string, string | number | undefined>;
 
@@ -59,46 +41,46 @@ withDefaults(
   {
     swiperInfo: () => [
       {
-        swiperImg: "/static/homepic/homepic3.png",
+        swiperImg: '/static/homepic/homepic3.png',
         bottomBar: {
-          avatar: "/static/character/character1.png",
-          authorText: "匿名1/绘",
+          avatar: '/static/character/character1.png',
+          authorText: '匿名1/绘',
           style: {
-            backgroundColor: "white",
+            backgroundColor: 'white',
           },
           avatarStyle: {
-            backgroundColor: "antiquewhite",
+            backgroundColor: 'antiquewhite',
           },
         },
       },
       {
-        swiperImg: "/static/homepic/homepic2.png",
+        swiperImg: '/static/homepic/homepic2.png',
         bottomBar: {
-          avatar: "/static/character/character1.png",
-          authorText: "匿名/绘",
+          avatar: '/static/character/character1.png',
+          authorText: '匿名/绘',
           style: {
-            backgroundColor: "antiquewhite",
+            backgroundColor: 'antiquewhite',
           },
           avatarStyle: {
-            backgroundColor: "white",
+            backgroundColor: 'white',
           },
         },
       },
     ],
     styles: () => ({}),
-  }
+  },
 );
 
 const dotStyles = {
-  color: "pink",
-  backgroundColor: "grey",
-  border: "grey",
-  selectedBackgroundColor: "pink",
-  selectedBorder: "pink",
+  color: 'pink',
+  backgroundColor: 'grey',
+  border: 'grey',
+  selectedBackgroundColor: 'pink',
+  selectedBorder: 'pink',
 };
 
 const current = ref(0);
-const mode = ref<"round" | "round-dot">("round"); // keep whatever modes you use
+const mode = ref<'round' | 'round-dot'>('round'); // keep whatever modes you use
 
 const change = (e: any) => {
   current.value = e.detail.current;
@@ -107,7 +89,7 @@ const change = (e: any) => {
 // #ifdef MP-WEIXIN
 defineOptions({
   options: {
-    styleIsolation: "shared", // 允许样式穿透（微信小程序）
+    styleIsolation: 'shared', // 允许样式穿透（微信小程序）
   },
 });
 // #endif

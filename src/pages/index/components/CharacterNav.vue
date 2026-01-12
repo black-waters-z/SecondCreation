@@ -1,26 +1,11 @@
 <template>
   <view class="character-nav-container">
     <view v-for="(value, index) in characters" class="character-div">
-      <navigator
-        :url="value.navigatorUrl"
-        hover-class="navigator-hover"
-        class="character-nav-container__navigator"
-      >
+      <navigator :url="value.navigatorUrl" hover-class="navigator-hover" class="character-nav-container__navigator">
         <match-media :min-width="600">
           <view class="character-avatar">
-            <image
-              v-if="value.avatar"
-              :src="value.avatar"
-              mode="scaleToFill"
-              class="character-avatar__image"
-            />
-            <uni-icons
-              fontFamily="CustomFont"
-              :color="value?.color"
-              size="25"
-              v-if="value.icon"
-              class="icon-class"
-            >
+            <image v-if="value.avatar" :src="value.avatar" mode="scaleToFill" class="character-avatar__image" />
+            <uni-icons fontFamily="CustomFont" :color="value?.color" size="25" v-if="value.icon" class="icon-class">
               {{ value.icon }}
             </uni-icons>
           </view>
@@ -34,21 +19,21 @@
 <script setup lang="ts">
 const characters = [
   {
-    name: "角色百科",
-    avatar: "/static/avatar/avatar1.jpg",
-    navigatorUrl: "/pages/character/index",
+    name: 'tag导航',
+    avatar: '/static/avatar/avatar1.jpg',
+    navigatorUrl: '/pages/character/index',
   },
-  { name: "粮仓导航", avatar: "/static/avatar/avatar1.jpg" },
-  { name: "火热合集", avatar: "/static/avatar/avatar1.jpg" },
-  { name: "官方公告", icon: "\ue600" },
-  { name: "搜索", icon: "\ue60d" },
+  { name: '粮仓导航', avatar: '/static/avatar/avatar1.jpg' },
+  { name: '火热合集', avatar: '/static/avatar/avatar1.jpg' },
+  { name: '官方公告', icon: '\ue600' },
+  { name: '搜索', icon: '\ue60d' },
 ];
 </script>
 
 <style lang="scss" scoped>
 @font-face {
   font-family: CustomFont;
-  src: url("../../../static/iconfont.ttf");
+  src: url('../../../static/iconfont.ttf');
 }
 .character-nav-container {
   width: calc(100% - 20rpx);

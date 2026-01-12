@@ -62,6 +62,7 @@
     "axios": "^1.13.2",
     "dayjs": "^1.11.19",
     "element-plus": "^2.13.0",
+    "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "lodash-unified": "^1.0.3",
     "pinia": "^3.0.4",

@@ -1,34 +1,42 @@
 <template>
   <view class="search-bar-container">
-    <view class="search-container" :style="{ width: width, height: height }">
-      <uni-icons
-        fontFamily="CustomFont"
-        color="white"
-        size="15"
-        class="search-container__icon"
-        >{{ "&#xe60d;" }}
-      </uni-icons>
+    <view class="search-container" v-if="type === 'default'" :style="{ width: width, height: height }">
+      <uni-icons fontFamily="CustomFont" color="white" size="15" class="search-container__icon">{{ '&#xe60d;' }} </uni-icons>
+    </view>
+    <view class="search-input-container" v-if="type === 'search'" :style="{ width: width, height: height }">
+      <input class="search-input-container__input" v-model="searchText" type="text" placeholder="请输入搜索内容" />
+      <uni-icons type="search" size="30" class="icon search-input-container__icon" @click="$emit('search', searchText)" />
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  height: string;
-  width: string;
-}>();
+import { ref } from 'vue';
+withDefaults(
+  defineProps<{
+    height: string;
+    width: string;
+    type?: string;
+  }>(),
+  {
+    type: 'default',
+  },
+);
+
+const searchText = ref<string>('');
+
+defineEmits(['search']);
 </script>
 
 <style scoped lang="scss">
 @font-face {
   font-family: CustomFont;
-  src: url("../../static/iconfont.ttf");
+  src: url('../../static/iconfont.ttf');
 }
 
 $icon-grey: #707070;
 
 .search-bar-container {
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +46,27 @@ $icon-grey: #707070;
   position: sticky;
   top: 0;
   // #endif
+
+  .search-input-container {
+    display: flex;
+    align-items: center;
+
+    &__input {
+      // #ifdef MP-WEIXIN
+      width: 14.625rem;
+      // #endif
+      width: 14.625rem !important;
+      height: 55rpx !important;
+      padding-left: 10rpx;
+      padding-right: 10rpx;
+      border: 3px solid $text-main;
+      border-radius: 1000px;
+    }
+
+    &__icon {
+      margin-left: 10rpx;
+    }
+  }
 
   .search-container {
     width: 300px;

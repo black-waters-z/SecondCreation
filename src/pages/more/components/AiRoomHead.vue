@@ -22,8 +22,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 10px;
-  padding-top: 5rpx;
+  padding: 20rpx;
   // #ifdef MP-WEIXIN
   margin-top: 80rpx;
   // #endif

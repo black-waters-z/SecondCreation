@@ -1,43 +1,61 @@
 <template>
-  <view @click="goBack" class="go-back-container">
-    <uni-icons type="left" size="30"></uni-icons>
+  <view class="go-back-container w-full">
+    <uni-icons type="left" size="20" @click="goBack"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
+    <select-collection class="justify-center" v-if="type" v-model="index" :collection-list="collectionList">
+      <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
+    </select-collection>
+    <search-bar class="go-back-container__search" v-if="type" :type="type" @search="onSearchFromChild"></search-bar>
   </view>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import SearchBar from './SearchBar.vue';
+import SelectCollection from '@/pages/post/components/SelectCollection.vue';
+interface collection {
+  id: number;
+  name: string;
+}
+
+const index = ref(0);
+
 function goBack() {
   uni.navigateBack();
 }
+const emit = defineEmits(['search']);
 
-withDefaults(defineProps<{ title?: string }>(), {
-  title: "",
+const onSearchFromChild = (text: string) => {
+  emit('search', text, props.collectionList[index.value]);
+};
+
+const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList: collection[] }>(), {
+  title: '',
 });
 </script>
 
 <style scoped lang="scss">
-// #ifdef MP-WEIXIN
-$go-back-container__top: 80rpx;
-// #endif
+:deep(.select-collection-container) {
+  background-color: white;
+  padding: 0;
+}
 
-// #ifdef H5
-$go-back-container__top: 0rpx;
-// #endif
+:deep(.select-collection-container__picker__text) {
+  font-size: 20rpx;
+}
 
 .go-back-container {
-  width: calc(100vw - 20rpx);
   display: flex;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-  padding: {
-    top: 20rpx;
-    left: 20rpx;
-  }
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20rpx;
   background-color: white;
-  position: fixed;
-  z-index: 1000;
-  top: $go-back-container__top;
   left: 0;
+  min-height: 80rpx;
+
+  &__search {
+    flex: 1;
+  }
 
   &__title {
     position: absolute;

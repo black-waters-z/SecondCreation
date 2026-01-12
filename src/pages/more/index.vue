@@ -1,45 +1,24 @@
 <template>
-  <view class="w-100">
-    <head-nav></head-nav>
-    <ai-room-head class="w-100"></ai-room-head>
-    <scroll-view
-      scroll-y="true"
-      class="mobile-scroll scroll-Y w-100"
-      refresher-enabled="true"
-      refresher-default-style="none"
-      :refresher-triggered="triggered"
-      :refresher-threshold="100"
-      refresher-background="rgb(248, 248, 248)"
-      @refresherpulling="onPulling"
-      @refresherrefresh="onRefresh"
-      @refresherrestore="onRestore"
-      @refresherabort="onAbort"
-    >
-      <template #refresher>
-        <refresh class="w-100"></refresh>
-      </template>
+  <view class="w-100 content">
+    <head-nav class="w-full bg-white position-sticky top-0"></head-nav>
+    <!-- #ifdef MP-WEIXIN -->
+    <search-bar class="w-full" type="search"></search-bar>
+    <!-- #endif -->
+    <scroll-container class="w-full flex-1 mh-0">
       <ai-room-nav class="ai-room"></ai-room-nav>
-    </scroll-view>
+    </scroll-container>
+    <post-sheet-show class="w-full"></post-sheet-show>
+    <post-sheet class="w-full"></post-sheet>
   </view>
 </template>
 
 <script setup lang="ts">
-import AiRoomHead from "./components/AiRoomHead.vue";
-import HeadNav from "@/components/common/HeadNav.vue";
-import AiRoomNav from "./components/AiRoomNav.vue";
-import Refresh from "@/components/common/Refresh/index.vue";
-import { useScrollView } from "@/hooks/useScrollView";
-
-const swiperInfo = [
-  {
-    swiperImg: "/static/homepic/homepic3.png",
-  },
-  {
-    swiperImg: "/static/homepic/homepic2.png",
-  },
-];
-
-const { triggered, onPulling, onRefresh, onAbort, onRestore } = useScrollView();
+import HeadNav from '@/components/common/HeadNav.vue';
+import AiRoomNav from './components/AiRoomNav.vue';
+import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import SearchBar from '@/components/common/SearchBar.vue';
+import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
+import PostSheet from '@/components/common/PostSheet/index.vue';
 </script>
 
 <style lang="scss">
@@ -49,8 +28,6 @@ const { triggered, onPulling, onRefresh, onAbort, onRestore } = useScrollView();
 }
 
 .scroll-Y {
-  height: calc(100vh - 80rpx);
-
   .uni-scroll-view-content {
   }
   .bar {
@@ -60,10 +37,4 @@ const { triggered, onPulling, onRefresh, onAbort, onRestore } = useScrollView();
     z-index: 1000;
   }
 }
-
-// #ifdef MP-WEIXIN
-.scroll-Y {
-  height: calc(100vh - 170rpx);
-}
-// #endif
 </style>

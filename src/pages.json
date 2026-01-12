@@ -31,7 +31,13 @@
       }
     },
     {
-      "path": "pages/character/index",
+      "path": "pages/tagNav/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/tagPage/index",
       "style": {
         "navigationStyle": "custom"
       }
@@ -64,6 +70,24 @@
     },
     {
       "path": "pages/post/AddTag",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/search/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/login",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/tagNav/zone",
       "style": {
         "navigationStyle": "custom"
       }

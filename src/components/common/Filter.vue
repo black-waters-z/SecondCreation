@@ -1,12 +1,7 @@
 <template>
-  <view class="filter-container" :style="{ marginTop: marginTop }">
+  <view class="filter-container w-full" :style="{ marginTop: marginTop }">
     <!-- 筛选条件 -->
-    <text
-      v-for="(value, index) in filters"
-      @click="handleFilter(index)"
-      :class="{ filter: true, active: index === modelValue }"
-      >{{ value }}</text
-    >
+    <text v-for="(value, index) in filters" @click="handleFilter(index)" :class="{ filter: true, active: index === modelValue }">{{ value }}</text>
   </view>
 </template>
 
@@ -19,16 +14,16 @@ const props = withDefaults(
   }>(),
   {
     modelValue: 0,
-    filters: () => ["最热", "本月最热", "本周最热", "最新"],
-  }
+    filters: () => ['最热', '本月最热', '本周最热', '最新'],
+  },
 );
 const emit = defineEmits<{
-  (e: "update:modelValue", value: number): void;
+  (e: 'update:modelValue', value: number): void;
 }>();
 
 const handleFilter = (idx: number) => {
   if (idx != props.modelValue) {
-    emit("update:modelValue", idx);
+    emit('update:modelValue', idx);
   }
 };
 </script>
@@ -38,13 +33,6 @@ $grey-background-color: rgb(248, 248, 248);
 
 .filter-container {
   width: 100vw;
-  z-index: 2000;
-  position: fixed;
-  left: 0;
-  top: 70rpx;
-  // #ifdef MP-WEIXIN
-  top: 160rpx;
-  // #endif
   height: 70rpx;
   font-size: 30rpx;
   background-color: white;

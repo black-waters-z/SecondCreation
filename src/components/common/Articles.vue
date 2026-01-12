@@ -2,68 +2,53 @@
   <!-- styles可以传入grid的列数 -->
   <view class="w-100 overflow-y-scroll articles-container">
     <view class="ranks" :style="styles">
-      <Article
-        v-for="(item, index) in article"
-        :key="index"
-        :article="item"
-        :zone="zone"
-      >
-      </Article>
+      <Article v-for="(item, index) in article" :key="index" :article="item" :zone="zone"> </Article>
     </view>
     <!--  #ifdef H5 -->
     <view class="ranks-pagination w-100">
-      <el-pagination
-        class="margin-y-10"
-        background
-        layout="prev, pager, next"
-        :total="100"
-      >
-      </el-pagination>
+      <el-pagination class="margin-y-10" background layout="prev, pager, next" :total="100"> </el-pagination>
     </view>
     <!--  #endif -->
   </view>
 </template>
 
 <script lang="ts" setup>
-import Article from "./Article.vue";
-const props = withDefaults(
-  defineProps<{ article?: any; zone?: number; styles?: any }>(),
-  {
-    article: () => [
-      { title: "", author: "", image: "/static/character/character1.png" },
-      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "1221121", author: "wangwu" },
-      { title: "", author: "", image: "/static/character/character1.png" },
-      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "1221121", author: "wangwu" },
-      { title: "", author: "", image: "/static/character/character1.png" },
-      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "1221121", author: "wangwu" },
-      { title: "", author: "", image: "/static/character/character1.png" },
-      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "1221121", author: "wangwu" },
-      { title: "", author: "", image: "/static/character/character1.png" },
-      { title: "", author: "", content: "我是一只小小小鸟啊啊啊" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "", author: "" },
-      { title: "1221121", author: "wangwu" },
-    ],
-    zone: 0,
-  }
-);
+import Article from './Article.vue';
+const props = withDefaults(defineProps<{ article?: any; zone?: number; styles?: any }>(), {
+  article: () => [
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '1221121', author: 'wangwu' },
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '1221121', author: 'wangwu' },
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '1221121', author: 'wangwu' },
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '1221121', author: 'wangwu' },
+    { title: '', author: '', image: '/static/character/character1.png' },
+    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '', author: '' },
+    { title: '1221121', author: 'wangwu' },
+  ],
+  zone: 0,
+});
 </script>
 
 <style scoped lang="scss">
@@ -129,11 +114,7 @@ const props = withDefaults(
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0.7),
-        rgba(245, 245, 245, 0.9)
-      );
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(245, 245, 245, 0.9));
       gap: 10rpx;
     }
 
@@ -185,7 +166,7 @@ const props = withDefaults(
     &-pagination {
       display: flex;
       justify-content: flex-end;
-      padding-bottom: 20rpx;
+      padding-bottom: 80rpx;
       box-sizing: border-box;
       padding-right: 100rpx;
     }
