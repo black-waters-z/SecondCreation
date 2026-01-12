@@ -1,15 +1,24 @@
 <template>
-  <view class="w-full">
+  <PageWrapper class="w-full">
     <go-back type="search" @search="search" :collection-list="collectionList"></go-back>
-  </view>
+    <template #scroll>
+      <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
+    </template>
+  </PageWrapper>
 </template>
 
 <script setup lang="ts">
 import GoBack from '@/components/common/GoBack.vue';
+import PageWrapper from '@/components/container/PageContainer.vue';
+import WaterFall from '@/components/common/WaterFall.vue';
 import { ref } from 'vue';
-function search(searchText: string) {
-  console.log('search', searchText);
-  //   这里插入查询的接口
+import { searchArticle } from '@/api/articleApi';
+import type { Article } from '../tagPage/type';
+const articleList = ref<Article[]>([]);
+async function search(searchText: string, collection: any) {
+  await searchArticle(searchText).then((res) => {
+    articleList.value = res;
+  });
 }
 
 const collectionList = ref([

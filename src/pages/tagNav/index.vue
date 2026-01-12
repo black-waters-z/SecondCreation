@@ -3,7 +3,8 @@
   <page-wrapper class="w-full tag-nav letter-spacing-4" show-head>
     <template #scroll>
       <view class="w-full tag-nav__scroll" v-for="(item, key) in tagList" :key="key">
-        <IntroductionNav class="tag-nav__introduction" :navigator-href="`/pages/tagPage/work`">{{ introduction[key] }}
+        <IntroductionNav v-show="item" class="tag-nav__introduction" :navigator-href="`/pages/tagNav/zone?type=${key}`">
+          {{ introduction[key] }}
         </IntroductionNav>
         <tag-container :tag-list="item"></tag-container>
       </view>
@@ -18,16 +19,11 @@ import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
 import { get } from "@/utils/request"
 import { computed, ref } from 'vue';
 import type { Tag as TagType } from './type';
+import { introduction } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 
 const tagListAll = ref<TagType[]>([
 ]);
-
-const introduction = {
-  work: '作品',
-  character: '角色',
-  cross: 'cp标签'
-}
 
 const tagList = computed(() => {
   let lst: Record<string, TagType[]> = {}
@@ -48,6 +44,7 @@ onLoad(async () => {
 page {
   height: 100vh;
 }
+
 
 .tag-nav {
   &__scroll {

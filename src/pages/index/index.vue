@@ -19,7 +19,7 @@
       <IntroductionNav>同人团宣</IntroductionNav>
       <home-product></home-product>
       <introduction-nav>推荐</introduction-nav>
-      <water-fall :waterFallColNum="2"></water-fall>
+      <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
     </scroll-container>
 
     <!-- 宽屏瀑布流 -->
@@ -50,7 +50,9 @@ import Refresh from '@/components/common/Refresh/index.vue';
 import HomeProduct from './components/HomeProduct.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
 import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
-
+import { onLoad } from '@dcloudio/uni-app';
+import { getRecommenedArticles } from '@/api/articleApi'
+import type { Article } from '../tagPage/type';
 if (process.env.NODE_ENV === 'development') {
   console.log(import.meta.env.DEV);
   console.log('开发环境');
@@ -64,45 +66,11 @@ defineOptions({
   },
 });
 const scrollTop = ref(0);
-const old = reactive({
-  scrollTop: 0,
-});
+const articleList = ref<Article[]>([])
+onLoad(async () => {
+  articleList.value = await getRecommenedArticles()
+})
 
-const triggered = ref<string | boolean>(false);
-let _freshing = false;
-
-const onPulling = (e: Event) => {
-  // console.log("onpulling", e);
-};
-
-// 这里之后加刷新的接口，推荐算法，
-const onRefresh = () => {
-  if (_freshing) return;
-  _freshing = true;
-  console.log('刷新');
-  setTimeout(() => {
-    triggered.value = false;
-    _freshing = false;
-  }, 3000);
-};
-
-const onRestore = () => {
-  triggered.value = 'restore'; // 需要重置
-  console.log('onRestore');
-};
-
-const onAbort = () => {
-  console.log('onAbort');
-};
-
-onMounted(() => {
-  _freshing = false;
-  setTimeout(() => {
-    triggered.value = true;
-  }, 1000);
-});
-
-onMounted(async () => {});
 </script>
 
 <style lang="scss">
@@ -110,6 +78,7 @@ onMounted(async () => {});
   margin-left: 16rpx;
   margin-top: 20rpx;
 }
+
 .content {
   display: flex;
   flex-direction: column;
@@ -134,6 +103,7 @@ onMounted(async () => {});
 @media screen and (min-width: 600px) {
   .content {
     position: relative;
+
     &__head {
       display: none;
     }
@@ -157,5 +127,4 @@ onMounted(async () => {});
   order: 3;
 }
 
-// #endif
-</style>
+// #endif</style>

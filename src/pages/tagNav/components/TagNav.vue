@@ -1,5 +1,5 @@
 <template>
-    <navigator open-type="switchTab" :url="`/pages/store/index?tag=${tag.id}`" class="tag-nav-one">
+    <navigator open-type="switchTab" :url="`/pages/tagPage/index?tag=${tag.id}`" class="tag-nav-one">
         <Tag :text="tag.name" :closable="false" :bg-color="'gray'" class="tag-nav-one__tag letter-spacing-4"></Tag>
     </navigator>
 </template>

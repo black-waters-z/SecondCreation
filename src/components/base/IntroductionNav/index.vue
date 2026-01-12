@@ -16,10 +16,12 @@ defineProps<{ navigatorHref?: String }>();
 <style lang="scss" scoped>
 .introduction-nav {
   display: flex;
+
   &__text {
     font-size: 25rpx;
     margin-left: 10rpx;
   }
+
   &__icon {
     display: flex;
     justify-content: flex-end;

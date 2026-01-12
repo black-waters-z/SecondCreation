@@ -1,8 +1,3 @@
-export interface Article {
-  id?: number;
-  title: string;
-  author: string;
-  image?: string;
-  content?: string;
-  zone?: number;
-}
+import type { Article } from '../pages/tagPage/type';
+
+export type ArticleType = Article;

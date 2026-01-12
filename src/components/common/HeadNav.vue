@@ -11,16 +11,18 @@
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
-    <match-media :max-width="599" class="nav bg-white">
+    <match-media :max-width="599" class="nav !flex bg-white">
       <view class="flex-1 flex">
         <navigator open-type="switchTab" url="/pages/index/index">
           <image src="/static/logo.png" mode="scaleToFill" class="logo" />
         </navigator>
       </view>
-      <uni-icons type="bars" size="30" @click="toggleMobileNav"></uni-icons>
-      <navigator url="../search/index">
-        <uni-icons type="search" size="30"></uni-icons>
-      </navigator>
+      <view><uni-icons type="bars" size="30" @click="toggleMobileNav"></uni-icons>
+        <navigator url="../search/index">
+          <uni-icons type="search" size="30"></uni-icons>
+        </navigator>
+      </view>
+
     </match-media>
     <character-mobile-nav :is-show="showMobileNav" @toggle-mobile-nav="toggleMobileNav"></character-mobile-nav>
     <!-- #endif -->
@@ -72,10 +74,20 @@ function toggleMobileNav() {
 }
 
 .nav {
-  display: flex;
+  display: flex !important;
   align-items: center;
   padding: 8px 12px;
   background: white;
+
+  .navigator-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  navigator {
+    display: inline-flex;
+    align-items: center;
+  }
 
   .logo {
     width: 130rpx;
@@ -88,9 +100,6 @@ function toggleMobileNav() {
     font-size: 25px !important;
     margin-left: 10px; // 图标之间间距
     float: right;
-  }
-  navigator {
-    display: inline-block;
     float: right;
   }
 }

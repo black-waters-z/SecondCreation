@@ -4,10 +4,12 @@
     <template #scroll>
       <write class="w-full weixin-write" v-if="postType === 'write'"></write>
       <write class="w-full weixin-write" v-if="postType === 'paint'">
-        <up-upload :fileList="fileList3" @afterRead="afterRead" @delete="deletePic" name="3" multiple :maxCount="9" :previewFullImage="true"></up-upload>
+        <up-upload :fileList="fileList3" @afterRead="afterRead" @delete="deletePic" name="3" multiple :maxCount="9"
+          :previewFullImage="true"></up-upload>
       </write>
       <write class="w-full weixin-write" v-if="postType === 'video'">
-        <up-upload class="video-upload" :fileList="fileList3" @afterRead="afterRead" @delete="deletePic" name="3" multiple :maxCount="1" accept="video">
+        <up-upload class="video-upload" :fileList="fileList3" @afterRead="afterRead" @delete="deletePic" name="3"
+          multiple :maxCount="1" accept="video">
           <!-- <video src=""></video> -->
         </up-upload>
       </write>
@@ -49,26 +51,31 @@ provide('image_urls', imageUrls);
   .u-upload__wrap__preview {
     width: 100%;
   }
-  .u-upload__button {
+
+  ::v-deep .u-upload__button {
     width: 100% !important;
     height: 190px !important;
     margin-right: 0;
     border-radius: 8px;
   }
-  .u-upload__wrap__preview__other {
+
+  ::v-deep .u-upload__wrap__preview__other {
     width: 100% !important;
     height: 190px !important;
     margin-right: 0;
     border-radius: 8px;
   }
+
   .u-upload__wrap__preview__other {
     background-color: black;
+
     &:first-child::after {
       content: '视频上传成功';
       font-size: 16px;
       color: #d3d4d6;
     }
   }
+
   .u-upload__button {
     &:first-child::after {
       content: '上传视频';

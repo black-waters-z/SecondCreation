@@ -26,7 +26,7 @@ function goBack() {
 const emit = defineEmits(['search']);
 
 const onSearchFromChild = (text: string) => {
-  emit('search', props.collectionList[index.value]);
+  emit('search', text, props.collectionList[index.value]);
 };
 
 const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList: collection[] }>(), {

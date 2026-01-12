@@ -3,18 +3,18 @@
     <view class="waterfall__col" v-for="id_num in waterFallColNum">
       <view class="waterfall__inner" :id="`col${id_num}`">
         <!-- zone之后要换成从数据库中查过来的 -->
-        <Article v-for="(item, key) in columnLists[id_num - 1].value" :article="item" :key="key" :zone="item.zone ?? Math.random() < 0.5 ? 0 : 1"></Article>
+        <Article v-for="(item, key) in columnLists[id_num - 1].value" :article="item" :key="key"
+          :zone="item?.image_urls?.length ? 0 : 1"></Article>
       </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref, watch } from 'vue';
 import { getCurrentInstance } from 'vue';
 import Article from '@/components/common/Article.vue';
-import type { Article as ArticleType } from '@/types/index';
-import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
+import type { ArticleType } from '@/types/index';
 const instance = getCurrentInstance();
 
 defineOptions({
@@ -26,16 +26,6 @@ defineOptions({
 const props = withDefaults(defineProps<{ waterFallColNum: number; articleLists: ArticleType[] }>(), {
   waterFallColNum: 3,
   articleLists: () => [
-    { title: '', author: '作者1', image: '/static/character/character1.png' },
-    { title: '', author: '作者2', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '作者3' },
-    { title: '', author: '作者4' },
-    { title: '', author: '作者5' },
-    { title: '1221121', author: 'wangwu' },
-    { title: '', author: '作者3' },
-    { title: '', author: '作者4' },
-    { title: '', author: '作者5' },
-    { title: '1221121', author: 'wangwu' },
   ],
 });
 
@@ -84,9 +74,29 @@ const mountMenu = async (index = 0) => {
   mountMenu(index + 1);
 };
 
-onMounted(() => {
+const resetColumns = () => {
+  columnLists.forEach((column) => {
+    column.value = [];
+  });
+};
+
+const renderArticles = async () => {
+  resetColumns();
+  await nextTick();
   mountMenu(0);
+};
+
+onMounted(() => {
+  renderArticles();
 });
+
+watch(
+  () => props.articleLists,
+  () => {
+    renderArticles();
+  },
+  { deep: true }
+);
 </script>
 
 <style scoped lang="scss">
