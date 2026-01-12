@@ -7,6 +7,8 @@
     <scroll-container class="w-full flex-1 mh-0">
       <ai-room-nav class="ai-room"></ai-room-nav>
     </scroll-container>
+    <post-sheet-show class="w-full"></post-sheet-show>
+    <post-sheet class="w-full"></post-sheet>
   </view>
 </template>
 
@@ -15,6 +17,8 @@ import HeadNav from '@/components/common/HeadNav.vue';
 import AiRoomNav from './components/AiRoomNav.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
 import SearchBar from '@/components/common/SearchBar.vue';
+import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
+import PostSheet from '@/components/common/PostSheet/index.vue';
 </script>
 
 <style lang="scss">

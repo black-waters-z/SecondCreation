@@ -49,7 +49,12 @@ provide('image_urls', imageUrls);
   .u-upload__wrap__preview {
     width: 100%;
   }
-  .u-upload__button,
+  .u-upload__button {
+    width: 100% !important;
+    height: 190px !important;
+    margin-right: 0;
+    border-radius: 8px;
+  }
   .u-upload__wrap__preview__other {
     width: 100% !important;
     height: 190px !important;

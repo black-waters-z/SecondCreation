@@ -3,7 +3,8 @@
     <view class="character-mobile-nav-container-view">
       <ul class="character-mobile-nav-container-view__ul">
         <li v-for="(value, index) in characters" :key="index" class="character-mobile-nav-container-view__li">
-          <navigator :url="value.navigatorUrl" hover-class="character-mobile-nav-container__navigator-hover" class="character-mobile-nav-container__navigator">
+          <navigator :url="value.navigatorUrl" hover-class="character-mobile-nav-container__navigator-hover"
+            class="character-mobile-nav-container__navigator">
             <text class="character-name">{{ value.name }}</text>
           </navigator>
         </li>
@@ -20,7 +21,7 @@ const characters = [
   {
     name: 'tag导航',
     avatar: '/static/avatar/avatar1.jpg',
-    navigatorUrl: '/pages/character/index',
+    navigatorUrl: '/pages/tagNav/index',
   },
   { name: '粮仓导航', avatar: '/static/avatar/avatar1.jpg' },
   { name: '火热合集', avatar: '/static/avatar/avatar1.jpg' },
@@ -50,6 +51,7 @@ const props = defineProps<{
 
   &-view {
     box-sizing: border-box;
+
     padding: {
       top: 0px;
       left: 20px;
@@ -58,7 +60,7 @@ const props = defineProps<{
     }
 
     &__ul {
-      & > li:last-child {
+      &>li:last-child {
         border-bottom: none;
         display: flex;
         justify-content: center;

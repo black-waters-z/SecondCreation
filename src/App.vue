@@ -47,6 +47,14 @@ page {
   // #endif
 }
 
+// text {
+//   letter-spacing: 4rpx;
+// }
+
+.letter-spacing-4 {
+  letter-spacing: 4rpx;
+}
+
 .content {
   width: 100%;
   display: flex;
@@ -122,6 +130,7 @@ page {
 .z-100 {
   z-index: 100;
 }
+
 .justify-center {
   justify-content: center;
 }
@@ -160,6 +169,7 @@ page {
   background: transparent;
   color: transparent;
 }
+
 // #endif
 
 /* 解决H5的问题 */
@@ -184,7 +194,7 @@ uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
 }
 
 // 宽屏隐藏tabbar
-.uni-app--showleftwindow + .uni-tabbar-bottom {
+.uni-app--showleftwindow+.uni-tabbar-bottom {
   display: none;
 }
 
@@ -217,9 +227,11 @@ uni-layout {
   .uni-app--showtabbar uni-page-wrapper {
     height: 100%;
   }
+
   uni-content {
     width: calc(100% - 100px);
   }
+
   .content {
     position: relative;
   }

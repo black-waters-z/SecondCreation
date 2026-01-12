@@ -1,18 +1,18 @@
 <template>
   <view class="w-full navigation-module">
     <view v-for="item in navigationItems" :key="item.index" class="navigation">
-      <uni-icons
-        fontFamily="CustomFont"
-        :size="item.index === activeNavigatorIndex ? '30' : '20'"
+      <uni-icons fontFamily="CustomFont" :size="item.index === activeNavigatorIndex ? '30' : '20'"
         :class="item.index === activeNavigatorIndex ? 'navigation__pink' : 'navigation__grey'"
-        @click="handleNavigator(item.index)"
-        :color="item.index === activeNavigatorIndex ? 'palevioletred' : '#999'"
-      >
+        @click="handleNavigator(item.index)" :color="item.index === activeNavigatorIndex ? 'palevioletred' : '#999'">
         {{ item.icon }}
       </uni-icons>
-      <text :class="item.index === activeNavigatorIndex ? 'navigation-text-active' : ''" :style="item.index === activeNavigatorIndex ? navigatorVisibleStyle : navigatorHiddenStyle">
+      <text :class="item.index === activeNavigatorIndex ? 'navigation-text-active' : ''"
+        :style="item.index === activeNavigatorIndex ? navigatorVisibleStyle : navigatorHiddenStyle">
         {{ ArticleModule[item.text] }}
       </text>
+    </view>
+    <view class="flex-1">
+      <slot name="filter"></slot>
     </view>
   </view>
 </template>
@@ -117,7 +117,8 @@ const navigatorHiddenStyle: CSSProperties = {
     display: flex;
     position: relative;
     justify-content: center;
-    > * {
+
+    >* {
       flex: 1;
     }
 
@@ -132,5 +133,4 @@ const navigatorHiddenStyle: CSSProperties = {
   }
 }
 
-// #endif
-</style>
+// #endif</style>

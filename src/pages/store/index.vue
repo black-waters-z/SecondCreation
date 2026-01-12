@@ -1,21 +1,12 @@
 <template>
   <view class="content w-100">
     <head-nav class="w-full"></head-nav>
-    <!--  #ifdef MP-WEIXIN -->
-    <active-nav type="icon" class="w-full"></active-nav>
-    <Filter v-model="filterIndex" class="w-full"></Filter>
-    <!-- #endif -->
     <scroll-container class="store-content__scroll flex-1 mh-0">
-      <!--  #ifdef H5 -->
-      <active-nav type="icon"></active-nav>
-      <Filter v-model="filterIndex"></Filter>
-      <!-- #endif -->
-      <articles
-        :zone="activeNavigatorIndex"
-        :styles="{
-          'grid-template-columns': isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(5, minmax(0, 1fr))',
-        }"
-      ></articles>
+      <active-nav type="icon" class="w-full">已筛选</active-nav>
+      <Filter v-model="filterIndex" class="w-full"></Filter>
+      <articles :zone="activeNavigatorIndex" :styles="{
+        'grid-template-columns': isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(5, minmax(0, 1fr))',
+      }"></articles>
     </scroll-container>
     <to-top></to-top>
     <post-sheet class="w-full"></post-sheet>

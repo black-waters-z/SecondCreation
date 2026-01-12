@@ -7,10 +7,9 @@
         <support-pay></support-pay>
       </view>
       <view class="content__read-nav">
-        <read-nav :nav-items="readNavItems"> </read-nav>
-        <introduction-nav>创作中心</introduction-nav>
-        <read-nav :nav-items="writeNavItems"> </read-nav>
-        <introduction-nav>其他服务</introduction-nav>
+        <read-nav :nav-items="readNavItems" color="black"> </read-nav>
+        <up-line dashed color="#ffecef"></up-line>
+        <read-nav :nav-items="writeNavItems" color="black"> </read-nav>
       </view>
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
@@ -36,7 +35,6 @@ import { navigateToLogin } from '@/utils/navigate';
 import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
 import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
-
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
@@ -88,6 +86,7 @@ onLoad(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
+    box-sizing: border-box;
   }
 }
 

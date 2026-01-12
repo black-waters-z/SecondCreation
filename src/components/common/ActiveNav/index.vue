@@ -1,5 +1,9 @@
 <template>
-  <template v-if="type == 'icon'" class="w-full"> <nav-with-icon></nav-with-icon> </template>
+  <template v-if="type == 'icon'" class="w-full"> <nav-with-icon>
+      <template #filter>
+        <slot></slot>
+      </template>
+    </nav-with-icon> </template>
 </template>
 
 <script lang="ts" setup>

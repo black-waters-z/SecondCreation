@@ -31,7 +31,13 @@
       }
     },
     {
-      "path": "pages/character/index",
+      "path": "pages/tagNav/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/tagPage/index",
       "style": {
         "navigationStyle": "custom"
       }
