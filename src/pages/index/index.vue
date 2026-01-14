@@ -1,7 +1,11 @@
 <template>
   <view class="content">
     <!-- 首页头部 -->
+    <!-- #ifdef MP-WEIXIN -->
+    <head-nav></head-nav>
+    <!-- #endif -->
     <head-nav show-search class="position-sticky top-0 z-100"></head-nav>
+
     <!-- #ifdef MP-WEIXIN -->
     <match-media :max-width="599" class="w-full position-sticky top-80 bg-white z-100">
       <character-nav class="character-nav"></character-nav>
@@ -28,7 +32,7 @@
         <template #refresher>
           <refresh></refresh>
         </template>
-        <water-fall :waterFallColNum="5"></water-fall>
+        <water-fall :waterFallColNum="5" :article-lists="articleList"></water-fall>
       </scroll-view>
     </match-media>
     <post-sheet class="w-full"></post-sheet>
@@ -83,9 +87,6 @@ onLoad(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // #ifdef MP-WEIXIN
-  margin-top: 80rpx;
-  // #endif
   height: calc(100vh - 90rpx);
   min-height: 0; // allow flex children like scroll-view to shrink
 

@@ -16,4 +16,10 @@ defineProps<{
 }>();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content {
+  // #ifdef MP-WEIXIN
+  height: 100vh;
+  // #endif
+}
+</style>

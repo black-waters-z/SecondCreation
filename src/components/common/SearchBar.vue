@@ -1,8 +1,8 @@
 <template>
   <view class="search-bar-container">
-    <view class="search-container" v-if="type === 'default'" :style="{ width: width, height: height }">
+    <navigator url="/pages/search/index" open-type="navigate" class="search-container" v-if="type === 'default'" :style="{ width: width, height: height }">
       <uni-icons fontFamily="CustomFont" color="white" size="15" class="search-container__icon">{{ '&#xe60d;' }} </uni-icons>
-    </view>
+    </navigator>
     <view class="search-input-container" v-if="type === 'search'" :style="{ width: width, height: height }">
       <input class="search-input-container__input" v-model="searchText" type="text" placeholder="请输入搜索内容" />
       <uni-icons type="search" size="30" class="icon search-input-container__icon" @click="$emit('search', searchText)" />

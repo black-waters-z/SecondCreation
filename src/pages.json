@@ -91,11 +91,17 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/test1/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "一个自由的创作平台",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
@@ -120,7 +126,7 @@
     }
   },
   "tabBar": {
-    "color": "#7A7E83",
+    "color": "#000000",
     "selectedColor": "#db639b",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",

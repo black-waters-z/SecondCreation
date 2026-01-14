@@ -5,7 +5,7 @@ enum RefreshType {
   Loading = 'Loading',
 }
 export function useScrollView() {
-  const triggered = ref<string | boolean>(true);
+  const triggered = ref<string | boolean>(false);
   let isRefreshing = false;
   const refreshType = ref<RefreshType>(RefreshType.PullDown);
   const onPulling = (e: Event) => {
@@ -16,6 +16,7 @@ export function useScrollView() {
   const onRefresh = () => {
     if (isRefreshing) return;
     isRefreshing = true;
+    triggered.value = true;
     refreshType.value = RefreshType.Loading;
     setTimeout(() => {
       triggered.value = false;
@@ -31,13 +32,6 @@ export function useScrollView() {
   const onAbort = () => {
     console.log('onAbort');
   };
-
-  onMounted(() => {
-    isRefreshing = false;
-    setTimeout(() => {
-      triggered.value = true;
-    }, 1000);
-  });
 
   return {
     triggered,

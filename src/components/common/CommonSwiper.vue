@@ -42,29 +42,9 @@ withDefaults(
     swiperInfo: () => [
       {
         swiperImg: '/static/homepic/homepic3.png',
-        bottomBar: {
-          avatar: '/static/character/character1.png',
-          authorText: '匿名1/绘',
-          style: {
-            backgroundColor: 'white',
-          },
-          avatarStyle: {
-            backgroundColor: 'antiquewhite',
-          },
-        },
       },
       {
         swiperImg: '/static/homepic/homepic2.png',
-        bottomBar: {
-          avatar: '/static/character/character1.png',
-          authorText: '匿名/绘',
-          style: {
-            backgroundColor: 'antiquewhite',
-          },
-          avatarStyle: {
-            backgroundColor: 'white',
-          },
-        },
       },
     ],
     styles: () => ({}),

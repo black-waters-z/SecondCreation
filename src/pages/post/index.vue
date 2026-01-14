@@ -47,6 +47,9 @@ provide('image_urls', imageUrls);
 </script>
 
 <style lang="scss">
+page{
+  height: 100vh;
+}
 .video-upload {
   .u-upload__wrap__preview {
     width: 100%;

@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch } from 'vue';
 import { getCurrentInstance } from 'vue';
-import Article from '@/components/common/Article.vue';
+import Article from '@/components/common/Article/index.vue';
 import type { ArticleType } from '@/types/index';
 const instance = getCurrentInstance();
 

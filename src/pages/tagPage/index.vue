@@ -1,5 +1,6 @@
 <template>
     <page-wrapper show-head>
+        <go-back class="w-full"></go-back>
         <nav-tab :list="list" :nav-tags="result?.navTags"></nav-tab>
         <template #scroll>
             <water-fall v-if="result?.articleList?.length" :water-fall-col-num="2"
@@ -16,6 +17,7 @@ import { getTagPageData } from '@/api/tagApi';
 import type { TagPageData } from '@/pages/tagPage/type';
 import WaterFall from '@/components/common/WaterFall.vue';
 import NavTab from '@/components/base/NavTab/index.vue';
+import GoBack from '@/components/common/GoBack.vue';
 onLoad(async (options) => {
     tagParam = options?.tag;
     if (tagParam) {
