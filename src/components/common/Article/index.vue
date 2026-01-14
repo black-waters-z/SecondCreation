@@ -1,7 +1,13 @@
 <template>
     <view class="w-full flex flex-column article">
-        <image class="w-full article-img" :src="`${getImageBaseUrl}${article?.image_urls[0]}`" v-if="article?.image_urls?.[0]" mode="aspectFill" />
-        <text class="w-full article-content" v-if="!article?.image_urls?.[0]">
+        <image class="w-full article-img" :src="`${getImageBaseUrl}${article?.image_urls[0]}`"
+            v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill" />
+        <!-- 视频之后再说，后端没发过来呢 -->
+        <view class="w-full article-video-container">
+            <video class="article-video" :src="`${getVideoBaseUrl}${article.image_urls?.[0]}`" v-if="isVideo"></video>
+        </view>
+
+        <text class="w-full article-content" v-if="!article?.image_urls?.[0] && !isVideo">
             {{ article?.content }}
         </text>
         <view class="article-info flex-1">
@@ -22,11 +28,22 @@
 import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
 import { computed } from 'vue';
-const props=defineProps<{ article: ArticleType }>();
+const props = defineProps<{ article: ArticleType }>();
 
 const getImageBaseUrl = computed(() => {
-    return import.meta.env.VITE_IMAGE_BASE_URL || 'http://localhost:8080/static/upload_IMG/';
+    return import.meta.env.VITE_IMAGE_BASE || 'http://localhost:8080/static/upload_IMG/';
 })
+
+const getVideoBaseUrl = computed(() => {
+    return import.meta.env.VITE_VIDEO_BASE || 'http://localhost:8080/static/upload_Video/';
+})
+
+const isVideo = computed(() => {
+    const fileExtension = props.article?.image_urls?.[0]?.split('.').pop().toLowerCase();
+    const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
+    if (videoExtensions.includes(fileExtension)) return true;
+    return false;
+});
 
 </script>
 
@@ -38,10 +55,15 @@ const getImageBaseUrl = computed(() => {
     box-sizing: border-box;
     border-radius: 16rpx;
 
+    &-video {
+        width: 100%;
+        height: 120px;
+    }
+
     &-img {
         position: relative;
         min-height: 400rpx;
-        background-color:#fdcdd8;
+        background-color: #fdcdd8;
         border-radius: 16rpx;
 
         &::after {
@@ -56,7 +78,7 @@ const getImageBaseUrl = computed(() => {
         }
     }
 
-    &-content{
+    &-content {
         min-height: 300rpx;
         max-height: 400rpx;
         box-sizing: border-box;
@@ -64,7 +86,7 @@ const getImageBaseUrl = computed(() => {
         font-size: 25rpx;
         font-style: italic;
         font-weight: 400;
-        color:$text-muted;
+        color: $text-muted;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -86,7 +108,7 @@ const getImageBaseUrl = computed(() => {
         box-sizing: border-box;
         padding: 0 20rpx;
 
-        &__tag{
+        &__tag {
             min-width: 0;
         }
 
@@ -132,16 +154,23 @@ const getImageBaseUrl = computed(() => {
     }
 }
 
+::v-deep .uni-video-cover-play-button {
+    &::after {
+        font-size: 30px;
+        display: none;
+    }
+}
+
 @media screen and (min-width:600px) {
-    .article{
+    .article {
         box-sizing: border-box;
         width: 100%;
 
-        &-img{
+        &-img {
             min-height: 600rpx;
         }
 
-        &-content{
+        &-content {
             max-height: 600rpx;
         }
     }

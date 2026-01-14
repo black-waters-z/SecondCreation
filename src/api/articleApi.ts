@@ -9,3 +9,9 @@ export async function searchArticle(keyword: string): Promise<Article[]> {
   const result = await get(`/articles/search?keyword=${keyword}`);
   return result;
 }
+
+// 按照热度根据页数，时间范围等查询
+export async function getFilterArticle(page: number): Promise<Article[]> {
+  const result = await get(`/articles/get-filter-articles?page=${page}`);
+  return result.items;
+}

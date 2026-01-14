@@ -63,15 +63,12 @@ const getColumnIndex = async () => {
   return minIndex;
 };
 
-const mountMenu = async (index = 0) => {
-  if (index >= props.articleLists.length) {
-    return;
+const mountMenu = async () => {
+  for (let index = 0; index < props.articleLists.length; index++) {
+    const targetColumnIndex = await getColumnIndex();
+    columnLists[targetColumnIndex].value.push(props.articleLists[index]);
+    await nextTick();
   }
-  const targetColumnIndex = await getColumnIndex();
-  columnLists[targetColumnIndex].value.push(props.articleLists[index]);
-
-  await nextTick();
-  mountMenu(index + 1);
 };
 
 const resetColumns = () => {
@@ -83,7 +80,7 @@ const resetColumns = () => {
 const renderArticles = async () => {
   resetColumns();
   await nextTick();
-  mountMenu(0);
+  await mountMenu();
 };
 
 onMounted(() => {
