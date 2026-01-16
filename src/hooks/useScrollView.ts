@@ -33,6 +33,10 @@ export function useScrollView() {
     console.log('onAbort');
   };
 
+  const onEnd = () => {
+    console.log('onEnd');
+  };
+
   return {
     triggered,
     refreshType,
@@ -40,5 +44,6 @@ export function useScrollView() {
     onRefresh,
     onRestore,
     onAbort,
+    onEnd,
   };
 }

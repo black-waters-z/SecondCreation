@@ -1,13 +1,8 @@
 <template>
-  <button
-    class="button"
-    hover-class="button-hover"
-    @click="$emit('click')"
-    :class="{
-      'button-bt': type === Button.button,
-      'button-outline': type === Button.outline,
-    }"
-  >
+  <button class="button" hover-class="button-hover" @click="$emit('click')" :class="{
+    'button-bt': type === Button.button,
+    'button-outline': type === Button.outline,
+  }">
     <slot></slot>
   </button>
 </template>
@@ -31,11 +26,13 @@ defineEmits(['click']);
   margin-left: 0;
   margin-right: 0;
   margin: 10rpx;
+
   padding: {
     left: 20px;
     right: 20px;
     border: none;
   }
+
   line-height: 2;
   box-shadow: 0 0 10px $pink-shadow-01;
 }
@@ -45,8 +42,13 @@ defineEmits(['click']);
   background-color: $pink-300;
   color: white;
   transition: 0.3s ease;
+
   &:active {
     transform: scale(1.2);
+  }
+
+  &::after {
+    border: none;
   }
 }
 
@@ -55,8 +57,13 @@ defineEmits(['click']);
   color: $pink-300;
   background: none;
   transition: 0.3s ease;
+
   &:active {
     transform: scale(1.2);
+  }
+
+  &::after {
+    border: none;
   }
 }
 

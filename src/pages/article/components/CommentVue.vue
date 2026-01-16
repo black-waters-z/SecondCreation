@@ -1,18 +1,10 @@
 <template>
   <view class="comment-container">
-    <view class="comment" v-for="(comment, index) in comments">
+    <view class="comment-container-comment" v-for="(comment, index) in comments">
       <view class="first-comment">
-        <one-comment
-          :comment="comment"
-          @showSecondCommentClick="showSecondCommentClick"
-        ></one-comment>
+        <one-comment :comment="comment" @showSecondCommentClick="showSecondCommentClick"></one-comment>
       </view>
-
-      <view
-        class="second-comment"
-        v-if="showSecondComment"
-        v-for="(secondComment, index) in comment?.secondComment"
-      >
+      <view class="second-comment" v-if="showSecondComment" v-for="(secondComment, index) in comment?.secondComment">
         <one-comment :comment="secondComment" type="second"></one-comment>
       </view>
     </view>
@@ -50,35 +42,15 @@ withDefaults(
 
 <style lang="scss" scoped>
 .comment-container {
-  width: 95%;
-  margin: 0 auto;
+  background: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
 
-  .comment {
-    width: 100%;
+  &-comment {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    margin-bottom: 20rpx;
-    position: relative;
-
-    .second-comment-show {
-      margin-right: 20rpx;
-      bottom: 10rpx;
-      font-size: 20rpx;
-    }
-
-    .first-comment {
-      width: 100%;
-      flex: 1;
-    }
-  }
-
-  .second-comment {
     width: 100%;
-    flex: 1;
   }
 }
 </style>

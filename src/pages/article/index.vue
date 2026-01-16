@@ -1,23 +1,20 @@
 <template>
-  <view class="article-page content w-100">
-    <head-nav></head-nav>
-    <go-back></go-back>
-    <whole-article :art_id="art_id"></whole-article>
-    <post-comment></post-comment>
-    <view class="comment-box w-100">
+  <page-wrapper class="w-full" show-head>
+    <template #scroll>
+      <whole-article></whole-article>
+      <post-comment></post-comment>
       <comment-vue :comments="comments"></comment-vue>
-      <comment-vue :comments="comments"></comment-vue>
-      <comment-vue :comments="comments"></comment-vue>
-    </view>
-  </view>
+      <have-no-more-comment></have-no-more-comment>
+    </template>
+  </page-wrapper>
 </template>
 
 <script setup lang="ts">
-import HeadNav from "@/components/common/HeadNav.vue";
-import GoBack from "@/components/common/GoBack.vue";
+import PageWrapper from "@/components/container/PageContainer.vue";
 import WholeArticle from "./components/WholeArticle.vue";
-import PostComment from "./components/PostComment.vue";
 import CommentVue from "./components/CommentVue.vue";
+import PostComment from "./components/PostComment.vue";
+import HaveNoMoreComment from "./components/HaveNoMoreComment.vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 
@@ -55,14 +52,7 @@ const comments = ref([
 </script>
 
 <style lang="scss" scoped>
-.article-page {
-  scrollbar-width: none;
-
-  .comment-box {
-    overflow-y: auto;
-    scrollbar-width: thin;
-    z-index: 0;
-    background-color: white;
-  }
+page {
+  height: 100vh;
 }
 </style>

@@ -1,11 +1,7 @@
 <template>
-  <view
-    class="oneComment"
-    :style="{
-      width: type === 'second' ? '90%' : '95%',
-      transform: type === 'second' ? 'scale(0.9)' : 'scale(1)',
-    }"
-  >
+  <view class="oneComment" :style="{
+    transform: type === 'second' ? 'scale(0.9)' : 'scale(1)',
+  }">
     <view class="oneComment__user">
       <view class="oneComment__user__avatar">
         <image :src="comment.avatar" mode="scaleToFill" />
@@ -15,23 +11,24 @@
           <view class="oneComment__user__info__name">{{ comment.user }}</view>
           <view class="oneComment__user__info__time">{{
             comment.time.toLocaleString()
-          }}</view>
+            }}</view>
+
         </view>
         <view class="oneComment__content">
-          <view class="oneComment__content__text">{{ comment.content }}</view>
+          <view class="oneComment__content__text">
+            <text>
+              {{ comment.content }}
+            </text>
+
+          </view>
           <view class="oneComment__content__actions">
-            <text>回复</text>
-            <text>赞同</text>
-            <view
-              class="second-comment-show"
-              @click="
-                emit('showSecondCommentClick');
-                showText = '';
-              "
-              v-if="type === 'first'"
-            >
-              <text>{{ showText }} </text></view
-            >
+            <click-icon class="oneComment__content__actions__icon" v-for="item in iconType" :type="item"></click-icon>
+            <view class="second-comment-show" @click="
+              emit('showSecondCommentClick');
+            showText = '';
+            " v-if="type === 'first'">
+              <text>{{ showText }} </text>
+            </view>
           </view>
         </view>
       </view>
@@ -40,8 +37,9 @@
 </template>
 
 <script setup lang="ts">
+import ClickIcon from "@/components/base/ClickIcon/index.vue"
 import { ref } from "vue";
-
+const iconType = [["chat"], ["redo-filled"], ["heart", "heart-filled"], ["hand-up", "hand-up-filled"]]
 interface OneComment {
   id: number;
   content: string;
@@ -84,7 +82,6 @@ const showText = ref<string>("展开回复");
   &__user {
     display: flex;
     gap: 20rpx;
-    margin-bottom: 12rpx;
 
     &__avatar {
       width: 70rpx;
@@ -102,18 +99,21 @@ const showText = ref<string>("展开回复");
     &__info {
       display: flex;
       flex-direction: row;
-      gap: 8rpx;
-      margin-left: 20rpx;
+      gap: 18rpx;
+      padding-left: 10rpx;
 
       &__name {
         font-size: 26rpx;
         font-weight: 600;
-        color: #1f2937;
+        color: $text-title;
       }
 
       &__time {
         font-size: 22rpx;
         color: #9ca3af;
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
       }
     }
   }
@@ -123,26 +123,40 @@ const showText = ref<string>("展开回复");
     padding: 10rpx;
     display: flex;
     flex-direction: column;
-    gap: 8rpx;
 
     &__text {
       font-size: 26rpx;
       color: #374151;
       line-height: 1.6;
+      width: fit-content;
     }
 
     &__actions {
       display: flex;
-      gap: 30rpx;
+      gap: 20rpx;
       font-size: 24rpx;
       color: $pink-color;
+      flex-direction: row-reverse;
+      flex: 1;
+
+      &__icon {
+        display: flex;
+        align-items: flex-end;
+      }
     }
   }
 }
 
 .second-comment-show {
+  display: inline-block;
   flex: 1;
+  color: $pink-color;
+  font-size: 20rpx;
+  opacity: 0.3;
+}
+
+::v-deep .icon-wrapper {
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
 }
 </style>

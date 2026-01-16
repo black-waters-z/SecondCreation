@@ -11,7 +11,10 @@
             {{ article?.content }}
         </text>
         <view class="article-info flex-1">
-            <text class="article-info__title text-ellipsis">{{ article?.title }}想要成为你的恋人，为什么不可以呢（1）</text>
+            <navigator :url="`/pages/article/index?id=${article?.id}`" open-type="navigate"
+                hover-class="navigator-hover">
+                <text class="article-info__title text-ellipsis">{{ article?.title }}想要成为你的恋人，为什么不可以呢（1）</text>
+            </navigator>
             <view class="article-info__scroll-view flex flex-row">
                 <bottom-tag :tag-list="article?.tags" class="article-info__tag flex-1"></bottom-tag>
                 <view class="article-info__author">

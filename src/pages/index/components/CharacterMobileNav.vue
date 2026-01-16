@@ -47,7 +47,8 @@ const props = defineProps<{
   top: 0;
   background-color: white;
   transform: translateX(100%);
-  transition: 0.3s ease-in-out;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
 
   &-view {
     box-sizing: border-box;
@@ -85,6 +86,7 @@ const props = defineProps<{
 }
 
 .character-mobile-nav-container__active {
+  opacity: 1;
   transform: translateX(0%);
 }
 </style>

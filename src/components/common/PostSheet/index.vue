@@ -3,7 +3,8 @@
   <view :class="visible ? `post-sheet-container active` : `post-sheet-container`">
     <view class="post-sheet-container__view">
       <view class="flex item-center" v-for="(row, rowIndex) in chunkedChoices" :key="rowIndex">
-        <post-choice class="flex-1 item-center justify-center" v-for="choice in row" :key="choice.text + choice.icon" :text="choice.text" :backgroundcolor="choice.backgroundcolor" :url="choice.url" fontColor="grey">
+        <post-choice class="flex-1 item-center justify-center" v-for="choice in row" :key="choice.text + choice.icon"
+          :text="choice.text" :backgroundcolor="choice.backgroundcolor" :url="choice.url" fontColor="grey">
           <template #icon>
             <uni-icons fontFamily="CustomFont" size="33" :color="choice?.color || '#000'">
               {{ choice.icon }}
@@ -71,7 +72,7 @@ const chunkedChoices = computed(() => {
   transform: translateY(70vh);
   display: flex;
   justify-content: center;
-  transition: 0.3s;
+  transition: 0.5s ease-in-out;
 
   &__view {
     width: 80%;
@@ -98,5 +99,5 @@ const chunkedChoices = computed(() => {
 .post-sheet-container {
   bottom: 40rpx;
 }
-// #endif
-</style>
+
+// #endif</style>
