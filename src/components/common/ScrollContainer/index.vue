@@ -7,12 +7,17 @@
       <refresh class="w-100" :type="refreshType"></refresh>
     </template>
     <slot></slot>
+    <have-no-more v-if="have_no_more"></have-no-more>
   </scroll-view>
 </template>
 
 <script setup lang="ts">
 import { useScrollView } from '@/hooks/useScrollView';
 import Refresh from '../Refresh/index.vue';
+import HaveNoMore from '@/components/base/HaveNoMore/index.vue'
+withDefaults(defineProps<{ have_no_more?: boolean }>(), {
+  have_no_more: false
+})
 const { triggered, refreshType, onEnd, onPulling, onRefresh, onAbort, onRestore } = useScrollView();
 </script>
 

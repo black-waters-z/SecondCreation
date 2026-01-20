@@ -1,14 +1,14 @@
 <template>
-    <view class="have-no-more-comment">
+    <view class="have-no-more">
         <uni-icons type="refresh" size="30"></uni-icons>
-        <text>暂无更多评论，下拉刷新其他文章</text>
+        <text>上划加载更多...</text>
     </view>
 </template>
 
 <script lang="ts" setup></script>
 
 <style lang="scss" scoped>
-.have-no-more-comment {
+.have-no-more {
     display: flex;
     flex-direction: column;
     justify-content: center;

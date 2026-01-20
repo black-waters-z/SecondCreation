@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper class="w-full store" show-head>
+  <page-wrapper have_no_more class="w-full store" show-head>
     <store-tab></store-tab>
     <template #scroll>
       <grid-articles-container class="w-full grid-articles-container"
@@ -28,10 +28,6 @@ const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
 onShow(() => {
   if (activeNavigatorIndex.value === -1) activeNavigatorIndex.value = 0;
 });
-const info = uni.getSystemInfoSync();
-const isMobile = info.platform === 'android' || info.platform === 'ios' || info.deviceType === 'phone' || info.windowWidth <= 600;
-
-const filterIndex = ref<number>(0);
 
 const articleList = ref<Article[]>([]);
 onLoad(async () => {
@@ -58,7 +54,7 @@ onLoad(async () => {
 .store {
   .grid-articles-container {
     .waterfall {
-      padding-top: 0;
+      padding-top: 0 !important;
     }
   }
 
@@ -68,7 +64,6 @@ onLoad(async () => {
     }
   }
 }
-
 
 
 @media screen and (min-width: 600px) {

@@ -33,9 +33,7 @@ export function useScrollView() {
     console.log('onAbort');
   };
 
-  const onEnd = () => {
-    console.log('onEnd');
-  };
+  const onEnd = () => {};
 
   return {
     triggered,

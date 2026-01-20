@@ -1,10 +1,9 @@
 <template>
-  <page-wrapper class="w-full" show-head>
+  <page-wrapper class="w-full" show-head have_no_more>
     <template #scroll>
       <whole-article></whole-article>
       <post-comment></post-comment>
       <comment-vue :comments="comments"></comment-vue>
-      <have-no-more-comment></have-no-more-comment>
     </template>
   </page-wrapper>
 </template>
@@ -14,7 +13,6 @@ import PageWrapper from "@/components/container/PageContainer.vue";
 import WholeArticle from "./components/WholeArticle.vue";
 import CommentVue from "./components/CommentVue.vue";
 import PostComment from "./components/PostComment.vue";
-import HaveNoMoreComment from "./components/HaveNoMoreComment.vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 

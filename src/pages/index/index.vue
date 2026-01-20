@@ -13,7 +13,7 @@
     <!-- #endif -->
 
     <!-- 窄屏瀑布流 -->
-    <scroll-container class="w-full flex-1 mh-0">
+    <scroll-container have_no_more class="w-full flex-1 mh-0">
       <!-- #ifdef H5 -->
       <view class="content__head">
         <common-swiper></common-swiper>
@@ -28,12 +28,12 @@
 
     <!-- 宽屏瀑布流 -->
     <match-media :min-width="600" style="width: 100%">
-      <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y">
+      <scroll-container have_no_more class="w-full flex-1 mh-0">
         <template #refresher>
           <refresh></refresh>
         </template>
         <water-fall :waterFallColNum="5" :article-lists="articleList"></water-fall>
-      </scroll-view>
+      </scroll-container>
     </match-media>
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
@@ -54,6 +54,7 @@ import Refresh from '@/components/common/Refresh/index.vue';
 import HomeProduct from './components/HomeProduct.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
 import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
+import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { getRecommenedArticles } from '@/api/articleApi'
 import type { Article } from '../tagPage/type';
@@ -101,23 +102,6 @@ onLoad(async () => {
   }
 }
 
-@media screen and (min-width: 600px) {
-  .content {
-    position: relative;
-
-    &__head {
-      display: none;
-    }
-
-    .mobile-scroll {
-      display: none;
-    }
-  }
-
-  .uni-scroll-view-refresher {
-    background-color: white !important;
-  }
-}
 
 // #ifdef H5
 .content__head {

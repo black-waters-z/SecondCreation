@@ -1,6 +1,6 @@
 <template>
     <view class="bottom-tag">
-        <scroll-view scroll-x class="bottom-tag__scroll">
+        <scroll-view scroll-x enable-flex class="bottom-tag__scroll">
             <view class="bottom-tag__item">
                 <Tag v-for="item in tagList" class="bottom-tag__item-tag" :bg-color="'pink'" :text="item.name"
                     :key="item.id" :closable="false" size="mini"></Tag>
@@ -15,6 +15,12 @@ import type { Tag as TagType } from '@/pages/tagNav/type'
 defineProps<{
     tagList?: TagType[];
 }>()
+
+defineOptions({
+    options: {
+        styleIsolation: 'shared',
+    },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -23,7 +29,6 @@ defineProps<{
 }
 
 .bottom-tag__item {
-    display: inline;
     align-items: center;
     white-space: nowrap;
     padding-right: 12rpx;
@@ -34,19 +39,20 @@ defineProps<{
     }
 }
 
-::deep .uni-scroll-view {
-    display: flex;
-    flex-direction: row;
+.bottom-tag__scroll {
     min-width: 0;
+    width: 100%;
+    white-space: nowrap;
 }
 
-::deep .uni-scroll-view-content {
-    display: inline-flex;
-    min-width: 0;
-}
-
-::v-deep .u-tag__content {
-    display: flex;
+.bottom-tag__item {
     align-items: center;
+    white-space: nowrap;
 }
-</style>
+
+// #ifdef MP-WEIXIN
+.bottom-tag__item {
+    display: flex;
+}
+
+// #endif</style>

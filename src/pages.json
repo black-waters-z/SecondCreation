@@ -97,6 +97,18 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/shopping/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/buyGood/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
@@ -147,8 +159,8 @@
         "selectedIconPath": "static/icon/home-pink.png"
       },
       {
-        "pagePath": "pages/more/index",
-        "text": "更多",
+        "pagePath": "pages/shopping/index",
+        "text": "购物",
         "iconPath": "static/icon/notice-grey.png",
         "selectedIconPath": "static/icon/notice-pink.png"
       },

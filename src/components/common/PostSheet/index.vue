@@ -34,12 +34,12 @@ type Choice = {
 };
 
 const choices: Choice[] = [
-  { text: '发布文章', icon: '\ue649', backgroundcolor: 'white', url: '../post/index?type=write', color: '#ffb2b2' },
-  { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index?type=paint', color: '#ffb2b2' },
-  { text: '汉化组', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#ffb2b2' },
-  { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index?type=video', color: '#bebfc0' },
-  { text: '创建聊天室', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
-  { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
+  { text: '发布文章', icon: '\ue649', backgroundcolor: 'white', url: '../post/index?type=write', color: '#000' },
+  { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index?type=paint', color: '#000' },
+  { text: '汉化组', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#000' },
+  { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index?type=video', color: '#e153a2' },
+  { text: '创建聊天室', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#e153a2' },
+  { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#e153a2' },
 ];
 
 const chunkedChoices = computed(() => {
@@ -81,7 +81,7 @@ const chunkedChoices = computed(() => {
     border-radius: 16px;
     box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-rows: repeat(2, 100px);
+    grid-template-rows: repeat(3, 100px);
   }
 }
 
