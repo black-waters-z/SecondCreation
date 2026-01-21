@@ -100,8 +100,7 @@ watch(
 .waterfall {
   display: flex;
   width: 100%;
-  gap: 10rpx;
-  padding: 20rpx;
+  padding: 0 10rpx;
   box-sizing: border-box;
 
   &__col {

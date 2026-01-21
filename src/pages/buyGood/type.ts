@@ -1,14 +1,10 @@
+import type { CommentInfo } from '@/components/shop/comment/type';
 export interface GoodInfos {
   // 商品页
   id: number;
   description: string;
   choices: goodChoice[];
-}
-
-interface swiperImg {
-  id: number;
-  img: string;
-  imgTitle: string;
+  comments: CommentInfo[];
 }
 
 interface goodChoice {

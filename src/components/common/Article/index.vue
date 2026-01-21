@@ -52,7 +52,7 @@ const isVideo = computed(() => {
 
 <style lang="scss" scoped>
 .article {
-    width: 360rpx;
+    width: 340rpx;
     background: white;
     margin: 20rpx 5rpx;
     box-sizing: border-box;

@@ -1,16 +1,17 @@
 <template>
     <view class="shop-product">
-        <image src="#" mode="scaleToFill" class="shop-product--img" />
+        <image :src="goodInfo?.good_img ?? '#'" mode="scaleToFill" class="shop-product--img" />
         <view class="shop-product--info">
-            <navigator url="/pages/buyGood/index" open-type="navigate" hover-class="navigator-hover">
+            <navigator :url="`/pages/buyGood/index?id=${goodInfo?.id ?? 0}`" open-type="navigate"
+                hover-class="navigator-hover">
                 <text class="shop-product--info-title">
-                    【白正】AAA批发市场AAA批发市场AAA批发市场AAA批发市场AAA批发市场
+                    {{ goodInfo?.title ?? "【白正】AAA批发市场AAA批发市场AAA" }}
                 </text>
             </navigator>
 
             <view class="shop-product--info-owner">
-                <image class="shop-product--info-owner__avatar" src=""> </image>
-                <text class="shop-product--info-owner__name">AAA批发市场</text>
+                <image class="shop-product--info-owner__avatar" :src="goodInfo?.store?.avatar ?? ''"> </image>
+                <text class="shop-product--info-owner__name">{{ goodInfo?.store?.name ?? 'aaa批发市场' }}</text>
                 <click-icon class="shop-product--info-owner__star" :type="type" :size="23"></click-icon>
             </view>
         </view>
@@ -19,7 +20,12 @@
 
 <script setup lang="ts">
 import ClickIcon from '@/components/base/ClickIcon/index.vue'
+import type { goodInfoType } from './type'
 const type = ['star', 'star-filled']
+
+defineProps<{
+    goodInfo: goodInfoType
+}>()
 </script>
 
 <style lang="scss" scoped>

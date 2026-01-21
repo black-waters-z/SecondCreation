@@ -17,8 +17,8 @@
           HD </text>
       </view>
       <view class="whole-article__contact">
-        <click-icon v-for="(item, index) in iconType" :key="index" class="whole-article__contact-icon" :type="item"
-          :size="26"></click-icon>
+        <click-icon show-text v-for="(item, index) in iconType" :key="index" class="whole-article__contact-icon"
+          :type="item" :size="26"></click-icon>
       </view>
     </view>
   </view>

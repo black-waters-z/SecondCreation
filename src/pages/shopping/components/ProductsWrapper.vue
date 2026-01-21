@@ -1,11 +1,15 @@
 <template>
     <view class="products-wrapper">
-        <product v-for="value in [1, 2, 3, 4, 5, 6, 7, 8, 9]"></product>
+        <product v-for="(value, idx) in info ?? [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="idx" :good-info="value"></product>
     </view>
 </template>
 <script setup lang="ts">
 import Product from "@/components/shop/product/index.vue"
+import type { goodInfo } from "../type"
 
+defineProps<{
+    info: goodInfo[];
+}>()
 </script>
 <style lang="scss" scoped>
 .products-wrapper {

@@ -5,7 +5,7 @@
         </view>
         <view class="shopping-head--nav-wrapper">
             <view v-for="(value, idx) in ['画作制品', '文字制品', '棉花制品', '评价']" class="shopping-head--nav"
-                :class="{ 'active': activeIndex === idx }" @click="clickNav(idx)">
+                :class="{ 'active': activeIndex === idx }" @click="clickNav(idx, value)">
                 {{ value }}
             </view>
         </view>
@@ -17,9 +17,16 @@ import ScSearch from '@/components/base/ScSearch/index.vue'
 import { ref } from 'vue'
 const activeIndex = ref(0)
 
-function clickNav(index: number) {
+
+defineProps<{ modelValue: string }>()
+
+const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
+
+function clickNav(index: number, value: string) {
     activeIndex.value = index
+    emit('update:modelValue', value)
 }
+
 </script>
 
 <style lang="scss" scoped>

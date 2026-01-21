@@ -22,7 +22,8 @@
 
           </view>
           <view class="oneComment__content__actions">
-            <click-icon class="oneComment__content__actions__icon" v-for="item in iconType" :type="item"></click-icon>
+            <click-icon show-text class="oneComment__content__actions__icon" v-for="item in iconType"
+              :type="item"></click-icon>
             <view class="second-comment-show" @click="
               emit('showSecondCommentClick');
             showText = '';

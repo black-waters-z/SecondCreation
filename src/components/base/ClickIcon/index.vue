@@ -1,11 +1,13 @@
 <template>
-    <view v-if="type.length === 2">
+    <view v-if="type?.length === 2">
         <view class="icon-wrapper" v-if="!isShow" @click="toggle">
             <uni-icons :type="type[0]" :size="size" color="#bfbaba"></uni-icons>
+            <text v-if="showText">{{ num ?? 0 }}</text>
         </view>
         <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click="toggle"
             @animationend="isShaking = false">
             <uni-icons :type="type[1]" :size="size" color="#ff7aa0"></uni-icons>
+            <text v-if="showText">{{ (num ?? 0) + 1 }}</text>
         </view>
     </view>
     <view v-else-if="type.length === 1" class="icon-wrapper">
@@ -15,12 +17,7 @@
 
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
-
-interface IconType {
-    type: string,
-}
-
-defineProps<{ type: IconType[], size: number }>()
+defineProps<{ type: string[], size: number, num?: number, showText?: boolean }>()
 
 const isShow = ref(false)
 const isShaking = ref(false)
