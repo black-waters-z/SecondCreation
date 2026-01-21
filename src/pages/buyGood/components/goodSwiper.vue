@@ -4,8 +4,10 @@
             <swiper class="good-swiper__swiper-box" @change="change">
                 <swiper-item v-for="(item, index) in info" :key="index">
                     <view class="swiper-item">
-                        <image class="w-full swiper-item__image" src="/src/static/homepic/homepic2.png"
-                            mode="aspectFill"></image>
+                        <image class="w-full swiper-item__image"
+                            src="https://raw.githubusercontent.com/black-waters-z/MyPictiureStore/refs/heads/main/pailideTest1.png"
+                            mode="aspectFill">
+                        </image>
                     </view>
                 </swiper-item>
             </swiper>

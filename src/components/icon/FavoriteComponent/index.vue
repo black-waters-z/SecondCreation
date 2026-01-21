@@ -27,16 +27,6 @@ const instance = getCurrentInstance();
 
 const props = withDefaults(defineProps<{ articleLists: ArticleType[] }>(), {
   articleLists: () => [
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '1221121', author: 'wangwu' },
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
   ],
 });
 

@@ -16,7 +16,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
 type CSSProperties = Record<string, string | number | undefined>;
 
 // props:styles 长高
@@ -41,10 +40,10 @@ withDefaults(
   {
     swiperInfo: () => [
       {
-        swiperImg: '/static/homepic/homepic3.png',
+        swiperImg: `${import.meta.env.VITE_STATIC_IMG_BASE}/homepic/homepic3.png`,
       },
       {
-        swiperImg: '/static/homepic/homepic2.png',
+        swiperImg: `${import.meta.env.VITE_STATIC_IMG_BASE}/homepic/homepic2.png`,
       },
     ],
     styles: () => ({}),

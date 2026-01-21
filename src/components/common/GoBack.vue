@@ -1,11 +1,13 @@
 <template>
   <view class="go-back-container w-full">
     <uni-icons type="left" size="20" @click="goBack"></uni-icons>
+    <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
     <select-collection class="justify-center" v-if="type" v-model="index" :collection-list="collectionList">
       <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
     </select-collection>
     <search-bar class="go-back-container__search" v-if="type" :type="type" @search="onSearchFromChild"></search-bar>
+
   </view>
 </template>
 
@@ -26,10 +28,10 @@ function goBack() {
 const emit = defineEmits(['search']);
 
 const onSearchFromChild = (text: string) => {
-  emit('search', text, props.collectionList[index.value]);
+  emit('search', text, props?.collectionList?.[index.value]);
 };
 
-const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList: collection[] }>(), {
+const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean }>(), {
   title: '',
 });
 </script>
@@ -64,6 +66,11 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
     font-size: 24rpx;
     font-weight: 700;
   }
+}
+
+.cart-filled {
+  position: absolute;
+  right: 20rpx;
 }
 
 @media screen and (min-width: 600px) {
