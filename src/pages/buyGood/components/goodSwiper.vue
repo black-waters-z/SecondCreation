@@ -2,11 +2,9 @@
     <view class="good-swiper">
         <uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
             <swiper class="good-swiper__swiper-box" @change="change">
-                <swiper-item v-for="(item, index) in info" :key="index">
+                <swiper-item v-for="(item, index) in choices" :key="index">
                     <view class="swiper-item">
-                        <image class="w-full swiper-item__image"
-                            src="https://raw.githubusercontent.com/black-waters-z/MyPictiureStore/refs/heads/main/pailideTest1.png"
-                            mode="aspectFill">
+                        <image class="w-full swiper-item__image" :src="item.swiperImg" mode="aspectFill">
                         </image>
                     </view>
                 </swiper-item>
@@ -15,21 +13,22 @@
     </view>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const info = [{
-    content: '徽章组'
-}, {
-    content: '色纸'
-}, {
-    content: '拍立得'
-}]
+import { computed, ref } from 'vue';
+import type { goodChoice } from '../type'
+const props = defineProps<{ choices: goodChoice[] }>();
+const info = computed(() => {
+    if (!props.choices) return []
+    return props.choices.map((item) => ({
+        content: item.name
+    }))
+})
 const current = ref(0)
 const mode = 'nav'
 
 function change(e) {
     current.value = e.detail.current
 }
+
 </script>
 
 <style lang="scss" scoped>

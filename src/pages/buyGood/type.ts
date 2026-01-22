@@ -7,7 +7,7 @@ export interface GoodInfos {
   comments: CommentInfo[];
 }
 
-interface goodChoice {
+export interface goodChoice {
   // 其中一个选择,商品的图片是放在轮播上的，【点击tag自动切换轮播到那个位置】
   id: number;
   name: string;

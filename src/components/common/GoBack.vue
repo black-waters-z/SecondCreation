@@ -1,6 +1,6 @@
 <template>
   <view class="go-back-container w-full">
-    <uni-icons type="left" size="20" @click="goBack"></uni-icons>
+    <uni-icons type="left" size="20" @click="goBack" style="cursor:pointer"></uni-icons>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
     <select-collection class="justify-center" v-if="type" v-model="index" :collection-list="collectionList">
@@ -74,8 +74,6 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
 }
 
 @media screen and (min-width: 600px) {
-  .go-back-container {
-    display: none;
-  }
+  .go-back-container {}
 }
 </style>

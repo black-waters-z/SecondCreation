@@ -21,4 +21,10 @@ defineProps<{
     grid-template-columns: repeat(2, 1fr);
     gap: 20rpx;
 }
+
+@media (min-width: 600px) {
+    .products-wrapper {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
 </style>

@@ -8,19 +8,19 @@
                 {{ commentInfo?.comment?.content || '站位的评论' }}
             </view>
             <view class="shop-comment__comment--interact">
-                <click-icon show-text class="shop-comment__comment--interact-click"
-                    v-for="(item, idx) in commentInfo?.icons || iconType" :type="item.type ?? item" :num="item?.num"
-                    :size="18"></click-icon>
+                <click-icon show-text class="shop-comment__comment--interact-click" v-for="(item, idx) in iconType"
+                    :key="idx" :type="item.type ?? item" :num="commentInfo?.icons?.[0]?.num || 0" :size="18"
+                    :has-been-liked="commentInfo?.comment?.hasBeenLiked"></click-icon>
                 <view class="shop-comment__user-info">
-                    <image :src="commentInfo?.user?.avatar || ''" class="shop-comment__user-info--avatar"></image>
-                    <text class="shop-comment__user-info--name">{{ commentInfo?.user?.name || '匿名用户' }}</text>
+                    <image :src="commentInfo?.user?.avatarUrl || ''" class="shop-comment__user-info--avatar"></image>
+                    <text class="shop-comment__user-info--name">{{ commentInfo?.user?.username || '匿名用户' }}</text>
                     <text class="shop-comment__user-info--time">{{ commentInfo?.comment?.createTime || '1990.1.1'
-                    }}</text>
+                        }}</text>
                 </view>
             </view>
         </view>
         <view class="shop-comment__product" v-if="show_product">
-            <cafe-with-good-nav></cafe-with-good-nav>
+            <cafe-with-good-nav :source="commentInfo?.storeInfo"></cafe-with-good-nav>
         </view>
     </view>
 </template>
@@ -28,8 +28,13 @@
 import type { CommentInfo } from './type';
 import CafeWithGoodNav from '@/components/shop/CafeWithGoodNav/index.vue';
 import ClickIcon from '@/components/base/ClickIcon/index.vue';
+import { watch } from 'vue';
 const iconType = [["chat"], ["redo-filled"], ["hand-up", "hand-up-filled"]]
-defineProps<{ commentInfo: CommentInfo, show_product: boolean }>();
+const props = defineProps<{ commentInfo: CommentInfo, show_product: boolean }>();
+
+watch(() => props.commentInfo, (newVal, oldVal) => {
+    console.log('commentInfo changed:', newVal);
+})
 </script>
 <style lang="scss" scoped>
 .shop-comment {

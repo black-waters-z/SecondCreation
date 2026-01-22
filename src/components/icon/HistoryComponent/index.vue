@@ -7,8 +7,7 @@
 import WaterFall from "@/components/common/WaterFall.vue";
 import type { ArticleType } from "@/types/index";
 
-const articleLists: ArticleType[] = [
-];
+const articleLists: ArticleType[] = [];
 </script>
 
 <style scoped lang="scss"></style>

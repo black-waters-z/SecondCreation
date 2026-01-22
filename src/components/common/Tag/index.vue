@@ -1,7 +1,7 @@
 <template>
   <view class="tag">
-    <up-tag :text="text" :size="size || 'mini'" closable @close="closeTag" :bgColor="bgColor" :borderColor="bgColor"
-      v-if="closable" @tap="handleClick"></up-tag>
+    <up-tag class="tag__item" :text="text" :size="size || 'mini'" closable @close="closeTag" :bgColor="bgColor"
+      :borderColor="bgColor" v-if="closable" @tap="handleClick"></up-tag>
     <up-tag :text="text" :size="size || 'large'" v-if="!closable" :bgColor="bgColor" :borderColor="bgColor"
       @tap="handleClick"></up-tag>
   </view>
@@ -33,7 +33,9 @@ function handleClick() {
 
 <style lang="scss" scoped>
 .tag {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :deep(.u-tag) {

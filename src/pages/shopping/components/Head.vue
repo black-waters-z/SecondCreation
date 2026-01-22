@@ -4,8 +4,8 @@
             <sc-search></sc-search>
         </view>
         <view class="shopping-head--nav-wrapper">
-            <view v-for="(value, idx) in ['画作制品', '文字制品', '棉花制品', '评价']" class="shopping-head--nav"
-                :class="{ 'active': activeIndex === idx }" @click="clickNav(idx, value)">
+            <view v-for="(value, idx) in [shopTab.paint, shopTab.write, shopTab.toy, shopTab.comment]"
+                class="shopping-head--nav" :class="{ 'active': activeIndex === idx }" @click="clickNav(idx, value)">
                 {{ value }}
             </view>
         </view>
@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import ScSearch from '@/components/base/ScSearch/index.vue'
 import { ref } from 'vue'
+import { shopTab } from '../type'
 const activeIndex = ref(0)
 
 
@@ -56,11 +57,20 @@ function clickNav(index: number, value: string) {
         opacity: 0.6;
         color: #000;
 
+
         &.active {
             font-weight: 600;
             opacity: 1;
             background-color: $border-color;
         }
     }
+}
+
+@media screen and (min-width:600px) {
+    .shopping-head--nav {
+        max-width: 200rpx;
+        cursor: pointer;
+    }
+
 }
 </style>

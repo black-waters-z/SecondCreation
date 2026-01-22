@@ -52,11 +52,13 @@ const isVideo = computed(() => {
 
 <style lang="scss" scoped>
 .article {
-    width: 340rpx;
+    width: 350rpx;
     background: white;
     margin: 20rpx 5rpx;
     box-sizing: border-box;
     border-radius: 16rpx;
+    border: 1px solid #fdcdd8;
+    padding: 0 0 20rpx 0;
 
     &-video {
         width: 100%;
@@ -121,7 +123,7 @@ const isVideo = computed(() => {
         }
 
         &__title {
-            font-size: 32rpx;
+            font-size: 28rpx;
             font-weight: 600;
             letter-spacing: 2rpx;
             white-space: 2lines;
@@ -167,7 +169,9 @@ const isVideo = computed(() => {
 @media screen and (min-width:600px) {
     .article {
         box-sizing: border-box;
-        width: 100%;
+        width: 460rpx;
+        border: 1px solid #fdcdd8;
+
 
         &-img {
             min-height: 600rpx;

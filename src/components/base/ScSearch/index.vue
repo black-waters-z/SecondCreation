@@ -54,4 +54,11 @@ function search() {
     }
 }
 
-// #endif</style>
+// #endif
+
+@media screen and (min-width:600px) {
+    .sc-search {
+        display: none;
+    }
+}
+</style>

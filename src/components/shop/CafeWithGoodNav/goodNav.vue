@@ -1,13 +1,15 @@
 <template>
     <view class="good-nav">
-        <view class="good-nav__item" v-for="(value, idx) in [1, 2, 3, 4]" :key="idx">
-            <image class="good-nav__item--img" src="" mode="aspectFill">
+        <view class="good-nav__item" v-for="(value, idx) in source" :key="idx">
+            <image class="good-nav__item--img" :src="value?.goodImg" mode="aspectFill">
             </image>
-            <text class="good-nav__item--title">【春中声色】采珠子</text>
+            <text class="good-nav__item--title">{{ value?.title }}</text>
         </view>
     </view>
 </template>
 <script setup lang="ts">
+import type { goodInfo } from "@/pages/shopping/type";
+defineProps<{ source: goodInfo[] }>()
 </script>
 
 <style lang="scss" scoped>

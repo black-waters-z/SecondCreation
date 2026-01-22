@@ -46,8 +46,28 @@ onLoad((options) => {
 // #endif
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 page {
   height: 100%;
+}
+
+@media screen and (min-width:600px) {
+  .uni-top-window {
+    display: none !important;
+    opacity: 0;
+  }
+
+  .uni-top-window--placeholder {
+    height: 0 !important;
+  }
+
+  uni-left-window {
+    display: none;
+    opacity: 0;
+  }
+
+  .go-back-container {
+    display: none !important;
+  }
 }
 </style>

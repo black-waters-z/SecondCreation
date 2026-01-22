@@ -2,18 +2,26 @@
 <template>
     <view class="cafe-with-good-nav">
         <view class="cafe-with-good-nav__left">
-            <image class="cafe-with-good-nav__left--img"
-                src="https://raw.githubusercontent.com/black-waters-z/MyPictiureStore/refs/heads/main/cafe.png"
-                mode="aspectFill"></image>
+            <image class="cafe-with-good-nav__left--img" :src="source?.storeOwner.avatar ?? '#'" mode="aspectFill">
+            </image>
         </view>
         <view class="cafe-with-good-nav__right">
-            <good-nav></good-nav>
+            <good-nav :source="source?.Goods"></good-nav>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import goodNav from './goodNav.vue';
+import type { goodInfo } from '@/pages/shopping/type';
+interface storeInfo {
+    storeOwner: {
+        name: string;
+        avatar: string;
+    };
+    Goods: goodInfo[];
+}
+defineProps<{ source: storeInfo }>();
 </script>
 
 <style lang="scss" scoped>

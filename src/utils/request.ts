@@ -19,6 +19,12 @@ interface UniResponse<T = any> {
 
 const baseURL = import.meta.env.VITE_API_BASE || "/api";
 
+const toFormUrlEncoded = (payload: Record<string, any>): string => {
+  return Object.keys(payload)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(String(payload[key]))}`)
+    .join("&");
+};
+
 // 统一的请求方法
 export const request = <T = any>(config: RequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
@@ -41,10 +47,17 @@ export const request = <T = any>(config: RequestConfig): Promise<T> => {
       ...header,
     };
 
+    const contentType = headers["content-type"] || (headers as any)["Content-Type"];
+    const useForm =
+      typeof contentType === "string" &&
+      contentType.includes("application/x-www-form-urlencoded");
+    const requestData =
+      useForm && data && typeof data === "object" ? toFormUrlEncoded(data) : data;
+
     uni.request({
       url: fullUrl,
       method,
-      data,
+      data: requestData,
       header: headers,
       timeout,
       success: (res: any) => {

@@ -104,11 +104,13 @@ watch(
   box-sizing: border-box;
 
   &__col {
-    width: 25%;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16rpx;
+
+    &:not(:last-child) {
+      margin-right: 8rpx;
+    }
   }
 }
 

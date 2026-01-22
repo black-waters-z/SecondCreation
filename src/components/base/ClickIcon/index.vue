@@ -16,10 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
-defineProps<{ type: string[], size: number, num?: number, showText?: boolean }>()
-
+import { computed, nextTick, ref, watch } from 'vue';
+const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean }>()
 const isShow = ref(false)
+
+watch(() => props.hasBeenLiked, () => {
+    isShow.value = props.hasBeenLiked
+}, {
+    immediate: true
+})
+
 const isShaking = ref(false)
 
 const toggle = () => {

@@ -4,22 +4,22 @@
             <rich-text class="good-choice__description--text" :nodes="richTextNodes">
             </rich-text>
             <button class="good-choice__description--button" @click="openRichText">{{ isExpanded ? '收起' : '展开'
-            }}</button>
+                }}</button>
         </view>
 
         <view class="w-full good-choice__container">
-            <view v-for="(item, idx) in ['色纸', '58x58双人徽章', '拍立得', '相纸']" class="good-choice__item" :key="idx">
+            <view v-for="(item, idx) in goodInfos?.choices" class="good-choice__item" :key="idx">
                 <!-- ban: 商品库存为0禁用按钮 -->
                 <view @click="chooseGood(idx)" :class="{ 'active': activeIndex === idx, 'ban': false }"
                     class="good-choice__tag">
-                    <text>{{ item }}</text>
+                    <text>{{ item.name }}</text>
                 </view>
             </view>
         </view>
         <view class="good-choice__number-box">
             <uni-number-box :min="1" :max="9" :value="1" />
-            <text class="good-choice__number-box--left">余量10</text>
-            <text class="good-choice__number-box--price">￥10</text>
+            <text class="good-choice__number-box--left">余量{{ goodInfos?.choices?.[activeIndex]?.stock }}</text>
+            <text class="good-choice__number-box--price">￥{{ goodInfos?.choices?.[activeIndex]?.price }}</text>
         </view>
 
         <view class="good-choice__good-wrapper">
@@ -29,11 +29,11 @@
     </view>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { GoodInfos } from '../type';
 import SCButton from '@/components/common/SCButton/index.vue'
 import { richTextNodes } from '../type'
-defineProps<{ goodInfos: GoodInfos }>()
+const props = defineProps<{ goodInfos: GoodInfos }>()
 const activeIndex = ref<number>(0)
 // 这里应该有多选
 const isExpanded = ref(false)
@@ -44,6 +44,12 @@ function chooseGood(idx: number) {
 function openRichText() {
     isExpanded.value = !isExpanded.value;
 }
+
+const choices = computed(() => {
+    return props.goodInfos.choices.map(item => {
+        return item.name;
+    })
+})
 
 
 </script>

@@ -1,6 +1,6 @@
 <template>
     <view class="shop-product">
-        <image :src="goodInfo?.good_img ?? '#'" mode="scaleToFill" class="shop-product--img" />
+        <image :src="goodInfo?.goodImg ?? '#'" mode="aspectFill" class="shop-product--img" />
         <view class="shop-product--info">
             <navigator :url="`/pages/buyGood/index?id=${goodInfo?.id ?? 0}`" open-type="navigate"
                 hover-class="navigator-hover">
@@ -80,6 +80,17 @@ defineProps<{
                 display: flex;
                 justify-content: flex-end;
             }
+        }
+    }
+}
+
+@media screen and (min-width:600px) {
+    .shop-product {
+        width: 450rpx;
+        cursor: pointer;
+
+        &--img {
+            height: 300rpx;
         }
     }
 }

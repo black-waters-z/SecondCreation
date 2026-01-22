@@ -1,7 +1,15 @@
+import type { goodInfo } from '@/pages/shopping/type';
 export interface CommentInfo {
   user: User;
   comment: Comment;
   icons: Array<iconWithNum | string[]>;
+  storeInfo?: {
+    storeOwner: {
+      name: string;
+      avatar: string;
+    };
+    Goods: goodInfo[];
+  };
 }
 
 interface iconWithNum {
@@ -13,12 +21,14 @@ interface Comment {
   id: string;
   content: string;
   createTime: string;
-  favorite: string;
-  likes: string;
+  likeCount: string;
+  parentId?: number;
+  userId?: number;
+  hasBeenLiked?: boolean;
 }
 
 interface User {
   id: string;
-  name: string;
-  avatar: string;
+  username: string;
+  avatarUrl: string;
 }

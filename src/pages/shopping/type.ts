@@ -12,9 +12,9 @@ export interface commentsInfo {
 
 export interface goodInfo {
   id: number;
-  good_img: string;
+  goodImg: string;
   title: string;
-  store: {
+  store?: {
     avatar: string;
     name: string;
   };

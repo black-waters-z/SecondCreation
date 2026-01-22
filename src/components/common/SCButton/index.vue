@@ -44,7 +44,7 @@ defineEmits(['click']);
   transition: 0.3s ease;
 
   &:active {
-    transform: scale(1.2);
+    transform: scale(0.9);
   }
 
   &::after {
@@ -59,7 +59,7 @@ defineEmits(['click']);
   transition: 0.3s ease;
 
   &:active {
-    transform: scale(1.2);
+    transform: scale(0.9);
   }
 
   &::after {

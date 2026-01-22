@@ -35,7 +35,7 @@ defineOptions({
 
     &-tag {
         margin-right: 10rpx;
-        transform: scale(0.8);
+        font-size: 20rpx;
     }
 }
 
