@@ -1,40 +1,39 @@
 <template>
-  <view class="content w-100">
-    <head-nav class="w-full"></head-nav>
-    <scroll-container class="store-content__scroll flex-1 mh-0">
-      <active-nav type="icon" class="w-full">已筛选</active-nav>
-      <Filter v-model="filterIndex" class="w-full"></Filter>
-      <articles :zone="activeNavigatorIndex" :styles="{
-        'grid-template-columns': isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(5, minmax(0, 1fr))',
-      }"></articles>
-    </scroll-container>
+  <page-wrapper have_no_more class="w-full store" show-head>
+    <store-tab></store-tab>
+    <template #scroll>
+      <grid-articles-container class="w-full grid-articles-container"
+        :article-list="articleList"></grid-articles-container>
+    </template>
     <to-top></to-top>
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
-  </view>
+  </page-wrapper>
 </template>
 
 <script setup lang="ts">
-import ActiveNav from '@/components/common/ActiveNav/index.vue';
-import Articles from '@/components/common/Articles.vue';
+import StoreTab from './components/StoreTab.vue';
 import PostSheet from '@/components/common/PostSheet/index.vue';
 import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
-import HeadNav from '@/components/common/HeadNav.vue';
 import ToTop from '@/components/common/ToTop.vue';
-import Filter from '@/components/common/Filter.vue';
-import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import PageWrapper from '@/components/container/PageContainer.vue';
+import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
 import { useHeadBarStore } from '@/store/useHeadBar';
-import { onLaunch, onShow } from '@dcloudio/uni-app';
+import { onLoad, onShow } from '@dcloudio/uni-app';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import type { Article } from '@/pages/tagPage/type';
+import { getFilterArticle } from '@/api/articleApi';
 const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
 onShow(() => {
   if (activeNavigatorIndex.value === -1) activeNavigatorIndex.value = 0;
 });
-const info = uni.getSystemInfoSync();
-const isMobile = info.platform === 'android' || info.platform === 'ios' || info.deviceType === 'phone' || info.windowWidth <= 600;
 
-const filterIndex = ref<number>(0);
+const articleList = ref<Article[]>([]);
+onLoad(async () => {
+  articleList.value = await getFilterArticle(1);
+  console.log(articleList.value);
+})
 </script>
 
 <style lang="scss">
@@ -51,6 +50,21 @@ const filterIndex = ref<number>(0);
   display: flex;
   justify-content: center;
 }
+
+.store {
+  .grid-articles-container {
+    .waterfall {
+      padding-top: 0 !important;
+    }
+  }
+
+  .store-tab {
+    .select-collection-container {
+      background-color: white;
+    }
+  }
+}
+
 
 @media screen and (min-width: 600px) {
   .store-content {

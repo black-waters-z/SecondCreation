@@ -1,174 +1,92 @@
 <template>
-  <view class="whole-article-container w-100">
-    <view class="whole-article-container__article w-100">
-      <view class="author">
-        <view class="author__avatar"></view>
-        <view class="author__name">name</view>
+  <view class="whole-article w-full">
+    <go-back></go-back>
+    <view class="whole-article__content">
+      <text class="whole-article__content-title">TELL ME A PIECE OF YOUR HISTORY</text>
+      <view class="whole-article__author w-full">
+        <article-author></article-author>
       </view>
-      <view class="article">
-        <view class="article__title">title</view>
-        <view class="article__content">I like a big cat.</view>
-        <br />
-        <view class="article__post-time">
-          <text>2022-03-03</text>
-        </view>
-        <view class="article__interact">
-          <uni-icons
-            fontFamily="CustomFont"
-            size="18"
-            v-if="!like"
-            @click="like = !like"
-            class="icon"
-            >&#xe635;
-          </uni-icons>
-          <uni-icons
-            fontFamily="CustomFont"
-            size="18"
-            v-if="like"
-            @click="like = !like"
-            class="icon"
-            color="darkred"
-            >&#xe62b;
-          </uni-icons>
-          <uni-icons
-            type="star"
-            size="23"
-            v-if="!favorite"
-            class="icon"
-            @click="favorite = !favorite"
-          ></uni-icons>
-          <uni-icons
-            type="star-filled"
-            size="23"
-            v-if="favorite"
-            class="icon"
-            @click="favorite = !favorite"
-          ></uni-icons>
-          <uni-icons fontFamily="CustomFont" size="18" class="icon"
-            >&#xe6c9;
-          </uni-icons>
-        </view>
+      <view class="whole-article__content-content">
+        <view class="whole-article__content-content-subtitle">subtitle</view>
+        <view class="whole-article__content-content-image"></view>
+        <text class="whole-article__content-content-text">I got to ask Wang Yao (the embodiment of my home nation,
+          China) a few questions the other \n\n day after his existence was revealed. He has been living over my
+          restaurant
+          for the past eight…
+          \n\n
+          HD </text>
+      </view>
+      <view class="whole-article__contact">
+        <click-icon show-text v-for="(item, index) in iconType" :key="index" class="whole-article__contact-icon"
+          :type="item" :size="26"></click-icon>
       </view>
     </view>
   </view>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref, toRefs } from "vue";
-
-const props = defineProps<{ art_id: number }>();
-const interactInfo = ref({
-  like: true,
-  favorite: true,
-});
-
-const { like, favorite } = toRefs(interactInfo.value);
-const activeShow = ref(false);
-
-const toggleLike = () => {
-  like.value = !like.value;
-  if (like.value) {
-    activeShow.value = true;
-    setTimeout(() => {
-      activeShow.value = false;
-    }, 1000);
-  }
-};
-
-onMounted(() => {
-  console.log(props.art_id);
-});
+<script lang="ts" setup>
+import GoBack from "@/components/common/GoBack.vue";
+import ArticleAuthor from "./ArticleAuthor.vue";
+import type { ArticleType } from "@/components/common/Article/type";
+import ClickIcon from "@/components/base/ClickIcon/index.vue";
+const iconType = [["redo-filled"], ["heart", "heart-filled"], ["hand-up", "hand-up-filled"]]
+defineProps<{
+  article: ArticleType;
+}>();
 </script>
 
 <style lang="scss" scoped>
-@font-face {
-  font-family: CustomFont;
-  src: url("../../../static/iconfont.ttf");
-}
-
-// #ifdef MP-WEIXIN
-$whole-article-container__margin-top: 80rpx;
-// #endif
-
-// #ifdef H5
-$whole-article-container__margin-top: 0rpx;
-// #endif
-
-.whole-article-container {
+.whole-article {
   display: flex;
-  justify-content: center;
-  margin-top: $whole-article-container__margin-top;
-  z-index: 600;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: 1rpx;
 
-  &__article {
-    margin-top: 160rpx;
+  &__content {
+    width: 100%;
+    min-height: 300px;
     background-color: white;
-    padding-bottom: 20rpx;
-    box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.1);
-    position: relative;
+    box-sizing: border-box;
+    padding: 0 20px;
 
-    .author {
-      width: 200rpx;
-      height: 100rpx;
-      border-radius: 1000rpx;
-      margin: {
-        top: -40rpx;
-        left: 20rpx;
-      }
-      display: flex;
-      align-items: flex-end;
+    &-title {
+      width: fit-content;
+      display: block;
+      font-size: 40rpx;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 10rpx;
+      box-sizing: border-box;
+      padding: 0px 75rpx;
+    }
 
-      &__avatar {
-        width: 100rpx;
-        height: 100rpx;
-        background-color: rgb(198, 197, 197);
-        border-radius: 1000rpx;
-      }
+    &-content {
+      font-size: 30rpx;
+      font-weight: 350;
+      margin-bottom: 20rpx;
 
-      &__name {
+      &-subtitle {
+        font-weight: 200;
+        font-style: italic;
         font-size: 30rpx;
-        font-weight: 700;
-        margin-left: 10rpx;
-        padding: {
-          top: 6rpx;
-          bottom: 6rpx;
+        margin-bottom: 40rpx;
+
+        &::before {
+          content: ':';
+          margin-right: 10rpx;
         }
       }
     }
+  }
 
-    .article {
-      font-size: 26rpx;
-      margin: {
-        left: 40rpx;
-        right: 40rpx;
-      }
+  &__contact {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 20rpx;
 
-      &__title {
-        display: flex;
-        justify-content: center;
-        font-weight: 700;
-      }
-      &__content {
-        margin: {
-          top: 20rpx;
-          bottom: 20rpx;
-        }
-      }
-
-      &__post-time {
-        font-size: 23rpx;
-        color: grey;
-      }
-
-      &__interact {
-        position: absolute;
-        bottom: 10rpx;
-        right: 20rpx;
-        .icon {
-          margin-right: 15rpx;
-          bottom: 0;
-        }
-      }
+    &-icon {
+      margin-right: 20rpx;
     }
   }
 }

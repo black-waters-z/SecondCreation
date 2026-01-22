@@ -1,5 +1,6 @@
 <template>
     <page-wrapper class="w-full tag-nav letter-spacing-4" show-head>
+        <go-back class="w-full"></go-back>
         <template #scroll>
             <view class="tag-nav__scroll">
                 <IntroductionNav class="tag-nav__introduction">
@@ -22,6 +23,7 @@ import type { Ref } from 'vue';
 import type { Tag as TagType } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { listTags } from '@/api/tagApi';
+import GoBack from '@/components/common/GoBack.vue';
 let key: Ref<'work' | 'character' | 'cross'> = ref('work');
 const tagList = ref<TagType[]>([])
 onLoad(async (options) => {
@@ -30,14 +32,19 @@ onLoad(async (options) => {
     tagList.value = result?.items;
 })
 
+
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 page {
     height: 100vh;
 }
 
-:deep(.introduction-nav__icon) {
+.tag-nav-one {
+    margin: 6rpx 0;
+}
+
+.introduction-nav__icon {
     display: none;
 }
 

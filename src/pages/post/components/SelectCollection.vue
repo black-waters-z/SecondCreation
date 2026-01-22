@@ -1,7 +1,8 @@
 <template>
   <view class="w-full flex">
     <view class="select-collection-container">
-      <picker class="select-collection-container__picker" :range="nameList" range-key="" :value="index" @change="bindPickerChange">
+      <picker class="select-collection-container__picker" :range="nameList" range-key="" :value="index"
+        @change="bindPickerChange">
         <view class="flex item-center justify-center">
           <text class="select-collection-container__picker__text">
             <slot name="filterName"></slot>
@@ -51,6 +52,7 @@ function bindPickerChange(e: any) {
   background-color: $border-color;
   border-radius: 100px;
   box-sizing: border-box;
+
   padding: {
     left: 20rpx;
     right: 20rpx;
@@ -59,6 +61,9 @@ function bindPickerChange(e: any) {
   }
 
   &__picker {
+    display: flex;
+    align-items: center;
+
     &__text {
       font-size: 30rpx;
     }

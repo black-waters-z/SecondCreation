@@ -1,16 +1,24 @@
 <template>
-    <navigator open-type="switchTab" :url="`/pages/tagPage/index?tag=${tag.id}`" class="tag-nav-one">
-        <Tag :text="tag.name" :closable="false" :bg-color="'gray'" class="tag-nav-one__tag letter-spacing-4"></Tag>
-    </navigator>
+    <view class="tag-nav-one">
+        <Tag :text="tag.name" :closable="false" :bg-color="'gray'" class="tag-nav-one__tag letter-spacing-4"
+            @click="navigateToTag">
+        </Tag>
+    </view>
 </template>
 
 <script lang="ts" setup>
 import type { Tag as TagType } from '../type';
 import Tag from '@/components/common/Tag/index.vue'
 
-defineProps<{
+const props = defineProps<{
     tag: TagType;
 }>();
+
+function navigateToTag() {
+    uni.navigateTo({
+        url: `/pages/tagPage/index?tag=${props.tag.id}`,
+    });
+}
 </script>
 
 <style lang="scss" scoped>

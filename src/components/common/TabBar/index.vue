@@ -8,11 +8,7 @@
     </view>
     <view class="logo">
       <view class="tab-bar-item">
-        <image
-          src="/static/logo.png"
-          class="tab-bar-item__image"
-          mode="aspectFit"
-        ></image>
+        <image src="/static/logo.png" class="tab-bar-item__image" mode="aspectFit"></image>
       </view>
     </view>
   </view>
@@ -25,7 +21,7 @@ import NavigationBar from "./components/NavigationBar.vue";
 const navigationOptions = [
   { title: "首页", path: "/" },
   { title: "粮仓", path: "/pages/store/index" },
-  { title: "消息", path: "/pages/more/index" },
+  { title: "购物", path: "/pages/shopping/index" },
   { title: "我的", path: "/pages/user/index" },
 ];
 </script>
@@ -39,6 +35,7 @@ const navigationOptions = [
     flex: 1;
     display: flex;
   }
+
   .tab-bar-item {
     &__image {
       width: 70px;

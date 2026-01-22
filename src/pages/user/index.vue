@@ -6,17 +6,18 @@
         <user-bar :user-info="userInfo"></user-bar>
         <support-pay></support-pay>
       </view>
-      <view class="content__read-nav">
-        <read-nav :nav-items="readNavItems" color="black"> </read-nav>
-        <up-line dashed color="#ffecef"></up-line>
-        <read-nav :nav-items="writeNavItems" color="black"> </read-nav>
+      <view class="w-full flex ">
+        <view class="content__read-nav">
+          <read-nav :nav-items="readNavItems" color="black"> </read-nav>
+        </view>
+        <iframe
+          src="http://localhost:5173/pages/iconNavigate/index?icon=HistoryComponent&goBackTitle=%25E5%258E%2586%25E5%258F%25B2%25E8%25AE%25B0%25E5%25BD%2595"
+          class="flex-1 iframe-content" frameborder="0"></iframe>
       </view>
+
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
-    <match-media :min-width="600" class="item-center">
-      <ask-ai></ask-ai>
-    </match-media>
   </view>
 </template>
 
@@ -49,9 +50,6 @@ const readNavItems = [
   { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
   { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
   { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent' },
-];
-
-const writeNavItems = [
   { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE },
   { icon: '\ue64f', label: NavLabelEnum.DRAFT },
   { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA },
@@ -70,6 +68,13 @@ onLoad(() => {
 });
 </script>
 
+<style lang="scss" scoped>
+::v-deep uni-left-window {
+  display: none;
+  opacity: 0;
+}
+</style>
+
 <style lang="scss">
 .content {
   &__user {
@@ -85,16 +90,58 @@ onLoad(() => {
   &__read-nav {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 700rpx;
+    margin: 20rpx auto;
     box-sizing: border-box;
   }
 }
 
-@media screen and (min-width: 600px) {
-  .index-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
+.iframe-content {
+  display: none;
+}
+
+@media screen and (min-width:600px) {
+  .content__user {
+    display: flex;
+    flex-direction: row;
+
+    .user-bar-container {
+      width: 600rpx;
+    }
+
+    .support-pay-container {
+      display: none;
+    }
   }
+
+  .content__read-nav {
+    margin: 0 0;
+    width: 150rpx;
+  }
+
+  .read-nav-container {
+    flex-direction: column;
+    height: 470px !important;
+    gap: 10rpx;
+
+    .read-nav-container__icon {
+      cursor: pointer;
+      width: 130rpx;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15rpx;
+
+      &:hover {
+        background-color: $border-color;
+      }
+    }
+  }
+
+  .iframe-content {
+    display: block;
+  }
+
 }
 </style>

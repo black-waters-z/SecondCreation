@@ -21,12 +21,12 @@ const characters = [
   {
     name: 'tag导航',
     avatar: '/static/avatar/avatar1.jpg',
-    navigatorUrl: '/pages/character/index',
+    navigatorUrl: '/pages/tagNav/index',
   },
   { name: '粮仓导航', avatar: '/static/avatar/avatar1.jpg' },
   { name: '火热合集', avatar: '/static/avatar/avatar1.jpg' },
   { name: '官方公告', icon: '\ue600' },
-  { name: '搜索', icon: '\ue60d' },
+  { name: '搜索', icon: '\ue60d', navigatorUrl: '/pages/search/index' },
 ];
 </script>
 

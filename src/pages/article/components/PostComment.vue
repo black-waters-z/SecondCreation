@@ -1,58 +1,39 @@
 <template>
-  <view class="post-comment-container w-100">
-    <view class="post-comment-container__text-area w-100">
-      <view class="comment">发评论</view>
-      <button class="button">发送</button>
-    </view>
+  <view class="post-comment w-100">
+    <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment" placeholder="请输入内容"
+      autoHeight @focus="isFocus = !isFocus" @blur="isFocus = !isFocus"></up-textarea>
+    <SCButton type="button"><text>发送</text></SCButton>
   </view>
 </template>
 
 <script setup lang="ts">
+import SCButton from "@/components/common/SCButton/index.vue";
 import { ref } from "vue";
 
-const value = ref("");
+const comment = ref("");
+const isFocus = ref(false);
 </script>
 
 <style lang="scss" scoped>
-.post-comment-container {
+.post-comment {
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: white;
   display: flex;
-  justify-content: center;
-  margin: {
-    top: 20rpx;
-    bottom: 10rpx;
+  flex-direction: column;
+  align-items: center;
+
+  &__textarea {
+    width: 95%;
+    margin-bottom: 10px;
   }
 
-  &__text-area {
-    height: 70rpx;
-    border-radius: 16rpx;
-    display: flex;
+  .focus_border {
+    border-color: $pink-color !important;
+  }
 
-    .comment {
-      flex: 1;
-      height: 60rpx;
-      background-color: white;
-      border-radius: 16rpx;
-      margin-left: 20rpx;
-      margin-right: 20rpx;
-      display: flex;
-      align-items: center;
-      padding-left: 10rpx;
-    }
-
-    .button {
-      border: none;
-      font-size: 28rpx;
-      border-radius: 16rpx;
-      background-color: grey;
-      color: white;
-      height: 60rpx;
-      display: flex;
-      align-items: center;
-
-      :hover {
-        opacity: 0.5;
-      }
-    }
+  ::v-deep .button-bt {
+    font-size: 26rpx;
   }
 }
 </style>

@@ -3,7 +3,8 @@
   <view :class="visible ? `post-sheet-container active` : `post-sheet-container`">
     <view class="post-sheet-container__view">
       <view class="flex item-center" v-for="(row, rowIndex) in chunkedChoices" :key="rowIndex">
-        <post-choice class="flex-1" v-for="choice in row" :key="choice.text + choice.icon" :text="choice.text" :backgroundcolor="choice.backgroundcolor" :url="choice.url" fontColor="grey">
+        <post-choice class="flex-1 item-center justify-center" v-for="choice in row" :key="choice.text + choice.icon"
+          :text="choice.text" :backgroundcolor="choice.backgroundcolor" :url="choice.url" fontColor="grey">
           <template #icon>
             <uni-icons fontFamily="CustomFont" size="33" :color="choice?.color || '#000'">
               {{ choice.icon }}
@@ -33,12 +34,12 @@ type Choice = {
 };
 
 const choices: Choice[] = [
-  { text: '发布文章', icon: '\ue649', backgroundcolor: 'white', url: '../post/index?type=write', color: '#ffb2b2' },
-  { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index?type=paint', color: '#ffb2b2' },
-  { text: '汉化组', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#ffb2b2' },
-  { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index?type=video', color: '#bebfc0' },
-  { text: '创建聊天室', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
-  { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#bebfc0' },
+  { text: '发布文章', icon: '\ue649', backgroundcolor: 'white', url: '../post/index?type=write', color: '#737373' },
+  { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index?type=paint', color: '#737373' },
+  { text: '汉化组', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
+  { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index?type=video', color: '#737373' },
+  { text: '创建聊天室', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
+  { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
 ];
 
 const chunkedChoices = computed(() => {
@@ -71,7 +72,7 @@ const chunkedChoices = computed(() => {
   transform: translateY(70vh);
   display: flex;
   justify-content: center;
-  transition: 0.3s;
+  transition: 0.5s ease-in-out;
 
   &__view {
     width: 80%;
@@ -80,7 +81,7 @@ const chunkedChoices = computed(() => {
     border-radius: 16px;
     box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-rows: repeat(2, 100px);
+    grid-template-rows: repeat(3, 100px);
   }
 }
 
@@ -98,5 +99,5 @@ const chunkedChoices = computed(() => {
 .post-sheet-container {
   bottom: 40rpx;
 }
-// #endif
-</style>
+
+// #endif</style>

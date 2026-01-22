@@ -22,6 +22,12 @@ import { onLoad } from '@dcloudio/uni-app';
 import { post } from '@/utils/request';
 const articleData = ref<any>({});
 
+defineOptions({
+  options: {
+    styleIsolation: 'shared',
+  },
+});
+
 const workTags = ref({
   workTags: [],
   characterTags: [],

@@ -1,9 +1,10 @@
 <template>
     <page-wrapper show-head>
+        <go-back class="w-full"></go-back>
         <nav-tab :list="list" :nav-tags="result?.navTags"></nav-tab>
         <template #scroll>
-            <water-fall v-if="result?.articleList?.length" :water-fall-col-num="2"
-                :article-lists="result?.articleList"></water-fall>
+            <grid-articles-container v-if="result?.articleList?.length"
+                :article-list="result?.articleList"></grid-articles-container>
         </template>
     </page-wrapper>
 </template>
@@ -14,8 +15,9 @@ import PageWrapper from '@/components/container/PageContainer.vue';
 import { onLoad, onReady } from '@dcloudio/uni-app';
 import { getTagPageData } from '@/api/tagApi';
 import type { TagPageData } from '@/pages/tagPage/type';
-import WaterFall from '@/components/common/WaterFall.vue';
+import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
 import NavTab from '@/components/base/NavTab/index.vue';
+import GoBack from '@/components/common/GoBack.vue';
 onLoad(async (options) => {
     tagParam = options?.tag;
     if (tagParam) {

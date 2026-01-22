@@ -22,6 +22,7 @@ import SCButton from '@/components/common/SCButton/index.vue';
 import { ref } from 'vue';
 import { post } from '@/utils/request';
 import { parseToken } from '@/utils/security';
+
 interface FormData {
   username: string;
   password: string;
@@ -34,7 +35,16 @@ const formData = ref<FormData>({
 
 async function submit() {
   if (formData.value.username && formData.value.password) {
-    const res = await post('/users/login', { ...formData.value });
+    const form = new URLSearchParams({
+      grant_type: 'password',
+    })
+    form.append('username', formData.value.username)
+    form.append('password', formData.value.password)
+    const res = await post('/users/login', formData.value, {
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // ??Content-Type
+      },
+    });
     uni.setStorageSync('token', res.access_token);
     if (res) {
       uni.switchTab({ url: './index' });

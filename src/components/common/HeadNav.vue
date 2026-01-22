@@ -11,19 +11,18 @@
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
-    <match-media :max-width="599" class="nav !flex bg-white">
+    <view class="nav !flex bg-white">
       <view class="flex-1 flex">
         <navigator open-type="switchTab" url="/pages/index/index">
           <image src="/static/logo.png" mode="scaleToFill" class="logo" />
         </navigator>
       </view>
-      <view><uni-icons type="bars" size="30" @click="toggleMobileNav"></uni-icons>
+      <view><uni-icons type="bars" size="30" @click="toggleMobileNav" color="#000"></uni-icons>
         <navigator url="../search/index">
-          <uni-icons type="search" size="30"></uni-icons>
+          <uni-icons type="search" size="30" color="#000"></uni-icons>
         </navigator>
       </view>
-
-    </match-media>
+    </view>
     <character-mobile-nav :is-show="showMobileNav" @toggle-mobile-nav="toggleMobileNav"></character-mobile-nav>
     <!-- #endif -->
   </view>
@@ -74,12 +73,12 @@ function toggleMobileNav() {
 }
 
 .nav {
-  display: flex !important;
+  display: flex;
   align-items: center;
   padding: 8px 12px;
   background: white;
 
-  .navigator-wrap {
+  ::v-deep .navigator-wrap {
     display: flex;
     align-items: center;
   }
@@ -110,5 +109,11 @@ function toggleMobileNav() {
 
 .search-bar-container .search-container {
   margin-left: 40rpx !important;
+}
+
+@media (min-width: 600px) {
+  .nav {
+    display: none;
+  }
 }
 </style>

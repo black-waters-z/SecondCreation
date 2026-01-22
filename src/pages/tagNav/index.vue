@@ -1,6 +1,7 @@
 <template>
   <!-- 这个改成tag总结 -->
   <page-wrapper class="w-full tag-nav letter-spacing-4" show-head>
+    <go-back class="w-full"></go-back>
     <template #scroll>
       <view class="w-full tag-nav__scroll" v-for="(item, key) in tagList" :key="key">
         <IntroductionNav v-show="item" class="tag-nav__introduction" :navigator-href="`/pages/tagNav/zone?type=${key}`">
@@ -16,6 +17,7 @@
 import PageWrapper from '@/components/container/PageContainer.vue';
 import TagContainer from './components/tagContainer.vue';
 import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
+import GoBack from '@/components/common/GoBack.vue';
 import { get } from "@/utils/request"
 import { computed, ref } from 'vue';
 import type { Tag as TagType } from './type';
@@ -45,6 +47,9 @@ page {
   height: 100vh;
 }
 
+.tag-nav-one {
+  margin: 6rpx 0;
+}
 
 .tag-nav {
   &__scroll {

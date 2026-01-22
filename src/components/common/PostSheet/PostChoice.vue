@@ -22,7 +22,6 @@ function navigateTo() {
 
 <style scoped>
 .post-choice {
-  width: 100rpx;
   height: 100rpx;
   padding: 20rpx;
   border-radius: 1000px;

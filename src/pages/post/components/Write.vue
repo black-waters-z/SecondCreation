@@ -12,7 +12,7 @@
         <input type="text" v-model="formData.title" placeholder="标题" class="write-container__form__title" />
       </uni-forms-item>
       <uni-forms-item name="content">
-        <textarea v-model="formData.content" placeholder="输入文章内容" placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
+        <textarea maxlength="10000" v-model="formData.content" placeholder="输入文章内容" placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
       </uni-forms-item>
     </uni-forms>
     <view class="write-container__button">

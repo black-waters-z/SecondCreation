@@ -15,38 +15,6 @@
 <script lang="ts" setup>
 import Article from './Article.vue';
 const props = withDefaults(defineProps<{ article?: any; zone?: number; styles?: any }>(), {
-  article: () => [
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '1221121', author: 'wangwu' },
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '1221121', author: 'wangwu' },
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '1221121', author: 'wangwu' },
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '1221121', author: 'wangwu' },
-    { title: '', author: '', image: '/static/character/character1.png' },
-    { title: '', author: '', content: '我是一只小小小鸟啊啊啊' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '', author: '' },
-    { title: '1221121', author: 'wangwu' },
-  ],
   zone: 0,
 });
 </script>
@@ -138,6 +106,7 @@ const props = withDefaults(defineProps<{ article?: any; zone?: number; styles?: 
     margin-top: 16rpx;
     display: flex;
     justify-content: center;
+
     padding: {
       bottom: 10rpx;
     }
@@ -157,6 +126,7 @@ const props = withDefaults(defineProps<{ article?: any; zone?: number; styles?: 
     }
   }
 }
+
 .ranks-pagination {
   display: none;
 }
@@ -171,6 +141,7 @@ const props = withDefaults(defineProps<{ article?: any; zone?: number; styles?: 
       padding-right: 100rpx;
     }
   }
+
   :deep(.el-pagination.is-background .el-pager .is-active) {
     background-color: $pink-color;
   }
@@ -180,6 +151,7 @@ const props = withDefaults(defineProps<{ article?: any; zone?: number; styles?: 
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

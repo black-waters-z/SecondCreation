@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id 5062764 */
-  src: url('iconfont.ttf?t=1764070606558') format('truetype');
+  src: url('iconfont.ttf?t=1768384881931') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shangpin1:before {
+  content: "\e625";
+}
+
+.icon-shaixuan:before {
+  content: "\e74a";
+}
+
+.icon-gonggongliaotianshi-line:before {
+  content: "\e698";
+}
+
+.icon-liaotianshifaqisoupin:before {
+  content: "\e685";
+}
+
+.icon-chakanxiangqing-liaotianshi:before {
+  content: "\e621";
 }
 
 .icon-icon:before {
