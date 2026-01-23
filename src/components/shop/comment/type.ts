@@ -18,7 +18,7 @@ interface iconWithNum {
 }
 
 interface Comment {
-  id: string;
+  id: number;
   content: string;
   createTime: string;
   likeCount: string;

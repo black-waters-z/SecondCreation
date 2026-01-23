@@ -5,6 +5,7 @@
     <scroll-container :have_no_more="have_no_more" class="w-full flex-1 mh-0">
       <slot name="scroll"></slot>
     </scroll-container>
+    <slot name="bottom"></slot>
   </view>
 </template>
 

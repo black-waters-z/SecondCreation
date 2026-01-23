@@ -1,6 +1,9 @@
 <template>
   <view class="go-back-container w-full">
-    <uni-icons type="left" size="20" @click="goBack" style="cursor:pointer"></uni-icons>
+    <go-back-icon></go-back-icon>
+    <text class="go-back-container__return-text">
+      <slot></slot>
+    </text>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
     <select-collection class="justify-center" v-if="type" v-model="index" :collection-list="collectionList">
@@ -15,6 +18,7 @@
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
 import SelectCollection from '@/pages/post/components/SelectCollection.vue';
+import GoBackIcon from '@/components/base/GoBackIcon/index.vue';
 interface collection {
   id: number;
   name: string;
@@ -54,6 +58,14 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   background-color: white;
   left: 0;
   min-height: 80rpx;
+  padding-bottom: 0;
+
+  &__return-text {
+    letter-spacing: 4rpx;
+    font-size: 29rpx;
+    margin-left: 20rpx;
+    font-weight: 500;
+  }
 
   &__search {
     flex: 1;

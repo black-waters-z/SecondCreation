@@ -1,9 +1,14 @@
 <template>
     <view class="shop-cart">
-        <uni-icons type="cart" size="36" color="#fff"></uni-icons>
+        <uni-icons type="cart" size="36" color="#fff" @click="navToCart"></uni-icons>
     </view>
 </template>
 <script setup lang="ts">
+function navToCart() {
+    uni.navigateTo({
+        url: '/pages/shoppingCart/index'
+    })
+}
 </script>
 
 <style lang="scss" scoped>

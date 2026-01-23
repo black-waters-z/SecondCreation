@@ -4,18 +4,19 @@
         <view class="shop-comment__comment">
             <view class="shop-comment__comment--content">
                 <img src="/src/static/icon/douhao.svg" alt="description" width="20" height="20"
-                    style="margin-right: 10rpx;" />
+                    style="margin-right: 10rpx;" v-if="type !== 'child'" />
                 {{ commentInfo?.comment?.content || '站位的评论' }}
             </view>
             <view class="shop-comment__comment--interact">
                 <click-icon show-text class="shop-comment__comment--interact-click" v-for="(item, idx) in iconType"
                     :key="idx" :type="item.type ?? item" :num="commentInfo?.icons?.[0]?.num || 0" :size="18"
-                    :has-been-liked="commentInfo?.comment?.hasBeenLiked"></click-icon>
+                    :has-been-liked="commentInfo?.comment?.hasBeenLiked"
+                    @tap="clickFounction[idx](commentInfo?.comment?.id)"></click-icon>
                 <view class="shop-comment__user-info">
                     <image :src="commentInfo?.user?.avatarUrl || ''" class="shop-comment__user-info--avatar"></image>
                     <text class="shop-comment__user-info--name">{{ commentInfo?.user?.username || '匿名用户' }}</text>
                     <text class="shop-comment__user-info--time">{{ commentInfo?.comment?.createTime || '1990.1.1'
-                    }}</text>
+                        }}</text>
                 </view>
             </view>
         </view>
@@ -30,8 +31,20 @@ import CafeWithGoodNav from '@/components/shop/CafeWithGoodNav/index.vue';
 import ClickIcon from '@/components/base/ClickIcon/index.vue';
 import { watch } from 'vue';
 const iconType = [["chat"], ["redo-filled"], ["hand-up", "hand-up-filled"]]
-const props = defineProps<{ commentInfo: CommentInfo, show_product?: boolean }>();
+const clickFounction = [
+    (id: number) => {
+        uni.navigateTo({ url: `/pages/shoppingComment/index?comment_id=${id}` })
+    },
+    () => {
+        console.log('redo-filled');
+    },
+    () => {
+        console.log('hand-up');
+    },
 
+]
+
+const props = defineProps<{ commentInfo: CommentInfo, show_product?: boolean, type?: string }>();
 watch(() => props.commentInfo, (newVal, oldVal) => {
     console.log('commentInfo changed:', newVal);
 })
