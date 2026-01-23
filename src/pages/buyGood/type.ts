@@ -1,10 +1,12 @@
 import type { CommentInfo } from '@/components/shop/comment/type';
+import type { storeInfo } from '@/components/shop/CafeWithGoodNav/type';
 export interface GoodInfos {
   // 商品页
   id: number;
   description: string;
   choices: goodChoice[];
   comments: CommentInfo[];
+  storeInfo?: storeInfo;
 }
 
 export interface goodChoice {

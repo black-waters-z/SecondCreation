@@ -35,7 +35,6 @@ function handleClick() {
 .tag {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
 }
 
 :deep(.u-tag) {

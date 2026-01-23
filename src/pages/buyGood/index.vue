@@ -4,7 +4,7 @@
         <template #scroll>
             <good-swiper :choices="data?.choices"></good-swiper>
             <good-choice :goodInfos="data"></good-choice>
-            <cafe-with-good-nav></cafe-with-good-nav>
+            <cafe-with-good-nav :source="data?.storeInfo"></cafe-with-good-nav>
             <comment v-for="item in data?.comments" :comment-info="item"></comment>
         </template>
         <shop-cart></shop-cart>
@@ -22,7 +22,7 @@ import { onLoad } from '@dcloudio/uni-app';
 import { getGoodPageInfo } from '@/api/shopApi';
 import type { GoodInfos } from './type'
 import { ref } from 'vue';
-let data = ref<GoodInfos>();
+let data = ref<GoodInfos>({ id: 0, description: '', choices: [], comments: [] });
 onLoad(async (options) => {
     data.value = await getGoodPageInfo(options?.id)
 })

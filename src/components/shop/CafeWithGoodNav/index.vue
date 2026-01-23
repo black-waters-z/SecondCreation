@@ -13,14 +13,8 @@
 
 <script setup lang="ts">
 import goodNav from './goodNav.vue';
-import type { goodInfo } from '@/pages/shopping/type';
-interface storeInfo {
-    storeOwner: {
-        name: string;
-        avatar: string;
-    };
-    Goods: goodInfo[];
-}
+import type { storeInfo } from './type'
+
 defineProps<{ source: storeInfo }>();
 </script>
 

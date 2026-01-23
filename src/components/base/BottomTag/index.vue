@@ -1,10 +1,8 @@
 <template>
     <view class="bottom-tag">
         <scroll-view scroll-x enable-flex class="bottom-tag__scroll">
-            <view class="bottom-tag__item">
-                <Tag v-for="item in tagList" class="bottom-tag__item-tag" :bg-color="'pink'" :text="item.name"
-                    :key="item.id" :closable="false" size="mini"></Tag>
-            </view>
+            <Tag v-for="item in tagList" class="bottom-tag__item-tag" :bg-color="'pink'" :text="item.name"
+                :key="item.id" :closable="false" size="mini"></Tag>
         </scroll-view>
     </view>
 </template>
@@ -24,30 +22,20 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
-.bottom-tag {
-    min-width: 0;
-}
-
-.bottom-tag__item {
-    align-items: center;
-    white-space: nowrap;
-    padding-right: 12rpx;
-
-    &-tag {
-        margin-right: 10rpx;
-        font-size: 20rpx;
-    }
-}
-
 .bottom-tag__scroll {
     min-width: 0;
+    display: flex;
     width: 100%;
-    white-space: nowrap;
-}
 
-.bottom-tag__item {
-    align-items: center;
-    white-space: nowrap;
+    ::v-deep .uni-scroll-view-content {
+        gap: 10rpx;
+        min-width: 100%;
+        width: max-content;
+        display: flex;
+        justify-content: flex-start;
+        overflow: hidden;
+        flex-wrap: nowrap;
+    }
 }
 
 // #ifdef MP-WEIXIN

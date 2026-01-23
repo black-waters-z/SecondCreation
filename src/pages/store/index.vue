@@ -32,7 +32,7 @@ onShow(() => {
 const articleList = ref<Article[]>([]);
 onLoad(async () => {
   articleList.value = await getFilterArticle(1);
-  console.log(articleList.value);
+  // console.log(articleList.value);
 })
 </script>
 

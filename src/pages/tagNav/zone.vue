@@ -18,7 +18,7 @@ import PageWrapper from '@/components/container/PageContainer.vue';
 import TagContainer from './components/tagContainer.vue';
 import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
 import { introduction } from './type';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import type { Ref } from 'vue';
 import type { Tag as TagType } from './type';
 import { onLoad } from '@dcloudio/uni-app';

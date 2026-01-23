@@ -21,7 +21,6 @@ import PageWrapper from '@/components/container/PageContainer.vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import { ref } from 'vue';
 import { post } from '@/utils/request';
-import { parseToken } from '@/utils/security';
 
 interface FormData {
   username: string;

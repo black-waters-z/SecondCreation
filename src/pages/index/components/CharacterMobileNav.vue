@@ -53,18 +53,16 @@ const props = defineProps<{
   &-view {
     box-sizing: border-box;
 
-    padding: {
-      top: 0px;
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
-    }
-
     &__ul {
+      letter-spacing: 4rpx;
+      font-weight: 500;
+
       &>li:last-child {
         border-bottom: none;
+        box-shadow: none;
         display: flex;
         justify-content: center;
+        transition: all 0.3s ease-in-out;
 
         .uni-icons {
           padding: 10px;
@@ -72,15 +70,18 @@ const props = defineProps<{
           background-color: $pink-200;
           font-weight: 700;
           color: white !important;
-          box-shadow: 0 3px 20px $pink-shadow-01;
+        }
+
+        &:active {
+          transform: scale(0.9);
         }
       }
     }
 
     &__li {
-      padding: 15px 0;
-      font-size: 18px;
-      border-bottom: 1px solid $border-color;
+      padding: 30rpx 40rpx;
+      font-size: 16px;
+      border-bottom: 1rpx dashed $border-color;
     }
   }
 }

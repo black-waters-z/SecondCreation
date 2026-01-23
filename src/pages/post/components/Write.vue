@@ -12,7 +12,8 @@
         <input type="text" v-model="formData.title" placeholder="标题" class="write-container__form__title" />
       </uni-forms-item>
       <uni-forms-item name="content">
-        <textarea maxlength="10000" v-model="formData.content" placeholder="输入文章内容" placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
+        <textarea maxlength="10000" v-model="formData.content" placeholder="输入文章内容"
+          placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
       </uni-forms-item>
     </uni-forms>
     <view class="write-container__button">
@@ -50,7 +51,7 @@ const select = [
 ];
 
 const count = computed(() => {
-  return formData.content.length;
+  return formData?.content?.length;
 });
 function writeSubmit() {
   formData.image_urls = Array.isArray(images) ? images : unref(images);
@@ -114,6 +115,7 @@ function writeAddCraft() {
     padding: 40rpx;
     display: flex;
   }
+
   :deep(.uni-forms-item__content) {
     display: flex !important;
   }

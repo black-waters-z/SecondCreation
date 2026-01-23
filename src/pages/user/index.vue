@@ -14,7 +14,6 @@
           src="http://localhost:5173/pages/iconNavigate/index?icon=HistoryComponent&goBackTitle=%25E5%258E%2586%25E5%258F%25B2%25E8%25AE%25B0%25E5%25BD%2595"
           class="flex-1 iframe-content" frameborder="0"></iframe>
       </view>
-
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
@@ -28,14 +27,12 @@ import UserBar from './components/UserBar.vue';
 import SupportPay from './components/SupportPay.vue';
 import ReadNav from './components/ReadNav.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
-import AskAi from './components/AskAi.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
 import type { UserInfo } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
 import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
-import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',

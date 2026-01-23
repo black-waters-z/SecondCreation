@@ -31,5 +31,9 @@ const collectionList = ref<collection[]>([{ id: 1, name: '文' }, { id: 2, name:
         align-items: center;
         justify-content: center;
     }
+
+    ::v-deep .u-tabs__wrapper__nav__line {
+        background-color: $pink-400;
+    }
 }
 </style>

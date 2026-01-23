@@ -15,7 +15,7 @@
                     <image :src="commentInfo?.user?.avatarUrl || ''" class="shop-comment__user-info--avatar"></image>
                     <text class="shop-comment__user-info--name">{{ commentInfo?.user?.username || '匿名用户' }}</text>
                     <text class="shop-comment__user-info--time">{{ commentInfo?.comment?.createTime || '1990.1.1'
-                        }}</text>
+                    }}</text>
                 </view>
             </view>
         </view>
@@ -30,7 +30,7 @@ import CafeWithGoodNav from '@/components/shop/CafeWithGoodNav/index.vue';
 import ClickIcon from '@/components/base/ClickIcon/index.vue';
 import { watch } from 'vue';
 const iconType = [["chat"], ["redo-filled"], ["hand-up", "hand-up-filled"]]
-const props = defineProps<{ commentInfo: CommentInfo, show_product: boolean }>();
+const props = defineProps<{ commentInfo: CommentInfo, show_product?: boolean }>();
 
 watch(() => props.commentInfo, (newVal, oldVal) => {
     console.log('commentInfo changed:', newVal);

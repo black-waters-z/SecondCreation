@@ -18,5 +18,5 @@ export interface goodInfo {
     avatar: string;
     name: string;
   };
-  has_been_favorited: boolean;
+  has_been_favorited?: boolean;
 }
