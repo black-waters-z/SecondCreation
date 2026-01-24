@@ -3,7 +3,7 @@
         <text class="go-to-buy-bottom__price">&yen;{{ totalPrice }}</text>
         <view class="flex-1 go-to-buy-bottom__bt-box">
             <text class="go-to-buy-bottom__desc">总计6件</text>
-            <SCButton type="button" class="go-to-buy-bottom__button">点击购买</SCButton>
+            <SCButton type="button" class="go-to-buy-bottom__button" @click="$emit('goToBuy')">点击购买</SCButton>
         </view>
     </view>
 </template>
@@ -12,6 +12,7 @@
 import SCButton from "@/components/common/SCButton/index.vue";
 
 defineProps<{ totalPrice: number }>();
+defineEmits(["goToBuy"]);
 </script>
 
 <style lang="scss" scoped>

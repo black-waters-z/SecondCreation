@@ -7,7 +7,7 @@
                 <text class="cart-good__info--choice">{{ source?.choice?.choiceName }}</text>
             </view>
             <uni-number-box :min="1" :max="9" v-model="buyNum" />
-            <SCButton class="cart-good__info--buy" type="button">购买</SCButton>
+            <SCButton class="cart-good__info--buy" type="button" @click="goToBuy">购买</SCButton>
         </view>
         <view class="cart-good__info--price">
             <text>￥{{ price }}</text>
@@ -28,6 +28,13 @@ const price = computed(() => {
     emit('update:modelValue', props.source.choice.price * buyNum.value)
     return props.source.choice.price * buyNum.value
 })
+
+const buyChoice = ref<goodChoiceAdd>(props.source)
+function goToBuy() {
+    buyChoice.value.choice.buyNum = buyNum.value
+    buyChoice.value.totalPrice = props.source.choice.price * buyNum.value;
+    console.log(buyChoice.value)
+}
 </script>
 
 <style lang="scss" scoped>

@@ -8,4 +8,5 @@ export interface goodChoiceAdd {
     buyNum: number;
     choiceImg: string;
   };
+  totalPrice?: number;
 }

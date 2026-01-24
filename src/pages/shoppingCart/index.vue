@@ -14,7 +14,7 @@
             </checkbox-group>
         </template>
         <template #bottom>
-            <GoToBuyBottom :total-price="totalValue"></GoToBuyBottom>
+            <GoToBuyBottom :total-price="totalValue" @go-to-buy="goToBuy"></GoToBuyBottom>
         </template>
     </PageWrapper>
 </template>
@@ -62,16 +62,26 @@ watch(() => prices, () => {
     deep: true
 })
 
+const returned = ref<goodChoiceAdd[]>([])
 watch([() => checkedIndex, () => prices], () => {
-    const returned = checkedIndex.value.map((_, idx) => {
+    if (!changeIndex) return;
+    returned.value = checkedIndex.value.map((_, idx) => {
         cartChoices.value[idx].choice.buyNum = prices.value[idx] / cartChoices.value[idx].choice.price
+        cartChoices.value[idx].totalPrice = prices.value[idx]
         return cartChoices.value[idx]
     })
-    console.log(returned)
 }, {
     deep: true,
     immediate: true
 })
+
+function goToBuy() {
+    console.log('去结算')
+    console.log(returned.value)
+    // uni.navigateTo({
+    //     url: '/pages/shoppingCart/buy'
+    // })
+}
 </script>
 
 <style lang="scss">
