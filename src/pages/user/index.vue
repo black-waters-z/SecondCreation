@@ -10,9 +10,7 @@
         <view class="content__read-nav">
           <read-nav :nav-items="readNavItems" color="black"> </read-nav>
         </view>
-        <iframe
-          src="http://localhost:5173/pages/iconNavigate/index?icon=HistoryComponent&goBackTitle=%25E5%258E%2586%25E5%258F%25B2%25E8%25AE%25B0%25E5%25BD%2595"
-          class="flex-1 iframe-content" frameborder="0"></iframe>
+        <FavoriteComponent v-if="!isMobile"></FavoriteComponent>
       </view>
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
@@ -28,11 +26,13 @@ import SupportPay from './components/SupportPay.vue';
 import ReadNav from './components/ReadNav.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import FavoriteComponent from '@/components/icon/FavoriteComponent/index.vue';
 import type { UserInfo } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
 import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
+import { isMobile } from '@/utils';
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
@@ -123,12 +123,12 @@ onLoad(() => {
 
     .read-nav-container__icon {
       cursor: pointer;
-      width: 130rpx;
+      width: 100% !important;
       aspect-ratio: 1/1;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 15rpx;
+      border-radius: 15px !important;
 
       &:hover {
         background-color: $border-color;

@@ -1,16 +1,16 @@
 <template>
     <view class="cart-good" @click.stop>
-        <image class="cart-good__img" mode="aspectFill"></image>
+        <image class="cart-good__img" mode="aspectFill" :src="source?.choice?.choiceImg"></image>
         <view class="cart-good__info">
             <view class="title">
-                <text class="cart-good__info--title">标题</text>
-                <text class="cart-good__info--choice">选择</text>
+                <text class="cart-good__info--title">{{ source?.goodName }}</text>
+                <text class="cart-good__info--choice">{{ source?.choice?.choiceName }}</text>
             </view>
-            <uni-number-box :min="1" :max="9" :value="1" />
+            <uni-number-box :min="1" :max="9" v-model="buyNum" />
             <SCButton class="cart-good__info--buy" type="button">购买</SCButton>
         </view>
         <view class="cart-good__info--price">
-            <text>￥12.00</text>
+            <text>￥{{ price }}</text>
             <uni-icons type="close" size="27" class="cart-good__info--price__icon" color="grey"></uni-icons>
         </view>
     </view>
@@ -18,6 +18,16 @@
 
 <script setup lang="ts">
 import SCButton from "@/components/common/SCButton/index.vue"
+import type { goodChoiceAdd } from "@/pages/shoppingCart/type"
+import { computed, ref } from "vue";
+const props = defineProps<{ source: goodChoiceAdd, modelValue: number }>()
+const emit = defineEmits<{ (e: 'update:modelValue', value: number): void }>()
+const buyNum = ref<number>(props.source?.choice?.buyNum)
+
+const price = computed(() => {
+    emit('update:modelValue', props.source.choice.price * buyNum.value)
+    return props.source.choice.price * buyNum.value
+})
 </script>
 
 <style lang="scss" scoped>

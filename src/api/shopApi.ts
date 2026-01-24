@@ -3,7 +3,7 @@ import type { GoodInfos } from '@/pages/buyGood/type';
 import type { goodInfo as shopGood } from '@/pages/shopping/type';
 import type { CommentInfo } from '@/components/shop/comment/type';
 import type { goodInfo } from '@/pages/shopping/type';
-
+import type { goodChoiceAdd } from '@/pages/shoppingCart/type';
 export async function getGoodPageInfo(good_id: number): Promise<GoodInfos> {
   // 获取商品信息
   const headInfo = await get(`/goods/${good_id}`);
@@ -37,6 +37,11 @@ interface CommentsByCommentId {
   };
 }
 export async function getCommentsByCommentId(comment_id: number): Promise<CommentsByCommentId> {
-  const result = await get(`http://localhost:8080/good-comments/${comment_id}?page=1`);
+  const result = await get(`/good-comments/${comment_id}?page=1`);
   return result;
+}
+
+export async function getCartGoodChoices(): Promise<goodChoiceAdd[]> {
+  const result = await get('/cart/items');
+  return result.items;
 }

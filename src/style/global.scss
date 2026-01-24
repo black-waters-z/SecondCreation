@@ -170,6 +170,21 @@ uni-layout {
 
 // #endif
 
+// H5: hide top/left windows only for iconNavigate page.
+.hide-icon-navigate-window uni-top-window,
+.hide-icon-navigate-window uni-left-window {
+  display: none !important;
+  opacity: 0;
+}
+
+.hide-icon-navigate-window .uni-top-window--placeholder {
+  height: 0 !important;
+}
+
+.hide-icon-navigate-window uni-content {
+  width: 100% !important;
+}
+
 @media screen and (min-width: 600px) {
   .uni-app--showtabbar uni-page-wrapper {
     height: 100%;

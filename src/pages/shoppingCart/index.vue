@@ -5,18 +5,16 @@
             购物车
         </GoBack>
         <template #scroll>
-            <checkbox-group class="page--shopping-cart__checkbox">
-                <label class="page--shopping-cart__check">
-                    <checkbox value="cb" :checked="true" color="red" style="transform:scale(0.7)" />
-                    <cart-good></cart-good>
-                </label>
-                <label class="page--shopping-cart__check">
-                    <checkbox value="cb" color="red" style="transform:scale(0.7)" /> <cart-good></cart-good>
+            <checkbox-group class="page--shopping-cart__checkbox" @change="changeIndex">
+                <label class="page--shopping-cart__check" v-for="(value, idx) in cartChoices" :key="idx">
+                    <checkbox :value="idx" :checked="false" color="red" style="transform:scale(0.7)" />
+                    <cart-good :source="value" :model-value="prices[idx]"
+                        @update:model-value="updatePrice(idx, $event)"></cart-good>
                 </label>
             </checkbox-group>
         </template>
         <template #bottom>
-            <GoToBuyBottom></GoToBuyBottom>
+            <GoToBuyBottom :total-price="totalValue"></GoToBuyBottom>
         </template>
     </PageWrapper>
 </template>
@@ -26,6 +24,54 @@ import PageWrapper from '@/components/container/PageContainer.vue';
 import GoBack from '@/components/common/GoBack.vue';
 import CartGood from './components/CartGood.vue';
 import GoToBuyBottom from './components/GoToBuyBottom.vue';
+import type { goodChoiceAdd } from '@/pages/shoppingCart/type';
+import { ref, watch } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
+import { getCartGoodChoices } from "@/api/shopApi"
+const cartChoices = ref<goodChoiceAdd[]>([])
+const prices = ref<number[]>([])
+onLoad(async () => {
+    cartChoices.value = await getCartGoodChoices()
+    prices.value = cartChoices.value.map(item => item.choice.price)
+})
+
+const updatePrice = (index: number, newValue: number) => {
+    prices.value[index] = newValue;
+}
+
+const totalValue = ref(0);
+const checkedIndex = ref<number[]>([])
+
+function changeIndex($event) {
+    checkedIndex.value = $event.detail.value;
+    changePrice()
+}
+
+function changePrice() {
+    totalValue.value = prices.value.reduce((sum, current, currentIndex) => {
+        if (checkedIndex.value.includes(currentIndex)) {
+            return sum + current
+        }
+        return sum
+    }, 0)
+}
+
+watch(() => prices, () => {
+    changePrice()
+}, {
+    deep: true
+})
+
+watch([() => checkedIndex, () => prices], () => {
+    const returned = checkedIndex.value.map((_, idx) => {
+        cartChoices.value[idx].choice.buyNum = prices.value[idx] / cartChoices.value[idx].choice.price
+        return cartChoices.value[idx]
+    })
+    console.log(returned)
+}, {
+    deep: true,
+    immediate: true
+})
 </script>
 
 <style lang="scss">

@@ -4,9 +4,11 @@
         </up-tabs>
         <view class="store-tab__filter">
             <uni-icons fontFamily="CustomFont" type="contact" size="22" @click="isActive = true">{{ '\ue74a'
-                }}</uni-icons>
+            }}</uni-icons>
         </view>
-        <picker-wrapper v-model="isActive"></picker-wrapper>
+        <picker-wrapper v-model="isActive">
+            <slot></slot>
+        </picker-wrapper>
     </view>
 </template>
 

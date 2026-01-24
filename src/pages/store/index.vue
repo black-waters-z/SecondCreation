@@ -1,6 +1,8 @@
 <template>
   <page-wrapper have_no_more class="w-full store" show-head>
-    <store-tab></store-tab>
+    <store-tab>
+      <filter-store-article></filter-store-article>
+    </store-tab>
     <template #scroll>
       <grid-articles-container class="w-full grid-articles-container"
         :article-list="articleList"></grid-articles-container>
@@ -18,6 +20,7 @@ import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import ToTop from '@/components/common/ToTop.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
+import filterStoreArticle from '@/components/form/filterStoreArticle.vue';
 import { useHeadBarStore } from '@/store/useHeadBar';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { storeToRefs } from 'pinia';

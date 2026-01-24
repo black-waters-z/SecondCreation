@@ -7,9 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { debounce } from 'lodash'
-const props = defineProps<{
+defineProps<{
     modelValue: boolean
 }>()
 const emit = defineEmits<{
@@ -40,9 +39,11 @@ function stop() {
         height: auto;
         min-height: 300px;
         background-color: white;
+        border-radius: 20px 20px 0 0;
         position: absolute;
         bottom: 0;
         transform: translateY(100%);
+        padding: 20rpx;
     }
 }
 

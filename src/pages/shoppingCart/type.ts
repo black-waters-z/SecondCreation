@@ -1,10 +1,11 @@
 export interface goodChoiceAdd {
   id: number;
-  name: string;
-  choices: {
+  goodName: string;
+  choice: {
     id: number;
-    name: string;
+    choiceName: string;
     price: number;
     buyNum: number;
-  }[];
+    choiceImg: string;
+  };
 }

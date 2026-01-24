@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import GoBack from '@/components/common/GoBack.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
-import { onLoad } from '@dcloudio/uni-app';
+import { onHide, onLoad, onShow } from '@dcloudio/uni-app';
 import { ref, shallowRef } from 'vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 const goBackTitle = ref('');
@@ -31,6 +31,18 @@ let key = ref<componentKey>();
 onLoad((options) => {
   key.value = options?.icon as componentKey | undefined;
   component.value = key.value ? componentMap[key.value] : null;
+});
+
+onShow(() => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.add('hide-icon-navigate-window');
+  }
+});
+
+onHide(() => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('hide-icon-navigate-window');
+  }
 });
 // #endif
 
@@ -51,23 +63,26 @@ page {
   height: 100%;
 }
 
-@media screen and (min-width:600px) {
-  .uni-top-window {
-    display: none !important;
-    opacity: 0;
-  }
+uni-top-window {
+  display: none !important;
+  opacity: 0;
+}
 
-  .uni-top-window--placeholder {
-    height: 0 !important;
-  }
+.uni-top-window--placeholder {
+  height: 0 !important;
+}
 
-  uni-left-window {
-    display: none;
-    opacity: 0;
-  }
+uni-left-window {
+  display: none !important;
+  opacity: 0;
+}
 
-  .go-back-container {
-    display: none !important;
-  }
+/* Remove the left-nav gap when the left window is hidden. */
+uni-content {
+  width: 100% !important;
+}
+
+.go-back-container {
+  display: none !important;
 }
 </style>
