@@ -11,7 +11,8 @@
         </view>
         <view class="cart-good__info--price">
             <text>￥{{ price }}</text>
-            <uni-icons type="close" size="27" class="cart-good__info--price__icon" color="grey"></uni-icons>
+            <uni-icons type="close" size="27" class="cart-good__info--price__icon" color="grey"
+                @click="deleteGood"></uni-icons>
         </view>
     </view>
 </template>
@@ -20,10 +21,13 @@
 import SCButton from "@/components/common/SCButton/index.vue"
 import type { goodChoiceAdd } from "@/pages/shoppingCart/type"
 import { computed, ref } from "vue";
+import { deleteCartGoodChoice } from "@/api/shopApi"
 const props = defineProps<{ source: goodChoiceAdd, modelValue: number }>()
-const emit = defineEmits<{ (e: 'update:modelValue', value: number): void }>()
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: number): void,
+    (e: 'deleteGood'): void
+}>()
 const buyNum = ref<number>(props.source?.choice?.buyNum)
-
 const price = computed(() => {
     emit('update:modelValue', props.source.choice.price * buyNum.value)
     return props.source.choice.price * buyNum.value
@@ -35,9 +39,18 @@ function goToBuy() {
     buyChoice.value.totalPrice = props.source.choice.price * buyNum.value;
     console.log(buyChoice.value)
 }
+
+async function deleteGood() {
+    await deleteCartGoodChoice(props.source.choice.id)
+    emit('deleteGood')
+}
 </script>
 
 <style lang="scss" scoped>
+.hidden {
+    display: none;
+}
+
 .cart-good {
     display: flex;
     flex-direction: row;
@@ -51,7 +64,6 @@ function goToBuy() {
         height: 100px;
         border-radius: 10px;
         background-color: $border-color;
-        align-self: center;
     }
 
     .cart-good__info {
@@ -69,9 +81,14 @@ function goToBuy() {
         }
 
         &--title {
-            font-size: 34rpx;
+            font-size: 32rpx;
             font-weight: 600;
-
+            max-width: 230rpx;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
         }
 
         &--choice {

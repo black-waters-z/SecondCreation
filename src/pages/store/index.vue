@@ -70,9 +70,17 @@ onLoad(async () => {
 
 
 @media screen and (min-width: 600px) {
+  .content {
+    align-items: flex-start;
+  }
+
   .store-content {
     height: 100%;
     margin-top: 0;
+  }
+
+  .store-tab {
+    margin-left: 20px;
   }
 
   .uni-scroll-view-refresher {

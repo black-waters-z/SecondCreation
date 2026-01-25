@@ -19,6 +19,11 @@ export interface goodChoice {
   stock: number;
 }
 
+export interface cartAddChoice {
+  goodChoiceId: number;
+  quantity: number;
+}
+
 // 定义富文本nodes数组，可直接在uniapp的<rich-text>组件中使用
 export const richTextNodes = [
   // 标题

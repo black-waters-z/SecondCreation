@@ -1,5 +1,5 @@
-import { get } from '@/utils/request';
-import type { GoodInfos } from '@/pages/buyGood/type';
+import { get, post, del } from '@/utils/request';
+import type { GoodInfos, cartAddChoice } from '@/pages/buyGood/type';
 import type { goodInfo as shopGood } from '@/pages/shopping/type';
 import type { CommentInfo } from '@/components/shop/comment/type';
 import type { goodInfo } from '@/pages/shopping/type';
@@ -44,4 +44,30 @@ export async function getCommentsByCommentId(comment_id: number): Promise<Commen
 export async function getCartGoodChoices(): Promise<goodChoiceAdd[]> {
   const result = await get('/cart/items');
   return result.items;
+}
+
+export async function addCartGoodChoice(data: cartAddChoice): Promise<void> {
+  try {
+    await post('/cart/items', data);
+    uni.showToast({
+      title: '加入购物车成功',
+    });
+  } catch (error) {
+    uni.showToast({
+      title: '加入购物车失败',
+    });
+  }
+}
+
+export async function deleteCartGoodChoice(goodChoiceId: number): Promise<void> {
+  try {
+    await del('/cart/items/' + goodChoiceId);
+    uni.showToast({
+      title: '删除成功',
+    });
+  } catch (error) {
+    uni.showToast({
+      title: '删除失败',
+    });
+  }
 }

@@ -2,14 +2,6 @@
   <view class="character-nav-container">
     <view v-for="(value, index) in characters" class="character-div">
       <navigator :url="value.navigatorUrl" hover-class="navigator-hover" class="character-nav-container__navigator">
-        <match-media :min-width="600">
-          <view class="character-avatar">
-            <image v-if="value.avatar" :src="value.avatar" mode="scaleToFill" class="character-avatar__image" />
-            <uni-icons fontFamily="CustomFont" :color="value?.color" size="25" v-if="value.icon" class="icon-class">
-              {{ value.icon }}
-            </uni-icons>
-          </view>
-        </match-media>
         <text class="character-name">{{ value.name }}</text>
       </navigator>
     </view>
@@ -35,6 +27,7 @@ const characters = [
   font-family: CustomFont;
   src: url('../../../static/iconfont.ttf');
 }
+
 .character-nav-container {
   width: calc(100% - 20rpx);
   border-radius: 16rpx;
@@ -77,6 +70,7 @@ const characters = [
 
 @media screen and (min-width: 600px) {
   .character-nav-container {
+
     .character-div {
       width: 100%;
       flex-direction: row;
@@ -84,7 +78,6 @@ const characters = [
       .character-name {
         flex: 1;
         margin-left: 20px;
-        font-weight: 600;
         font-size: 30rpx;
       }
     }
@@ -92,6 +85,7 @@ const characters = [
     .character-nav-container__navigator {
       padding: 10rpx 30rpx;
       width: 130px;
+
       &:hover {
         background-color: $navigation-hover-color;
         cursor: pointer;

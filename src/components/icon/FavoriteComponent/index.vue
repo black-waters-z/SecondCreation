@@ -9,9 +9,12 @@
 import GridArticlesContainer from "@/components/common/GridArticlesContainer/index.vue";
 import { onMounted, ref } from "vue";
 import type { Article } from '@/pages/tagPage/type'
+import { getFavoriteArticles } from "@/api/articleApi";
 // 查接口
 const articleList = ref<Article[]>([])
-onMounted(async () => { });
+onMounted(async () => {
+  articleList.value = await getFavoriteArticles()
+});
 </script>
 
 <style scoped lang="scss">

@@ -6,10 +6,11 @@
         </GoBack>
         <template #scroll>
             <checkbox-group class="page--shopping-cart__checkbox" @change="changeIndex">
-                <label class="page--shopping-cart__check" v-for="(value, idx) in cartChoices" :key="idx">
+                <label class="page--shopping-cart__check" v-for="(value, idx) in cartChoices" v-show="showGood[idx]"
+                    :key="idx">
                     <checkbox :value="idx" :checked="false" color="red" style="transform:scale(0.7)" />
-                    <cart-good :source="value" :model-value="prices[idx]"
-                        @update:model-value="updatePrice(idx, $event)"></cart-good>
+                    <cart-good :source="value" :model-value="prices[idx]" @update:model-value="updatePrice(idx, $event)"
+                        @delete-good="deleteGood(idx)"></cart-good>
                 </label>
             </checkbox-group>
         </template>
@@ -30,8 +31,10 @@ import { onLoad } from '@dcloudio/uni-app';
 import { getCartGoodChoices } from "@/api/shopApi"
 const cartChoices = ref<goodChoiceAdd[]>([])
 const prices = ref<number[]>([])
+const showGood = ref<boolean[]>([])
 onLoad(async () => {
     cartChoices.value = await getCartGoodChoices()
+    showGood.value = cartChoices.value.map(() => true)
     prices.value = cartChoices.value.map(item => item.choice.price)
 })
 
@@ -47,6 +50,7 @@ function changeIndex($event) {
     changePrice()
 }
 
+// 计算总价
 function changePrice() {
     totalValue.value = prices.value.reduce((sum, current, currentIndex) => {
         if (checkedIndex.value.includes(currentIndex)) {
@@ -75,6 +79,11 @@ watch([() => checkedIndex, () => prices], () => {
     immediate: true
 })
 
+function deleteGood(index: number) {
+    showGood.value[index] = false
+    checkedIndex.value = checkedIndex.value.filter(item => item !== index);
+    changePrice();
+}
 function goToBuy() {
     console.log('去结算')
     console.log(returned.value)

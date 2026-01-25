@@ -3,8 +3,9 @@
         <up-tabs :list="list">
         </up-tabs>
         <view class="store-tab__filter">
-            <uni-icons fontFamily="CustomFont" type="contact" size="22" @click="isActive = true">{{ '\ue74a'
-            }}</uni-icons>
+            <uni-icons fontFamily="CustomFont" type="contact" size="22" @click="isActive = true"
+                style="cursor: pointer;">{{ '\ue74a'
+                }}</uni-icons>
         </view>
         <picker-wrapper v-model="isActive">
             <slot></slot>

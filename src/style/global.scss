@@ -157,6 +157,7 @@ uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
 
 .uni-app--showleftwindow uni-left-window {
   flex-shrink: 0;
+  background-color: #f7f7f7;
 }
 
 .uni-top-window {
@@ -191,11 +192,12 @@ uni-layout {
   }
 
   uni-content {
-    width: calc(100% - 100px);
+    width: 100%;
   }
 
   .content {
     position: relative;
+    box-sizing: border-box;
   }
 
   .uni-app--showleftwindow uni-main,
@@ -207,7 +209,7 @@ uni-layout {
 
   page {
     background-color: white;
-    height: 100%;
+    height: 100% !important;
   }
 
   .nomobile-disappear {

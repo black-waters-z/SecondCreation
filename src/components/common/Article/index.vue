@@ -62,7 +62,8 @@ const isVideo = computed(() => {
 
     &-video {
         width: 100%;
-        height: 120px;
+        height: 100px;
+        border-radius: 15rpx;
     }
 
     &-img {

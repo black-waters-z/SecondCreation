@@ -15,3 +15,8 @@ export async function getFilterArticle(page: number): Promise<Article[]> {
   const result = await get(`/articles/get-filter-articles?page=${page}`);
   return result.items;
 }
+
+export async function getFavoriteArticles(): Promise<Article[]> {
+  const result = await get('/articles/favorites?page=1');
+  return result;
+}

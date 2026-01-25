@@ -8,6 +8,7 @@
       </view>
       <view class="w-full flex ">
         <view class="content__read-nav">
+          <user-bar :user-info="userInfo" v-if="!isMobile"></user-bar>
           <read-nav :nav-items="readNavItems" color="black"> </read-nav>
         </view>
         <FavoriteComponent v-if="!isMobile"></FavoriteComponent>
@@ -99,11 +100,11 @@ onLoad(() => {
 
 @media screen and (min-width:600px) {
   .content__user {
-    display: flex;
-    flex-direction: row;
+    display: none;
 
     .user-bar-container {
       width: 600rpx;
+
     }
 
     .support-pay-container {
@@ -112,7 +113,8 @@ onLoad(() => {
   }
 
   .content__read-nav {
-    margin: 0 0;
+    margin: 0 60px;
+    margin-right: 60px;
     width: 150rpx;
   }
 
@@ -121,7 +123,7 @@ onLoad(() => {
     height: 470px !important;
     gap: 10rpx;
 
-    .read-nav-container__icon {
+    ::v-deep .read-nav-container__icon {
       cursor: pointer;
       width: 100% !important;
       aspect-ratio: 1/1;
