@@ -1,21 +1,22 @@
 <template>
   <page-wrapper class="w-full">
-    <head-nav class="w-full"></head-nav>
-    <go-back :title="goBackTitle" class="w-full position-sticky top-0 z-100"></go-back>
-    <!-- #ifdef H5 -->
-    <component class="w-100 h-100 overflow-y-scroll w-full" :is="component ?? null"></component>
-    <!-- #endif -->
-    <!-- #ifdef MP-WEIXIN  -->
-    <FavoriteComponent class="w-full" v-if="componentKey === 'FavoriteComponent'"></FavoriteComponent>
-    <LikeComponent class="w-full" v-if="componentKey === 'LikeComponent'"></LikeComponent>
-    <history-component class="w-full" v-if="componentKey === 'HistoryComponent'"></history-component>
-    <!-- #endif -->
+    <go-back>返回</go-back>
+    <template #scroll>
+      <!-- #ifdef H5 -->
+      <component class="w-100 h-100 overflow-y-scroll w-full" :is="component ?? null"></component>
+      <!-- #endif -->
+      <!-- #ifdef MP-WEIXIN  -->
+      <FavoriteComponent class="w-full" v-if="componentKey === 'FavoriteComponent'"></FavoriteComponent>
+      <LikeComponent class="w-full" v-if="componentKey === 'LikeComponent'"></LikeComponent>
+      <history-component class="w-full" v-if="componentKey === 'HistoryComponent'"></history-component>
+      <!-- #endif -->
+    </template>
+
   </page-wrapper>
 </template>
 
 <script setup lang="ts">
 import GoBack from '@/components/common/GoBack.vue';
-import HeadNav from '@/components/common/HeadNav.vue';
 import { onHide, onLoad, onShow } from '@dcloudio/uni-app';
 import { ref, shallowRef } from 'vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
@@ -80,9 +81,5 @@ uni-left-window {
 /* Remove the left-nav gap when the left window is hidden. */
 uni-content {
   width: 100% !important;
-}
-
-.go-back-container {
-  display: none !important;
 }
 </style>

@@ -24,22 +24,20 @@ defineProps<{ userInfo: UserInfo }>();
 
 .user-bar-container {
   width: 100%;
-  // #ifdef MP-WEIXIN
-  width: 100vw;
-  // #endif
-  background-color: white;
   border-radius: 16rpx;
   display: flex;
   flex-direction: row;
   padding-bottom: 20rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
 
   &__avatar {
     width: 130rpx;
     height: 130rpx;
     background-color: antiquewhite;
     border-radius: 1000rpx;
-    margin: 20rpx 0 0 20rpx;
     display: flex;
+    margin-top: 20rpx;
     align-items: center;
     justify-content: center;
   }

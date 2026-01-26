@@ -8,8 +8,18 @@
       </view>
       <view class="w-full flex ">
         <view class="content__read-nav">
+          <view class="flex">
+            <view class="content__read-nav__split"></view>
+            <text class="content__read-nav__text">文章管理</text>
+          </view>
           <user-bar :user-info="userInfo" v-if="!isMobile"></user-bar>
-          <read-nav :nav-items="readNavItems" color="black"> </read-nav>
+          <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"> </read-nav>
+          <view class="flex">
+            <view class="content__read-nav__split"></view>
+            <text class="content__read-nav__text">用户管理</text>
+          </view>
+          <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_2" color="black">
+          </read-nav>
         </view>
         <FavoriteComponent v-if="!isMobile"></FavoriteComponent>
       </view>
@@ -37,11 +47,21 @@ import { isMobile } from '@/utils';
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
-  FAVORITE = '收藏',
-  LIKE = '喜欢',
+  FAVORITE = '我的收藏',
+  LIKE = '我的喜欢',
   ARTICLE_MANAGE = '文章管理',
-  DRAFT = '草稿箱',
+  DRAFT = '查看草稿',
   ARTICLE_DATA = '文章数据',
+  PROBLEM_ANSWER = '问题反馈',
+  PASSWORD_CHANGE = '修改密码',
+  ABOUT_US = '关于我们',
+  LOGOUT_ACCOUNT = '注销账户',
+  USER_SETTING = '用户设置',
+  LOGOUT = '退出登录',
+  USER_COMMENT = '用户评论',
+  USER_COMMENT_REPLY = '用户评论回复',
+  USER_COMMENT_LIKE = '用户评论点赞',
+  USER_COMMENT_FAVORITE = '用户收藏的评论',
 }
 
 const readNavItems = [
@@ -51,6 +71,15 @@ const readNavItems = [
   { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE },
   { icon: '\ue64f', label: NavLabelEnum.DRAFT },
   { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA },
+];
+
+const readNavItems_2 = [
+  { label: NavLabelEnum.USER_SETTING, type: 'SettingComponent' },
+  { label: NavLabelEnum.PROBLEM_ANSWER, type: 'FavoriteComponent' },
+  { label: NavLabelEnum.PASSWORD_CHANGE, type: 'LikeComponent' },
+  { label: NavLabelEnum.LOGOUT },
+  { label: NavLabelEnum.ABOUT_US },
+  { label: NavLabelEnum.LOGOUT_ACCOUNT },
 ];
 
 onLoad(() => {
@@ -92,6 +121,29 @@ onLoad(() => {
     margin: 20rpx auto;
     box-sizing: border-box;
   }
+
+  .content__read-nav__user-manager {
+    padding: 20rpx 10rpx;
+  }
+
+  &__read-nav__article-manager {
+    padding: 20rpx 10rpx;
+  }
+
+  &__read-nav__split {
+    width: 12rpx;
+    height: 20px;
+    background-color: $pink-400;
+    border-radius: 100px;
+  }
+
+  &__read-nav__text {
+    letter-spacing: 2rpx;
+    height: 20px;
+    font-size: 26rpx;
+    margin-left: 20rpx;
+  }
+
 }
 
 .iframe-content {

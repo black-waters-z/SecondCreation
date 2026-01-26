@@ -1,5 +1,5 @@
 <template>
-  <view class="w-full flex">
+  <view class="flex">
     <view class="select-collection-container">
       <picker class="select-collection-container__picker" :range="nameList" range-key="" :value="index"
         @change="bindPickerChange">

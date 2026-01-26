@@ -1,7 +1,7 @@
 <template>
   <page-wrapper class="w-full" show-head have_no_more>
     <template #scroll>
-      <whole-article></whole-article>
+      <whole-article :article="returnArticle?.article" :user-info="returnArticle?.userInfo"></whole-article>
       <post-comment></post-comment>
       <comment-vue :comments="comments"></comment-vue>
     </template>
@@ -15,13 +15,12 @@ import CommentVue from "./components/CommentVue.vue";
 import PostComment from "./components/PostComment.vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
-
-let art_id = 0;
-onLoad((option) => {
-  //总之就是开始查数据，查文章，查评论
-  art_id = option?.art_id;
-});
-
+import { getArticleById } from "@/api/articleApi";
+import type { ArticlePageData } from "./type";
+const returnArticle = ref<ArticlePageData>({} as ArticlePageData)
+onLoad(async (options) => {
+  returnArticle.value = await getArticleById(options?.id)
+})
 const comments = ref([
   {
     id: 0,
@@ -49,8 +48,12 @@ const comments = ref([
 ]);
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 page {
   height: 100vh;
+}
+
+.uni-swiper__warp {
+  border-radius: 15px;
 }
 </style>

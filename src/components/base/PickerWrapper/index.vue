@@ -44,6 +44,7 @@ function stop() {
         bottom: 0;
         transform: translateY(100%);
         padding: 20rpx;
+        box-sizing: border-box;
     }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <page-wrapper have_no_more class="w-full store" show-head>
-    <store-tab>
-      <filter-store-article></filter-store-article>
+    <store-tab v-slot="{ startFilter }">
+      <filter-store-article @start-filter="startFilter"></filter-store-article>
     </store-tab>
     <template #scroll>
       <grid-articles-container class="w-full grid-articles-container"

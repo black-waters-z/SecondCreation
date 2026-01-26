@@ -1,5 +1,9 @@
 <template>
     <view class="user-info" v-if="isMobile">
+        <view class="user-info__name">
+            <view>{{ userInfo?.name || '尚未登录' }}</view>
+            <text class="user-info__go-to-user-page">前往用户主页</text>
+        </view>
         <view class="user-info__other">
             <view class="user-info__other__tag">总点击数 {{ userInfo?.clickedPoints || 0 }} </view>
             <view class="user-info__other__tag">总被收藏数 {{ userInfo?.favoritedPoints || 0 }} </view>
@@ -19,22 +23,12 @@ defineProps<{
 
 <style lang="scss" scoped>
 .user-bar-container {
-    width: 100%;
-    // #ifdef MP-WEIXIN
-    width: 100vw;
-    // #endif
-    background-color: white;
-    border-radius: 16rpx;
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 20rpx;
 
     &__avatar {
         width: 130rpx;
         height: 130rpx;
         background-color: antiquewhite;
         border-radius: 1000rpx;
-        margin: 20rpx 0 0 20rpx;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -49,6 +43,16 @@ defineProps<{
     .user-info {
         margin: 20rpx 0 0 20rpx;
         flex: 1;
+
+        &__go-to-user-page {
+            flex: 1;
+            font-size: 20rpx;
+            font-style: italic;
+            text-decoration: underline;
+            display: flex;
+            justify-content: flex-end;
+            color: red;
+        }
 
         &__name {
             font-weight: 700;

@@ -11,6 +11,7 @@
         </swiper-item>
       </swiper>
     </uni-swiper-dot>
+    <slot></slot>
   </view>
 </template>
 
@@ -25,6 +26,10 @@ withDefaults(
     styles?: {
       width?: string;
       height?: string;
+      maxWidth?: string;
+      maxHeight?: string;
+      minWidth?: string;
+      minHeight?: string;
     };
     swiperInfo: {
       swiperImg: string;

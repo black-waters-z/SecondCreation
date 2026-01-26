@@ -26,9 +26,6 @@ interface collection {
 
 const index = ref(0);
 
-function goBack() {
-  uni.navigateBack();
-}
 const emit = defineEmits(['search']);
 
 const onSearchFromChild = (text: string) => {
@@ -69,6 +66,7 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
 
   &__search {
     flex: 1;
+    margin-left: 10rpx;
   }
 
   &__title {

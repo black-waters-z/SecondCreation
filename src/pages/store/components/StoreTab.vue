@@ -8,7 +8,7 @@
                 }}</uni-icons>
         </view>
         <picker-wrapper v-model="isActive">
-            <slot></slot>
+            <slot :startFilter="startFilter"></slot>
         </picker-wrapper>
     </view>
 </template>
@@ -19,12 +19,9 @@ import { ref } from 'vue';
 const list = [{ id: 1, name: '年度最热' }, { id: 2, name: '月度最热' }, { id: 3, name: '周度最热' }, { id: 4, name: '最新' }]
 const isActive = ref(false)
 
-interface collection {
-    id: number;
-    name: string;
+function startFilter() {
+    isActive.value = false
 }
-const selectIndex = ref(0)
-const collectionList = ref<collection[]>([{ id: 1, name: '文' }, { id: 2, name: '画' }, { id: 3, name: '视频' }, { id: 4, name: '糖' }])
 </script>
 
 <style lang="scss" scoped>

@@ -2,23 +2,21 @@
   <view class="whole-article w-full">
     <go-back></go-back>
     <view class="whole-article__content">
-      <text class="whole-article__content-title">TELL ME A PIECE OF YOUR HISTORY</text>
+      <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__author w-full">
-        <article-author></article-author>
+        <article-author :user-info="userInfo"></article-author>
       </view>
       <view class="whole-article__content-content">
-        <view class="whole-article__content-content-subtitle">subtitle</view>
-        <view class="whole-article__content-content-image"></view>
-        <text class="whole-article__content-content-text">I got to ask Wang Yao (the embodiment of my home nation,
-          China) a few questions the other \n\n day after his existence was revealed. He has been living over my
-          restaurant
-          for the past eight…
-          \n\n
-          HD </text>
+        <view class="whole-article__content-content-subtitle" v-if="article?.subtitle">{{ article?.subtitle
+        }}</view>
+        <CommonSwiper v-if="article?.image_urls?.length" :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
+        </CommonSwiper>
+        <text class="whole-article__content-content-text">{{ article?.content }}</text>
       </view>
       <view class="whole-article__contact">
-        <click-icon show-text v-for="(item, index) in iconType" :key="index" class="whole-article__contact-icon"
-          :type="item" :size="26"></click-icon>
+        <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
+          class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
+          :size="26"></click-icon>
       </view>
     </view>
   </view>
@@ -29,10 +27,33 @@ import GoBack from "@/components/common/GoBack.vue";
 import ArticleAuthor from "./ArticleAuthor.vue";
 import type { ArticleType } from "@/components/common/Article/type";
 import ClickIcon from "@/components/base/ClickIcon/index.vue";
-const iconType = [["redo-filled"], ["heart", "heart-filled"], ["hand-up", "hand-up-filled"]]
-defineProps<{
+import type { UserInfo } from "@/pages/user/type";
+import { computed } from "vue";
+import CommonSwiper from "@/components/common/CommonSwiper.vue";
+const props = defineProps<{
   article: ArticleType;
+  userInfo: UserInfo
 }>();
+const iconInfo = computed(() => [{
+  type: ["redo-filled"],
+},
+{
+  type: ["heart", "heart-filled"],
+  num: props.article?.favorite_count ?? 0,
+  hasBeenLiked: props.article?.has_favorited ?? false
+},
+{
+  type: ["hand-up", "hand-up-filled"],
+  num: props.article?.like_count ?? 0,
+  hasBeenLiked: props.article?.has_liked ?? false
+}
+])
+
+const swiperInfo = computed(() => {
+  return props.article?.image_urls?.map(item => ({
+    swiperImg: item,
+  })) || []
+})
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +71,7 @@ defineProps<{
     padding: 0 20px;
 
     &-title {
-      width: fit-content;
+      width: 100%;
       display: block;
       font-size: 40rpx;
       font-weight: 500;

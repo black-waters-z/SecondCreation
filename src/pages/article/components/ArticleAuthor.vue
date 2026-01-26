@@ -1,11 +1,15 @@
 <template>
     <view class="article-author">
-        <view class="article-author__avatar"></view>
-        <text class="article-author__name">author-name</text>
+        <image class="article-author__avatar" :src="userInfo?.avatar" mode="aspectFill"></image>
+        <text class="article-author__name">{{ userInfo?.name }}</text>
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { UserInfo } from '@/pages/user/type';
+
+defineProps<{ userInfo: UserInfo }>()
+</script>
 
 <style lang="scss" scoped>
 .article-author {

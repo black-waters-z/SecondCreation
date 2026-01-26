@@ -17,6 +17,8 @@ export interface Article {
   updated_at: string;
   published_at: string | null;
   tags?: Tag[];
+  has_liked?: boolean;
+  has_favorited?: boolean;
 }
 
 export interface TagPageData {

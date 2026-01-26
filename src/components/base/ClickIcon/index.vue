@@ -11,13 +11,16 @@
         </view>
     </view>
     <view v-else-if="type.length === 1" class="icon-wrapper">
-        <uni-icons :type="type[0]" :size="size" color="#747272"></uni-icons>
+        <uni-icons :type="type[0]" :size="size" :color="color ?? '#747272'"></uni-icons>
+        <text class="icon-wrapper__text">
+            <slot></slot>
+        </text>
     </view>
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue';
-const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean }>()
+import { nextTick, ref, watch } from 'vue';
+const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string }>()
 const isShow = ref(false)
 
 watch(() => props.hasBeenLiked, () => {
@@ -42,10 +45,17 @@ const toggle = () => {
 <style lang="scss" scoped>
 .icon-wrapper {
     display: inline-flex;
+
+    &__text {
+        font-size: 20rpx;
+        font-style: italic;
+        display: flex;
+        align-items: center;
+    }
 }
 
 .shake {
-    animation: shake 0.6s ease-in-out;
+    animation: shake 0.2s ease-in-out;
     transform-origin: center bottom; // shake around the bottom
 }
 
