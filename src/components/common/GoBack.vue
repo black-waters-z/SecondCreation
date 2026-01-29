@@ -10,7 +10,9 @@
       <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
     </select-collection>
     <search-bar class="go-back-container__search" v-if="type" :type="type" @search="onSearchFromChild"></search-bar>
-
+    <navigator v-if="showLogo" class="go-back-container__logo" url="/pages/index/index" open-type="switchTab">
+      <image src="/src/static/logo.png" mode="scaleToFill" class="go-back-container__logo-img" />
+    </navigator>
   </view>
 </template>
 
@@ -32,7 +34,7 @@ const onSearchFromChild = (text: string) => {
   emit('search', text, props?.collectionList?.[index.value]);
 };
 
-const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean }>(), {
+const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean; showLogo?: boolean }>(), {
   title: '',
 });
 </script>
@@ -56,6 +58,18 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   left: 0;
   min-height: 80rpx;
   padding-bottom: 0;
+
+  &__logo {
+    width: 130rpx;
+    height: 50rpx;
+    margin-left: auto;
+    margin-right: 20rpx;
+
+    &-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
   &__return-text {
     letter-spacing: 4rpx;

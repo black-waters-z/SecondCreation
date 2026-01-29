@@ -16,7 +16,7 @@
                     <image :src="commentInfo?.user?.avatarUrl || ''" class="shop-comment__user-info--avatar"></image>
                     <text class="shop-comment__user-info--name">{{ commentInfo?.user?.username || '匿名用户' }}</text>
                     <text class="shop-comment__user-info--time">{{ commentInfo?.comment?.createTime || '1990.1.1'
-                        }}</text>
+                    }}</text>
                 </view>
             </view>
         </view>

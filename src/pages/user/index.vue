@@ -68,9 +68,9 @@ const readNavItems = [
   { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
   { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
   { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent' },
-  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE },
-  { icon: '\ue64f', label: NavLabelEnum.DRAFT },
-  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA },
+  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE, type: 'ArticleManagerComponent' },
+  { icon: '\ue64f', label: NavLabelEnum.DRAFT, type: 'DraftComponent' },
+  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA, type: 'ArticleDataComponent' },
 ];
 
 const readNavItems_2 = [

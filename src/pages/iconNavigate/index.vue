@@ -9,6 +9,7 @@
       <FavoriteComponent class="w-full" v-if="componentKey === 'FavoriteComponent'"></FavoriteComponent>
       <LikeComponent class="w-full" v-if="componentKey === 'LikeComponent'"></LikeComponent>
       <history-component class="w-full" v-if="componentKey === 'HistoryComponent'"></history-component>
+      <DraftComponent class="w-full" v-if="componentKey === 'DraftComponent'"></DraftComponent>
       <!-- #endif -->
     </template>
 
@@ -51,6 +52,7 @@ onHide(() => {
 import FavoriteComponent from '@/components/icon/FavoriteComponent/index.vue';
 import LikeComponent from '@/components/icon/LikeComponent/index.vue';
 import HistoryComponent from '@/components/icon/HistoryComponent/index.vue';
+import DraftComponent from '@/components/icon/DraftComponent/index.vue';
 let componentKey = ref('');
 onLoad((options) => {
   componentKey.value = options?.icon;

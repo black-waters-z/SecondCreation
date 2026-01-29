@@ -25,6 +25,7 @@ onHide(() => {
 @import 'uview-plus/index.scss';
 @import './static/iconfont.css';
 @import './style/global.scss';
+
 :root {
   --pink-color: $pink-color;
 }
@@ -48,7 +49,4 @@ page {
 
 // text {
 //   letter-spacing: 4rpx;
-// }
-
-
-</style>
+// }</style>

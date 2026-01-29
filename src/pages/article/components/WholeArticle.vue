@@ -1,7 +1,8 @@
 <template>
   <view class="whole-article w-full">
-    <go-back></go-back>
     <view class="whole-article__content">
+      <CommonSwiper v-if="article?.image_urls?.length" :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
+      </CommonSwiper>
       <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__author w-full">
         <article-author :user-info="userInfo"></article-author>
@@ -9,10 +10,9 @@
       <view class="whole-article__content-content">
         <view class="whole-article__content-content-subtitle" v-if="article?.subtitle">{{ article?.subtitle
         }}</view>
-        <CommonSwiper v-if="article?.image_urls?.length" :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
-        </CommonSwiper>
         <text class="whole-article__content-content-text">{{ article?.content }}</text>
       </view>
+      <slot name="collection"></slot>
       <view class="whole-article__contact">
         <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
           class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"

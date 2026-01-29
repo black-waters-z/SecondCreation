@@ -1,7 +1,12 @@
 <template>
-  <page-wrapper class="w-full" show-head have_no_more>
+  <page-wrapper class="w-full" have_no_more>
+    <go-back show-logo>返回</go-back>
     <template #scroll>
-      <whole-article :article="returnArticle?.article" :user-info="returnArticle?.userInfo"></whole-article>
+      <whole-article :article="returnArticle?.article" :user-info="returnArticle?.userInfo">
+        <template #collection>
+          <collection-nav :source="returnArticle?.collection"></collection-nav>
+        </template>
+      </whole-article>
       <post-comment></post-comment>
       <comment-vue :comments="comments"></comment-vue>
     </template>
@@ -12,6 +17,8 @@
 import PageWrapper from "@/components/container/PageContainer.vue";
 import WholeArticle from "./components/WholeArticle.vue";
 import CommentVue from "./components/CommentVue.vue";
+import CollectionNav from "./components/CollectionNav.vue";
+import GoBack from "@/components/common/GoBack.vue";
 import PostComment from "./components/PostComment.vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";

@@ -1,26 +1,37 @@
 <template>
-    <view v-if="type?.length === 2">
+    <view v-if="type && type?.length === 2 && !iconType">
         <view class="icon-wrapper" v-if="!isShow" @click="toggle">
             <uni-icons :type="type[0]" :size="size" color="#bfbaba"></uni-icons>
-            <text v-if="showText">{{ num ?? 0 }}</text>
+            <text class="icon-wrapper__text" v-if="showText">{{ num ?? 0 }}</text>
         </view>
         <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click="toggle"
             @animationend="isShaking = false">
             <uni-icons :type="type[1]" :size="size" color="#ff7aa0"></uni-icons>
-            <text v-if="showText">{{ (num ?? 0) + 1 }}</text>
+            <text class="icon-wrapper__text" v-if="showText">{{ (num ?? 0) + 1 }}</text>
         </view>
     </view>
-    <view v-else-if="type.length === 1" class="icon-wrapper">
+    <view v-else-if="type && type.length === 1 && !iconType" class="icon-wrapper">
         <uni-icons :type="type[0]" :size="size" :color="color ?? '#747272'"></uni-icons>
         <text class="icon-wrapper__text">
             <slot></slot>
         </text>
     </view>
+    <view v-else-if="iconType === 'uview'">
+        <view class="icon-wrapper" v-if="!isShow" @click="toggle">
+            <slot name="icon1"></slot>
+            <text v-if="showText">{{ num ?? 0 }}</text>
+        </view>
+        <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click="toggle"
+            @animationend="isShaking = false">
+            <slot name="icon2"></slot>
+            <text v-if="showText">{{ (num ?? 0) + 1 }}</text>
+        </view>
+    </view>
 </template>
 
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue';
-const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string }>()
+const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string, iconType?: string }>()
 const isShow = ref(false)
 
 watch(() => props.hasBeenLiked, () => {
@@ -47,7 +58,7 @@ const toggle = () => {
     display: inline-flex;
 
     &__text {
-        font-size: 20rpx;
+        font-size: 24rpx;
         font-style: italic;
         display: flex;
         align-items: center;
