@@ -27,6 +27,7 @@ withDefaults(defineProps<{ type: string }>(), { type: 'Restore' });
   justify-content: center;
   align-items: center;
   height: 80rpx;
+
   .circle {
     width: 40rpx;
     height: 40rpx;
@@ -36,8 +37,8 @@ withDefaults(defineProps<{ type: string }>(), { type: 'Restore' });
     animation: refresh 1s infinite;
     margin-right: 20rpx;
   }
-  .pull-down {
-  }
+
+  .pull-down {}
 
   .fade-text-0 {
     transition: color 0.5s ease-in-out;
@@ -56,15 +57,19 @@ withDefaults(defineProps<{ type: string }>(), { type: 'Restore' });
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(90deg);
   }
+
   50% {
     transform: rotate(180deg);
   }
+
   75% {
     transform: rotate(270deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -72,25 +77,35 @@ withDefaults(defineProps<{ type: string }>(), { type: 'Restore' });
 
 @keyframes colorTransition1 {
   0% {
-    color: gray; /* 浅灰色 */
+    color: gray;
+    /* 浅灰色 */
   }
+
   50% {
-    color: rgb(119, 118, 118); /* 浅灰色 */
+    color: rgb(119, 118, 118);
+    /* 浅灰色 */
   }
+
   100% {
-    color: darkgray; /* 深灰色 */
+    color: darkgray;
+    /* 深灰色 */
   }
 }
 
 @keyframes colorTransition2 {
   0% {
-    color: darkgray; /* 浅灰色 */
+    color: darkgray;
+    /* 浅灰色 */
   }
+
   50% {
-    color: rgb(119, 118, 118); /* 浅灰色 */
+    color: rgb(119, 118, 118);
+    /* 浅灰色 */
   }
+
   100% {
-    color: gray; /* 深灰色 */
+    color: gray;
+    /* 深灰色 */
   }
 }
 

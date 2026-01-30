@@ -16,3 +16,8 @@ export interface ArticleData {
   article_url: path;
   author_url: path;
 }
+
+export interface Collection {
+  id: number;
+  name: string;
+}

@@ -44,12 +44,16 @@ const { fileList3, deletePic, afterRead } = usePostPicFile();
 
 const imageUrls = computed(() => fileList3.value.map((item) => item.url).filter(Boolean));
 provide('image_urls', imageUrls);
+
+// 获取合集列表，并将其传到addTag页
+
 </script>
 
 <style lang="scss">
-page{
+page {
   height: 100vh;
 }
+
 .video-upload {
   .u-upload__wrap__preview {
     width: 100%;

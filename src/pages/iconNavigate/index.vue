@@ -3,7 +3,7 @@
     <go-back>返回</go-back>
     <template #scroll>
       <!-- #ifdef H5 -->
-      <component class="w-100 h-100 overflow-y-scroll w-full" :is="component ?? null"></component>
+      <component class="w-full" :is="component ?? null"></component>
       <!-- #endif -->
       <!-- #ifdef MP-WEIXIN  -->
       <FavoriteComponent class="w-full" v-if="componentKey === 'FavoriteComponent'"></FavoriteComponent>

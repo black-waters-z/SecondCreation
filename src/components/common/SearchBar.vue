@@ -17,8 +17,8 @@
 import { ref } from 'vue';
 withDefaults(
   defineProps<{
-    height: string;
-    width: string;
+    height?: string;
+    width?: string;
     type?: string;
   }>(),
   {

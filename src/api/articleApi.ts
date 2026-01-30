@@ -1,4 +1,4 @@
-import { get } from '@/utils/request';
+import { get, post } from '@/utils/request';
 import type { Article } from '@/pages/tagPage/type';
 import type { ArticlePageData } from '@/pages/article/type';
 export async function getRecommenedArticles(): Promise<Article[]> {
@@ -22,6 +22,17 @@ export async function getFavoriteArticles(): Promise<Article[]> {
   return result;
 }
 
+export async function changeArticleFavorite(article_id: number) {
+  await post('/articles/favorite/' + article_id);
+}
+export async function getLikeArticles(): Promise<Article[]> {
+  const result = await get('/articles/likes?page=1');
+  return result;
+}
+
+export async function changeArticleLike(article_id: number) {
+  await post('/articles/like/' + article_id);
+}
 export async function getArticleById(article_id: number): Promise<ArticlePageData> {
   const result = await get(`/articles/${article_id}/with-status`);
   return result;

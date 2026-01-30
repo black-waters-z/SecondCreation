@@ -4,6 +4,8 @@ import HistoryComponent from '@/components/icon/HistoryComponent/index.vue';
 import DraftComponent from '@/components/icon/DraftComponent/index.vue';
 import ArticleManagerComponent from '@/components/icon/ArticleManagerComponent/index.vue';
 import ArticleDataComponent from '@/components/icon/ArticleDataComponent/index.vue';
+import SettingComponent from '@/components/icon/SettingComponent/index.vue';
+import ProblemReplyComponent from '@/components/icon/ProblemReplyComponent/index.vue';
 export const componentMap = {
   FavoriteComponent,
   LikeComponent,
@@ -11,5 +13,7 @@ export const componentMap = {
   DraftComponent,
   ArticleManagerComponent,
   ArticleDataComponent,
+  SettingComponent,
+  ProblemReplyComponent,
 };
 export type componentKey = keyof typeof componentMap;

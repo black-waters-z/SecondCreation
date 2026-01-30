@@ -1,6 +1,6 @@
 <template>
   <view class="favorite-component">
-    <GridArticlesContainer :article-list="articleList">
+    <GridArticlesContainer :article-list="articleList" type="grid">
     </GridArticlesContainer>
   </view>
 </template>

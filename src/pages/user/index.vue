@@ -75,8 +75,8 @@ const readNavItems = [
 
 const readNavItems_2 = [
   { label: NavLabelEnum.USER_SETTING, type: 'SettingComponent' },
-  { label: NavLabelEnum.PROBLEM_ANSWER, type: 'FavoriteComponent' },
-  { label: NavLabelEnum.PASSWORD_CHANGE, type: 'LikeComponent' },
+  { label: NavLabelEnum.PROBLEM_ANSWER, type: 'ProblemReplyComponent' },
+  { label: NavLabelEnum.PASSWORD_CHANGE, type: 'PasswordChangeComponent' },
   { label: NavLabelEnum.LOGOUT },
   { label: NavLabelEnum.ABOUT_US },
   { label: NavLabelEnum.LOGOUT_ACCOUNT },
