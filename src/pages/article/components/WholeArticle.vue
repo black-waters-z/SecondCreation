@@ -12,6 +12,7 @@
         }}</view>
         <text class="whole-article__content-content-text">{{ article?.content }}</text>
       </view>
+      <Tip></Tip>
       <slot name="collection"></slot>
       <view class="whole-article__contact">
         <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
@@ -23,13 +24,13 @@
 </template>
 
 <script lang="ts" setup>
-import GoBack from "@/components/common/GoBack.vue";
 import ArticleAuthor from "./ArticleAuthor.vue";
 import type { ArticleType } from "@/components/common/Article/type";
 import ClickIcon from "@/components/base/ClickIcon/index.vue";
 import type { UserInfo } from "@/pages/user/type";
 import { computed } from "vue";
 import CommonSwiper from "@/components/common/CommonSwiper.vue";
+import Tip from "./Tip.vue"
 const props = defineProps<{
   article: ArticleType;
   userInfo: UserInfo
@@ -65,7 +66,6 @@ const swiperInfo = computed(() => {
 
   &__content {
     width: 100%;
-    min-height: 300px;
     background-color: white;
     box-sizing: border-box;
     padding: 0 20px;
@@ -110,5 +110,6 @@ const swiperInfo = computed(() => {
       margin-right: 20rpx;
     }
   }
+
 }
 </style>

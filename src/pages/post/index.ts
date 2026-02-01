@@ -20,4 +20,5 @@ export interface ArticleData {
 export interface Collection {
   id: number;
   name: string;
+  description?: string;
 }

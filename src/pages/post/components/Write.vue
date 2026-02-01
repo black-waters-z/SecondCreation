@@ -24,11 +24,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, reactive, unref } from 'vue';
+import { computed, inject, reactive, ref, unref } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import SelectCollection from './SelectCollection.vue';
 import { parseToken } from '@/utils/security';
+import { getCollectionListInPost } from "@/api/collectionApi"
+import { onLoad } from '@dcloudio/uni-app';
+import type { Collection } from '@/pages/post/index';
 const images = inject('image_urls', [] as any);
+// 从数据库获取用户建立的合集
+const select = ref<Collection[]>([]);
+onLoad(() => {
+  // 获取合集列表，并将其传到addTag页
+  getCollectionListInPost().then((res) => {
+    select.value = res;
+  });
+})
 
 defineOptions({
   options: {
@@ -43,12 +54,7 @@ const formData = reactive({
   image_urls: [] as string[] | undefined,
 });
 
-// 从数据库获取用户建立的合集
-const select = [
-  { id: 0, name: '默认合集' },
-  { id: 1, name: '合集1' },
-  { id: 2, name: '合集2' },
-];
+
 
 const count = computed(() => {
   return formData?.content?.length;
@@ -61,7 +67,7 @@ function writeSubmit() {
     data: formData,
     success: () => {
       uni.navigateTo({
-        url: './AddTag',
+        url: './AddTag?collection=' + formData.collection,
       });
     },
     fail: () => {

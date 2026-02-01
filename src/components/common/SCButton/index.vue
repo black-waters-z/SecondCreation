@@ -2,7 +2,7 @@
   <button class="button" hover-class="button-hover" @click="$emit('click')" :class="{
     'button-bt': type === Button.button,
     'button-outline': type === Button.outline,
-  }" :style="{ background: color, border: color }">
+  }" :style="{ background: color, border: color, fontSize: size }">
     <slot></slot>
   </button>
 </template>
@@ -14,7 +14,7 @@ enum Button {
   outline = 'outline',
 }
 
-defineProps<{ type: string, color?: string }>();
+defineProps<{ type: string, color?: string, size?: string }>();
 defineEmits(['click']);
 </script>
 

@@ -40,7 +40,7 @@ defineOptions({
   },
 });
 
-defineProps<{ showSearch: boolean }>();
+defineProps<{ showSearch?: boolean }>();
 const showMobileNav = ref(false);
 function toggleMobileNav() {
   showMobileNav.value = !showMobileNav.value;

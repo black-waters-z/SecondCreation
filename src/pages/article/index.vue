@@ -8,7 +8,7 @@
         </template>
       </whole-article>
       <post-comment></post-comment>
-      <comment-vue :comments="comments"></comment-vue>
+      <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment"></comment-vue>
     </template>
   </page-wrapper>
 </template>
@@ -23,36 +23,14 @@ import PostComment from "./components/PostComment.vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { getArticleById } from "@/api/articleApi";
-import type { ArticlePageData } from "./type";
+import { getArticleCommentList } from "@/api/articleCommentApi"
+import type { ArticlePageData, FirstComment } from "./type";
 const returnArticle = ref<ArticlePageData>({} as ArticlePageData)
+const comments = ref<FirstComment[]>([])
 onLoad(async (options) => {
   returnArticle.value = await getArticleById(options?.id)
+  comments.value = await getArticleCommentList(options?.id)
 })
-const comments = ref([
-  {
-    id: 0,
-    content: "默认评论",
-    user: "匿名用户",
-    time: new Date("2022-01-01"),
-    avatar: "",
-    secondComment: [
-      {
-        id: 1,
-        content: "默认二级评论1",
-        user: "匿名用户1",
-        time: new Date("2022-01-01"),
-        avatar: "",
-      },
-      {
-        id: 2,
-        content: "默认二级评论2",
-        user: "匿名用户2",
-        time: new Date("2022-01-01"),
-        avatar: "",
-      },
-    ],
-  },
-]);
 </script>
 
 <style lang="scss">

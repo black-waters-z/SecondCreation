@@ -18,8 +18,10 @@ import SCButton from '@/components/common/SCButton/index.vue';
 import SelectCollection from './components/SelectCollection.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 import { ref } from 'vue';
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad } from '@dcloudio/uni-app'
+import type { Collection } from '@/pages/post/index';;
 import { post } from '@/utils/request';
+import { getCollectionListInPost } from '@/api/collectionApi';
 const articleData = ref<any>({});
 
 defineOptions({
@@ -39,13 +41,9 @@ const workTags = ref({
  * 这里之后插入代码
  */
 const collection = ref<number>(0);
-const collectionList = [
-  { id: 0, name: '默认合集' },
-  { id: 1, name: '合集1' },
-  { id: 2, name: '合集2' },
-];
+const collectionList = ref<Collection[]>([]);
 
-onLoad(() => {
+onLoad((options) => {
   uni.getStorage({
     key: 'articleData',
     success: (res) => {
@@ -57,6 +55,10 @@ onLoad(() => {
       console.error('Failed to retrieve article data.');
     },
   });
+  getCollectionListInPost().then((res) => {
+    collectionList.value = res;
+  });
+  collection.value = Number(options?.collection)
 });
 
 async function submit() {
@@ -64,7 +66,7 @@ async function submit() {
   const result = {
     data: {
       ...articleData.value,
-      collection: collectionList[collection.value],
+      collection: collectionList.value[collection.value],
       tags: {
         ...workTags.value,
       },

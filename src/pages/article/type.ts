@@ -26,3 +26,22 @@ export interface Collection {
   description: string;
   articles: Article[];
 }
+
+export interface FirstComment {
+  id: number;
+  article_id: number;
+  content: string;
+  time: Date;
+  like_count: number;
+  reply_count: number;
+  created_at: Date;
+  user: {
+    id: number;
+    username: string;
+    avatar_url: string;
+  };
+}
+
+export interface ChildComment extends FirstComment {
+  parent_id: number;
+}

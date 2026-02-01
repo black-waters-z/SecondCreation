@@ -1,5 +1,14 @@
-import { computed, provide, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { Ref } from 'vue';
+import { useLoadVideo } from './useLoadVideo';
+
+interface FileReply {
+  status: string;
+  message: string;
+  objectUrl: string;
+  filename: string;
+  fileSize: number;
+}
 
 export function usePostPicFile() {
   interface FileItem {
@@ -8,6 +17,8 @@ export function usePostPicFile() {
     message?: string;
     [key: string]: any;
   }
+
+  const { loadVideo } = useLoadVideo();
 
   const fileList3 = ref<FileItem[]>([]);
   const fileListPicture = ref<FileItem[]>([]);
@@ -31,7 +42,7 @@ export function usePostPicFile() {
     console.error(`File list ${fileListKey} not found`);
   };
 
-  const uploadFilePromise = (url: string, name: string): Promise<string> => {
+  const uploadFilePromise = (url: string, name: string) => {
     return new Promise((resolve, reject) => {
       let config = { url: 'http://localhost:8080/upload-image-file', name: 'image' };
       const extension = name.split('.').pop()?.toLowerCase();
@@ -79,7 +90,8 @@ export function usePostPicFile() {
     console.log(lists);
     for (let i = 0; i < lists.length; i++) {
       try {
-        const result = await uploadFilePromise(lists[i].url, lists[i].name);
+        // 首先上传数组内的文件
+        const result = (await uploadFilePromise(lists[i].url, lists[i].name)) as string;
         const item = fileListRef.value[fileListLen + i];
 
         fileListRef.value.splice(fileListLen + i, 1, {
@@ -88,6 +100,19 @@ export function usePostPicFile() {
           message: '',
           url: result,
         });
+        // 判断文件是否是视频格式，是，则进入if判断生成封面图，push入数组
+        const extension = fileListRef.value[fileListLen + i].url.split('.').pop()?.toLowerCase();
+        if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
+          // 开始生成封面图
+          const res = await loadVideo(import.meta.env.VITE_VIDEO_BASE + result);
+          uni.showToast({ title: '生成封面图成功', icon: 'success' });
+          fileListRef.value.push({
+            ...item,
+            status: 'success',
+            message: '',
+            url: res,
+          });
+        }
       } catch (error) {
         console.error('Upload failed:', error);
         const item = fileListRef.value[fileListLen + i];
@@ -108,10 +133,6 @@ export function usePostPicFile() {
     },
     { deep: true },
   );
-
-  const url_images = computed(() => {
-    return fileList3.value.map((item) => item.url);
-  });
 
   return { fileList3, fileListPicture, fileListOther, deletePic, afterRead };
 }
