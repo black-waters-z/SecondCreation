@@ -1,13 +1,25 @@
-import { computed, provide, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { Ref } from 'vue';
+import { useLoadVideo } from './useLoadVideo';
+
+interface FileReply {
+  status: string;
+  message: string;
+  objectUrl: string;
+  filename: string;
+  fileSize: number;
+}
 
 export function usePostPicFile() {
   interface FileItem {
     url: string;
+    coverUrl?: string;
     status?: string;
     message?: string;
     [key: string]: any;
   }
+
+  const { loadVideo } = useLoadVideo();
 
   const fileList3 = ref<FileItem[]>([]);
   const fileListPicture = ref<FileItem[]>([]);
@@ -31,12 +43,12 @@ export function usePostPicFile() {
     console.error(`File list ${fileListKey} not found`);
   };
 
-  const uploadFilePromise = (url: string, name: string): Promise<string> => {
+  const uploadFilePromise = (url: string, name: string) => {
     return new Promise((resolve, reject) => {
-      let config = { url: 'http://localhost:8080/upload-image-file', name: 'image' };
+      let config = { url: import.meta.env.VITE_API_BASE + '/upload-image-file', name: 'image' };
       const extension = name.split('.').pop()?.toLowerCase();
       if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
-        config = { url: 'http://localhost:8080/upload-video-file', name: 'video' };
+        config = { url: import.meta.env.VITE_API_BASE + '/upload-video-file', name: 'video' };
       }
       uni.uploadFile({
         ...config,
@@ -79,14 +91,25 @@ export function usePostPicFile() {
     console.log(lists);
     for (let i = 0; i < lists.length; i++) {
       try {
-        const result = await uploadFilePromise(lists[i].url, lists[i].name);
+        // 首先上传数组内的文件
+        const result = (await uploadFilePromise(lists[i].url, lists[i].name)) as string;
         const item = fileListRef.value[fileListLen + i];
+
+        // 判断文件是否是视频格式，是，则进入if判断生成封面图，push入数组
+        const extension = result.split('.').pop()?.toLowerCase();
+        let res;
+        if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
+          // 开始生成封面图
+          res = await loadVideo(import.meta.env.VITE_VIDEO_BASE + result);
+          uni.showToast({ title: '生成封面图成功', icon: 'success' });
+        }
 
         fileListRef.value.splice(fileListLen + i, 1, {
           ...item,
           status: 'success',
           message: '',
           url: result,
+          coverUrl: res,
         });
       } catch (error) {
         console.error('Upload failed:', error);
@@ -108,10 +131,6 @@ export function usePostPicFile() {
     },
     { deep: true },
   );
-
-  const url_images = computed(() => {
-    return fileList3.value.map((item) => item.url);
-  });
 
   return { fileList3, fileListPicture, fileListOther, deletePic, afterRead };
 }

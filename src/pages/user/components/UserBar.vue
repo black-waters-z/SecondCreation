@@ -1,25 +1,19 @@
 <template>
   <view class="user-bar-container">
-    <view class="user-bar-container__avatar no-login-grey">
+    <image class="user-bar-container__avatar" :src="userInfo?.avatar_url" mode="aspectFill"
+      :class="{ 'no-login-grey': !userInfo?.avatar_url }">
       <uni-icons fontFamily="CustomFont" color="white" size="24"> &#xe61c; </uni-icons>
-    </view>
-    <view class="user-info">
-      <view class="user-info__name">
-        <view>{{ userInfo.name || '尚未登录' }} &nbsp;&nbsp;</view>
-        <uni-icons fontFamily="CustomFont" color="black" size="15" class="user-info__name__icon"> &#xe605; </uni-icons>
-      </view>
-
-      <view class="user-info__other">
-        <view class="user-info__other__tag">总点击数 {{ userInfo?.clickedPoints || 0 }} </view>
-        <view class="user-info__other__tag">总被收藏数 {{ userInfo?.favoritedPoints || 0 }} </view>
-        <view class="user-info__other__tag">总粉丝 {{ userInfo?.fans || 0 }} </view>
-      </view>
-    </view>
+    </image>
+    <mobile-user-info :userInfo="userInfo"></mobile-user-info>
+    <not-mobile-user-info v-if="!isMobile" :userInfo="userInfo"></not-mobile-user-info>
   </view>
 </template>
 
 <script setup lang="ts">
 import type { UserInfo } from '../type';
+import MobileUserInfo from './UserInfo/MobileUserInfo.vue';
+import NotMobileUserInfo from './UserInfo/NotMobileUserInfo.vue';
+import { isMobile } from '../../../utils';
 defineProps<{ userInfo: UserInfo }>();
 </script>
 
@@ -31,22 +25,19 @@ defineProps<{ userInfo: UserInfo }>();
 
 .user-bar-container {
   width: 100%;
-  // #ifdef MP-WEIXIN
-  width: 100vw;
-  // #endif
-  background-color: white;
   border-radius: 16rpx;
   display: flex;
   flex-direction: row;
   padding-bottom: 20rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
 
   &__avatar {
     width: 130rpx;
     height: 130rpx;
-    background-color: antiquewhite;
     border-radius: 1000rpx;
-    margin: 20rpx 0 0 20rpx;
     display: flex;
+    margin-top: 20rpx;
     align-items: center;
     justify-content: center;
   }
@@ -54,6 +45,7 @@ defineProps<{ userInfo: UserInfo }>();
   .no-login-grey {
     background-color: grey;
     opacity: 0.5;
+    cursor: pointer;
   }
 
   .user-info {
@@ -85,11 +77,6 @@ defineProps<{ userInfo: UserInfo }>();
         margin-left: 10rpx;
       }
     }
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .user-bar-container {
   }
 }
 </style>

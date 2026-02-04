@@ -1,5 +1,5 @@
 <template>
-  <view class="w-full bg-white head-nav" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
+  <view class="w-full bg-white head-nav">
     <!-- #ifdef MP-WEIXIN -->
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
@@ -36,11 +36,11 @@ import CharacterMobileNav from '@/pages/index/components/CharacterMobileNav.vue'
 // #endif
 defineOptions({
   options: {
-    styleIsolation: 'shared', // 或者 "shared"
+    styleIsolation: 'shared',
   },
 });
 
-defineProps<{ showSearch: boolean }>();
+defineProps<{ showSearch?: boolean }>();
 const showMobileNav = ref(false);
 function toggleMobileNav() {
   showMobileNav.value = !showMobileNav.value;
@@ -70,6 +70,7 @@ function toggleMobileNav() {
 
 .head-nav {
   z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
@@ -95,10 +96,9 @@ function toggleMobileNav() {
   }
 
   .uni-icons {
-    color: $text-muted !important;
-    font-size: 25px !important;
+    font-size: 20px !important;
     margin-left: 10px; // 图标之间间距
-    float: right;
+    font-weight: 600;
     float: right;
   }
 }

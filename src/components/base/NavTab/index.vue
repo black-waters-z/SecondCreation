@@ -50,5 +50,8 @@ const nav_tags = computed(() => {
         }
 
     }
+
 }
+
+
 </style>

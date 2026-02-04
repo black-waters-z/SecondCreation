@@ -36,7 +36,7 @@ const tagList = computed(() => {
 })
 
 onLoad(async () => {
-  const res = await get(`http://localhost:8080/tags/?page=1&page_size=100`)
+  const res = await get(`/tags/?page=1&page_size=100`)
   tagListAll.value = res?.items
   console.log(res?.items)
 })

@@ -35,10 +35,22 @@ function handleClick() {
 .tag {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
 }
 
 :deep(.u-tag) {
   border-radius: 100px;
+}
+
+::v-deep .u-tag__content {
+  align-items: center;
+  display: flex;
+}
+
+::v-deep .u-tag__text--mini {
+  line-height: 1;
+}
+
+::v-deep .u-tag--mini {
+  max-height: 36rpx;
 }
 </style>

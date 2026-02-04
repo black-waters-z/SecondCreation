@@ -5,12 +5,14 @@
       <view class="support-pay-container__small-title">我们将不胜感激！</view>
     </view>
     <view>
-      <button class="support-bt">点击支持</button>
+      <SCButton type="outline" :style="{ fontSize: '26rpx' }">点击支持</SCButton>
     </view>
   </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SCButton from '@/components/common/SCButton/index.vue'
+</script>
 
 <style lang="scss" scoped>
 .support-pay-container {
@@ -19,14 +21,14 @@
   // #ifdef MP-WEIXIN
   width: calc(90vw - 20rpx);
   // #endif
-  background-color: rgba(255, 191, 202, 0.3);
   border-radius: 16rpx;
   padding: 15rpx 10rpx;
   display: flex;
   align-items: center;
+  background-color: $uni-bg-color-grey;
 
   .text {
-    width: 73%;
+    flex: 1;
   }
 
   &__title {

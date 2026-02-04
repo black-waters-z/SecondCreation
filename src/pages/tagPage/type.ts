@@ -1,10 +1,10 @@
 import type { Tag } from '@/pages/tagNav/type';
 import type { NavTabTag } from '@/components/base/NavTab/type';
+import type { UserInfo } from '../user/type';
 
 export interface Article {
   id: number;
   title: string;
-  author?: string;
   subtitle: string | null;
   content: string;
   image_urls: string[];
@@ -17,6 +17,10 @@ export interface Article {
   updated_at: string;
   published_at: string | null;
   tags?: Tag[];
+  has_liked?: boolean;
+  has_favorited?: boolean;
+
+  author?: UserInfo;
 }
 
 export interface TagPageData {

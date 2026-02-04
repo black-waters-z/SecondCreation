@@ -2,7 +2,7 @@
   <view class="post-comment w-100">
     <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment" placeholder="请输入内容"
       autoHeight @focus="isFocus = !isFocus" @blur="isFocus = !isFocus"></up-textarea>
-    <SCButton type="button"><text>发送</text></SCButton>
+    <SCButton type="button" @click="$emit('sendComment', comment)"><text>发送</text></SCButton>
   </view>
 </template>
 
@@ -10,8 +10,10 @@
 import SCButton from "@/components/common/SCButton/index.vue";
 import { ref } from "vue";
 
-const comment = ref("");
+const comment = ref<string>();
 const isFocus = ref(false);
+
+defineEmits(["sendComment"])
 </script>
 
 <style lang="scss" scoped>

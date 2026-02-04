@@ -1,6 +1,8 @@
 <template>
   <page-wrapper have_no_more class="w-full store" show-head>
-    <store-tab></store-tab>
+    <store-tab v-slot="{ startFilter }">
+      <filter-store-article @start-filter="startFilter"></filter-store-article>
+    </store-tab>
     <template #scroll>
       <grid-articles-container class="w-full grid-articles-container"
         :article-list="articleList"></grid-articles-container>
@@ -18,6 +20,7 @@ import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import ToTop from '@/components/common/ToTop.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
+import filterStoreArticle from '@/components/form/filterStoreArticle.vue';
 import { useHeadBarStore } from '@/store/useHeadBar';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { storeToRefs } from 'pinia';
@@ -32,7 +35,7 @@ onShow(() => {
 const articleList = ref<Article[]>([]);
 onLoad(async () => {
   articleList.value = await getFilterArticle(1);
-  console.log(articleList.value);
+  // console.log(articleList.value);
 })
 </script>
 
@@ -67,9 +70,17 @@ onLoad(async () => {
 
 
 @media screen and (min-width: 600px) {
+  .content {
+    align-items: flex-start;
+  }
+
   .store-content {
     height: 100%;
     margin-top: 0;
+  }
+
+  .store-tab {
+    margin-left: 20px;
   }
 
   .uni-scroll-view-refresher {

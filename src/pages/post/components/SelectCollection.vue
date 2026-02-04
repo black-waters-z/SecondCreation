@@ -1,5 +1,5 @@
 <template>
-  <view class="w-full flex">
+  <view class="flex">
     <view class="select-collection-container">
       <picker class="select-collection-container__picker" :range="nameList" range-key="" :value="index"
         @change="bindPickerChange">
@@ -7,7 +7,7 @@
           <text class="select-collection-container__picker__text">
             <slot name="filterName"></slot>
           </text>
-          <view class="uni-input select-collection-container__picker__text">{{ collectionList?.[index].name }}</view>
+          <view class="uni-input select-collection-container__picker__text">{{ collectionList?.[index]?.name }}</view>
           <text class="select-collection-container__picker__text">
             <slot name="filterEnd"></slot>
           </text>
@@ -38,7 +38,7 @@ const nameList = computed(() => {
   return props.collectionList.map((item) => item.name);
 });
 
-const index = ref(0);
+const index = ref<number>(props.modelValue);
 
 function bindPickerChange(e: any) {
   index.value = e.detail.value;

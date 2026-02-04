@@ -12,7 +12,6 @@ import CharacterNav from "@/pages/index/components/CharacterNav.vue";
 .left-window-container {
   width: 100%;
   height: 60vh;
-  background-color: white;
 
   .character-nav-container {
     flex-direction: column;

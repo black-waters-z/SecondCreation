@@ -8,13 +8,21 @@
       </view>
       <view class="w-full flex ">
         <view class="content__read-nav">
-          <read-nav :nav-items="readNavItems" color="black"> </read-nav>
+          <view class="flex">
+            <view class="content__read-nav__split"></view>
+            <text class="content__read-nav__text">文章管理</text>
+          </view>
+          <user-bar :user-info="userInfo" v-if="!isMobile"></user-bar>
+          <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"> </read-nav>
+          <view class="flex">
+            <view class="content__read-nav__split"></view>
+            <text class="content__read-nav__text">用户管理</text>
+          </view>
+          <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_2" color="black">
+          </read-nav>
         </view>
-        <iframe
-          src="http://localhost:5173/pages/iconNavigate/index?icon=HistoryComponent&goBackTitle=%25E5%258E%2586%25E5%258F%25B2%25E8%25AE%25B0%25E5%25BD%2595"
-          class="flex-1 iframe-content" frameborder="0"></iframe>
+        <FavoriteComponent v-if="!isMobile"></FavoriteComponent>
       </view>
-
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
@@ -28,43 +36,59 @@ import UserBar from './components/UserBar.vue';
 import SupportPay from './components/SupportPay.vue';
 import ReadNav from './components/ReadNav.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
-import AskAi from './components/AskAi.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import FavoriteComponent from '@/components/icon/FavoriteComponent/index.vue';
 import type { UserInfo } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
 import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
-import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
+import { isMobile } from '@/utils';
+import { getUserMeInfo } from '@/api/userApi';
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
-  FAVORITE = '收藏',
-  LIKE = '喜欢',
+  FAVORITE = '我的收藏',
+  LIKE = '我的喜欢',
   ARTICLE_MANAGE = '文章管理',
-  DRAFT = '草稿箱',
+  DRAFT = '查看草稿',
   ARTICLE_DATA = '文章数据',
+  PROBLEM_ANSWER = '问题反馈',
+  PASSWORD_CHANGE = '修改密码',
+  ABOUT_US = '关于我们',
+  LOGOUT_ACCOUNT = '注销账户',
+  USER_SETTING = '用户设置',
+  LOGOUT = '退出登录',
+  USER_COMMENT = '用户评论',
+  USER_COMMENT_REPLY = '用户评论回复',
+  USER_COMMENT_LIKE = '用户评论点赞',
+  USER_COMMENT_FAVORITE = '用户收藏的评论',
 }
 
 const readNavItems = [
   { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
   { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
   { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent' },
-  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE },
-  { icon: '\ue64f', label: NavLabelEnum.DRAFT },
-  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA },
+  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE, type: 'ArticleManagerComponent' },
+  { icon: '\ue64f', label: NavLabelEnum.DRAFT, type: 'DraftComponent' },
+  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA, type: 'ArticleDataComponent' },
 ];
 
-onLoad(() => {
+const readNavItems_2 = [
+  { label: NavLabelEnum.USER_SETTING, type: 'SettingComponent' },
+  { label: NavLabelEnum.PROBLEM_ANSWER, type: 'ProblemReplyComponent' },
+  { label: NavLabelEnum.PASSWORD_CHANGE, type: 'PasswordChangeComponent' },
+  { label: NavLabelEnum.LOGOUT },
+  { label: NavLabelEnum.ABOUT_US },
+  { label: NavLabelEnum.LOGOUT_ACCOUNT },
+];
+
+onLoad(async () => {
   const token = uni.getStorageSync('token');
   if (!token) {
     navigateToLogin();
   }
-  const user = parseToken(token);
-  userInfo.value = {
-    id: user.uid,
-    name: user.sub,
-  };
+  userInfo.value = await getUserMeInfo()
 });
 </script>
 
@@ -94,6 +118,29 @@ onLoad(() => {
     margin: 20rpx auto;
     box-sizing: border-box;
   }
+
+  .content__read-nav__user-manager {
+    padding: 20rpx 10rpx;
+  }
+
+  &__read-nav__article-manager {
+    padding: 20rpx 10rpx;
+  }
+
+  &__read-nav__split {
+    width: 12rpx;
+    height: 20px;
+    background-color: $pink-400;
+    border-radius: 100px;
+  }
+
+  &__read-nav__text {
+    letter-spacing: 2rpx;
+    height: 20px;
+    font-size: 26rpx;
+    margin-left: 20rpx;
+  }
+
 }
 
 .iframe-content {
@@ -102,11 +149,11 @@ onLoad(() => {
 
 @media screen and (min-width:600px) {
   .content__user {
-    display: flex;
-    flex-direction: row;
+    display: none;
 
     .user-bar-container {
       width: 600rpx;
+
     }
 
     .support-pay-container {
@@ -115,7 +162,8 @@ onLoad(() => {
   }
 
   .content__read-nav {
-    margin: 0 0;
+    margin: 0 60px;
+    margin-right: 60px;
     width: 150rpx;
   }
 
@@ -124,14 +172,14 @@ onLoad(() => {
     height: 470px !important;
     gap: 10rpx;
 
-    .read-nav-container__icon {
+    ::v-deep .read-nav-container__icon {
       cursor: pointer;
-      width: 130rpx;
+      width: 100% !important;
       aspect-ratio: 1/1;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 15rpx;
+      border-radius: 15px !important;
 
       &:hover {
         background-color: $border-color;

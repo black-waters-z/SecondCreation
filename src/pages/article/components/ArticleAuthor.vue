@@ -1,11 +1,15 @@
 <template>
     <view class="article-author">
-        <view class="article-author__avatar"></view>
-        <text class="article-author__name">author-name</text>
+        <image class="article-author__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
+        <text class="article-author__name">{{ userInfo?.username }}</text>
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { UserInfo } from '@/pages/user/type';
+
+defineProps<{ userInfo: UserInfo }>()
+</script>
 
 <style lang="scss" scoped>
 .article-author {
@@ -13,7 +17,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-bottom: 20rpx;
+    margin: 20rpx 0;
 
     .article-author__avatar {
         width: 80rpx;

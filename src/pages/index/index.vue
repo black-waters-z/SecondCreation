@@ -20,9 +20,7 @@
       </view>
       <!-- #endif -->
       <!-- 这里插入商品信息 -->
-      <IntroductionNav>同人团宣</IntroductionNav>
-      <home-product></home-product>
-      <introduction-nav>推荐</introduction-nav>
+      <home-product :source="goods"></home-product>
       <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
     </scroll-container>
 
@@ -53,11 +51,11 @@ import WaterFall from '@/components/common/WaterFall.vue';
 import Refresh from '@/components/common/Refresh/index.vue';
 import HomeProduct from './components/HomeProduct.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
-import IntroductionNav from '@/components/base/IntroductionNav/index.vue';
-import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
+import { getGoodsInfo } from "@/api/shopApi"
 import { onLoad } from '@dcloudio/uni-app';
 import { getRecommenedArticles } from '@/api/articleApi'
 import type { Article } from '../tagPage/type';
+import type { goodInfo } from '../shopping/type';
 if (process.env.NODE_ENV === 'development') {
   console.log(import.meta.env.DEV);
   console.log('开发环境');
@@ -70,10 +68,13 @@ defineOptions({
     styleIsolation: 'shared', // 或者 "shared"
   },
 });
-const scrollTop = ref(0);
+const goods = ref<goodInfo[]>([]);
 const articleList = ref<Article[]>([])
 onLoad(async () => {
   articleList.value = await getRecommenedArticles()
+  await getGoodsInfo(1, 10).then(res => {
+    goods.value = res
+  })
 })
 
 </script>

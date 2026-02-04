@@ -1,7 +1,7 @@
 export interface UserInfo {
   id: number;
-  name: string;
-  avatar?: string;
+  username?: string;
+  avatar_url?: string;
   clickedPoints?: number;
   favoritedPoints?: number;
   fans?: number;

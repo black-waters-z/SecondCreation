@@ -1,6 +1,6 @@
 <template>
     <view class="good-swiper">
-        <uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
+        <uni-swiper-dot v-if="choices.length" :info="info" :current="current" field="content" :mode="mode">
             <swiper class="good-swiper__swiper-box" @change="change">
                 <swiper-item v-for="(item, index) in choices" :key="index">
                     <view class="swiper-item">
@@ -15,7 +15,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import type { goodChoice } from '../type'
-const props = defineProps<{ choices: goodChoice[] }>();
+const props = withDefaults(defineProps<{ choices: goodChoice[] }>(), {
+    choices: () => []
+});
 const info = computed(() => {
     if (!props.choices) return []
     return props.choices.map((item) => ({

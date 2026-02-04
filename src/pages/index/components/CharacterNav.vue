@@ -1,22 +1,20 @@
 <template>
   <view class="character-nav-container">
-    <view v-for="(value, index) in characters" class="character-div">
-      <navigator :url="value.navigatorUrl" hover-class="navigator-hover" class="character-nav-container__navigator">
-        <match-media :min-width="600">
-          <view class="character-avatar">
-            <image v-if="value.avatar" :src="value.avatar" mode="scaleToFill" class="character-avatar__image" />
-            <uni-icons fontFamily="CustomFont" :color="value?.color" size="25" v-if="value.icon" class="icon-class">
-              {{ value.icon }}
-            </uni-icons>
-          </view>
-        </match-media>
+    <view v-for="(value, index) in characters" class="character-div" :key="index + 4"
+      @tap="goToCharacter(index, value.navigatorUrl)">
+
+      <view class="character-nav-container__navigator"
+        :class="{ 'active': tabBarStore.activeTabBarIndex == index + 4 }">
         <text class="character-name">{{ value.name }}</text>
-      </navigator>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
+import { useTabBarStore } from "@/store/useNav";
+const tabBarStore = useTabBarStore();
+const { changeTabBarIndex } = tabBarStore;
 const characters = [
   {
     name: 'tag导航',
@@ -28,6 +26,14 @@ const characters = [
   { name: '官方公告', icon: '\ue600' },
   { name: '搜索', icon: '\ue60d', navigatorUrl: '/pages/search/index' },
 ];
+
+function goToCharacter(index: number, url?: string) {
+  const nextIndex = index + 4;
+  changeTabBarIndex(nextIndex);
+  if (url) {
+    uni.navigateTo({ url });
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -35,6 +41,7 @@ const characters = [
   font-family: CustomFont;
   src: url('../../../static/iconfont.ttf');
 }
+
 .character-nav-container {
   width: calc(100% - 20rpx);
   border-radius: 16rpx;
@@ -77,6 +84,19 @@ const characters = [
 
 @media screen and (min-width: 600px) {
   .character-nav-container {
+    transition: all 0.3s ease-in-out;
+
+    .active {
+      color: $pink-400;
+      border-radius: 100px;
+
+      .character-name {
+        border-left: 10rpx solid $pink-300;
+        padding-left: 20rpx;
+        font-weight: 600;
+      }
+    }
+
     .character-div {
       width: 100%;
       flex-direction: row;
@@ -84,18 +104,27 @@ const characters = [
       .character-name {
         flex: 1;
         margin-left: 20px;
-        font-weight: 600;
         font-size: 30rpx;
       }
     }
 
     .character-nav-container__navigator {
+      font-weight: 400;
       padding: 10rpx 30rpx;
       width: 130px;
+      letter-spacing: 4rpx;
+
+
       &:hover {
-        background-color: $navigation-hover-color;
+        font-weight: 600;
         cursor: pointer;
         border-radius: 100px;
+        color: $pink-400;
+
+        .character-name {
+          border-left: 10rpx solid $pink-300;
+          padding-left: 20rpx;
+        }
       }
     }
 

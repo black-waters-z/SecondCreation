@@ -12,7 +12,8 @@
         <input type="text" v-model="formData.title" placeholder="标题" class="write-container__form__title" />
       </uni-forms-item>
       <uni-forms-item name="content">
-        <textarea maxlength="10000" v-model="formData.content" placeholder="输入文章内容" placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
+        <textarea maxlength="10000" v-model="formData.content" placeholder="输入文章内容"
+          placeholder-class="textarea-placeholder" class="write-container__form__content w-full" />
       </uni-forms-item>
     </uni-forms>
     <view class="write-container__button">
@@ -23,44 +24,57 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, reactive, unref } from 'vue';
+import { computed, inject, reactive, ref, unref } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import SelectCollection from './SelectCollection.vue';
 import { parseToken } from '@/utils/security';
+import { getCollectionListInPost } from "@/api/collectionApi"
+import { onLoad } from '@dcloudio/uni-app';
+import type { Collection, FormData } from '@/pages/post/index';
+import type { Article } from '@/pages/tagPage/type';
+
 const images = inject('image_urls', [] as any);
+// 从数据库获取用户建立的合集
+
+const props = defineProps<{
+  formdata: Article;
+}>();
+
+const formData: FormData = reactive({
+  title: props.formdata?.title || '',
+  content: props.formdata?.content || '',
+  collection: 0,
+  image_urls: props.formdata?.image_urls || [],
+});
+
+const select = ref<Collection[]>([]);
+const article_id = ref<number>(0)
+onLoad((options) => {
+  article_id.value = options?.article_id
+  // 获取合集列表，并将其传到addTag页
+  getCollectionListInPost().then((res) => {
+    select.value = res;
+  });
+})
 
 defineOptions({
   options: {
     styleIsolation: 'shared',
   },
 });
-const formData = reactive({
-  title: '',
-  content: '',
-  author_id: 0,
-  collection: 0,
-  image_urls: [] as string[] | undefined,
-});
 
-// 从数据库获取用户建立的合集
-const select = [
-  { id: 0, name: '默认合集' },
-  { id: 1, name: '合集1' },
-  { id: 2, name: '合集2' },
-];
 
 const count = computed(() => {
-  return formData.content.length;
+  return formData?.content?.length;
 });
 function writeSubmit() {
   formData.image_urls = Array.isArray(images) ? images : unref(images);
-  formData.author_id = parseToken(uni.getStorageSync('token')).uid;
   uni.setStorage({
     key: 'articleData',
     data: formData,
     success: () => {
       uni.navigateTo({
-        url: './AddTag',
+        url: article_id.value ? './AddTag?collection=' + formData.collection + '&article_id=' + article_id.value : './AddTag?collection=' + formData.collection,
       });
     },
     fail: () => {
@@ -114,6 +128,7 @@ function writeAddCraft() {
     padding: 40rpx;
     display: flex;
   }
+
   :deep(.uni-forms-item__content) {
     display: flex !important;
   }

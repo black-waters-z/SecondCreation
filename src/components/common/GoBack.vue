@@ -1,13 +1,18 @@
 <template>
   <view class="go-back-container w-full">
-    <uni-icons type="left" size="20" @click="goBack" style="cursor:pointer"></uni-icons>
+    <go-back-icon></go-back-icon>
+    <text class="go-back-container__return-text">
+      <slot></slot>
+    </text>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
     <select-collection class="justify-center" v-if="type" v-model="index" :collection-list="collectionList">
       <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
     </select-collection>
     <search-bar class="go-back-container__search" v-if="type" :type="type" @search="onSearchFromChild"></search-bar>
-
+    <navigator v-if="showLogo" class="go-back-container__logo" url="/pages/index/index" open-type="switchTab">
+      <image src="/src/static/logo.png" mode="scaleToFill" class="go-back-container__logo-img" />
+    </navigator>
   </view>
 </template>
 
@@ -15,6 +20,7 @@
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
 import SelectCollection from '@/pages/post/components/SelectCollection.vue';
+import GoBackIcon from '@/components/base/GoBackIcon/index.vue';
 interface collection {
   id: number;
   name: string;
@@ -22,16 +28,13 @@ interface collection {
 
 const index = ref(0);
 
-function goBack() {
-  uni.navigateBack();
-}
 const emit = defineEmits(['search']);
 
 const onSearchFromChild = (text: string) => {
   emit('search', text, props?.collectionList?.[index.value]);
 };
 
-const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean }>(), {
+const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean; showLogo?: boolean }>(), {
   title: '',
 });
 </script>
@@ -50,13 +53,33 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 20rpx;
+  padding: 10rpx;
   background-color: white;
   left: 0;
   min-height: 80rpx;
 
+  &__logo {
+    width: 130rpx;
+    height: 50rpx;
+    margin-left: auto;
+    margin-right: 20rpx;
+
+    &-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__return-text {
+    letter-spacing: 4rpx;
+    font-size: 29rpx;
+    margin-left: 20rpx;
+    font-weight: 500;
+  }
+
   &__search {
     flex: 1;
+    margin-left: 10rpx;
   }
 
   &__title {

@@ -1,33 +1,33 @@
 <template>
   <view class="oneComment" :style="{
-    transform: type === 'second' ? 'scale(0.9)' : 'scale(1)',
+    transform: type === 'second' ? 'scale(0.95)' : 'scale(1)',
   }">
     <view class="oneComment__user">
       <view class="oneComment__user__avatar">
-        <image :src="comment.avatar" mode="scaleToFill" />
+        <image :src="comment?.user?.avatar_url" mode="aspectFill" />
       </view>
       <view class="oneComment__not-user-avatar">
         <view class="oneComment__user__info">
-          <view class="oneComment__user__info__name">{{ comment.user }}</view>
+          <view class="oneComment__user__info__name">{{ comment?.user?.username }}</view>
           <view class="oneComment__user__info__time">{{
-            comment.time.toLocaleString()
+            new Date(comment?.created_at)?.toLocaleString()
             }}</view>
 
         </view>
         <view class="oneComment__content">
           <view class="oneComment__content__text">
             <text>
-              {{ comment.content }}
+              {{ comment?.content }}
             </text>
 
           </view>
           <view class="oneComment__content__actions">
-            <click-icon show-text class="oneComment__content__actions__icon" v-for="item in iconType"
-              :type="item"></click-icon>
+            <click-icon show-text class="oneComment__content__actions__icon" v-for="(item, idx) in iconType"
+              :type="item" :key="idx" :num="comment?.like_count"></click-icon>
             <view class="second-comment-show" @click="
               emit('showSecondCommentClick');
             showText = '';
-            " v-if="type === 'first'">
+            " v-if="type === 'first' && comment?.reply_count > 0">
               <text>{{ showText }} </text>
             </view>
           </view>
@@ -40,18 +40,12 @@
 <script setup lang="ts">
 import ClickIcon from "@/components/base/ClickIcon/index.vue"
 import { ref } from "vue";
-const iconType = [["chat"], ["redo-filled"], ["heart", "heart-filled"], ["hand-up", "hand-up-filled"]]
-interface OneComment {
-  id: number;
-  content: string;
-  user: string;
-  time: Date;
-  avatar: string;
-}
+import type { FirstComment } from "@/pages/article/type";
+const iconType = [["chat"], ["redo-filled"], ["hand-up", "hand-up-filled"]]
 
 withDefaults(
   defineProps<{
-    comment: OneComment;
+    comment: FirstComment;
     type?: string;
   }>(),
   {
@@ -74,7 +68,8 @@ const showText = ref<string>("展开回复");
   right: 0;
   background-color: white;
   float: right;
-  transition-origin: top left;
+  transform-origin: right top;
+  /* 右上角为缩放中心 */
 
   &__not-user-avatar {
     flex: 1;
@@ -136,7 +131,6 @@ const showText = ref<string>("展开回复");
       display: flex;
       gap: 20rpx;
       font-size: 24rpx;
-      color: $pink-color;
       flex-direction: row-reverse;
       flex: 1;
 
@@ -151,7 +145,6 @@ const showText = ref<string>("展开回复");
 .second-comment-show {
   display: inline-block;
   flex: 1;
-  color: $pink-color;
   font-size: 20rpx;
   opacity: 0.3;
 }

@@ -1,38 +1,70 @@
 <template>
   <view class="whole-article w-full">
-    <go-back></go-back>
+    <video class="whole-article__video" :src="article?.image_urls?.[0]"
+      v-if="article?.image_urls?.length && isVideo(article?.image_urls?.[0])"></video>
+    <CommonSwiper v-if="article?.image_urls?.length && !isVideo(article?.image_urls?.[0])"
+      :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
+    </CommonSwiper>
     <view class="whole-article__content">
-      <text class="whole-article__content-title">TELL ME A PIECE OF YOUR HISTORY</text>
       <view class="whole-article__author w-full">
-        <article-author></article-author>
+        <article-author :user-info="userInfo"></article-author>
       </view>
+      <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__content-content">
-        <view class="whole-article__content-content-subtitle">subtitle</view>
-        <view class="whole-article__content-content-image"></view>
-        <text class="whole-article__content-content-text">I got to ask Wang Yao (the embodiment of my home nation,
-          China) a few questions the other \n\n day after his existence was revealed. He has been living over my
-          restaurant
-          for the past eight…
-          \n\n
-          HD </text>
+        <view class="whole-article__content-content-subtitle" v-if="article?.subtitle">{{ article?.subtitle
+        }}</view>
+        <text class="whole-article__content-content-text">{{ article?.content }}</text>
       </view>
+      <Tip></Tip>
+      <slot name="collection"></slot>
       <view class="whole-article__contact">
-        <click-icon show-text v-for="(item, index) in iconType" :key="index" class="whole-article__contact-icon"
-          :type="item" :size="26"></click-icon>
+        <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
+          class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
+          :size="26"></click-icon>
       </view>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
-import GoBack from "@/components/common/GoBack.vue";
 import ArticleAuthor from "./ArticleAuthor.vue";
 import type { ArticleType } from "@/components/common/Article/type";
 import ClickIcon from "@/components/base/ClickIcon/index.vue";
-const iconType = [["redo-filled"], ["heart", "heart-filled"], ["hand-up", "hand-up-filled"]]
-defineProps<{
+import type { UserInfo } from "@/pages/user/type";
+import { computed } from "vue";
+import CommonSwiper from "@/components/common/CommonSwiper.vue";
+import Tip from "./Tip.vue"
+const props = defineProps<{
   article: ArticleType;
+  userInfo: UserInfo
 }>();
+const iconInfo = computed(() => [{
+  type: ["redo-filled"],
+},
+{
+  type: ["heart", "heart-filled"],
+  num: props.article?.favorite_count ?? 0,
+  hasBeenLiked: props.article?.has_favorited ?? false
+},
+{
+  type: ["hand-up", "hand-up-filled"],
+  num: props.article?.like_count ?? 0,
+  hasBeenLiked: props.article?.has_liked ?? false
+}
+])
+
+const swiperInfo = computed(() => {
+  return props.article?.image_urls?.map(item => ({
+    swiperImg: item,
+  })) || []
+})
+
+const isVideo = (url: string) => {
+  const fileExtension = url.split('.').pop().toLowerCase();
+  const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
+  if (videoExtensions.includes(fileExtension)) return true;
+  return false;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -42,22 +74,24 @@ defineProps<{
   align-items: center;
   letter-spacing: 1rpx;
 
+  &__video {
+    width: 100%;
+    object-fit: cover;
+  }
+
   &__content {
     width: 100%;
-    min-height: 300px;
     background-color: white;
     box-sizing: border-box;
     padding: 0 20px;
 
     &-title {
-      width: fit-content;
+      width: 100%;
       display: block;
       font-size: 40rpx;
       font-weight: 500;
-      text-align: center;
-      margin-bottom: 10rpx;
+      margin: 30rpx 0;
       box-sizing: border-box;
-      padding: 0px 75rpx;
     }
 
     &-content {
@@ -84,10 +118,12 @@ defineProps<{
     display: flex;
     flex-direction: row-reverse;
     margin-bottom: 20rpx;
+    justify-content: space-around;
 
     &-icon {
       margin-right: 20rpx;
     }
   }
+
 }
 </style>

@@ -1,10 +1,12 @@
 import type { CommentInfo } from '@/components/shop/comment/type';
+import type { storeInfo } from '@/components/shop/CafeWithGoodNav/type';
 export interface GoodInfos {
   // 商品页
   id: number;
   description: string;
   choices: goodChoice[];
   comments: CommentInfo[];
+  storeInfo?: storeInfo;
 }
 
 export interface goodChoice {
@@ -15,6 +17,11 @@ export interface goodChoice {
   swiperImg: string;
   //   库存
   stock: number;
+}
+
+export interface cartAddChoice {
+  goodChoiceId: number;
+  quantity: number;
 }
 
 // 定义富文本nodes数组，可直接在uniapp的<rich-text>组件中使用

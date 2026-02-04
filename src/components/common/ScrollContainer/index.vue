@@ -35,4 +35,11 @@ const { triggered, refreshType, onEnd, onPulling, onRefresh, onAbort, onRestore 
     justify-content: center;
   }
 }
+
+@media screen and (min-width: 600px) {
+  .mobile-scroll {
+    box-sizing: border-box;
+    padding: 0 20px;
+  }
+}
 </style>

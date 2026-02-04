@@ -2,7 +2,7 @@
   <view class="read-nav-container">
     <view v-for="(item, idx) in navItems" :key="item.label" class="read-nav-container__icon"
       :class="{ 'icon_active': activeIndex === idx }" @click="goToIconNavigatePage(item?.type, item?.label, idx)">
-      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="25">
+      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="20">
         {{ item.icon }}
       </uni-icons>
       <text class="icon-text" :style="{ color: 'grey' }"> {{ item.label }} </text>
@@ -38,10 +38,6 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
   src: url('../../../static/iconfont.ttf');
 }
 
-.icon_active {
-  background-color: $border-color;
-}
-
 .read-nav-container {
   width: 100%;
   border-radius: 16rpx;
@@ -61,9 +57,39 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
     position: relative;
 
     .icon-text {
-      margin-top: 10rpx;
       font-size: 23rpx;
     }
+  }
+}
+
+@media screen and (max-width:600px) {
+  .read-nav-container {
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    .read-nav-container__icon {
+      align-self: flex-start;
+      display: flex;
+      flex-direction: row;
+      line-height: 1.5;
+      justify-content: center;
+      padding: 20rpx;
+      gap: 10rpx;
+      align-items: center;
+      font-size: 30rpx;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@media screen and (min-width:600px) {
+  .icon_active {
+    background-color: $border-color;
+  }
+
+  .icon-text {
+    margin-top: 10rpx;
   }
 }
 </style>

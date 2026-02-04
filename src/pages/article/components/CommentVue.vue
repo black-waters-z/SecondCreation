@@ -1,11 +1,13 @@
 <template>
   <view class="comment-container">
-    <view class="comment-container-comment" v-for="(comment, index) in comments">
+    <view class="comment-container-comment">
       <view class="first-comment">
-        <one-comment :comment="comment" @showSecondCommentClick="showSecondCommentClick"></one-comment>
+        <one-comment :comment="comment" @showSecondCommentClick="showSecondCommentClick(comment?.id)"></one-comment>
       </view>
-      <view class="second-comment" v-if="showSecondComment" v-for="(secondComment, index) in comment?.secondComment">
-        <one-comment :comment="secondComment" type="second"></one-comment>
+      <view class="w-full" v-if="showSecondComment">
+        <view class="second-comment" v-for="(item, index) in childs" :key="index">
+          <one-comment :comment="item" type="second"></one-comment>
+        </view>
       </view>
     </view>
   </view>
@@ -14,30 +16,19 @@
 <script setup lang="ts">
 import OneComment from "./OneComment.vue";
 import { ref } from "vue";
+import { getChildCommentListByCommentId } from "@/api/articleCommentApi"
+import type { FirstComment, ChildComment } from "../type"
+const showSecondComment = ref<boolean>(false);
 
-interface Comment {
-  id: number;
-  content: string;
-  user: string;
-  time: Date;
-  avatar: string;
-  secondComment?: Comment[];
-}
-
-const showSecondComment = ref<Boolean>(false);
-
-const showSecondCommentClick = () => {
+const childs = ref<ChildComment[]>([])
+const showSecondCommentClick = async (parent_id: number) => {
+  childs.value = await getChildCommentListByCommentId(parent_id)
   showSecondComment.value = true;
 };
 
-withDefaults(
-  defineProps<{
-    comments: Comment[];
-  }>(),
-  {
-    comments: () => [],
-  }
-);
+defineProps<{
+  comment: FirstComment;
+}>()
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +42,11 @@ withDefaults(
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+
+  .second-comment {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
