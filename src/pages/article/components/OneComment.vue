@@ -1,6 +1,6 @@
 <template>
   <view class="oneComment" :style="{
-    transform: type === 'second' ? 'scale(0.9)' : 'scale(1)',
+    transform: type === 'second' ? 'scale(0.95)' : 'scale(1)',
   }">
     <view class="oneComment__user">
       <view class="oneComment__user__avatar">
@@ -68,7 +68,8 @@ const showText = ref<string>("展开回复");
   right: 0;
   background-color: white;
   float: right;
-  transition-origin: top left;
+  transform-origin: right top;
+  /* 右上角为缩放中心 */
 
   &__not-user-avatar {
     flex: 1;

@@ -44,6 +44,7 @@ import { navigateToLogin } from '@/utils/navigate';
 import { parseToken } from '@/utils/security';
 import { ref } from 'vue';
 import { isMobile } from '@/utils';
+import { getUserMeInfo } from '@/api/userApi';
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
@@ -82,16 +83,12 @@ const readNavItems_2 = [
   { label: NavLabelEnum.LOGOUT_ACCOUNT },
 ];
 
-onLoad(() => {
+onLoad(async () => {
   const token = uni.getStorageSync('token');
   if (!token) {
     navigateToLogin();
   }
-  const user = parseToken(token);
-  userInfo.value = {
-    id: user.uid,
-    name: user.sub,
-  };
+  userInfo.value = await getUserMeInfo()
 });
 </script>
 

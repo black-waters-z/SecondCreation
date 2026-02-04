@@ -5,15 +5,18 @@
                 v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill" />
             <!-- 视频之后再说，后端没发过来呢 -->
             <view class="w-full article-video-container" v-if="isVideo">
-                <image :src="article?.image_urls?.[1]" class="article-video"></image>
-                <view class="article-video--info">
-                    <text class="article-video__title">{{ article?.title }}</text>
-                    <text class="article-video__author">小甜甜</text>
-                </view>
+                <navigator open-type="navigate" :url="`/pages/article/index?id=${article?.id}`">
+                    <image :src="article?.image_urls?.[1]" class="article-video"></image>
+                    <view class="article-video--info">
+                        <text class="article-video__title">{{ article?.title }}</text>
+                        <text class="article-video__author">{{ article?.author?.username }}</text>
+                    </view>
+                </navigator>
+
                 <view class="article-video__play">
                     <uni-icons class="article-video__play--icon" fontFamily="CustomFont" :size="23" color="white">{{
                         '\ue89d'
-                    }}</uni-icons>
+                        }}</uni-icons>
                 </view>
             </view>
             <text class="w-full article-content" v-if="!article?.image_urls?.[0] && !isVideo">
@@ -30,7 +33,7 @@
                 <view class="article-info__author">
                     <!-- <image class="article-info__author--avatar" src="/src/static/character/character1.png"
                         mode="aspectFill"></image> -->
-                    <text class="article-info__author--author-name">{{ article?.author }}小甜甜小甜甜小甜甜</text>
+                    <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
                 </view>
             </view>
             <view class="article__click-icon__container">

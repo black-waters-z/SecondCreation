@@ -23,11 +23,11 @@ const showTip = ref<boolean>(false)
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20rpx;
+    margin: 80rpx 0;
 
     &__icon {
-        width: 150rpx;
-        height: 150rpx;
+        width: 130rpx;
+        height: 130rpx;
         transition: all 0.2s ease-in-out;
 
         &:active {

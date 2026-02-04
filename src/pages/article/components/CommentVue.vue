@@ -43,5 +43,10 @@ defineProps<{
     flex-direction: column;
     width: 100%;
   }
+
+  .second-comment {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

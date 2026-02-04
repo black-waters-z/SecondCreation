@@ -1,5 +1,6 @@
 <template>
     <view class="tip-form-container w-full">
+        <view class="tip-form-container__title">钱包：431 积分</view>
         <view class="tip-form">
             <view class="tip-form__item" v-for="(item, idx) in tipList" :key="idx"
                 :class="{ 'tip-form__item-active': item_active === idx }" @click="item_active = idx">
@@ -61,6 +62,14 @@ const tipList = [{
     box-sizing: border-box;
     padding: 10rpx;
     position: relative;
+
+    &__title {
+        font-size: 26rpx;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20rpx;
+        letter-spacing: 4rpx;
+    }
 }
 
 .tip-form {

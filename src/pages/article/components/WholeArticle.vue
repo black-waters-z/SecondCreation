@@ -1,12 +1,15 @@
 <template>
   <view class="whole-article w-full">
+    <video class="whole-article__video" :src="article?.image_urls?.[0]"
+      v-if="article?.image_urls?.length && isVideo(article?.image_urls?.[0])"></video>
+    <CommonSwiper v-if="article?.image_urls?.length && !isVideo(article?.image_urls?.[0])"
+      :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
+    </CommonSwiper>
     <view class="whole-article__content">
-      <CommonSwiper v-if="article?.image_urls?.length" :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
-      </CommonSwiper>
-      <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__author w-full">
         <article-author :user-info="userInfo"></article-author>
       </view>
+      <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__content-content">
         <view class="whole-article__content-content-subtitle" v-if="article?.subtitle">{{ article?.subtitle
         }}</view>
@@ -55,6 +58,13 @@ const swiperInfo = computed(() => {
     swiperImg: item,
   })) || []
 })
+
+const isVideo = (url: string) => {
+  const fileExtension = url.split('.').pop().toLowerCase();
+  const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
+  if (videoExtensions.includes(fileExtension)) return true;
+  return false;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -63,6 +73,11 @@ const swiperInfo = computed(() => {
   flex-direction: column;
   align-items: center;
   letter-spacing: 1rpx;
+
+  &__video {
+    width: 100%;
+    object-fit: cover;
+  }
 
   &__content {
     width: 100%;
@@ -75,10 +90,8 @@ const swiperInfo = computed(() => {
       display: block;
       font-size: 40rpx;
       font-weight: 500;
-      text-align: center;
-      margin-bottom: 10rpx;
+      margin: 30rpx 0;
       box-sizing: border-box;
-      padding: 0px 75rpx;
     }
 
     &-content {
@@ -105,6 +118,7 @@ const swiperInfo = computed(() => {
     display: flex;
     flex-direction: row-reverse;
     margin-bottom: 20rpx;
+    justify-content: space-around;
 
     &-icon {
       margin-right: 20rpx;

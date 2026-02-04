@@ -1,7 +1,7 @@
 <template>
     <view class="user-info" v-if="isMobile">
         <view class="user-info__name">
-            <view>{{ userInfo?.name || '尚未登录' }}</view>
+            <view>{{ userInfo?.username || '尚未登录' }}</view>
             <text class="user-info__go-to-user-page">前往用户主页</text>
         </view>
         <view class="user-info__other">
@@ -76,7 +76,7 @@ defineProps<{
                 background-color: rgb(239, 236, 236);
                 padding: 5rpx 10rpx;
                 border-radius: 1000px;
-                margin-left: 10rpx;
+                margin-right: 10rpx;
             }
         }
     }

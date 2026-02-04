@@ -1,8 +1,9 @@
 <template>
   <view class="user-bar-container">
-    <view class="user-bar-container__avatar no-login-grey">
+    <image class="user-bar-container__avatar" :src="userInfo?.avatar_url" mode="aspectFill"
+      :class="{ 'no-login-grey': !userInfo?.avatar_url }">
       <uni-icons fontFamily="CustomFont" color="white" size="24"> &#xe61c; </uni-icons>
-    </view>
+    </image>
     <mobile-user-info :userInfo="userInfo"></mobile-user-info>
     <not-mobile-user-info v-if="!isMobile" :userInfo="userInfo"></not-mobile-user-info>
   </view>
@@ -34,7 +35,6 @@ defineProps<{ userInfo: UserInfo }>();
   &__avatar {
     width: 130rpx;
     height: 130rpx;
-    background-color: antiquewhite;
     border-radius: 1000rpx;
     display: flex;
     margin-top: 20rpx;

@@ -5,7 +5,7 @@
                 <uni-icons fontFamily="CustomFont" color="white" size="24"> &#xe61c; </uni-icons>
             </view>
             <view class="user-info__name">
-                <view>{{ userInfo?.name || '尚未登录' }}</view>
+                <view>{{ userInfo?.username || '尚未登录' }}</view>
             </view>
 
             <view class="user-info__other">

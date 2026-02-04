@@ -13,6 +13,7 @@ interface FileReply {
 export function usePostPicFile() {
   interface FileItem {
     url: string;
+    coverUrl?: string;
     status?: string;
     message?: string;
     [key: string]: any;
@@ -44,10 +45,10 @@ export function usePostPicFile() {
 
   const uploadFilePromise = (url: string, name: string) => {
     return new Promise((resolve, reject) => {
-      let config = { url: 'http://localhost:8080/upload-image-file', name: 'image' };
+      let config = { url: import.meta.env.VITE_API_BASE + '/upload-image-file', name: 'image' };
       const extension = name.split('.').pop()?.toLowerCase();
       if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
-        config = { url: 'http://localhost:8080/upload-video-file', name: 'video' };
+        config = { url: import.meta.env.VITE_API_BASE + '/upload-video-file', name: 'video' };
       }
       uni.uploadFile({
         ...config,
@@ -94,25 +95,22 @@ export function usePostPicFile() {
         const result = (await uploadFilePromise(lists[i].url, lists[i].name)) as string;
         const item = fileListRef.value[fileListLen + i];
 
+        // 判断文件是否是视频格式，是，则进入if判断生成封面图，push入数组
+        const extension = result.split('.').pop()?.toLowerCase();
+        let res;
+        if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
+          // 开始生成封面图
+          res = await loadVideo(import.meta.env.VITE_VIDEO_BASE + result);
+          uni.showToast({ title: '生成封面图成功', icon: 'success' });
+        }
+
         fileListRef.value.splice(fileListLen + i, 1, {
           ...item,
           status: 'success',
           message: '',
           url: result,
+          coverUrl: res,
         });
-        // 判断文件是否是视频格式，是，则进入if判断生成封面图，push入数组
-        const extension = fileListRef.value[fileListLen + i].url.split('.').pop()?.toLowerCase();
-        if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
-          // 开始生成封面图
-          const res = await loadVideo(import.meta.env.VITE_VIDEO_BASE + result);
-          uni.showToast({ title: '生成封面图成功', icon: 'success' });
-          fileListRef.value.push({
-            ...item,
-            status: 'success',
-            message: '',
-            url: res,
-          });
-        }
       } catch (error) {
         console.error('Upload failed:', error);
         const item = fileListRef.value[fileListLen + i];

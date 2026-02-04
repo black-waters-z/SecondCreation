@@ -1,6 +1,7 @@
 import { get, post } from '@/utils/request';
 import type { Article } from '@/pages/tagPage/type';
 import type { ArticlePageData } from '@/pages/article/type';
+import type { ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 export async function getRecommenedArticles(): Promise<Article[]> {
   const result = await get('/articles/recommendations');
   return result;
@@ -36,4 +37,11 @@ export async function changeArticleLike(article_id: number) {
 export async function getArticleById(article_id: number): Promise<ArticlePageData> {
   const result = await get(`/articles/${article_id}/with-status`);
   return result;
+}
+
+// manage-article：获取用户自身发布的文章
+
+export async function getManageArticleList(page: number, page_size: number): Promise<ManageArticle[]> {
+  const result = await get(`/articles/mine/statistics?page=${page}&page_size=${page_size}`);
+  return result.items;
 }

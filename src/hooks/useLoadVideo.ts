@@ -48,7 +48,7 @@ export function useLoadVideo() {
         // H5 supports File objects via "files"
         // #ifdef H5
         uni.uploadFile({
-          url: 'http://localhost:8080/upload-image-file',
+          url: import.meta.env.VITE_API_BASE + '/upload-image-file',
           name: 'image',
           files: [{ name: 'image', file }],
           formData: { type: 'multipart/form-data' },
@@ -69,7 +69,7 @@ export function useLoadVideo() {
         // Non-H5 should pass a filePath string (temp file path)
         // #ifndef H5
         uni.uploadFile({
-          url: 'http://localhost:8080/upload-image-file',
+          url: import.meta.env.VITE_API_BASE + '/upload-image-file',
           name: 'image',
           filePath: file as unknown as string,
           formData: { type: 'multipart/form-data' },

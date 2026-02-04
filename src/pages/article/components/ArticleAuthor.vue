@@ -1,7 +1,7 @@
 <template>
     <view class="article-author">
-        <image class="article-author__avatar" :src="userInfo?.avatar" mode="aspectFill"></image>
-        <text class="article-author__name">{{ userInfo?.name }}</text>
+        <image class="article-author__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
+        <text class="article-author__name">{{ userInfo?.username }}</text>
     </view>
 </template>
 
@@ -17,7 +17,7 @@ defineProps<{ userInfo: UserInfo }>()
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-bottom: 20rpx;
+    margin: 20rpx 0;
 
     .article-author__avatar {
         width: 80rpx;

@@ -53,11 +53,10 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 20rpx;
+  padding: 10rpx;
   background-color: white;
   left: 0;
   min-height: 80rpx;
-  padding-bottom: 0;
 
   &__logo {
     width: 130rpx;

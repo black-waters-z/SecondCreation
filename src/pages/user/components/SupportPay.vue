@@ -25,6 +25,7 @@ import SCButton from '@/components/common/SCButton/index.vue'
   padding: 15rpx 10rpx;
   display: flex;
   align-items: center;
+  background-color: $uni-bg-color-grey;
 
   .text {
     flex: 1;

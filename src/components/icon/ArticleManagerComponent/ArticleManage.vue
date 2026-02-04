@@ -1,31 +1,33 @@
 <template>
     <view class="article-manage">
         <view class="article-manage__title">
-            <text class="article-manage__title-text">文章标题</text>
-            <view class="article-manage__title-bt">
+            <text class="article-manage__title-text">{{ article?.title }}</text>
+            <navigator :url="`/pages/post/index?article_id=${article?.id}`" open-type="navigate"
+                class="article-manage__title-bt">
                 <uni-icons type="compose" size="20"></uni-icons>
                 <text>编辑</text>
-            </view>
+            </navigator>
         </view>
         <view class="article-manage__info">
             <view class="article-manage__info--likes">
                 <text>点赞数</text>
-                <text>0</text>
+                <text>{{ article?.like_count ?? 0 }}</text>
             </view>
             <view class="article-manage__info--favorites">
                 <text>收藏数</text>
-                <text>0</text>
+                <text>{{ article?.favorite_count ?? 0 }}</text>
             </view>
             <view class="article-manage__info--comments">
                 <text>评论数</text>
-                <text>0</text>
+                <text>{{ article?.comment_count ?? 0 }}</text>
             </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import SCButton from "@/components/common/SCButton/index.vue"
+import type { ManageArticle } from "./type"
+defineProps<{ article: ManageArticle }>()
 </script>
 
 <style lang="scss" scoped>
