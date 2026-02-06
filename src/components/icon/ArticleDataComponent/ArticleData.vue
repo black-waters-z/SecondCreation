@@ -9,8 +9,8 @@
         <view class="article-data__chart-choose">
             <choose-tab></choose-tab>
         </view>
-        <view class="article-data__chart" style="width: 100%; height:500rpx">
-            <l-echart ref="chartRef" @finished="initChart" style="height: 100%"></l-echart>
+        <view class="article-data__chart">
+            <l-echart ref="chartRef" @finished="initChart"></l-echart>
         </view>
     </view>
 </template>
@@ -76,9 +76,7 @@ const updateChart = (newOption: Record<string, any>) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    height: 100%;
 
     &__info {
         display: flex;
@@ -130,6 +128,19 @@ const updateChart = (newOption: Record<string, any>) => {
         box-sizing: border-box;
         background-color: $pink-50;
         margin: 20rpx 0;
+        height: 500rpx
     }
+}
+
+@media screen and (min-width:600px) {
+    .article-data {
+        align-items: flex-start;
+
+        &__chart {
+            width: 1000rpx;
+            height: 800rpx;
+        }
+    }
+
 }
 </style>

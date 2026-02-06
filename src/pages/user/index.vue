@@ -8,20 +8,21 @@
       </view>
       <view class="w-full flex ">
         <view class="content__read-nav">
-          <view class="flex">
+          <view class="flex" v-if="isMobile">
             <view class="content__read-nav__split"></view>
             <text class="content__read-nav__text">文章管理</text>
           </view>
           <user-bar :user-info="userInfo" v-if="!isMobile"></user-bar>
-          <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"> </read-nav>
+          <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"
+            v-model:iconIndx="iconIndx"> </read-nav>
           <view class="flex">
-            <view class="content__read-nav__split"></view>
-            <text class="content__read-nav__text">用户管理</text>
+            <view class="content__read-nav__split" v-if="isMobile"></view>
+            <text class="content__read-nav__text" v-if="isMobile">用户管理</text>
           </view>
           <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_2" color="black">
           </read-nav>
         </view>
-        <FavoriteComponent v-if="!isMobile"></FavoriteComponent>
+        <component :is="component" v-if="!isMobile" class="w-full"></component>
       </view>
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
@@ -37,14 +38,16 @@ import SupportPay from './components/SupportPay.vue';
 import ReadNav from './components/ReadNav.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
 import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
-import FavoriteComponent from '@/components/icon/FavoriteComponent/index.vue';
 import type { UserInfo } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
-import { parseToken } from '@/utils/security';
-import { ref } from 'vue';
+import { ref, shallowRef } from 'vue';
 import { isMobile } from '@/utils';
 import { getUserMeInfo } from '@/api/userApi';
+
+import { type componentKey, componentMap } from '@/pages/iconNavigate/index';
+import { watch } from 'vue';
+
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
   HISTORY = '历史记录',
@@ -74,6 +77,8 @@ const readNavItems = [
   { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA, type: 'ArticleDataComponent' },
 ];
 
+const iconIndx = ref(0);
+
 const readNavItems_2 = [
   { label: NavLabelEnum.USER_SETTING, type: 'SettingComponent' },
   { label: NavLabelEnum.PROBLEM_ANSWER, type: 'ProblemReplyComponent' },
@@ -90,6 +95,15 @@ onLoad(async () => {
   }
   userInfo.value = await getUserMeInfo()
 });
+
+const component = shallowRef<(typeof componentMap)[componentKey] | null>(null);
+let key = ref<componentKey>();
+
+watch(iconIndx, (val) => {
+  key.value = readNavItems[val].type as componentKey;
+  component.value = componentMap[key.value];
+},
+  { immediate: true });
 </script>
 
 <style lang="scss" scoped>

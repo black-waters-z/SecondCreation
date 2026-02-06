@@ -1,7 +1,7 @@
 <template>
     <view class="bottom-tag">
         <scroll-view scroll-x enable-flex class="bottom-tag__scroll">
-            <Tag v-for="item in tagList" class="bottom-tag__item-tag" :bg-color="'pink'" :text="item.name"
+            <Tag v-for="item in tagList" class="bottom-tag__item-tag" :bg-color="'#b8b8b8'" :text="item.name"
                 :key="item.id" :closable="false" size="mini"></Tag>
         </scroll-view>
     </view>

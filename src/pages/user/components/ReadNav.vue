@@ -18,7 +18,8 @@ interface NavItems {
   label: string;
   type?: string;
 }
-defineProps<{ navItems: NavItems[]; color?: string }>();
+defineProps<{ navItems: NavItems[]; color?: string; iconIndx?: number }>();
+const emit = defineEmits(['update:iconIndx'])
 const activeIndex = ref(0);
 const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: string | number | boolean, idx: number) => {
   activeIndex.value = idx;
@@ -27,8 +28,11 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
       url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${encodeURIComponent(goBackTitle)}`,
     });
     return;
+  } else {
+    // 只有大屏是 这样
+    emit('update:iconIndx', idx);
   }
-  // 向iframe传url
+
 };
 </script>
 

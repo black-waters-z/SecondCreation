@@ -31,8 +31,8 @@
             <view v-if="!isVideo" class="article-info__scroll-view flex flex-row">
                 <bottom-tag :tag-list="article?.tags" class="article-info__tag flex-1"></bottom-tag>
                 <view class="article-info__author">
-                    <!-- <image class="article-info__author--avatar" src="/src/static/character/character1.png"
-                        mode="aspectFill"></image> -->
+                    <image class="article-info__author--avatar" :src="article?.author?.avatar_url" mode="aspectFill">
+                    </image>
                     <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
                 </view>
             </view>
@@ -242,9 +242,10 @@ const isVideo = computed(() => {
             align-items: center;
 
             &--avatar {
-                width: 40rpx;
-                height: 40rpx;
+                width: 35rpx;
+                height: 35rpx;
                 border-radius: 50%;
+                margin-left: 10rpx;
             }
 
             &--author-name {

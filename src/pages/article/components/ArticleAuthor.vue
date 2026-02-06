@@ -2,12 +2,13 @@
     <view class="article-author">
         <image class="article-author__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
         <text class="article-author__name">{{ userInfo?.username }}</text>
+        <SCButton class="article-author__bt" type="button" size="25rpx" color="red">关注</SCButton>
     </view>
 </template>
 
 <script setup lang="ts">
 import type { UserInfo } from '@/pages/user/type';
-
+import SCButton from '@/components/common/SCButton/index.vue';
 defineProps<{ userInfo: UserInfo }>()
 </script>
 
@@ -33,6 +34,10 @@ defineProps<{ userInfo: UserInfo }>()
         color: #333;
         font-weight: 600;
         font-style: italic;
+    }
+
+    &__bt {
+        margin-left: auto;
     }
 }
 </style>

@@ -3,7 +3,9 @@
     'button-bt': type === Button.button,
     'button-outline': type === Button.outline,
   }" :style="{ background: color, border: color, fontSize: size }">
-    <slot></slot>
+    <text :style="{ lineHeight: 1 }">
+      <slot></slot>
+    </text>
   </button>
 </template>
 
@@ -27,13 +29,9 @@ defineEmits(['click']);
   margin-right: 0;
   margin: 10rpx;
   width: fit-content;
-
-  padding: {
-    left: 20px;
-    right: 20px;
-    border: none;
-  }
-
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx 20rpx;
   line-height: 2;
   box-shadow: 0 0 10px $pink-shadow-01;
 }

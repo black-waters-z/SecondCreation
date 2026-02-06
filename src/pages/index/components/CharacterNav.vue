@@ -2,9 +2,9 @@
   <view class="character-nav-container">
     <view v-for="(value, index) in characters" class="character-div" :key="index + 4"
       @tap="goToCharacter(index, value.navigatorUrl)">
-
       <view class="character-nav-container__navigator"
         :class="{ 'active': tabBarStore.activeTabBarIndex == index + 4 }">
+        <uni-icons fontFamily="CustomFont" :size="20">{{ value.icon }}</uni-icons>
         <text class="character-name">{{ value.name }}</text>
       </view>
     </view>
@@ -17,13 +17,13 @@ const tabBarStore = useTabBarStore();
 const { changeTabBarIndex } = tabBarStore;
 const characters = [
   {
-    name: 'tag导航',
-    avatar: '/static/avatar/avatar1.jpg',
+    name: 'tag',
+    avatar: '/src/static/avatar/avatar1.jpg',
     navigatorUrl: '/pages/tagNav/index',
   },
-  { name: '粮仓导航', avatar: '/static/avatar/avatar1.jpg' },
-  { name: '火热合集', avatar: '/static/avatar/avatar1.jpg' },
-  { name: '官方公告', icon: '\ue600' },
+  { name: '粮仓', avatar: '/src/static/avatar/avatar1.jpg' },
+  { name: '合集', avatar: '/src/static/avatar/avatar1.jpg' },
+  { name: '公告', icon: '\ue600' },
   { name: '搜索', icon: '\ue60d', navigatorUrl: '/pages/search/index' },
 ];
 
@@ -50,7 +50,8 @@ function goToCharacter(index: number, url?: string) {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 10rpx;
+  box-sizing: border-box;
+  padding: 50rpx;
 
   .character-div {
     flex: 1;
@@ -87,14 +88,11 @@ function goToCharacter(index: number, url?: string) {
     transition: all 0.3s ease-in-out;
 
     .active {
-      color: $pink-400;
+      transition: all 0.3s ease-in-out;
       border-radius: 100px;
+      background-color: $uni-bg-color-grey;
 
-      .character-name {
-        border-left: 10rpx solid $pink-300;
-        padding-left: 20rpx;
-        font-weight: 600;
-      }
+      .character-name {}
     }
 
     .character-div {
@@ -104,27 +102,23 @@ function goToCharacter(index: number, url?: string) {
       .character-name {
         flex: 1;
         margin-left: 20px;
-        font-size: 30rpx;
+        font-size: 18px;
       }
     }
 
     .character-nav-container__navigator {
-      font-weight: 400;
+      font-weight: 600;
       padding: 10rpx 30rpx;
       width: 130px;
-      letter-spacing: 4rpx;
-
+      color: $text-main;
 
       &:hover {
-        font-weight: 600;
+        transition: all 0.3s ease-in-out;
         cursor: pointer;
         border-radius: 100px;
-        color: $pink-400;
+        background-color: $uni-bg-color-grey;
 
-        .character-name {
-          border-left: 10rpx solid $pink-300;
-          padding-left: 20rpx;
-        }
+        .character-name {}
       }
     }
 

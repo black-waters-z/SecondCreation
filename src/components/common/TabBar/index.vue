@@ -8,7 +8,7 @@
     </view>
     <view class="logo">
       <view class="tab-bar-item">
-        <image src="/static/logo.png" class="tab-bar-item__image" mode="aspectFit"></image>
+        <image src="/src/static/logo.png" class="tab-bar-item__image" mode="aspectFit"></image>
       </view>
     </view>
   </view>

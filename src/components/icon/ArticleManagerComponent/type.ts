@@ -4,4 +4,6 @@ export interface ManageArticle {
   like_count: number;
   favorite_count: number;
   comment_count: number;
+  content?: string;
+  image_urls?: string[];
 }

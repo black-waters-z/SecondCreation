@@ -4,7 +4,7 @@
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
         <navigator open-type="switchTab" url="/pages/index/index" hover-class="navigator-hover">
-          <image src="/static/logo.png" mode="scaleToFill" class="logo" />
+          <image src="/src/static/logo.png" mode="scaleToFill" class="logo" />
         </navigator>
         <SearchBar class="w-100 status_bar__search" width="300rpx" height="75rpx"></SearchBar>
       </view>

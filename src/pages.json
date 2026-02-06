@@ -75,6 +75,12 @@
       }
     },
     {
+      "path": "pages/user/info",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/search/index",
       "style": {
         "navigationStyle": "custom"

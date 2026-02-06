@@ -51,4 +51,18 @@ defineProps<{
         white-space: nowrap;
     }
 }
+
+@media (min-width: 600px) {
+    .small-article {
+        .article-img {
+            width: 320rpx;
+            height: 320rpx;
+        }
+
+        .article-content {
+            width: 320rpx;
+            height: 320rpx;
+        }
+    }
+}
 </style>

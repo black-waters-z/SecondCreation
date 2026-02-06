@@ -1,6 +1,6 @@
 <template>
   <view class="whole-article w-full">
-    <video class="whole-article__video" :src="article?.image_urls?.[0]"
+    <video class="whole-article__video" :src="article?.image_urls?.[0]" autoplay
       v-if="article?.image_urls?.length && isVideo(article?.image_urls?.[0])"></video>
     <CommonSwiper v-if="article?.image_urls?.length && !isVideo(article?.image_urls?.[0])"
       :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
