@@ -18,6 +18,16 @@ interface PostCommentParams {
   article_id: number;
   parent_id?: number | undefined;
 }
-export async function postCommentFunction(data: PostCommentParams) {
-  await post('/comments', data);
+
+interface PostCommentResult {
+  comment_id: number;
+  grand_parent_id: number | null;
+  user: {
+    id: number;
+    name: string;
+    avatar: string;
+  };
+}
+export async function postCommentFunction(data: PostCommentParams): Promise<PostCommentResult> {
+  return await post('/comments', data);
 }

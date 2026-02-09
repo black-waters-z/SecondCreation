@@ -8,8 +8,8 @@
         </template>
       </whole-article>
       <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
-      <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment"
-        @comment-reply="replyComment"></comment-vue>
+      <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment" @comment-reply="replyComment"
+        :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
     </template>
   </page-wrapper>
 </template>
@@ -28,12 +28,20 @@ import { getArticleCommentList, postCommentFunction } from "@/api/articleComment
 import type { ArticlePageData, FirstComment } from "./type";
 const returnArticle = ref<ArticlePageData>({} as ArticlePageData)
 const comments = ref<FirstComment[]>([])
+const commentRefs = ref<Record<number, InstanceType<typeof CommentVue> | null>>({});
+const setCommentRef = (el: any, id: number) => {
+  if (el) {
+    commentRefs.value[id] = el;
+  }
+};
+
 onLoad(async (options) => {
   returnArticle.value = await getArticleById(options?.id)
   comments.value = await getArticleCommentList(options?.id)
 })
 const commentData = ref<{ content: string, parent_id?: number, parent_name?: string, article_id: number }>({ content: '', article_id: 0 })
 
+// 发布评论
 async function sendComment(comment: string) {
   commentData.value.content = comment
   commentData.value.article_id = returnArticle.value.article?.id
@@ -42,12 +50,50 @@ async function sendComment(comment: string) {
     article_id: commentData.value.article_id,
     parent_id: commentData.value?.parent_id,
   }
-  await postCommentFunction(inputData)
+  const result = await postCommentFunction(inputData) // 返回值应当为最祖先的评论id，以及创建后的comment的id值
   uni.showToast({
     title: '评论成功',
     icon: 'success',
     duration: 2000,
   })
+  // 在原位置插入用户的评论，这里先用parent_id表示
+  if (inputData.parent_id && result.grand_parent_id) {
+    const targetRef = commentRefs.value[result.grand_parent_id];
+    targetRef?.showSecondCommentClick(result.grand_parent_id)
+    targetRef?.insertChild({
+      parent_id: inputData.parent_id,
+      id: result.comment_id,
+      article_id: inputData.article_id,
+      content: inputData.content,
+      time: new Date(),
+      like_count: 0,
+      reply_count: 0,
+      created_at: new Date(),
+      user: {
+        id: result.user.id,
+        username: result.user.name,
+        avatar_url: result.user.avatar,
+      }
+    },
+    )
+    console.log('插入成功')
+  } else {
+    comments.value.push({
+      id: result.comment_id,
+      article_id: inputData.article_id,
+      content: inputData.content,
+      time: new Date(),
+      like_count: 0,
+      reply_count: 0,
+      created_at: new Date(),
+      user: {
+        id: result.user.id,
+        username: result.user.name,
+        avatar_url: result.user.avatar,
+      }
+    },)
+  }
+
 }
 
 function replyComment(parent_id: number, parent_name: string) {

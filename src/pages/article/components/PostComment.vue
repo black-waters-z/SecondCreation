@@ -2,7 +2,7 @@
   <view class="post-comment w-100">
     <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment" placeholder="请输入内容"
       autoHeight @focus="isFocus = !isFocus" @blur="isFocus = !isFocus"></up-textarea>
-    <SCButton type="button" @click="$emit('sendComment', comment)"><text>发送</text></SCButton>
+    <SCButton type="button" @click="sendComment"><text>发送</text></SCButton>
   </view>
 </template>
 
@@ -13,6 +13,11 @@ const props = defineProps<{ commentToward: { content: string, parent_id?: number
 const emit = defineEmits(['sendComment', 'update:commentToward'])
 const comment = ref<string>();
 const isFocus = ref(false);
+
+function sendComment() {
+  emit('sendComment', comment.value)
+  comment.value = ''
+}
 
 watch(
   () => props.commentToward.parent_name,

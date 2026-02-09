@@ -11,7 +11,7 @@
           <view class="oneComment__user__info__name">{{ comment?.user?.username }}</view>
           <view class="oneComment__user__info__time">{{
             new Date(comment?.created_at)?.toLocaleString()
-            }}</view>
+          }}</view>
 
         </view>
         <view class="oneComment__content">
@@ -59,6 +59,7 @@ const emit = defineEmits(["showSecondCommentClick", "commentReply"]);
 const showText = ref<string>("展开回复");
 
 function commentReply(commentId: number, parent_name?: string) {
+  console.log(commentId, parent_name);
   emit("commentReply", commentId, parent_name);
 }
 </script>

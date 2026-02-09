@@ -27,7 +27,7 @@ const showSecondCommentClick = async (parent_id: number) => {
   showSecondComment.value = true;
 };
 
-defineProps<{
+const props = defineProps<{
   comment: FirstComment;
 }>()
 
@@ -37,6 +37,15 @@ const emit = defineEmits<{
 function commentReply(parent_id: number, parent_name: string) {
   emit("commentReply", parent_id, parent_name)
 }
+
+const insertChild = (child: ChildComment) => {
+  childs.value.push(child)
+}
+
+defineExpose({
+  insertChild,
+  showSecondCommentClick
+})
 </script>
 
 <style lang="scss" scoped>
