@@ -1,10 +1,9 @@
 <template>
     <view class="user-info-component">
-        <view class="user-info-component__avatar"></view>
-        <view class="user-info-component__name">user</view>
+        <image class="user-info-component__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
+        <view class="user-info-component__name">{{ userInfo?.username }}</view>
         <view class="user-info-component__info">
             <view class="user-info-component__info__item">
-
                 关注</view>
             <view class="user-info-component__info__item">粉丝</view>
         </view>
@@ -12,6 +11,11 @@
 </template>
 
 <script setup lang="ts">
+import type { UserInfo } from '@/pages/user/type';
+defineProps<{
+    userInfo: UserInfo;
+}>();
+
 </script>
 
 <style lang="scss" scoped>
@@ -20,15 +24,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $border-color;
+    background: $border-color;
     box-sizing: border-box;
     padding: 20rpx;
 
     &__avatar {
-        width: 150rpx;
-        height: 150rpx;
+        width: 130rpx;
+        height: 130rpx;
         border-radius: 50%;
-        background-color: pink;
+        background-color: $border-color;
         margin-top: 40rpx;
     }
 

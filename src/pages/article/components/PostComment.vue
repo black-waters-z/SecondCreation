@@ -8,12 +8,27 @@
 
 <script setup lang="ts">
 import SCButton from "@/components/common/SCButton/index.vue";
-import { ref } from "vue";
-
+import { ref, watch } from "vue";
+const props = defineProps<{ commentToward: { content: string, parent_id?: number, parent_name?: string, article_id: number } }>()
+const emit = defineEmits(['sendComment', 'update:commentToward'])
 const comment = ref<string>();
 const isFocus = ref(false);
 
-defineEmits(["sendComment"])
+watch(
+  () => props.commentToward.parent_name,
+  (newParentName) => {
+    if (newParentName) {
+      comment.value = `@${newParentName} ${comment.value || ''}` + `${comment.value || ''}`;
+    }
+  },
+  { immediate: true }
+);
+
+watch(() => comment.value, (newValue) => {
+  if (comment.value && props.commentToward.parent_name && !comment.value.includes(props.commentToward.parent_name)) {
+    emit('update:commentToward', { content: newValue, article_id: props.commentToward.article_id })
+  }
+})
 </script>
 
 <style lang="scss" scoped>

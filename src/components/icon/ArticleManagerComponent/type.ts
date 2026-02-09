@@ -6,4 +6,5 @@ export interface ManageArticle {
   comment_count: number;
   content?: string;
   image_urls?: string[];
+  created_at?: string;
 }

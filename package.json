@@ -87,6 +87,7 @@
     "@popperjs/core": "^2.11.8",
     "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.0",
+    "@types/qs": "^6.14.0",
     "@vue/devtools-api": "^8.0.3",
     "@vue/runtime-core": "^3.4.21",
     "@vue/tsconfig": "^0.1.3",

@@ -36,7 +36,7 @@
                     <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
                 </view>
             </view>
-            <view class="article__click-icon__container">
+            <!-- <view class="article__click-icon__container">
                 <view class="article__click-icon--left">
                     <click-icon class="article__click-icon--left-icon" :type="['eye-filled']" :size="18">{{
                         article?.view_count ?? 0 }}</click-icon>
@@ -45,7 +45,7 @@
                 </view>
                 <click-icon class="article__click-icon" :type="['heart', 'heart-filled']" :size="16"
                     :has-been-liked="article?.has_favorited"></click-icon>
-            </view>
+            </view> -->
         </view>
     </view>
 </template>
@@ -96,6 +96,7 @@ const isVideo = computed(() => {
         justify-content: flex-end;
         align-items: flex-end;
         z-index: 100;
+        display: none;
     }
 
     &-video-container {

@@ -34,12 +34,13 @@ const formData = ref<FormData>({
 
 async function submit() {
   if (formData.value.username && formData.value.password) {
-    const form = new URLSearchParams({
+    const payload = encodeForm({
       grant_type: 'password',
-    })
-    form.append('username', formData.value.username)
-    form.append('password', formData.value.password)
-    const res = await post('/users/login', formData.value, {
+      username: formData.value.username,
+      password: formData.value.password,
+    });
+
+    const res = await post('/users/login', payload, {
       header: {
         'content-type': 'application/x-www-form-urlencoded', // ??Content-Type
       },
@@ -49,6 +50,12 @@ async function submit() {
       uni.switchTab({ url: './index' });
     }
   }
+}
+
+function encodeForm(data: Record<string, string>) {
+  return Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join('&');
 }
 </script>
 

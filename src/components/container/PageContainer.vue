@@ -1,6 +1,9 @@
 <template>
   <view class="content w-full">
     <head-nav v-if="showHead"></head-nav>
+    <!-- #ifdef MP-WEIXIN -->
+    <head-nav></head-nav>
+    <!-- #endif -->
     <slot></slot>
     <scroll-container :have_no_more="have_no_more" class="w-full flex-1 mh-0">
       <slot name="scroll"></slot>

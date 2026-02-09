@@ -1,5 +1,5 @@
 import type { ChildComment, FirstComment } from '@/pages/article/type';
-import { get } from '@/utils/request';
+import { get, post } from '@/utils/request';
 
 export async function getArticleCommentList(articleId: number): Promise<FirstComment[]> {
   const data = await get(`/comments?article_id=${articleId}&page=1`);
@@ -10,4 +10,14 @@ export async function getArticleCommentList(articleId: number): Promise<FirstCom
 export async function getChildCommentListByCommentId(parent_id: number): Promise<ChildComment[]> {
   const data = await get(`/comments/childComment?parent_id=${parent_id}&page=1&page_size=10&order_by=created_at`);
   return data;
+}
+
+// 发布文章评论
+interface PostCommentParams {
+  content: string;
+  article_id: number;
+  parent_id?: number | undefined;
+}
+export async function postCommentFunction(data: PostCommentParams) {
+  await post('/comments', data);
 }

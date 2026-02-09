@@ -22,6 +22,8 @@
 
           </view>
           <view class="oneComment__content__actions">
+            <click-icon :type="['chat']" :size="16"
+              @click="commentReply(comment?.id, comment?.user?.username)"></click-icon>
             <click-icon show-text class="oneComment__content__actions__icon" v-for="(item, idx) in iconType"
               :type="item" :key="idx" :num="comment?.like_count"></click-icon>
             <view class="second-comment-show" @click="
@@ -41,7 +43,7 @@
 import ClickIcon from "@/components/base/ClickIcon/index.vue"
 import { ref } from "vue";
 import type { FirstComment } from "@/pages/article/type";
-const iconType = [["chat"], ["redo-filled"], ["hand-up", "hand-up-filled"]]
+const iconType = [["redo-filled"], ["hand-up", "hand-up-filled"]]
 
 withDefaults(
   defineProps<{
@@ -53,8 +55,12 @@ withDefaults(
   }
 );
 
-const emit = defineEmits(["showSecondCommentClick"]);
+const emit = defineEmits(["showSecondCommentClick", "commentReply"]);
 const showText = ref<string>("展开回复");
+
+function commentReply(commentId: number, parent_name?: string) {
+  emit("commentReply", commentId, parent_name);
+}
 </script>
 
 <style scoped lang="scss">

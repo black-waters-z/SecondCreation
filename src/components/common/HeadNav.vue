@@ -51,7 +51,7 @@ function toggleMobileNav() {
 .status_bar {
   width: 100vw;
   top: 0;
-  min-height: 80rpx;
+  height: 80rpx;
   background: white;
   left: 0;
 

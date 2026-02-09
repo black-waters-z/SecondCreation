@@ -40,7 +40,6 @@ const indicatorPosition = computed(() => {
     flex-direction: column;
     background-color: white;
     border-radius: 10rpx;
-    margin-bottom: 20rpx;
     font-size: 26rpx;
 
     .user-info-tab-item {

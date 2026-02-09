@@ -2,11 +2,12 @@
   <view class="comment-container">
     <view class="comment-container-comment">
       <view class="first-comment">
-        <one-comment :comment="comment" @showSecondCommentClick="showSecondCommentClick(comment?.id)"></one-comment>
+        <one-comment :comment="comment" @showSecondCommentClick="showSecondCommentClick(comment?.id)"
+          @commentReply="commentReply"></one-comment>
       </view>
       <view class="w-full" v-if="showSecondComment">
         <view class="second-comment" v-for="(item, index) in childs" :key="index">
-          <one-comment :comment="item" type="second"></one-comment>
+          <one-comment :comment="item" type="second" @commentReply="commentReply"></one-comment>
         </view>
       </view>
     </view>
@@ -29,6 +30,13 @@ const showSecondCommentClick = async (parent_id: number) => {
 defineProps<{
   comment: FirstComment;
 }>()
+
+const emit = defineEmits<{
+  (e: 'commentReply', parent_id: number, parent_name: string): void
+}>()
+function commentReply(parent_id: number, parent_name: string) {
+  emit("commentReply", parent_id, parent_name)
+}
 </script>
 
 <style lang="scss" scoped>

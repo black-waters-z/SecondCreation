@@ -22,7 +22,9 @@
           <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_2" color="black">
           </read-nav>
         </view>
+        <!-- #ifdef H5 -->
         <component :is="component" v-if="!isMobile" class="w-full"></component>
+        <!-- #endif -->
       </view>
     </scroll-container>
     <post-sheet class="w-full"></post-sheet>
