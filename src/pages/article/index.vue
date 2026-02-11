@@ -7,9 +7,12 @@
           <collection-nav :source="returnArticle?.collection"></collection-nav>
         </template>
       </whole-article>
-      <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
+      <text class="comment--title">评论</text>
       <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment" @comment-reply="replyComment"
         :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
+    </template>
+    <template #bottom>
+      <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
     </template>
   </page-wrapper>
 </template>
@@ -59,7 +62,7 @@ async function sendComment(comment: string) {
   // 在原位置插入用户的评论，这里先用parent_id表示
   if (inputData.parent_id && result.grand_parent_id) {
     const targetRef = commentRefs.value[result.grand_parent_id];
-    targetRef?.showSecondCommentClick(result.grand_parent_id)
+    targetRef?.showSecondCommentOpen()
     targetRef?.insertChild({
       parent_id: inputData.parent_id,
       id: result.comment_id,
@@ -93,7 +96,6 @@ async function sendComment(comment: string) {
       }
     },)
   }
-
 }
 
 function replyComment(parent_id: number, parent_name: string) {
@@ -113,5 +115,13 @@ page {
 
 .uni-swiper__warp {
   border-radius: 15px;
+}
+
+.comment--title {
+  padding-left: 20rpx;
+  letter-spacing: 4rpx;
+  padding-top: 40rpx;
+  font-size: 30rpx;
+  font-weight: 700;
 }
 </style>

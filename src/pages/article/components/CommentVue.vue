@@ -27,6 +27,10 @@ const showSecondCommentClick = async (parent_id: number) => {
   showSecondComment.value = true;
 };
 
+const showSecondCommentOpen = () => {
+  showSecondComment.value = true;
+};
+
 const props = defineProps<{
   comment: FirstComment;
 }>()
@@ -44,7 +48,7 @@ const insertChild = (child: ChildComment) => {
 
 defineExpose({
   insertChild,
-  showSecondCommentClick
+  showSecondCommentOpen
 })
 </script>
 

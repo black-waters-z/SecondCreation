@@ -7,7 +7,7 @@
             </navigator>
         </view>
         <view class="article-data__chart-choose">
-            <choose-tab></choose-tab>
+            <choose-tab @choose="chooseTabChange"></choose-tab>
         </view>
         <view class="article-data__chart">
             <l-echart ref="chartRef" @finished="initChart"></l-echart>
@@ -18,49 +18,34 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ChooseTab from "@/components/base/ChooseTab/index.vue"
+import { type ArticleDataDict } from "@/components/icon/ArticleDataComponent/type"
+import { useChart } from "@/hooks/useChart"
+const props = defineProps<{
+    articleData: ArticleDataDict[],
+}>()
+const articleData = ref<ArticleDataDict[]>(props.articleData)
+const chooseTab = ref<'date' | 'week' | 'month'>('date')
+const { options } = useChart(articleData, chooseTab);
+
+function chooseTabChange(value: 'date' | 'week' | 'month') {
+    chooseTab.value = value;
+    updateChart(options.value);
+}
+
 const chartRef = ref<any>(null);
 let myChart: any = null;
 
 // 初始化并设置图表配置
 const initChart = async () => {
+    if (!props.articleData || Object.keys(props.articleData).length === 0) {
+        return; // 数据无效时不初始化图表
+    }
     myChart = await chartRef.value!.init();
 
-    const option = {
-        tooltip: {},
-        xAxis: {
-            data: ['1月25日', '1月26日', '1月27日', '1月28日', '1月29日'],
-        },
-        yAxis: {},
-        series: [
-            {
-                name: '点赞数',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10],
-                itemStyle: {
-                    color: '#ff69b4' // 粉色
-                }
-            },
-            {
-                name: '收藏数',
-                type: 'bar',
-                data: [5, 25, 20, 4, 0],
-                itemStyle: {
-                    color: '#000000' // 黑色
-                }
-            },
-            {
-                name: '评论数',
-                type: 'bar',
-                data: [1, 2, 3, 1, 0],
-                itemStyle: {
-                    color: '#808080' // 灰色
-                }
-            },
-
-        ],
-    };
+    const option = options.value
 
     myChart.setOption(option);
+    // console.log('图表已初始化', option);
 };
 
 // 如果需要在其他地方更新图表数据

@@ -15,9 +15,9 @@
         }}</view>
         <text class="whole-article__content-content-text">{{ article?.content }}</text>
       </view>
-      <Tip></Tip>
       <slot name="collection"></slot>
       <view class="whole-article__contact">
+        <Tip></Tip>
         <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
           class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
           :size="26"></click-icon>
@@ -119,9 +119,12 @@ const isVideo = (url: string) => {
     flex-direction: row-reverse;
     margin-bottom: 20rpx;
     justify-content: space-around;
+    margin-top: 100rpx;
 
     &-icon {
       margin-right: 20rpx;
+      display: flex;
+      align-items: center;
     }
   }
 

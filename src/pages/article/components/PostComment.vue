@@ -30,7 +30,7 @@ watch(
 );
 
 watch(() => comment.value, (newValue) => {
-  if (comment.value && props.commentToward.parent_name && !comment.value.includes(props.commentToward.parent_name)) {
+  if (!comment.value || (comment.value && props.commentToward.parent_name && !comment.value.includes(props.commentToward.parent_name))) {
     emit('update:commentToward', { content: newValue, article_id: props.commentToward.article_id })
   }
 })
@@ -42,12 +42,16 @@ watch(() => comment.value, (newValue) => {
   padding: 10px;
   background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+
+
+  ::v-deep .u-textarea__field {
+    min-height: 20px !important;
+  }
 
   &__textarea {
     width: 95%;
-    margin-bottom: 10px;
   }
 
   .focus_border {
