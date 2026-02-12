@@ -5,7 +5,7 @@
     <head-nav></head-nav>
     <!-- #endif -->
     <slot></slot>
-    <scroll-container :have_no_more="have_no_more" class="w-full flex-1 mh-0">
+    <scroll-container :have_no_more="have_no_more" class="w-full flex-1 mh-0" :enable_refresher="enable_refresh">
       <slot name="scroll"></slot>
     </scroll-container>
     <slot name="bottom"></slot>
@@ -15,10 +15,13 @@
 <script setup lang="ts">
 import HeadNav from '../common/HeadNav.vue';
 import ScrollContainer from '../common/ScrollContainer/index.vue';
-defineProps<{
+withDefaults(defineProps<{
   showHead?: boolean;
   have_no_more?: boolean;
-}>();
+  enable_refresh?: boolean;
+}>(), {
+  enable_refresh: true,
+});
 </script>
 
 <style lang="scss" scoped>

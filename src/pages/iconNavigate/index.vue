@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper class="w-full">
+  <page-wrapper :enable_refresh="false" class="w-full">
     <go-back>返回</go-back>
     <template #scroll>
       <!-- #ifdef H5 -->

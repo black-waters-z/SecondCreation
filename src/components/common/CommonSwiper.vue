@@ -1,5 +1,8 @@
 <template>
-  <view>
+  <view class="common-swiper">
+    <uni-icons class="common-swiper__icon" fontFamily="CustomFont" :size="26" color="white" v-if="showIcon"
+      @click="showWrapper">{{ '\uec13'
+      }}</uni-icons>
     <uni-swiper-dot :info="swiperInfo" :current="current" field="content" :mode="mode" :dotsStyles="dotStyles">
       <swiper class="swiper-box" :style="{ ...styles }" circular interval="3000" duration="500" @change="change">
         <swiper-item v-for="(item, index) in swiperInfo" :key="index">
@@ -12,17 +15,24 @@
       </swiper>
     </uni-swiper-dot>
     <slot></slot>
+    <image-wrapper ref="imageWrapper" :image="swiperInfo[current].swiperImg"></image-wrapper>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import ImageWrapper from "@/components/base/ImageWrapper/index.vue"
 type CSSProperties = Record<string, string | number | undefined>;
+const imageWrapper = ref<typeof ImageWrapper>();
 
+function showWrapper() {
+  imageWrapper.value?.toggleShow();
+}
 // props:styles 长高
 // swiperInfo: 轮播图数据，底部栏数据
 withDefaults(
   defineProps<{
+    showIcon?: boolean;
     styles?: {
       width?: string;
       height?: string;
@@ -80,6 +90,18 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
+.common-swiper {
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    z-index: 500;
+    text-shadow: 0 0 10rpx rgba(0, 0, 0, 0.3);
+  }
+}
+
 .swiper-box {
   width: 100vw;
   height: 60vw;
@@ -92,6 +114,14 @@ defineOptions({
   width: 100%;
   height: 100%;
   background-color: none;
+
+  ::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 400;
+  }
 }
 
 .navigation-img {

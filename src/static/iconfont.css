@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id 5062764 */
-  src: url('iconfont.ttf?t=1769333297219') format('truetype');
+  src: url('iconfont.ttf?t=1770795709687') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fangda:before {
+  content: "\ec13";
+}
+
+.icon-shangpin:before {
+  content: "\e650";
 }
 
 .icon-bofang:before {

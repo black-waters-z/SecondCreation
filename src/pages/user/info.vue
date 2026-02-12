@@ -7,17 +7,17 @@
         <!-- 放分别内容、合集 -->
         <swiper-wrapper v-model:current="current">
             <template #a>
-                <ScrollContainer>
+                <ScrollContainer :enable_refresher="false">
                     <favorite-component></favorite-component>
                 </ScrollContainer>
             </template>
             <template #b>
-                <ScrollContainer>
+                <ScrollContainer :enable_refresher="false">
                     <UserInfoArticles :article-list="articleList" :user-info="userInfo"></UserInfoArticles>
                 </ScrollContainer>
             </template>
             <template #c>
-                <ScrollContainer>
+                <ScrollContainer :enable_refresher="false">
                     <UserInfoCollections :collection-list="collectionList"></UserInfoCollections>
                 </ScrollContainer>
             </template>

@@ -52,6 +52,9 @@ import { watch } from 'vue';
 
 const userInfo = ref<UserInfo>();
 enum NavLabelEnum {
+  CONTACT_TO_ME = '互动消息',
+  ATTENTION_TO_ME = '关注',
+
   HISTORY = '历史记录',
   FAVORITE = '我的收藏',
   LIKE = '我的喜欢',
@@ -71,6 +74,9 @@ enum NavLabelEnum {
 }
 
 const readNavItems = [
+  { icon: '\ue63b', label: NavLabelEnum.CONTACT_TO_ME, type: 'ContactToMeComponent' },
+  { icon: '\ue634', label: NavLabelEnum.ATTENTION_TO_ME, type: 'AttentionToMeComponent' },
+
   { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
   { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
   { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent' },
