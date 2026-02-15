@@ -1,4 +1,4 @@
-import { get } from '@/utils/request';
+import { get, post } from '@/utils/request';
 import type { NavTabTag } from '@/components/base/NavTab/type';
 import type { TagPageData, Article } from '@/pages/tagPage/type';
 import type { Tag } from '@/pages/tagNav/type';
@@ -17,18 +17,29 @@ export async function listTags(tagType: 'work' | 'character' | 'cross', all: boo
   return result;
 }
 
-async function fromTagGetArticleList(tagId: string): Promise<Article[]> {
-  const result = await get(`/articles/from_tag_get?tag_id=${tagId}`);
+export interface queryArticleKey {
+  keyword?: string;
+  tag_ids?: number[];
+  order_by: '-total_score' | 'total_score';
+  time_range?: Date[];
+  peroid?: 'all' | 'week' | 'month' | 'year' | 'newest' | 'recommend';
+  page: number;
+  per_page: number;
+}
+async function fromTagGetArticleList(queryKey: queryArticleKey): Promise<Article[]> {
+  const result = await post(`/articles/filter_and_search_articles`, queryKey);
   return result;
 }
 
-async function getNavTagRelation(tagId: string): Promise<NavTabTag> {
-  const result = await get(`/tag-relations/get_work_tags?other_tag_id=${tagId}`);
-  return result;
+async function getNavTagRelation(tagId?: number): Promise<NavTabTag | undefined> {
+  if (tagId) {
+    const result = await get(`/tag-relations/get_work_tags?other_tag_id=${tagId}`);
+    return result;
+  }
 }
 
-export async function getTagPageData(tagId: string): Promise<TagPageData> {
-  const navTags = await getNavTagRelation(tagId);
-  const articleList = await fromTagGetArticleList(tagId);
+export async function getTagPageData(queryKey: queryArticleKey): Promise<TagPageData> {
+  const navTags = await getNavTagRelation(queryKey.tag_ids?.[0]);
+  const articleList = await fromTagGetArticleList(queryKey);
   return { navTags, articleList };
 }

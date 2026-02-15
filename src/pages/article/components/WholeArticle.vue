@@ -7,7 +7,7 @@
     </CommonSwiper>
     <view class="whole-article__content">
       <view class="whole-article__author w-full">
-        <article-author :user-info="userInfo"></article-author>
+        <article-author :user-info="userInfo" :has_attention="userInfo.has_been_followed"></article-author>
       </view>
       <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__content-content">

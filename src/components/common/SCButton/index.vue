@@ -24,21 +24,22 @@ defineEmits(['click']);
 .button {
   border-radius: 100px;
   box-sizing: border-box;
-  display: inline-flex;
+  box-sizing: border-box;
+  display: block;
   margin-left: 0;
   margin-right: 0;
   margin: 10rpx;
   width: fit-content;
   justify-content: center;
   align-items: center;
-  padding: 10rpx 20rpx;
+  padding: 5rpx 30rpx;
   line-height: 2;
   box-shadow: 0 0 10px $pink-shadow-01;
 }
 
 .button-bt {
-  border: 2px solid $pink-300;
-  background-color: $pink-300;
+  border: none;
+  background: $pink-linear-gradient-02;
   color: white;
   transition: 0.3s ease;
 
@@ -52,8 +53,9 @@ defineEmits(['click']);
 }
 
 .button-outline {
-  border: 2px solid $pink-300;
-  color: $pink-300;
+  border: 2rpx solid $pink-400;
+
+  color: $pink-400;
   background: none;
   transition: 0.3s ease;
 

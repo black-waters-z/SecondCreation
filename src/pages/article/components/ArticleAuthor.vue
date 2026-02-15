@@ -2,14 +2,30 @@
     <view class="article-author">
         <image class="article-author__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
         <text class="article-author__name">{{ userInfo?.username }}</text>
-        <SCButton class="article-author__bt" type="button" size="25rpx" color="red">关注</SCButton>
+        <SCButton class="article-author__bt" type="button" size="25rpx" @click="toggleAttentionFunc(userInfo.id)"
+            :color="has_attentioned ? 'grey' : 'red'">
+            {{ has_attentioned ? '已关注' : '关注' }}</SCButton>
     </view>
 </template>
 
 <script setup lang="ts">
 import type { UserInfo } from '@/pages/user/type';
 import SCButton from '@/components/common/SCButton/index.vue';
-defineProps<{ userInfo: UserInfo }>()
+import { ref } from 'vue';
+import { watch } from 'vue';
+import { toggleAttention } from "@/api/userApi"
+const props = defineProps<{ userInfo: UserInfo, has_attention?: boolean }>()
+
+const has_attentioned = ref(props.has_attention)
+watch(() => props.has_attention, (newValue) => {
+    has_attentioned.value = newValue
+}, { immediate: true })
+
+async function toggleAttentionFunc(following_id: number) {
+    has_attentioned.value = !has_attentioned.value
+    // 接入接口
+    await toggleAttention(following_id)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -18,7 +34,7 @@ defineProps<{ userInfo: UserInfo }>()
     align-items: center;
     width: 100%;
     height: 100%;
-    margin: 20rpx 0;
+    padding: 20rpx 0;
 
     .article-author__avatar {
         width: 80rpx;

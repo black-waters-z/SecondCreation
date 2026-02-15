@@ -7,6 +7,7 @@ import ArticleDataComponent from '@/components/icon/ArticleDataComponent/index.v
 import SettingComponent from '@/components/icon/SettingComponent/index.vue';
 import ProblemReplyComponent from '@/components/icon/ProblemReplyComponent/index.vue';
 import ContactToMeComponent from '@/components/icon/ContactToMeComponent/index.vue';
+import AttentionComponent from '@/components/icon/AttentionComponent/index.vue';
 export const componentMap = {
   FavoriteComponent,
   LikeComponent,
@@ -17,5 +18,6 @@ export const componentMap = {
   SettingComponent,
   ProblemReplyComponent,
   ContactToMeComponent,
+  AttentionComponent,
 };
 export type componentKey = keyof typeof componentMap;

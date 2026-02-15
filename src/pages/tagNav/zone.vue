@@ -1,5 +1,5 @@
 <template>
-    <page-wrapper class="w-full tag-nav letter-spacing-4" show-head>
+    <page-wrapper class="w-full tag-nav letter-spacing-4">
         <go-back class="w-full"></go-back>
         <template #scroll>
             <view class="tag-nav__scroll">

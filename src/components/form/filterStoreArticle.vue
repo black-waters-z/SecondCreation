@@ -12,7 +12,10 @@
                 <checkbox value="video" />视频
             </label>
         </checkbox-group>
-        <uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
+        <uni-section title="搜索关键词" type="line"></uni-section>
+        <uni-easyinput v-model="keyword" placeholder="输入搜索关键词" @iconClick="iconClick">
+        </uni-easyinput>
+        <uni-section :title="'搜索日期'" type="line"></uni-section>
         <view class="example-body">
             <uni-datetime-picker v-model="range" type="daterange" @maskClick="maskClick" />
         </view>
@@ -44,6 +47,7 @@ const range = ref(['2026-01-1', '2026-01-28'])
 const tagInput = ref<string>('')
 const tagInputAll = ref<string[]>([])
 const checkedValue = ref(['write'])
+const keyword = ref<string>('')
 function maskClick(e) {
     console.log('maskClick事件:', e);
 }
@@ -64,13 +68,20 @@ function deleteTag(idx: number) {
 }
 
 function startFilter() {
-    emit('startFilter')
-    // 筛选干脆根据每个表格不同在自己表格里筛选就好，传递回去只是通知对方关闭筛选界面
-    console.log('开始筛选:', {
+    emit('startFilter', {
         checkedValue: checkedValue.value,
-        range: range.value,
+        keyword: keyword.value,
+        time_range: range.value,
         tagInputAll: tagInputAll.value
-    });
+    })
+    // console.log('开始筛选:', {
+    //     checkedValue: checkedValue.value,
+    //     keyword: keyword.value,
+    //     time_range: range.value,
+    //     tagInputAll: tagInputAll.value
+    // });
+
+    // 筛选干脆根据每个表格不同在自己表格里筛选就好，传递回去只是通知对方关闭筛选界面
 }
 </script>
 

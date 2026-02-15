@@ -1,6 +1,6 @@
 import type { Collection } from '@/pages/post/index';
 import type { CollectionData } from '@/components/common/UserInfoCollections/type';
-import { get } from '../utils/request';
+import { get, post } from '../utils/request';
 import { type ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 import { type UserInfo } from '@/pages/user/type';
 export async function getCollectionListInPost(): Promise<Collection[]> {
@@ -19,4 +19,14 @@ export interface CollectionArticleWithUserOut {
 }
 export async function getCollectionArticles(collection_id: number, page: number = 1, page_size: number = 10): Promise<CollectionArticleWithUserOut> {
   return await get(`/collections/articles?collection_id=${collection_id}&page=${page}&page_size=${page_size}`);
+}
+
+export interface CreateCollection {
+  name: string;
+  image_url?: string;
+  description?: string;
+}
+export async function postCollection(collectionIn: CreateCollection): Promise<number> {
+  const result = await post('/collections', collectionIn);
+  return result.id;
 }

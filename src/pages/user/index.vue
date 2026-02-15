@@ -75,7 +75,7 @@ enum NavLabelEnum {
 
 const readNavItems = [
   { icon: '\ue63b', label: NavLabelEnum.CONTACT_TO_ME, type: 'ContactToMeComponent' },
-  { icon: '\ue634', label: NavLabelEnum.ATTENTION_TO_ME, type: 'AttentionToMeComponent' },
+  { icon: '\ue634', label: NavLabelEnum.ATTENTION_TO_ME, type: 'AttentionComponent' },
 
   { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
   { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
