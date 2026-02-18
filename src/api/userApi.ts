@@ -2,8 +2,12 @@ import type { UserInfo } from '@/pages/user/type';
 import { get, post } from '@/utils/request';
 
 // 获取当前用户信息
-export async function getUserMeInfo(): Promise<UserInfo> {
-  return await get('/users/me');
+export interface UserInfoWithFollow extends UserInfo {
+  following: boolean;
+}
+export async function getUserMeInfo(user_id?: number): Promise<UserInfoWithFollow> {
+  if (!user_id) return await get('/users/me');
+  return await get(`/users/me?input_user_id=${user_id}`);
 }
 
 // 修改用户密码

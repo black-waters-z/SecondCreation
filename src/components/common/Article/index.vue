@@ -194,12 +194,10 @@ const isVideo = computed(() => {
         box-sizing: border-box;
         padding: 20rpx;
         font-size: 25rpx;
-        font-style: italic;
         font-weight: 400;
         color: $text-muted;
         overflow: hidden;
         text-overflow: ellipsis;
-        padding-bottom: 0;
         background: #f1f1f19f;
         border-radius: 15rpx;
     }

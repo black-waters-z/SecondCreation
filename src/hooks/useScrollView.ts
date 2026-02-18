@@ -1,10 +1,10 @@
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 enum RefreshType {
   PullDown = 'PullDown',
   Restore = 'Restore',
   Loading = 'Loading',
 }
-export function useScrollView() {
+export function useScrollView(fetchData?: () => void) {
   const triggered = ref<string | boolean>(false);
   let isRefreshing = false;
   const refreshType = ref<RefreshType>(RefreshType.PullDown);

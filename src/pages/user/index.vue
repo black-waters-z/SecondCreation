@@ -8,6 +8,7 @@
       </view>
       <view class="w-full flex ">
         <view class="content__read-nav">
+
           <view class="flex" v-if="isMobile">
             <view class="content__read-nav__split"></view>
             <text class="content__read-nav__text">文章管理</text>
@@ -15,6 +16,12 @@
           <user-bar :user-info="userInfo" v-if="!isMobile"></user-bar>
           <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"
             v-model:iconIndx="iconIndx"> </read-nav>
+          <view class="flex">
+            <view class="content__read-nav__split" v-if="isMobile"></view>
+            <text class="content__read-nav__text" v-if="isMobile">互动</text>
+          </view>
+          <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_1" color="black">
+          </read-nav>
           <view class="flex">
             <view class="content__read-nav__split" v-if="isMobile"></view>
             <text class="content__read-nav__text" v-if="isMobile">用户管理</text>
@@ -74,8 +81,6 @@ enum NavLabelEnum {
 }
 
 const readNavItems = [
-  { icon: '\ue63b', label: NavLabelEnum.CONTACT_TO_ME, type: 'ContactToMeComponent' },
-  { icon: '\ue634', label: NavLabelEnum.ATTENTION_TO_ME, type: 'AttentionComponent' },
 
   { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
   { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
@@ -87,11 +92,15 @@ const readNavItems = [
 
 const iconIndx = ref(0);
 
+const readNavItems_1 = [
+  { icon: '\ue63b', label: NavLabelEnum.CONTACT_TO_ME, type: 'ContactToMeComponent' },
+  { icon: '\ue634', label: NavLabelEnum.ATTENTION_TO_ME, type: 'AttentionComponent' },
+
+]
+
 const readNavItems_2 = [
   { label: NavLabelEnum.USER_SETTING, type: 'SettingComponent' },
   { label: NavLabelEnum.PROBLEM_ANSWER, type: 'ProblemReplyComponent' },
-  { label: NavLabelEnum.PASSWORD_CHANGE, type: 'PasswordChangeComponent' },
-  { label: NavLabelEnum.LOGOUT },
   { label: NavLabelEnum.ABOUT_US },
   { label: NavLabelEnum.LOGOUT_ACCOUNT },
 ];

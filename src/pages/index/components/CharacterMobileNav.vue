@@ -26,7 +26,7 @@ const characters = [
   },
   { name: '粮仓导航', avatar: '/src/static/avatar/avatar1.jpg', navigatorUrl: '/pages/store/index', switch: true },
   { name: '火热合集', avatar: '/src/static/avatar/avatar1.jpg' },
-  { name: '官方公告', icon: '\ue600' },
+  { name: '官方公告', icon: '\ue600', navigatorUrl: '/pages/notice/index' },
   { name: '搜索', icon: '\ue60d', navigatorUrl: '/pages/search/index' },
 ];
 

@@ -1,8 +1,9 @@
 <template>
     <view class="article-data">
         <view class="article-data__info">
-            <text class="article-data__info--title">文章标题</text>
-            <navigator class="article-data__info--link" url="#" open-type="navigate">
+            <text class="article-data__info--title">{{ articleData?.[0].article_name }}</text>
+            <navigator class="article-data__info--link" :url="`/pages/article/index?id=${articleData?.[0].article_id}`"
+                open-type="navigate">
                 <text>前往查看文章</text><uni-icons type="arrow-right" size="20"></uni-icons>
             </navigator>
         </view>

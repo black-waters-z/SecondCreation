@@ -4,11 +4,16 @@ interface ArticleDataType {
 }
 
 export interface ArticleDataDict {
-  [key: string]: {
-    like: ArticleDataType[];
-    favorite: ArticleDataType[];
-    comment: ArticleDataType[];
-  };
+  article_id: number;
+  article_name: string;
+  [key: string]:
+    | {
+        like: ArticleDataType[];
+        favorite: ArticleDataType[];
+        comment: ArticleDataType[];
+      }
+    | number
+    | string;
 }
 
 export type ArticleDatas = ArticleDataDict[][];

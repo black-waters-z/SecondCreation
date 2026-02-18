@@ -41,18 +41,24 @@ import { type Ref, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import type { CollectionData } from '@/components/common/UserInfoCollections/type';
 import { type ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
-import { getUserMeInfo } from '@/api/userApi';
-import type { UserInfo as UserInfoType } from '@/pages/user/type';
+import { getUserMeInfo, type UserInfoWithFollow } from '@/api/userApi';
 
 const current = ref(2)
 // const userInfo = ref<UserInfo>()
 const collectionList = ref<CollectionData[]>([])
 const articleList = ref<ManageArticle[]>([])
-const userInfo = ref<UserInfoType>() as Ref<UserInfoType>
-onLoad(async () => {
-    userInfo.value = await getUserMeInfo();
-    collectionList.value = await getUserInfoCollection();
-    articleList.value = await getMineArticleList(1, 10);
+const userInfo = ref<UserInfoWithFollow>() as Ref<UserInfoWithFollow>
+onLoad(async (options) => {
+    if (!options?.id) {
+        userInfo.value = await getUserMeInfo();
+        collectionList.value = await getUserInfoCollection();
+        articleList.value = await getMineArticleList(1, 10);
+    } else {
+        userInfo.value = await getUserMeInfo(options.id);
+        collectionList.value = await getUserInfoCollection(options.id);
+        articleList.value = await getMineArticleList(1, 10, options.id);
+    }
+
 })
 </script>
 

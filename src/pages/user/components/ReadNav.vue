@@ -2,7 +2,7 @@
   <view class="read-nav-container">
     <view v-for="(item, idx) in navItems" :key="item.label" class="read-nav-container__icon"
       :class="{ 'icon_active': activeIndex === idx }" @click="goToIconNavigatePage(item?.type, item?.label, idx)">
-      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="20">
+      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="21">
         {{ item.icon }}
       </uni-icons>
       <text class="icon-text" :style="{ color: 'grey' }"> {{ item.label }} </text>
@@ -61,7 +61,9 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
     position: relative;
 
     .icon-text {
-      font-size: 23rpx;
+      margin-left: 4rpx;
+      font-size: 24rpx;
+      letter-spacing: 2rpx;
     }
   }
 }

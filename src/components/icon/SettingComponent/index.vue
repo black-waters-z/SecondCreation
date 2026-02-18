@@ -11,25 +11,37 @@
         <view class="setting-component__other-setting">
             <view class="setting-component__other-setting__item">绑定邮箱：
                 <text class="setting-component__other-setting__item-answer">1060827621@qq.com</text>
-                <uni-icons type="compose" size="20" class="setting-component__other-setting__item-edit"></uni-icons>
+                <uni-icons type="compose" size="20" @click="popShow = true; settingFormType = 'email';"
+                    class="setting-component__other-setting__item-edit"></uni-icons>
             </view>
             <view class="setting-component__other-setting__item">绑定手机：
                 <text class="setting-component__other-setting__item-answer">19693***782</text>
-                <uni-icons type="compose" size="20" class="setting-component__other-setting__item-edit"></uni-icons>
+                <uni-icons type="compose" size="20" @click="popShow = true; settingFormType = 'phone';"
+                    class="setting-component__other-setting__item-edit"></uni-icons>
             </view>
             <view class="setting-component__other-setting__item">修改密码：
                 <text class="setting-component__other-setting__item-answer">*******</text>
-                <uni-icons type="compose" size="20" class="setting-component__other-setting__item-edit"></uni-icons>
+                <uni-icons type="compose" size="20" @click="popShow = true; settingFormType = 'password';"
+                    class="setting-component__other-setting__item-edit"></uni-icons>
             </view>
         </view>
         <view class="setting-component__button">
-            <SCButton type="button">退出登录</SCButton>
+            <SCButton type="button" size="32rpx">退出登录</SCButton>
         </view>
+        <pop-wrapper v-model:popShow="popShow">
+            <setting-form :type="settingFormType"></setting-form>
+        </pop-wrapper>
     </view>
 </template>
 
 <script setup lang="ts">
 import SCButton from "@/components/common/SCButton/index.vue"
+import PopWrapper from "@/components/base/PopWrapper/index.vue"
+import SettingForm from "./SettingForm.vue";
+import { ref } from "vue";
+
+const popShow = ref(false)
+const settingFormType = ref<'email' | 'phone' | 'password'>('email')
 </script>
 
 <style lang="scss" scoped>

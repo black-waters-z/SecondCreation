@@ -2,6 +2,9 @@
     <view class="user-info-component">
         <image class="user-info-component__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
         <view class="user-info-component__name">{{ userInfo?.username }}</view>
+        <SCButton class="article-author__bt" type="button" size="25rpx" @click="toggleAttentionFunc(userInfo.id)"
+            :color="has_attentioned ? 'grey' : 'red'">
+            {{ has_attentioned ? '已关注' : '关注' }}</SCButton>
         <view class="user-info-component__info">
             <view class="user-info-component__info__item">
                 关注</view>
@@ -11,10 +14,23 @@
 </template>
 
 <script setup lang="ts">
-import type { UserInfo } from '@/pages/user/type';
-defineProps<{
-    userInfo: UserInfo;
+import SCButton from '@/components/common/SCButton/index.vue';
+import { ref, watch } from 'vue';
+import { toggleAttention, type UserInfoWithFollow } from '@/api/userApi';
+const props = defineProps<{
+    userInfo: UserInfoWithFollow;
 }>();
+
+const has_attentioned = ref(props.userInfo?.following)
+watch(() => props.userInfo?.following, (newValue) => {
+    has_attentioned.value = newValue
+}, { immediate: true })
+
+async function toggleAttentionFunc(following_id: number) {
+    has_attentioned.value = !has_attentioned.value
+    // 接入接口
+    await toggleAttention(following_id)
+}
 
 </script>
 

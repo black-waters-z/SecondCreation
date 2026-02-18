@@ -47,7 +47,11 @@ export async function getManageArticleList(page: number, page_size: number): Pro
 }
 
 // 获取用户所有的文章，文本前一百个字符
-export async function getMineArticleList(page: number, page_size: number): Promise<ManageArticle[]> {
-  const result = await get(`/articles/mine/statistics?page=${page}&page_size=${page_size}&get_content=true`);
+export async function getMineArticleList(page: number, page_size: number, user_id?: number): Promise<ManageArticle[]> {
+  if (!user_id) {
+    const result = await get(`/articles/mine/statistics?page=${page}&page_size=${page_size}&get_content=true`);
+    return result.items;
+  }
+  const result = await get(`/articles/mine/statistics?page=${page}&page_size=${page_size}&user_id=${user_id}&get_content=true`);
   return result.items;
 }
