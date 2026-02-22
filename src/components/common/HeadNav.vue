@@ -33,6 +33,7 @@ import SearchBar from './SearchBar.vue';
 import { ref } from 'vue';
 // #ifdef H5
 import CharacterMobileNav from '@/pages/index/components/CharacterMobileNav.vue';
+import { onHide } from '@dcloudio/uni-app';
 // #endif
 defineOptions({
   options: {
@@ -45,6 +46,10 @@ const showMobileNav = ref(false);
 function toggleMobileNav() {
   showMobileNav.value = !showMobileNav.value;
 }
+
+onHide(() => {
+  showMobileNav.value = false;
+});
 </script>
 
 <style lang="scss">

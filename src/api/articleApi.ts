@@ -2,20 +2,21 @@ import { get, post } from '@/utils/request';
 import type { Article } from '@/pages/tagPage/type';
 import type { ArticlePageData } from '@/pages/article/type';
 import type { ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
+import type { queryArticleKey } from './tagApi';
 export async function getRecommenedArticles(): Promise<Article[]> {
   const result = await get('/articles/recommendations');
   return result;
 }
 
-export async function searchArticle(keyword: string): Promise<Article[]> {
-  const result = await get(`/articles/search?keyword=${keyword}`);
+export async function searchArticle(search_keys: queryArticleKey): Promise<Article[]> {
+  const result = await post(`/articles/filter_and_search_articles`, search_keys);
   return result;
 }
 
 // 按照热度根据页数，时间范围等查询
 export async function getFilterArticle(page: number): Promise<Article[]> {
   const result = await get(`/articles/get-filter-articles?page=${page}`);
-  return result.items;
+  return result;
 }
 
 export async function getFavoriteArticles(): Promise<Article[]> {

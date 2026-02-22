@@ -54,7 +54,7 @@
 import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
 import { computed } from 'vue';
-import ClickIcon from "@/components/base/ClickIcon/index.vue"
+// import ClickIcon from "@/components/base/ClickIcon/index.vue"
 const props = defineProps<{ article: ArticleType }>();
 
 const isVideo = computed(() => {

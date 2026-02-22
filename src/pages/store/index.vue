@@ -1,11 +1,11 @@
 <template>
-  <page-wrapper have_no_more class="w-full store" show-head>
+  <page-wrapper have_no_more class="w-full store" show-head :fetch-data="fetchData">
     <store-tab v-slot="{ startFilter }">
       <filter-store-article @start-filter="startFilter"></filter-store-article>
     </store-tab>
     <template #scroll>
-      <grid-articles-container class="w-full grid-articles-container"
-        :article-list="articleList"></grid-articles-container>
+      <grid-articles-container class="w-full grid-articles-container" :article-list="articleList"
+        ref="gridArticle"></grid-articles-container>
     </template>
     <to-top></to-top>
     <post-sheet class="w-full"></post-sheet>
@@ -37,6 +37,14 @@ onLoad(async () => {
   articleList.value = await getFilterArticle(1);
   // console.log(articleList.value);
 })
+
+const gridArticle = ref<InstanceType<typeof GridArticlesContainer> | null>(null);
+
+async function fetchData(page: number) {
+  const next = await getFilterArticle(page);
+  // gridArticle?.value?.reset();
+  articleList.value = [...next];
+}
 </script>
 
 <style lang="scss">

@@ -1,7 +1,7 @@
 <template>
   <!-- 这个改成tag总结 -->
   <page-wrapper class="w-full tag-nav letter-spacing-4">
-    <go-back class="w-full"></go-back>
+    <go-back class="w-full">标签导航</go-back>
     <template #scroll>
       <view class="w-full tag-nav__scroll" v-for="(item, key) in tagList" :key="key">
         <IntroductionNav v-show="item" class="tag-nav__introduction" :navigator-href="`/pages/tagNav/zone?type=${key}`">

@@ -1,6 +1,6 @@
 <template>
   <view class="waterfall">
-    <view class="waterfall__col" v-for="id_num in waterFallColNum">
+    <view class="waterfall__col" v-for="(id_num, idx) in waterFallColNum" :key="idx">
       <view class="waterfall__inner" :id="`col${id_num}`">
         <!-- zone之后要换成从数据库中查过来的 -->
         <Article v-for="(item, key) in columnLists[id_num - 1].value" :article="item" :key="key"
@@ -78,7 +78,7 @@ const resetColumns = () => {
 };
 
 const renderArticles = async () => {
-  resetColumns();
+  // resetColumns();
   await nextTick();
   await mountMenu();
 };
@@ -94,6 +94,10 @@ watch(
   },
   { deep: true }
 );
+
+defineExpose({
+  resetColumns,
+});
 </script>
 
 <style scoped lang="scss">

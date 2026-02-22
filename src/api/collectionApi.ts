@@ -33,3 +33,8 @@ export async function postCollection(collectionIn: CreateCollection): Promise<nu
   const result = await post('/collections', collectionIn);
   return result.id;
 }
+
+// 获取总，年月日最热的合集前十个
+export async function getHotCollection(page: number, page_size: number): Promise<Record<'all' | 'year' | 'month' | 'week', CollectionData[]>> {
+  return await get(`/collections/list_hot_collection?page=${page}&page_size=${page_size}`);
+}

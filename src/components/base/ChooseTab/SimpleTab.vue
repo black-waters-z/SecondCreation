@@ -8,8 +8,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { tabs } from './type'
-
+defineProps<{ tabs: Record<'name', string>[] }>();
 const active = ref(0)
 const emit = defineEmits(['changeTab'])
 function changeTab(idx: number) {
@@ -22,6 +21,7 @@ function changeTab(idx: number) {
 .simple-tab {
     display: flex;
     justify-content: space-around;
+    letter-spacing: 10rpx;
     padding: 10px 0;
     font-size: 26rpx;
     position: sticky;

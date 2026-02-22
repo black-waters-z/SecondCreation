@@ -15,11 +15,18 @@
 import { useScrollView } from '@/hooks/useScrollView';
 import Refresh from '../Refresh/index.vue';
 import HaveNoMore from '@/components/base/HaveNoMore/index.vue'
-withDefaults(defineProps<{ have_no_more?: boolean; enable_refresher?: boolean }>(), {
-  have_no_more: false,
-  enable_refresher: true
-})
-const { triggered, refreshType, onEnd, onPulling, onRefresh, onAbort, onRestore } = useScrollView();
+const props = withDefaults(
+  defineProps<{
+    have_no_more?: boolean;
+    enable_refresher?: boolean;
+    fetchData?: (page: number, page_size?: number) => void | Promise<void>;
+  }>(),
+  {
+    have_no_more: false,
+    enable_refresher: true,
+  }
+);
+const { triggered, refreshType, onEnd, onPulling, onRefresh, onAbort, onRestore } = useScrollView(props.fetchData);
 </script>
 
 <style lang="scss" scoped>

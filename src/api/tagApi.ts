@@ -20,6 +20,7 @@ export async function listTags(tagType: 'work' | 'character' | 'cross', all: boo
 export interface queryArticleKey {
   keyword?: string;
   tag_ids?: number[];
+  must_have_ids?: number[];
   order_by: '-total_score' | 'total_score';
   time_range?: Date[];
   peroid?: 'all' | 'week' | 'month' | 'year' | 'newest' | 'recommend';
@@ -31,7 +32,7 @@ async function fromTagGetArticleList(queryKey: queryArticleKey): Promise<Article
   return result;
 }
 
-async function getNavTagRelation(tagId?: number): Promise<NavTabTag | undefined> {
+export async function getNavTagRelation(tagId?: number): Promise<NavTabTag | undefined> {
   if (tagId) {
     const result = await get(`/tag-relations/get_work_tags?other_tag_id=${tagId}`);
     return result;

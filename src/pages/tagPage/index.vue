@@ -2,8 +2,9 @@
     <page-wrapper>
         <go-back class="w-full">
             <template #right>
-                <Tag class="nav-tab__sticky--tag" v-if="result?.navTags?.work_tags?.[0]?.name"
-                    :text="result?.navTags?.work_tags?.[0]?.name" :closable="false" size="medium" :bg-color="'gray'">
+                <Tag class="nav-tab__sticky--tag" @click="changeWorkTag" v-if="result?.navTags?.work_tags?.length"
+                    :text="result?.navTags?.work_tags?.[workIndex]?.name" :closable="false" size="medium"
+                    :bg-color="'gray'">
                 </Tag>
                 <Tag class="nav-tab__sticky--tag" v-if="result?.navTags?.other_tag?.name"
                     :text="result?.navTags?.other_tag?.name" :closable="false" size="medium" :bg-color="'pink'">
@@ -16,7 +17,7 @@
             <filter-store-article @start-filter="startFilter"></filter-store-article>
         </nav-tab>
         <template #scroll>
-            <grid-articles-container v-if="result?.articleList?.length"
+            <grid-articles-container ref="gridArticle" v-if="result?.articleList?.length"
                 :article-list="result?.articleList"></grid-articles-container>
         </template>
     </page-wrapper>
@@ -30,11 +31,18 @@ import GridArticlesContainer from '@/components/common/GridArticlesContainer/ind
 import NavTab from '@/components/base/NavTab/index.vue';
 import GoBack from '@/components/common/GoBack.vue';
 import { useFilterArticles } from '@/hooks/useFilterArticles';
+import { ref } from 'vue';
 const list = [{ name: '最新', peroid: 'newest' }, { name: '推荐', peroid: 'recommend' }, { name: '本周', peroid: 'week' }, { name: '本月', peroid: 'month' }, { name: '本年', peroid: 'year' },]
-
+const gridArticle = ref<InstanceType<typeof GridArticlesContainer> | null>(null);
 const { result, toggleArticle,
-    startFilterArticles, } = useFilterArticles(list);
+    startFilterArticles, changeTagArticle } = useFilterArticles(list, gridArticle);
 
+const workIndex = ref(0);
+function changeWorkTag() {
+    if (!result.value?.navTags?.work_tags?.length) return;
+    workIndex.value = (workIndex.value + 1) % result.value?.navTags?.work_tags?.length;
+    changeTagArticle.value(result.value?.navTags?.work_tags?.[workIndex.value]?.id);
+}
 </script>
 
 <style lang="scss">

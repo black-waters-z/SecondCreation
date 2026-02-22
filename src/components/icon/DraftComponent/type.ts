@@ -1,20 +1,11 @@
-export interface Craft {
+export interface DraftListItem {
   id: number;
   title: string;
   subTitle: string;
   content: string;
   img: string[];
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updatedAt?: string;
 }
 
-export interface CraftListItem {
-  id: number;
-  title: string;
-  updatedAt: string;
-}
-
-export interface CraftList {
-  total: number;
-  list: CraftListItem[];
-}
+export type DraftList = DraftListItem[];

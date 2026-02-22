@@ -1,6 +1,6 @@
 <template>
     <view class="contact-to-me-component">
-        <SimpleTab @change-tab="changeTab"></SimpleTab>
+        <SimpleTab @change-tab="changeTab" :tabs="tabs"></SimpleTab>
         <ContactToMe v-for="(item, idx) in result" :key="idx" :source="item"></ContactToMe>
     </view>
 </template>

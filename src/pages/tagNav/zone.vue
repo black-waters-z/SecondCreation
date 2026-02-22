@@ -1,6 +1,6 @@
 <template>
     <page-wrapper class="w-full tag-nav letter-spacing-4">
-        <go-back class="w-full"></go-back>
+        <go-back class="w-full">返回</go-back>
         <template #scroll>
             <view class="tag-nav__scroll">
                 <IntroductionNav class="tag-nav__introduction">

@@ -1,5 +1,5 @@
-<template>
-  <view class="content">
+﻿<template>
+  <page-wrapper have_no_more class="content w-full" :fetch-data="loadMoreArticles">
     <!-- 首页头部 -->
     <!-- #ifdef MP-WEIXIN -->
     <head-nav></head-nav>
@@ -12,8 +12,7 @@
     </match-media>
     <!-- #endif -->
 
-    <!-- 窄屏瀑布流 -->
-    <scroll-container have_no_more class="w-full flex-1 mh-0">
+    <template #scroll>
       <!-- #ifdef H5 -->
       <view class="content__head">
         <common-swiper></common-swiper>
@@ -21,25 +20,21 @@
       <!-- #endif -->
       <!-- 这里插入商品信息 -->
       <home-product :source="goods"></home-product>
-      <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
-    </scroll-container>
-
-    <!-- 宽屏瀑布流 -->
-    <match-media :min-width="600" style="width: 100%">
-      <scroll-container have_no_more class="w-full flex-1 mh-0">
-        <template #refresher>
-          <refresh></refresh>
-        </template>
+      <match-media :max-width="599" class="w-full">
+        <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
+      </match-media>
+      <match-media :min-width="600" class="w-full">
         <water-fall :waterFallColNum="5" :article-lists="articleList"></water-fall>
-      </scroll-container>
-    </match-media>
+      </match-media>
+    </template>
+
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
-  </view>
+  </page-wrapper>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { ref } from 'vue';
 // #ifdef H5
 import CommonSwiper from '@/components/common/CommonSwiper.vue';
 // #endif
@@ -48,9 +43,8 @@ import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
 import CharacterNav from './components/CharacterNav.vue';
 import WaterFall from '@/components/common/WaterFall.vue';
-import Refresh from '@/components/common/Refresh/index.vue';
 import HomeProduct from './components/HomeProduct.vue';
-import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
+import PageWrapper from '@/components/container/PageContainer.vue';
 import { getGoodsInfo } from "@/api/shopApi"
 import { onLoad } from '@dcloudio/uni-app';
 import { getRecommenedArticles } from '@/api/articleApi'
@@ -70,6 +64,10 @@ defineOptions({
 });
 const goods = ref<goodInfo[]>([]);
 const articleList = ref<Article[]>([])
+const loadMoreArticles = async () => {
+  const next = await getRecommenedArticles();
+  articleList.value = [...articleList.value, ...next];
+}
 onLoad(async () => {
   articleList.value = await getRecommenedArticles()
   await getGoodsInfo(1, 10).then(res => {
