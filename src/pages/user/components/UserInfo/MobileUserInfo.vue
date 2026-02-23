@@ -2,7 +2,10 @@
     <view class="user-info" v-if="isMobile">
         <view class="user-info__name">
             <view>{{ userInfo?.username || '尚未登录' }}</view>
-            <text class="user-info__go-to-user-page">前往用户主页</text>
+            <navigator class="user-info__go-to-user-page" url="/pages/user/info" open-type="navigate"
+                hover-class="navigator-hover">
+                <text>前往用户主页</text>
+            </navigator>
         </view>
         <view class="user-info__other">
             <view class="user-info__other__tag">总点击数 {{ userInfo?.clickedPoints || 0 }} </view>
@@ -45,13 +48,11 @@ defineProps<{
         flex: 1;
 
         &__go-to-user-page {
-            flex: 1;
             font-size: 20rpx;
             font-style: italic;
             text-decoration: underline;
-            display: flex;
-            justify-content: flex-end;
             color: red;
+            margin-left: auto;
         }
 
         &__name {

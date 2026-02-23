@@ -1,16 +1,16 @@
 <template>
     <view class="choose-tab">
-        <view class="choose-tab__item" @click="choose('week')" :class="{ active: isActiveIdx === 'week' }">本周</view>
-        <view class="choose-tab__item" @click="choose('month')" :class="{ active: isActiveIdx === 'month' }">本月</view>
-        <view class="choose-tab__item" @click="choose('year')" :class="{ active: isActiveIdx === 'year' }">近年</view>
+        <view class="choose-tab__item" @click="choose('date')" :class="{ active: isActiveIdx === 'date' }">本周</view>
+        <view class="choose-tab__item" @click="choose('week')" :class="{ active: isActiveIdx === 'week' }">本月</view>
+        <view class="choose-tab__item" @click="choose('month')" :class="{ active: isActiveIdx === 'month' }">近年</view>
     </view>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-const isActiveIdx = ref<'week' | 'month' | 'year'>('week')
+const isActiveIdx = ref<'week' | 'month' | 'date'>('date')
 const emit = defineEmits(['choose'])
-function choose(idx: 'week' | 'month' | 'year') {
+function choose(idx: 'week' | 'month' | 'date') {
     isActiveIdx.value = idx
     emit('choose', idx)
 }

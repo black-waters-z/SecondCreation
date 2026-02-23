@@ -48,7 +48,6 @@ function changeActive() {
         }
 
         &--form {
-            min-height: 400rpx;
             background-color: white;
             border-radius: 10rpx;
             box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);

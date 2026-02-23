@@ -20,9 +20,18 @@ defineProps<{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 5rpx;
+    gap: 5rpx;
 
     .grid-item {
         width: 100%;
     }
+}
+
+@media screen and (min-width:600px) {
+    .grid {
+        gap: 30rpx;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
 }
 </style>

@@ -3,8 +3,10 @@
         <image class="article-img" :src="article.image_urls?.[0]" v-if="article.image_urls?.[0]" mode="aspectFill">
         </image>
         <view class="article-content" v-if="!article.image_urls?.[0]">{{ article?.content.slice(0, 50) }}</view>
-        <navigator open-type="navigate" :url="`/pages/article/index?id=${article.id}`" class="article-title">{{
-            article?.title }}</navigator>
+        <navigator open-type="navigate" :url="`/pages/article/index?id=${article.id}`" class="article-title">
+            <text>{{
+                article?.title }}</text>
+        </navigator>
     </view>
 </template>
 
@@ -21,6 +23,7 @@ defineProps<{
     flex-direction: column;
     width: 100%;
     align-self: center;
+    margin-bottom: 20rpx;
 
     .article-img {
         width: 180rpx;
@@ -44,11 +47,26 @@ defineProps<{
 
     .article-title {
         font-size: 20rpx;
-        letter-spacing: 1rpx;
         margin-top: 10rpx;
         text-align: center;
         overflow: hidden;
         white-space: nowrap;
+        font-weight: 400;
+        color: $text-title;
+    }
+}
+
+@media (min-width: 600px) {
+    .small-article {
+        .article-img {
+            width: 320rpx;
+            height: 320rpx;
+        }
+
+        .article-content {
+            width: 320rpx;
+            height: 320rpx;
+        }
     }
 }
 </style>

@@ -1,8 +1,11 @@
 <template>
-  <view class="go-back-container w-full">
+  <view class="go-back-container w-full" :style="{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }">
     <go-back-icon></go-back-icon>
     <text class="go-back-container__return-text">
       <slot></slot>
+    </text>
+    <text class="go-back-container__right">
+      <slot name="right" style="width:100%"></slot>
     </text>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
@@ -57,6 +60,16 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   background-color: white;
   left: 0;
   min-height: 80rpx;
+
+  &__right {
+    flex: 1;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    margin: 10rpx 0;
+    min-width: 0;
+    overflow-x: auto;
+
+  }
 
   &__logo {
     width: 130rpx;

@@ -2,7 +2,7 @@
   <view class="read-nav-container">
     <view v-for="(item, idx) in navItems" :key="item.label" class="read-nav-container__icon"
       :class="{ 'icon_active': activeIndex === idx }" @click="goToIconNavigatePage(item?.type, item?.label, idx)">
-      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="20">
+      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="21">
         {{ item.icon }}
       </uni-icons>
       <text class="icon-text" :style="{ color: 'grey' }"> {{ item.label }} </text>
@@ -18,7 +18,8 @@ interface NavItems {
   label: string;
   type?: string;
 }
-defineProps<{ navItems: NavItems[]; color?: string }>();
+defineProps<{ navItems: NavItems[]; color?: string; iconIndx?: number }>();
+const emit = defineEmits(['update:iconIndx'])
 const activeIndex = ref(0);
 const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: string | number | boolean, idx: number) => {
   activeIndex.value = idx;
@@ -27,8 +28,11 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
       url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${encodeURIComponent(goBackTitle)}`,
     });
     return;
+  } else {
+    // 只有大屏是 这样
+    emit('update:iconIndx', idx);
   }
-  // 向iframe传url
+
 };
 </script>
 
@@ -57,7 +61,9 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
     position: relative;
 
     .icon-text {
-      font-size: 23rpx;
+      margin-left: 4rpx;
+      font-size: 24rpx;
+      letter-spacing: 2rpx;
     }
   }
 }

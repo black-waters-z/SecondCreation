@@ -1,13 +1,16 @@
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 enum RefreshType {
   PullDown = 'PullDown',
   Restore = 'Restore',
   Loading = 'Loading',
 }
-export function useScrollView() {
+export function useScrollView(fetchData?: (page: number, page_size?: number) => void) {
   const triggered = ref<string | boolean>(false);
   let isRefreshing = false;
+  let isLoadingMore = false;
   const refreshType = ref<RefreshType>(RefreshType.PullDown);
+  const page = ref(2);
+  const page_size = ref(10);
   const onPulling = (e: Event) => {
     // console.log("onpulling", e);
     refreshType.value = RefreshType.PullDown;
@@ -33,7 +36,13 @@ export function useScrollView() {
     console.log('onAbort');
   };
 
-  const onEnd = () => {};
+  const onEnd = async () => {
+    if (!fetchData || isLoadingMore) return;
+    isLoadingMore = true;
+    await fetchData(page.value, page_size.value);
+    page.value += 1;
+    isLoadingMore = false;
+  };
 
   return {
     triggered,

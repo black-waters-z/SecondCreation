@@ -3,7 +3,8 @@
     <view class="character-mobile-nav-container-view">
       <ul class="character-mobile-nav-container-view__ul">
         <li v-for="(value, index) in characters" :key="index" class="character-mobile-nav-container-view__li">
-          <navigator :url="value.navigatorUrl" hover-class="character-mobile-nav-container__navigator-hover"
+          <navigator :url="value.navigatorUrl" :open-type="value?.switch ? 'switchTab' : 'navigate'"
+            hover-class="character-mobile-nav-container__navigator-hover"
             class="character-mobile-nav-container__navigator">
             <text class="character-name">{{ value.name }}</text>
           </navigator>
@@ -20,12 +21,12 @@
 const characters = [
   {
     name: 'tag导航',
-    avatar: '/static/avatar/avatar1.jpg',
+    avatar: '/src/static/avatar/avatar1.jpg',
     navigatorUrl: '/pages/tagNav/index',
   },
-  { name: '粮仓导航', avatar: '/static/avatar/avatar1.jpg' },
-  { name: '火热合集', avatar: '/static/avatar/avatar1.jpg' },
-  { name: '官方公告', icon: '\ue600' },
+  { name: '粮仓导航', avatar: '/src/static/avatar/avatar1.jpg', navigatorUrl: '/pages/store/index', switch: true },
+  { name: '火热合集', avatar: '/src/static/avatar/avatar1.jpg', navigatorUrl: '/pages/hotCollection/index' },
+  { name: '官方公告', icon: '\ue600', navigatorUrl: '/pages/notice/index' },
   { name: '搜索', icon: '\ue60d', navigatorUrl: '/pages/search/index' },
 ];
 
@@ -55,7 +56,6 @@ const props = defineProps<{
 
     &__ul {
       letter-spacing: 4rpx;
-      font-weight: 500;
 
       &>li:last-child {
         border-bottom: none;
@@ -80,7 +80,7 @@ const props = defineProps<{
 
     &__li {
       padding: 30rpx 40rpx;
-      font-size: 16px;
+      font-size: 30rpx;
       border-bottom: 1rpx dashed $border-color;
     }
   }

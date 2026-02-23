@@ -4,7 +4,7 @@
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
         <navigator open-type="switchTab" url="/pages/index/index" hover-class="navigator-hover">
-          <image src="/static/logo.png" mode="scaleToFill" class="logo" />
+          <image src="/src/static/logo.png" mode="scaleToFill" class="logo" />
         </navigator>
         <SearchBar class="w-100 status_bar__search" width="300rpx" height="75rpx"></SearchBar>
       </view>
@@ -33,6 +33,7 @@ import SearchBar from './SearchBar.vue';
 import { ref } from 'vue';
 // #ifdef H5
 import CharacterMobileNav from '@/pages/index/components/CharacterMobileNav.vue';
+import { onHide } from '@dcloudio/uni-app';
 // #endif
 defineOptions({
   options: {
@@ -45,13 +46,17 @@ const showMobileNav = ref(false);
 function toggleMobileNav() {
   showMobileNav.value = !showMobileNav.value;
 }
+
+onHide(() => {
+  showMobileNav.value = false;
+});
 </script>
 
 <style lang="scss">
 .status_bar {
   width: 100vw;
   top: 0;
-  min-height: 80rpx;
+  height: 80rpx;
   background: white;
   left: 0;
 

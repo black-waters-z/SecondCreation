@@ -75,6 +75,12 @@
       }
     },
     {
+      "path": "pages/user/info",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/search/index",
       "style": {
         "navigationStyle": "custom"
@@ -118,6 +124,24 @@
     },
     {
       "path": "pages/shoppingCart/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/collectionArticles",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/notice/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/hotCollection/index",
       "style": {
         "navigationStyle": "custom"
       }

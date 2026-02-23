@@ -16,7 +16,7 @@ import { searchArticle } from '@/api/articleApi';
 import type { Article } from '../tagPage/type';
 const articleList = ref<Article[]>([]);
 async function search(searchText: string, collection: any) {
-  await searchArticle(searchText).then((res) => {
+  await searchArticle({ keyword: searchText, page: 1, per_page: 10, order_by: '-total_score' }).then((res) => {
     articleList.value = res;
   });
 }

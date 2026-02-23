@@ -6,4 +6,5 @@ export interface UserInfo {
   favoritedPoints?: number;
   fans?: number;
   follows?: number;
+  has_been_followed?: boolean;
 }

@@ -1,13 +1,13 @@
 <template>
   <view class="whole-article w-full">
-    <video class="whole-article__video" :src="article?.image_urls?.[0]"
+    <video class="whole-article__video" :src="article?.image_urls?.[0]" autoplay
       v-if="article?.image_urls?.length && isVideo(article?.image_urls?.[0])"></video>
-    <CommonSwiper v-if="article?.image_urls?.length && !isVideo(article?.image_urls?.[0])"
+    <CommonSwiper show-icon v-if="article?.image_urls?.length && !isVideo(article?.image_urls?.[0])"
       :styles="{ maxHeight: '1600rpx' }" :swiper-info="swiperInfo">
     </CommonSwiper>
     <view class="whole-article__content">
       <view class="whole-article__author w-full">
-        <article-author :user-info="userInfo"></article-author>
+        <article-author :user-info="userInfo" :has_attention="userInfo.has_been_followed"></article-author>
       </view>
       <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__content-content">
@@ -15,9 +15,9 @@
         }}</view>
         <text class="whole-article__content-content-text">{{ article?.content }}</text>
       </view>
-      <Tip></Tip>
       <slot name="collection"></slot>
       <view class="whole-article__contact">
+        <Tip></Tip>
         <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
           class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
           :size="26"></click-icon>
@@ -119,9 +119,12 @@ const isVideo = (url: string) => {
     flex-direction: row-reverse;
     margin-bottom: 20rpx;
     justify-content: space-around;
+    margin-top: 100rpx;
 
     &-icon {
       margin-right: 20rpx;
+      display: flex;
+      align-items: center;
     }
   }
 

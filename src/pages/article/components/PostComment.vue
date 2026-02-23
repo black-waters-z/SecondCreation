@@ -2,18 +2,38 @@
   <view class="post-comment w-100">
     <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment" placeholder="请输入内容"
       autoHeight @focus="isFocus = !isFocus" @blur="isFocus = !isFocus"></up-textarea>
-    <SCButton type="button" @click="$emit('sendComment', comment)"><text>发送</text></SCButton>
+    <SCButton type="button" @click="sendComment"><text>发送</text></SCButton>
   </view>
 </template>
 
 <script setup lang="ts">
 import SCButton from "@/components/common/SCButton/index.vue";
-import { ref } from "vue";
-
+import { ref, watch } from "vue";
+const props = defineProps<{ commentToward: { content: string, parent_id?: number, parent_name?: string, article_id: number } }>()
+const emit = defineEmits(['sendComment', 'update:commentToward'])
 const comment = ref<string>();
 const isFocus = ref(false);
 
-defineEmits(["sendComment"])
+function sendComment() {
+  emit('sendComment', comment.value)
+  comment.value = ''
+}
+
+watch(
+  () => props.commentToward.parent_name,
+  (newParentName) => {
+    if (newParentName) {
+      comment.value = `@${newParentName} ${comment.value || ''}` + `${comment.value || ''}`;
+    }
+  },
+  { immediate: true }
+);
+
+watch(() => comment.value, (newValue) => {
+  if (!comment.value || (comment.value && props.commentToward.parent_name && !comment.value.includes(props.commentToward.parent_name))) {
+    emit('update:commentToward', { content: newValue, article_id: props.commentToward.article_id })
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -22,12 +42,16 @@ defineEmits(["sendComment"])
   padding: 10px;
   background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+
+
+  ::v-deep .u-textarea__field {
+    min-height: 20px !important;
+  }
 
   &__textarea {
     width: 95%;
-    margin-bottom: 10px;
   }
 
   .focus_border {

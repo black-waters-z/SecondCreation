@@ -31,12 +31,12 @@
             <view v-if="!isVideo" class="article-info__scroll-view flex flex-row">
                 <bottom-tag :tag-list="article?.tags" class="article-info__tag flex-1"></bottom-tag>
                 <view class="article-info__author">
-                    <!-- <image class="article-info__author--avatar" src="/src/static/character/character1.png"
-                        mode="aspectFill"></image> -->
+                    <image class="article-info__author--avatar" :src="article?.author?.avatar_url" mode="aspectFill">
+                    </image>
                     <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
                 </view>
             </view>
-            <view class="article__click-icon__container">
+            <!-- <view class="article__click-icon__container">
                 <view class="article__click-icon--left">
                     <click-icon class="article__click-icon--left-icon" :type="['eye-filled']" :size="18">{{
                         article?.view_count ?? 0 }}</click-icon>
@@ -45,7 +45,7 @@
                 </view>
                 <click-icon class="article__click-icon" :type="['heart', 'heart-filled']" :size="16"
                     :has-been-liked="article?.has_favorited"></click-icon>
-            </view>
+            </view> -->
         </view>
     </view>
 </template>
@@ -54,7 +54,7 @@
 import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
 import { computed } from 'vue';
-import ClickIcon from "@/components/base/ClickIcon/index.vue"
+// import ClickIcon from "@/components/base/ClickIcon/index.vue"
 const props = defineProps<{ article: ArticleType }>();
 
 const isVideo = computed(() => {
@@ -96,6 +96,7 @@ const isVideo = computed(() => {
         justify-content: flex-end;
         align-items: flex-end;
         z-index: 100;
+        display: none;
     }
 
     &-video-container {
@@ -193,12 +194,10 @@ const isVideo = computed(() => {
         box-sizing: border-box;
         padding: 20rpx;
         font-size: 25rpx;
-        font-style: italic;
         font-weight: 400;
         color: $text-muted;
         overflow: hidden;
         text-overflow: ellipsis;
-        padding-bottom: 0;
         background: #f1f1f19f;
         border-radius: 15rpx;
     }
@@ -242,9 +241,10 @@ const isVideo = computed(() => {
             align-items: center;
 
             &--avatar {
-                width: 40rpx;
-                height: 40rpx;
+                width: 35rpx;
+                height: 35rpx;
                 border-radius: 50%;
+                margin-left: 10rpx;
             }
 
             &--author-name {

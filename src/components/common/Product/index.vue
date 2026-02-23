@@ -1,6 +1,7 @@
 <template>
   <view class="product-container">
-    <image :src="'/static/product/product-1.png'" lazy-load mode="aspectFill" class="product-container__image"></image>
+    <image :src="'/src/static/product/product-1.png'" lazy-load mode="aspectFill" class="product-container__image">
+    </image>
     <view class="product-container__info">
       <text class="product-container__info--name">商品名称</text>
     </view>

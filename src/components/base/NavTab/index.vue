@@ -1,40 +1,65 @@
 <template>
     <view class="w-full nav-tab">
         <up-sticky class="w-full nav-tab__sticky" bgColor="#fff">
-
-            <up-tabs :list="list"></up-tabs>
-            <view slot="right" class="flex-1 nav-tab__sticky--right" style="padding-left: 4px;">
-                <Tag class="nav-tab__sticky--tag" v-if="nav_tags?.work_tags?.[0]?.name"
-                    :text="nav_tags?.work_tags?.[0]?.name" :closable="false" size="medium" :bg-color="'gray'">
-                </Tag>
-                <Tag class="nav-tab__sticky--tag" v-if="nav_tags?.other_tag?.name" :text="nav_tags?.other_tag?.name"
-                    :closable="false" size="medium" :bg-color="'pink'">
-                </Tag>
-            </view>
+            <up-tabs :list="list" @change="toggleTab">
+                <template #right>
+                    <view class="nav-tab__filter">
+                        <uni-icons fontFamily="CustomFont" type="contact" size="22" @click="isActive = true"
+                            style="cursor: pointer;">{{ '\ue74a'
+                            }}</uni-icons>
+                    </view>
+                </template>
+            </up-tabs>
         </up-sticky>
+
+        <picker-wrapper v-model="isActive">
+            <slot :startFilter="startFilter"></slot>
+        </picker-wrapper>
     </view>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import type { NavTab } from './type';
+import PickerWrapper from '@/components/base/PickerWrapper/index.vue';
 
-import Tag from '@/components/common/Tag/index.vue';
-import { computed } from 'vue';
-const props = defineProps<{ list: NavTab[], navTags?: any }>()
+defineProps<{ list: NavTab[], navTags?: any }>()
+const emit = defineEmits(['changeTab', 'startFilterArticles'])
+function toggleTab(e) {
+    emit('changeTab', e.index)
+}
 
-const nav_tags = computed(() => {
-    return props.navTags
-})
+const isActive = ref(false)
+
+function startFilter(value: any) {
+    isActive.value = false
+    emit('startFilterArticles', value)
+}
 
 </script>
 
 <style lang="scss" scoped>
 .nav-tab {
+    &__filter {
+        padding-right: 20rpx;
+    }
+
     &__sticky {
+        z-index: 0 !important;
+
         :deep(.u-sticky__content) {
+            width: 100%;
             display: flex;
-            justify-content: flex-end;
             flex-direction: row;
+        }
+
+        ::v-deep .u-tabs {
+            width: 100%;
+        }
+
+
+        ::v-deep .u-tabs__wrapper__nav__item {
+            padding: 0 30rpx;
         }
 
         &--right {
@@ -52,6 +77,4 @@ const nav_tags = computed(() => {
     }
 
 }
-
-
 </style>

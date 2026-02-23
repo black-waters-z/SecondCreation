@@ -7,11 +7,17 @@ export default defineConfig({
   plugins: [uni()],
   publicDir: 'static',
   server: {
+    // host: '192.168.43.15',
+    port: 3000,
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_API_URL,
+        target: 'http://localhost:8080',
         changeOrigin: true,
       },
+      // '/api': {
+      //   target: 'http://192.168.43.15:8080',
+      //   changeOrigin: true,
+      // },
     },
   },
   resolve: {

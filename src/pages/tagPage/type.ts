@@ -24,6 +24,6 @@ export interface Article {
 }
 
 export interface TagPageData {
-  navTags: NavTabTag;
+  navTags?: NavTabTag;
   articleList: Article[];
 }

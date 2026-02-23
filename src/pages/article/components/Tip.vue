@@ -19,15 +19,14 @@ const showTip = ref<boolean>(false)
 
 <style scoped lang="scss">
 .tip-container {
-    width: 100%;
-    display: flex;
+    width: 70rpx;
     justify-content: center;
     align-items: center;
-    margin: 80rpx 0;
+    height: 70rpx;
 
     &__icon {
-        width: 130rpx;
-        height: 130rpx;
+        width: 70rpx;
+        height: 70rpx;
         transition: all 0.2s ease-in-out;
 
         &:active {
