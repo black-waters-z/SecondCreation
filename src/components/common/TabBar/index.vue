@@ -3,26 +3,22 @@
     <view class="tab-bar-container__navigation">
       <navigation-bar :navigation-options="navigationOptions"></navigation-bar>
     </view>
-    <view class="tab-bar-container__search">
-      <search-bar></search-bar>
-    </view>
     <view class="logo">
-      <view class="tab-bar-item">
+      <navigator url="/pages/index/index" open-type="switchTab" hover-class="navigator-hover" class="tab-bar-item">
         <image src="/src/static/logo.png" class="tab-bar-item__image" mode="aspectFit"></image>
-      </view>
+      </navigator>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import SearchBar from "../SearchBar.vue";
 import NavigationBar from "./components/NavigationBar.vue";
 
 const navigationOptions = [
-  { title: "首页", path: "/" },
-  { title: "粮仓", path: "/pages/store/index" },
-  { title: "购物", path: "/pages/shopping/index" },
-  { title: "我的", path: "/pages/user/index" },
+  { title: "标签", path: "/pages/tagNav/index" },
+  { title: "合集", path: "/pages/hotCollection/index" },
+  { title: "公告", path: "/pages/notice/index" },
+  { title: "搜索", path: "/pages/search/index" },
 ];
 </script>
 
@@ -39,14 +35,10 @@ const navigationOptions = [
   .tab-bar-item {
     &__image {
       width: 70px;
-      height: 70px;
-      margin-left: 50px;
+      height: 44px;
+      margin-left: 30px;
     }
   }
 
-  &__search {
-    flex: 1;
-    display: flex;
-  }
 }
 </style>

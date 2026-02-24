@@ -41,7 +41,6 @@ import CommonSwiper from '@/components/common/CommonSwiper.vue';
 import PostSheet from '@/components/common/PostSheet/index.vue';
 import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
-import CharacterNav from './components/CharacterNav.vue';
 import WaterFall from '@/components/common/WaterFall.vue';
 import HomeProduct from './components/HomeProduct.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
@@ -111,4 +110,12 @@ onLoad(async () => {
   order: 3;
 }
 
-// #endif</style>
+// #endif
+
+@media screen and (min-width:600px) {
+  .content__head {
+    display: none;
+  }
+
+}
+</style>

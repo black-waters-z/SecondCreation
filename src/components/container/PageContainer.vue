@@ -1,5 +1,5 @@
 <template>
-  <view class="content w-full">
+  <view class="content page-container  w-full">
     <head-nav v-if="showHead"></head-nav>
     <!-- #ifdef MP-WEIXIN -->
     <head-nav></head-nav>
@@ -14,15 +14,27 @@
 </template>
 
 <script setup lang="ts">
+import { TimeFilter } from '@/types';
 import HeadNav from '../common/HeadNav.vue';
 import ScrollContainer from '../common/ScrollContainer/index.vue';
-withDefaults(defineProps<{
+import { type Article } from '@/pages/tagPage/type';
+import { provide } from 'vue';
+import { ScrollViewKey, useScrollView } from '@/hooks/useScrollView';
+
+const props = withDefaults(defineProps<{
   showHead?: boolean;
   have_no_more?: boolean;
   enable_refresh?: boolean;
-  fetchData?: (page: number, page_size?: number) => void | Promise<void>;
+  fetchData?: (page: number, page_size?: number, timefilter?: TimeFilter) => Article[] | Promise<Article[]>;
 }>(), {
   enable_refresh: true,
+});
+
+const scrollView = useScrollView(props.fetchData);
+provide(ScrollViewKey, scrollView);
+
+defineExpose({
+  scrollView,
 });
 </script>
 

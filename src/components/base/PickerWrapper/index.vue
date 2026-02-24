@@ -59,4 +59,23 @@ function stop() {
         transform: translateY(0);
     }
 }
+
+@media screen and (min-width:800px) {
+    .picker-wrapper {
+        .picker-form {
+            right: 0;
+            width: 600px;
+            height: 100%;
+            transform: translateX(100%);
+            border-radius: 20px 0px 0px 20px;
+        }
+    }
+
+    .active {
+        .form-active {
+            bottom: 0;
+            transform: translateX(0);
+        }
+    }
+}
 </style>

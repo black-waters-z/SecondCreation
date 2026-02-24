@@ -110,7 +110,7 @@ watch(commentData.value, (newValue) => {
 
 <style lang="scss">
 page {
-  height: 100vh;
+  height: 100%;
 }
 
 .uni-swiper__warp {

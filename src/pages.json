@@ -160,12 +160,6 @@
       "backgroundColor": "#ffffff"
     }
   },
-  "leftWindow": {
-    "path": "components/responsive/left-window.vue",
-    "style": {
-      "width": "200px"
-    }
-  },
   "easycom": {
     "autoscan": true,
     "custom": {

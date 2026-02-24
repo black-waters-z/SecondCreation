@@ -7,7 +7,7 @@
     </CommonSwiper>
     <view class="whole-article__content">
       <view class="whole-article__author w-full">
-        <article-author :user-info="userInfo" :has_attention="userInfo.has_been_followed"></article-author>
+        <article-author :user-info="userInfo" :has_attention="userInfo?.has_been_followed ?? false"></article-author>
       </view>
       <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__content-content">
@@ -83,7 +83,6 @@ const isVideo = (url: string) => {
     width: 100%;
     background-color: white;
     box-sizing: border-box;
-    padding: 0 20px;
 
     &-title {
       width: 100%;

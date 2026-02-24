@@ -1,13 +1,16 @@
-import { ref } from 'vue';
+import { type Article } from '@/pages/tagPage/type';
+import { nextTick } from 'vue';
+import { ref, type InjectionKey } from 'vue';
 enum RefreshType {
   PullDown = 'PullDown',
   Restore = 'Restore',
   Loading = 'Loading',
 }
-export function useScrollView(fetchData?: (page: number, page_size?: number) => void) {
+export function useScrollView(fetchData?: (page: number, page_size?: number) => Article[] | Promise<Article[]>) {
   const triggered = ref<string | boolean>(false);
   let isRefreshing = false;
-  let isLoadingMore = false;
+  const scrollToTop = ref(0.01);
+  const canLoadingMore = ref(true);
   const refreshType = ref<RefreshType>(RefreshType.PullDown);
   const page = ref(2);
   const page_size = ref(10);
@@ -37,20 +40,44 @@ export function useScrollView(fetchData?: (page: number, page_size?: number) => 
   };
 
   const onEnd = async () => {
-    if (!fetchData || isLoadingMore) return;
-    isLoadingMore = true;
-    await fetchData(page.value, page_size.value);
-    page.value += 1;
-    isLoadingMore = false;
+    console.log('onEnd', canLoadingMore.value);
+    if (!fetchData || !canLoadingMore.value) return;
+    // isLoadingMore = true;
+    const result = await fetchData(page.value + 1, page_size.value);
+    if (result.length) {
+      page.value += 1;
+      canLoadingMore.value = true;
+    } else {
+      canLoadingMore.value = false;
+    }
+  };
+
+  const changeTab = () => {
+    canLoadingMore.value = true;
+    page.value = 1;
+    console.log('changeTab', canLoadingMore.value);
+  };
+
+  const scrollTop = () => {
+    scrollToTop.value = 0;
+    nextTick(() => {
+      scrollToTop.value = 0.01;
+    });
   };
 
   return {
     triggered,
     refreshType,
+    scrollToTop,
     onPulling,
     onRefresh,
     onRestore,
     onAbort,
     onEnd,
+    scrollTop,
+    changeTab,
   };
 }
+
+export type ScrollViewContext = ReturnType<typeof useScrollView>;
+export const ScrollViewKey: InjectionKey<ScrollViewContext> = Symbol('ScrollView');

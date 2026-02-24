@@ -128,4 +128,13 @@ defineExpose({
   opacity: 0;
   transform: translateY(20rpx);
 }
+
+@media screen and (min-width:600px) {
+  .waterfall__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
     <navigator class="user-info--collection__container"
         :url="`/pages/user/collectionArticles?collection_id=${collection?.id}`" open-type="navigate">
-        <view class="user-info--collection-author">
+        <view v-if="collection?.author_username" class="user-info--collection-author">
             <image class="user-info--collection-author__avatar"
                 :src="collection?.author_avatar_url ? collection?.author_avatar_url : '/static/images/avatar.png'"
                 mode="aspectFill"></image>

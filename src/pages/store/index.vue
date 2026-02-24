@@ -1,6 +1,6 @@
 <template>
-  <page-wrapper have_no_more class="w-full store" show-head :fetch-data="fetchData">
-    <store-tab v-slot="{ startFilter }">
+  <page-wrapper have_no_more class="w-full store" show-head const ref="pageWrapper" :fetch-data="fetchData">
+    <store-tab v-slot="{ startFilter }" @fetch-data="toggleData" @filter-articles="filterArticles">
       <filter-store-article @start-filter="startFilter"></filter-store-article>
     </store-tab>
     <template #scroll>
@@ -22,29 +22,21 @@ import PageWrapper from '@/components/container/PageContainer.vue';
 import GridArticlesContainer from '@/components/common/GridArticlesContainer/index.vue';
 import filterStoreArticle from '@/components/form/filterStoreArticle.vue';
 import { useHeadBarStore } from '@/store/useHeadBar';
-import { onLoad, onShow } from '@dcloudio/uni-app';
+import { onShow } from '@dcloudio/uni-app';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import type { Article } from '@/pages/tagPage/type';
-import { getFilterArticle } from '@/api/articleApi';
+import { useFilterStoreArticles } from '@/hooks/useFilterStoreArticles';
+
+const pageWrapper = ref<InstanceType<typeof PageWrapper> | null>(null);
+const gridArticle = ref<InstanceType<typeof GridArticlesContainer> | null>(null);
 const { activeNavigatorIndex } = storeToRefs(useHeadBarStore());
 onShow(() => {
   if (activeNavigatorIndex.value === -1) activeNavigatorIndex.value = 0;
 });
 
-const articleList = ref<Article[]>([]);
-onLoad(async () => {
-  articleList.value = await getFilterArticle(1);
-  // console.log(articleList.value);
-})
+const { fetchData, filterArticles, articleList, toggleData } = useFilterStoreArticles(pageWrapper, gridArticle);
 
-const gridArticle = ref<InstanceType<typeof GridArticlesContainer> | null>(null);
 
-async function fetchData(page: number) {
-  const next = await getFilterArticle(page);
-  // gridArticle?.value?.reset();
-  articleList.value = [...next];
-}
 </script>
 
 <style lang="scss">

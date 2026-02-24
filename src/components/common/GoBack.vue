@@ -1,18 +1,21 @@
 <template>
-  <view class="go-back-container w-full" :style="{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }">
+  <view class="go-back-container w-full" :style="{ boxShadow: hasShadow ? '0 0 10px rgba(0, 0, 0, 0.1)' : undefined }">
     <go-back-icon></go-back-icon>
     <text class="go-back-container__return-text">
       <slot></slot>
     </text>
-    <text class="go-back-container__right">
+    <view class="go-back-container__right">
       <slot name="right" style="width:100%"></slot>
-    </text>
+      <!-- 这里是搜索的框 -->
+      <view class="flex" v-if="type">
+        <select-collection class="justify-center" v-model="index" :collection-list="collectionList">
+          <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
+        </select-collection>
+        <search-bar class="go-back-container__search" :type="type" @search="onSearchFromChild"></search-bar>
+      </view>
+    </view>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>
-    <select-collection class="justify-center" v-if="type" v-model="index" :collection-list="collectionList">
-      <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
-    </select-collection>
-    <search-bar class="go-back-container__search" v-if="type" :type="type" @search="onSearchFromChild"></search-bar>
     <navigator v-if="showLogo" class="go-back-container__logo" url="/pages/index/index" open-type="switchTab">
       <image src="/src/static/logo.png" mode="scaleToFill" class="go-back-container__logo-img" />
     </navigator>
@@ -37,7 +40,7 @@ const onSearchFromChild = (text: string) => {
   emit('search', text, props?.collectionList?.[index.value]);
 };
 
-const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean; showLogo?: boolean }>(), {
+const props = withDefaults(defineProps<{ title?: string; type?: string; collectionList?: collection[]; showCart?: boolean; showLogo?: boolean; hasShadow?: boolean }>(), {
   title: '',
 });
 </script>
@@ -62,7 +65,6 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   min-height: 80rpx;
 
   &__right {
-    flex: 1;
     justify-content: flex-end;
     box-sizing: border-box;
     margin: 10rpx 0;
@@ -110,6 +112,8 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
 }
 
 @media screen and (min-width: 600px) {
-  .go-back-container {}
+  .go-back-container {
+    display: none;
+  }
 }
 </style>

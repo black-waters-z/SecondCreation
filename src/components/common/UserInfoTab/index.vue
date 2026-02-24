@@ -60,12 +60,13 @@ const indicatorPosition = computed(() => {
 
 .indicator {
     position: relative;
-    height: 4rpx;
-    width: calc(33.33% - 75px);
-    margin: 0 37.5px;
+    height: 6rpx;
+    width: calc(33.33% - 100px);
+    margin: 0 50px;
     box-sizing: border-box;
     /* 每个 tab 的宽度 */
-    background-color: $pink-300;
+    background-color: $pink-400;
+    border-radius: 100px;
     /* 指示条颜色 */
     transition: left 0.3s ease;
     /* 平滑过渡效果 */

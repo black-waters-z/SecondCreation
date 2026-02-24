@@ -160,7 +160,9 @@ uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
 }
 
 .uni-top-window {
-  height: 80px !important;
+  height: 44px !important;
+  padding: 3px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 uni-layout {
@@ -185,6 +187,14 @@ uni-layout {
   width: 100% !important;
 }
 
+.uni-section-header__decoration.line {
+  background-color: $pink-400;
+}
+
+.is-focused {
+  border-color: $pink-400 !important;
+}
+
 @media screen and (min-width: 600px) {
   .uni-app--showtabbar uni-page-wrapper {
     height: 100%;
@@ -197,12 +207,13 @@ uni-layout {
   .content {
     position: relative;
     box-sizing: border-box;
+    padding: 10px 100px;
   }
 
   .uni-app--showleftwindow uni-main,
   uni-main {
     min-height: auto;
-    height: calc(100vh - 80px);
+    height: 100%;
     overflow: hidden;
   }
 

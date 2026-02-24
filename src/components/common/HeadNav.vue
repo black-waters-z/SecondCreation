@@ -117,6 +117,10 @@ onHide(() => {
 }
 
 @media (min-width: 600px) {
+  .head-nav {
+    display: none;
+  }
+
   .nav {
     display: none;
   }

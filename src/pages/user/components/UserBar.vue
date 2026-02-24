@@ -24,7 +24,6 @@ defineProps<{ userInfo: UserInfo }>();
 }
 
 .user-bar-container {
-  width: 100%;
   border-radius: 16rpx;
   display: flex;
   flex-direction: row;
@@ -77,6 +76,12 @@ defineProps<{ userInfo: UserInfo }>();
         margin-left: 10rpx;
       }
     }
+  }
+}
+
+@media screen and (max-width:600px) {
+  .user-bar-container {
+    width: 100%;
   }
 }
 </style>

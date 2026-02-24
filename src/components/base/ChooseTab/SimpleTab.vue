@@ -28,6 +28,10 @@ function changeTab(idx: number) {
     top: 0;
     background-color: white;
     z-index: 100;
+
+    .simple-tab__item {
+        cursor: pointer;
+    }
 }
 
 .simple-tab__active {

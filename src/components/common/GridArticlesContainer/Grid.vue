@@ -29,7 +29,7 @@ defineProps<{
 
 @media screen and (min-width:600px) {
     .grid {
-        gap: 30rpx;
+        gap: 10rpx;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 

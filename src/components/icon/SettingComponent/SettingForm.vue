@@ -14,14 +14,6 @@ defineProps<{ type: string }>();
 </script>
 
 <style lang="scss" scoped>
-::v-deep .uni-section-header__decoration.line {
-    background-color: $pink-400;
-}
-
-::v-deep .is-focused {
-    border-color: $pink-400 !important;
-}
-
 .setting-form {
     box-sizing: border-box;
     padding: 10rpx;
