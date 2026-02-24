@@ -128,4 +128,10 @@ const isVideo = (url: string) => {
   }
 
 }
+
+@media screen and (min-width:600px) {
+  .whole-article__content {
+    padding: 0 30rpx;
+  }
+}
 </style>

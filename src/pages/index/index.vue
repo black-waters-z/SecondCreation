@@ -24,7 +24,7 @@
         <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
       </match-media>
       <match-media :min-width="600" class="w-full">
-        <water-fall :waterFallColNum="5" :article-lists="articleList"></water-fall>
+        <water-fall :waterFallColNum="6" :article-lists="articleList"></water-fall>
       </match-media>
     </template>
 

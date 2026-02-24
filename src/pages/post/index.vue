@@ -69,7 +69,7 @@ provide('image_urls', imageUrls);
 
 <style lang="scss">
 page {
-  height: 100vh;
+  height: 100%;
 }
 
 .video-upload {

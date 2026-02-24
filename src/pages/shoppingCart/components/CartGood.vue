@@ -132,4 +132,15 @@ async function deleteGood() {
         }
     }
 }
+
+@media screen and (min-width:600px) {
+    .cart-good {
+        background-color: white;
+        box-shadow: $grey-shadow-01;
+        border-radius: 20px;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
 </style>

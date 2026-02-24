@@ -207,6 +207,7 @@ watch(iconIndx, (val) => {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 50px;
     padding: 10px 10px;
+    background-color: white;
   }
 
   .content__user {

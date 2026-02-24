@@ -195,6 +195,12 @@ uni-layout {
   border-color: $pink-400 !important;
 }
 
+// Pink themed page background gradient
+page {
+  background: white;
+  background-attachment: fixed;
+}
+
 @media screen and (min-width: 600px) {
   .uni-app--showtabbar uni-page-wrapper {
     height: 100%;
@@ -207,7 +213,7 @@ uni-layout {
   .content {
     position: relative;
     box-sizing: border-box;
-    padding: 10px 100px;
+    // padding: 10px 100px;
   }
 
   .uni-app--showleftwindow uni-main,
@@ -218,8 +224,11 @@ uni-layout {
   }
 
   page {
-    background-color: white;
-    height: 100% !important;
+    background: linear-gradient(290deg,#F8F8FF 0%, #f6c6d3 30%, #F8F8FF 50%, #f6c6d3 80%,#F8F8FF 100%);
+    // background-image: radial-gradient(circle,#f6c6d3 0%, #F8F8FF 100%);
+    // background: radial-gradient(circle, #f6c6d3 0%, #F8F8FF 80%);
+    background-attachment: fixed;
+    height: calc(100% - 50px);
   }
 
   .nomobile-disappear {

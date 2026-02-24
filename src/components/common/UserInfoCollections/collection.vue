@@ -112,4 +112,13 @@ defineProps<{ collection: CollectionData, price: string, number: number }>();
         margin-top: 10rpx;
     }
 }
+
+@media screen and (min-width:600px) {
+    .user-info--collection {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: $grey-shadow-01;
+    }
+
+}
 </style>

@@ -16,7 +16,7 @@
                     <image :src="commentInfo?.user?.avatarUrl || ''" class="shop-comment__user-info--avatar"></image>
                     <text class="shop-comment__user-info--name">{{ commentInfo?.user?.username || '匿名用户' }}</text>
                     <text class="shop-comment__user-info--time">{{ commentInfo?.comment?.createTime || '1990.1.1'
-                    }}</text>
+                        }}</text>
                 </view>
             </view>
         </view>
@@ -128,6 +128,27 @@ watch(() => props.commentInfo, (newVal, oldVal) => {
 
     &__product {
         margin-top: 20rpx;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .shop-comment {
+        background: white;
+        border-radius: 20px;
+        margin-top: 10px;
+
+        &__comment {
+            border-radius: 20px;
+
+        }
+
+        &__product {
+            border-radius: 20px;
+        }
+
+        ::v-deep .cafe-with-good-nav {
+            border-radius: 20px;
+        }
     }
 }
 </style>

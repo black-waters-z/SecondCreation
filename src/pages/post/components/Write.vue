@@ -93,7 +93,7 @@ function writeAddCraft() {
 .write-container {
   box-sizing: border-box;
   padding: 20rpx;
-  background-color: #f5f5f538;
+  background: white;
 
   &__info {
     color: $text-muted;

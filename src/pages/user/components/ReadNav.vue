@@ -46,7 +46,6 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
   width: 100%;
   border-radius: 16rpx;
   height: 150rpx;
-  background-color: white;
   display: flex;
   align-items: center;
   box-sizing: border-box;

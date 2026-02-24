@@ -16,7 +16,7 @@
                 <view class="article-video__play">
                     <uni-icons class="article-video__play--icon" fontFamily="CustomFont" :size="23" color="white">{{
                         '\ue89d'
-                    }}</uni-icons>
+                        }}</uni-icons>
                 </view>
             </view>
             <text class="w-full article-content" v-if="!article?.image_urls?.[0] && !isVideo">
@@ -277,7 +277,7 @@ const isVideo = computed(() => {
 @media screen and (min-width:600px) {
     .article {
         box-sizing: border-box;
-        width: 490rpx;
+        width: 460rpx;
 
         .article-video-container {
             min-height: 150px;
