@@ -1,6 +1,6 @@
 <template>
   <scroll-view scroll-y="true" class="mobile-scroll scroll-Y w-100" style="height: 100%; flex: 1; min-height: 0"
-    :scroll-top="scrollToTop" :refresher-enabled="enable_refresher" refresher-default-style="none"
+    :scroll-top="scrollToTop" :refresher-enabled="enable_refresher" refresher-default-style="none" @scroll="onScroll"
     :refresher-triggered="triggered" :refresher-threshold="120" refresher-background="rgb(248, 248, 248)"
     @refresherpulling="onPulling" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherabort="onAbort"
     @scrolltolower="onEnd" scroll-with-animation>
@@ -32,7 +32,7 @@ const props = withDefaults(
 // 获取和按钮共享的scrollViewHook的实例
 const injectedScrollView = inject(ScrollViewKey, null);
 const scrollView = injectedScrollView ?? useScrollView(props.fetchData);
-const { triggered, refreshType, scrollToTop, onEnd, onPulling, onRefresh, onAbort, onRestore } = scrollView;
+const { triggered, refreshType, scrollToTop, onEnd, onPulling, onRefresh, onAbort, onRestore, onScroll } = scrollView;
 
 </script>
 
@@ -54,7 +54,7 @@ const { triggered, refreshType, scrollToTop, onEnd, onPulling, onRefresh, onAbor
 @media screen and (min-width: 600px) {
   .mobile-scroll {
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 100px;
     height: 100%;
     position: relative;
   }

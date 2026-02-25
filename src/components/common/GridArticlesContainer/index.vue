@@ -1,7 +1,7 @@
 <template>
     <!-- styles可以传入grid的列数 -->
     <view class="grid-articles-container">
-        <water-fall v-if="!type" :water-fall-col-num="isMobile ? 2 : 6" :article-lists="articleList"
+        <water-fall v-if="!type" :water-fall-col-num="isMobile ? 2 : 5" :article-lists="articleList"
             ref="waterfall"></water-fall>
         <Grid :article-list="articleList" v-if="type === 'grid'"></Grid>
     </view>

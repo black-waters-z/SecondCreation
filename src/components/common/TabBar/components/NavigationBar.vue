@@ -48,17 +48,22 @@ function goToPath(path: string, index: number) {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
+    font-weight: 300;
+    letter-spacing: 3rpx;
+    text-decoration: 1px dashed $pink-400 underline;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
 
     &:hover {
-      background-color: $pink-200;
-      color: white;
+      // background-color: $pink-200;
+      color: $pink-300;
     }
   }
 }
 
 .active {
-  color: white;
-  background-color: $pink-400;
+  color: $pink-400;
 }
 </style>

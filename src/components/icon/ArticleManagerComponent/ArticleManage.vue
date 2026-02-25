@@ -85,6 +85,17 @@ defineProps<{ article: ManageArticle }>()
         background-color: white;
         box-shadow: $grey-shadow-01;
         border-radius: 20rpx;
+        min-height: 130px;
+        display: flex;
+        flex-direction: column;
+
+        &__info {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+        }
     }
+
+
 }
 </style>

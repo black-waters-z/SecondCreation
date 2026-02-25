@@ -102,10 +102,13 @@ defineOptions({
   }
 }
 
-.swiper-box {
-  width: 100vw;
-  height: 60vw;
+@media screen and (max-width:600px) {
+  .swiper-box {
+    width: 100vw;
+    height: 60vw;
+  }
 }
+
 
 .swiper-item {
   display: flex;
@@ -164,5 +167,19 @@ defineOptions({
 ::v-deep .uni-swiper__dots-box {
   justify-content: flex-end !important;
   margin-right: 30rpx;
+}
+
+@media screen and (min-width:600px) {
+
+  .swiper-box {
+    width: 500px;
+    height: 600px;
+    border-radius: 50px;
+
+    .swiper-item {
+      border-radius: 50px;
+    }
+  }
+
 }
 </style>

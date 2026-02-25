@@ -54,7 +54,6 @@ defineExpose({
 
 <style lang="scss" scoped>
 .comment-container {
-  background: white;
   display: flex;
   flex-direction: column;
   width: 100%;

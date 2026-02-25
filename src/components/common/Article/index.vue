@@ -19,9 +19,11 @@
                         }}</uni-icons>
                 </view>
             </view>
-            <text class="w-full article-content" v-if="!article?.image_urls?.[0] && !isVideo">
-                {{ article?.content }}
-            </text>
+            <view style="padding: 20rpx;" v-if="!article?.image_urls?.[0] && !isVideo">
+                <text class="w-full article-content">
+                    {{ article?.content }}
+                </text>
+            </view>
         </view>
         <view class="article-info flex-1">
             <navigator v-if="!isVideo" :url="`/pages/article/index?id=${article?.id}`" open-type="navigate"
@@ -189,17 +191,9 @@ const isVideo = computed(() => {
 
     &-content {
         display: block;
-        min-height: 300rpx;
-        max-height: 400rpx;
-        box-sizing: border-box;
-        padding: 20rpx;
         font-size: 25rpx;
         font-weight: 400;
         color: $text-muted;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: #f1f1f19f;
-        border-radius: 15rpx;
     }
 
     .text-ellipsis {
@@ -274,10 +268,37 @@ const isVideo = computed(() => {
     }
 }
 
+.article-content {
+    display: -webkit-box;
+    /* 1. 必须结合 box 模型使用 */
+    -webkit-box-orient: vertical;
+    /* 2. 设置伸缩盒子的子元素排列方式 */
+    -webkit-line-clamp: 8;
+    /* 3. 限制显示的行数 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    height: calc(8 * 1.5em);
+    box-sizing: border-box;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1.5em;
+        /* 遮挡最后一行的高度 */
+        background: linear-gradient(to bottom, transparent, white);
+        /* 渐变遮罩 */
+    }
+}
+
 @media screen and (min-width:600px) {
     .article {
         box-sizing: border-box;
-        width: 460rpx;
+        width: 500rpx;
+        box-shadow: $grey-shadow-02;
 
         .article-video-container {
             min-height: 150px;

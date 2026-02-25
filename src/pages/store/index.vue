@@ -80,7 +80,9 @@ const { fetchData, filterArticles, articleList, toggleData } = useFilterStoreArt
   }
 
   .store-tab {
-    margin-left: 20px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    background-color: white;
   }
 
   .uni-scroll-view-refresher {

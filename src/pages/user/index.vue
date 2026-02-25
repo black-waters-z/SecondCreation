@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper class="index-container content" show-head>
+  <PageWrapper class="user-index" show-head flex-row>
     <view class="user-index__user">
       <user-bar :user-info="userInfo" class="mobile-user-info"></user-bar>
       <read-nav class="content__read-nav__article-manager mobile-user-info" :nav-items="readNavItems" color="black"
@@ -190,18 +190,39 @@ watch(iconIndx, (val) => {
 
 
 @media screen and (min-width:600px) {
-  .index-container {
-    display: flex;
-    flex-direction: row;
+  .user-index {
 
-    .page-container {
-      flex: 1;
+    &__user {
+      margin-left: 100px;
+    }
+
+    .content.page-container {
+      .mobile-scroll {
+        padding-left: 20px;
+      }
     }
   }
 
+  .user-index {
+    .content.page-container {
+      flex-direction: row;
+    }
+
+    &__user {
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+    }
+  }
+
+
+
   .user-index__user {
+    position: sticky;
+    top: 0;
     width: 100px;
     display: flex;
+    height: auto;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

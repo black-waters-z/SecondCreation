@@ -73,6 +73,8 @@ const isVideo = (url: string) => {
   flex-direction: column;
   align-items: center;
   letter-spacing: 1rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
 
   &__video {
     width: 100%;
@@ -132,6 +134,13 @@ const isVideo = (url: string) => {
 @media screen and (min-width:600px) {
   .whole-article__content {
     padding: 0 30rpx;
+  }
+
+  .whole-article {
+    border-radius: 30rpx 30rpx 0 0;
+    box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-top: 20px;
   }
 }
 </style>

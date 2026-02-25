@@ -153,13 +153,6 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "topWindow": {
-    "path": "components/responsive/top-window.vue",
-    "style": {
-      "height": "44px",
-      "backgroundColor": "#ffffff"
-    }
-  },
   "easycom": {
     "autoscan": true,
     "custom": {

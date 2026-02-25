@@ -4,7 +4,7 @@
             <text class="article-data__info--title">{{ articleData?.[0].article_name }}</text>
             <navigator class="article-data__info--link" :url="`/pages/article/index?id=${articleData?.[0].article_id}`"
                 open-type="navigate">
-                <text>前往查看文章</text><uni-icons type="arrow-right" size="20"></uni-icons>
+                <text></text><uni-icons type="arrow-right" size="20"></uni-icons>
             </navigator>
         </view>
         <view class="article-data__chart-choose">
@@ -121,10 +121,19 @@ const updateChart = (newOption: Record<string, any>) => {
 @media screen and (min-width:600px) {
     .article-data {
         align-items: flex-start;
+        background-color: white;
+
 
         &__chart {
             width: 1000rpx;
             height: 800rpx;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+
+        &__info--link {
+            margin-right: 160rpx;
+            transform: translateY(40px);
         }
     }
 

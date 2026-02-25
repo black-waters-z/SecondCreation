@@ -9,11 +9,16 @@
       </navigator>
     </view>
   </view>
+  <view class="tab-bar-container-02">
+    <image :src="`${apiUrl}/static/asset/headBar.png`" mode="aspectFill" class="tab-bar-container-02__image"></image>
+    <text class="tab-bar-container-02__text-02">CHUANG</text>
+    <text class="tab-bar-container-02__text-01">欢迎来到创作域，请在这里尽情发挥创意！</text>
+  </view>
 </template>
 
 <script setup lang="ts">
 import NavigationBar from "./components/NavigationBar.vue";
-
+const apiUrl = import.meta.env.VITE_API_BASE;
 const navigationOptions = [
   { title: "标签", path: "/pages/tagNav/index" },
   { title: "合集", path: "/pages/hotCollection/index" },
@@ -36,9 +41,61 @@ const navigationOptions = [
     &__image {
       width: 70px;
       height: 44px;
-      margin-left: 30px;
+      margin-left: 80px;
     }
   }
 
+}
+
+@media screen and (min-width:600px) {
+  .tab-bar-container {
+    .logo {
+      height: 44px;
+    }
+  }
+
+  .tab-bar-container-02 {
+    background-color: white;
+    width: 100%;
+    height: 44px;
+    position: relative;
+
+    &__image {
+      width: 100%;
+      height: 44px;
+    }
+
+    &__text-02 {
+      position: absolute;
+      z-index: 100;
+      top: 50%;
+      left: 80px;
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+      transform: translateY(-50%);
+    }
+
+    &__text-01 {
+      position: absolute;
+      z-index: 100;
+      left: 50%;
+      top: 50%;
+      letter-spacing: 4rpx;
+      text-decoration: 3rpx dashed white underline;
+      font-weight: 400;
+      transform: translateX(-50%) translateY(-50%);
+      font-size: 18px;
+      color: white;
+    }
+  }
+
+  .tab-bar-item {
+    &__image {
+      width: 70px;
+      height: 44px;
+      margin-left: 30px;
+    }
+  }
 }
 </style>

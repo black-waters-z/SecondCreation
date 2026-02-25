@@ -30,6 +30,8 @@ defineProps<{ userInfo: UserInfo }>();
   padding-bottom: 20rpx;
   box-sizing: border-box;
   padding: 0 20rpx;
+  position: relative;
+  z-index: 1000;
 
   &__avatar {
     width: 130rpx;

@@ -8,8 +8,11 @@
         </template>
       </whole-article>
       <text class="comment--title">评论</text>
-      <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment" @comment-reply="replyComment"
-        :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
+      <view class="article__comments">
+        <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment" @comment-reply="replyComment"
+          :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
+      </view>
+
     </template>
     <template #bottom>
       <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
@@ -118,10 +121,23 @@ page {
 }
 
 .comment--title {
+  width: 100%;
   padding-left: 20rpx;
   letter-spacing: 4rpx;
   padding-top: 40rpx;
   font-size: 30rpx;
   font-weight: 700;
+}
+
+@media screen and (min-width:600px) {
+  .article__comments {
+    background-color: white;
+    border-radius: 0 0 15px 15px;
+    margin-top: 20rpx;
+  }
+
+  .comment--title {
+    display: none;
+  }
 }
 </style>

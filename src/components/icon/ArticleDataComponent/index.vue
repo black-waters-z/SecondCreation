@@ -16,4 +16,11 @@ onLoad(async () => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and (min-width:600px) {
+    .article-data-component {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>

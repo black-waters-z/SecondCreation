@@ -71,9 +71,8 @@ function commentReply(commentId: number, parent_name?: string) {
   width: 95%;
   padding: 20rpx;
   padding-bottom: 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid #f0f0f000;
   right: 0;
-  background-color: white;
   float: right;
   transform-origin: right top;
   /* 右上角为缩放中心 */

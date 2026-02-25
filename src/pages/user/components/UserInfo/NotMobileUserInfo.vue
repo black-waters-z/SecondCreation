@@ -44,8 +44,6 @@ const userManage = [
 
 <style lang="scss" scoped>
 .user-bar-container {
-    display: flex;
-    justify-content: center;
 
     &__avatar {
         width: 130rpx;
@@ -58,70 +56,73 @@ const userManage = [
         justify-content: center;
     }
 
-    .user-info {
-        margin: 20rpx 0 0 20rpx;
-        flex: 1;
-        transition: all 0.5s ease-in-out;
-        opacity: 0;
-        z-index: -1;
-        transform: translateX(80px);
 
-        &__time {
-            font-size: 12px;
-            color: $text-muted;
-            margin-top: 70rpx;
-        }
+}
 
-        &__nav {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            margin-top: 100rpx;
-            column-gap: 100px;
-            row-gap: 10px;
+.user-info {
+    flex: 1;
+    transition: all 0.5s ease-in-out;
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    transform: translateX(80px);
+    cursor: pointer;
 
-            &__item {
-                padding: 10rpx 0;
-                cursor: pointer;
-                font-weight: 400;
-                font-size: 14px;
+    &__time {
+        font-size: 12px;
+        color: $text-muted;
+        margin-top: 70rpx;
+    }
 
-                &:hover {
-                    color: $text-muted;
-                }
-            }
-        }
+    &__nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 100rpx;
+        column-gap: 100px;
+        row-gap: 10px;
 
-        &__user {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        &__name {
-            font-weight: 700;
-            font-size: 40rpx;
-            display: flex;
-            align-items: first baseline;
-            position: relative;
-            margin-top: 6px;
-
-            &__icon {
-                margin-right: 40rpx;
-                top: 10rpx;
-            }
-        }
-
-        &__other {
-            display: flex;
+        &__item {
+            padding: 10rpx 0;
+            cursor: pointer;
+            font-weight: 400;
             font-size: 14px;
-            margin-top: 20rpx;
-            gap: 10px;
-            color: $text-muted;
 
-            &__tag {
-                padding: 5rpx 10rpx;
-                margin-left: 10rpx;
-
+            &:hover {
+                color: $text-muted;
             }
+        }
+    }
+
+    &__user {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__name {
+        font-weight: 700;
+        font-size: 40rpx;
+        display: flex;
+        align-items: first baseline;
+        position: relative;
+        margin-top: 6px;
+
+        &__icon {
+            margin-right: 40rpx;
+            top: 10rpx;
+        }
+    }
+
+    &__other {
+        display: flex;
+        font-size: 14px;
+        margin-top: 20rpx;
+        gap: 10px;
+        color: $text-muted;
+
+        &__tag {
+            padding: 5rpx 10rpx;
+            margin-left: 10rpx;
+
         }
     }
 }
@@ -136,22 +137,41 @@ const userManage = [
 
 .user-info {
     position: absolute;
-    z-index: 300;
     top: 0px;
-    left: 70px;
     box-sizing: border-box;
     padding: 20px;
-    background-color: white;
-    width: 600px;
+    width: 0px;
+    height: 0px;
+    background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.124);
+
+    &>* {
+        display: none;
+    }
 }
 
-.user-bar-container:hover {
-    .user-info {
-        opacity: 1;
-        transform: translateX(80px);
-        z-index: 1000;
+.user-bar-container__avatar:hover+.user-info {
+    width: 600px;
+    height: 400px;
+    opacity: 1;
+    transform: translateX(80px);
+    z-index: 1000;
+
+    &>* {
+        display: flex;
+    }
+}
+
+.user-info:hover {
+    width: 600px;
+    height: 400px;
+    opacity: 1;
+    transform: translateX(80px);
+    z-index: 1000;
+
+    &>* {
+        display: flex;
     }
 }
 </style>
