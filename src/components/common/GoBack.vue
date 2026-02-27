@@ -113,7 +113,9 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
 
 @media screen and (min-width: 600px) {
   .go-back-container {
-    display: none;
+    background: none;
+    box-sizing: border-box;
+    padding: 10px 100px;
   }
 }
 </style>

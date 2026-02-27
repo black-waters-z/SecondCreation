@@ -75,6 +75,7 @@ const resetColumns = () => {
   columnLists.forEach((column) => {
     column.value = [];
   });
+  console.log('resetColumns');
 };
 
 const renderArticles = async () => {
@@ -97,6 +98,7 @@ watch(
 
 defineExpose({
   resetColumns,
+  renderArticles
 });
 </script>
 

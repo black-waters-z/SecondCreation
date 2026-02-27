@@ -24,33 +24,47 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, reactive, ref, unref } from 'vue';
+import { computed, inject, ref, unref } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import SelectCollection from './SelectCollection.vue';
-import { parseToken } from '@/utils/security';
 import { getCollectionListInPost } from "@/api/collectionApi"
 import { onLoad } from '@dcloudio/uni-app';
-import type { Collection, FormData } from '@/pages/post/index';
-import type { Article } from '@/pages/tagPage/type';
-
+import type { Collection } from '@/pages/post/index';
+import { addDraft } from '@/api/draftApi';
+import { type DraftListItem } from '@/components/icon/DraftComponent/type';
+import { watch } from 'vue';
 const images = inject('image_urls', [] as any);
 // 从数据库获取用户建立的合集
 
 const props = defineProps<{
-  formdata: Article;
+  formdata: DraftListItem;
 }>();
 
-const formData: FormData = reactive({
-  title: props.formdata?.title || '',
-  content: props.formdata?.content || '',
-  collection: 0,
-  image_urls: props.formdata?.image_urls || [],
-});
+const formData = ref<DraftListItem>({
+  title: '',
+  subtitle: '',
+  content: '',
+  image_urls: [],
+  created_at: '',
+  updatedAt: '',
+  collection: 0
+})
+
+watch(() => props.formdata, (value) => {
+  formData.value = {
+    ...value,
+    collection: 0,
+  }
+}, {
+  immediate: true
+})
 
 const select = ref<Collection[]>([]);
 const article_id = ref<number>(0)
+const draft_id = ref<number>(0)
 onLoad((options) => {
   article_id.value = options?.article_id
+  draft_id.value = options?.draft_id
   // 获取合集列表，并将其传到addTag页
   getCollectionListInPost().then((res) => {
     select.value = res;
@@ -65,27 +79,40 @@ defineOptions({
 
 
 const count = computed(() => {
-  return formData?.content?.length;
+  return formData?.value?.content?.length || 0;
 });
 function writeSubmit() {
-  formData.image_urls = Array.isArray(images) ? images : unref(images);
+  formData.value.image_urls = Array.isArray(images) ? images : unref(images);
   uni.setStorage({
     key: 'articleData',
-    data: formData,
+    data: formData.value,
     success: () => {
+      let url = './AddTag?collection=' + formData.value.collection
+      if (article_id.value) url += '&article_id=' + article_id.value;
+      if (draft_id.value) url += '&draft_id=' + draft_id.value;
       uni.navigateTo({
-        url: article_id.value ? './AddTag?collection=' + formData.collection + '&article_id=' + article_id.value : './AddTag?collection=' + formData.collection,
+        url: url
       });
     },
-    fail: () => {
-      console.log('本地保存文章内容失败');
+    fail: (err) => {
+      console.log('本地保存文章内容失败', err);
     },
   });
 }
 
-function writeAddCraft() {
-  console.log('add craft');
-  window.alert('草稿保存成功');
+async function writeAddCraft() {
+  await addDraft(formData.value)
+  uni.showToast({
+    title: '保存成功',
+    icon: 'success',
+    duration: 2000,
+    success: () => {
+      uni.navigateTo({
+        url: '/pages/user/index',
+      });
+    }
+  })
+
 }
 </script>
 

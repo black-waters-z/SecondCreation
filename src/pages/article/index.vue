@@ -1,21 +1,34 @@
 <template>
-  <page-wrapper class="w-full" have_no_more>
+  <page-wrapper class="w-full article-index" have_no_more>
     <go-back class="w-full" show-logo>返回</go-back>
     <template #scroll>
       <whole-article :article="returnArticle?.article" :user-info="returnArticle?.userInfo">
         <template #collection>
           <collection-nav :source="returnArticle?.collection"></collection-nav>
         </template>
+        <template #comment>
+          <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
+          <match-media :min-width="600">
+            <text class="comment--title">评论</text>
+            <view class="article__comments">
+              <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment"
+                @comment-reply="replyComment" :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
+            </view>
+          </match-media>
+        </template>
       </whole-article>
-      <text class="comment--title">评论</text>
-      <view class="article__comments">
-        <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment" @comment-reply="replyComment"
-          :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
-      </view>
-
+      <match-media :max-width="600">
+        <text class="comment--title">评论</text>
+        <view class="article__comments">
+          <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment"
+            @comment-reply="replyComment" :ref="(el) => setCommentRef(el, comment.id)"></comment-vue>
+        </view>
+      </match-media>
     </template>
     <template #bottom>
-      <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
+      <match-media :max-width="600">
+        <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
+      </match-media>
     </template>
   </page-wrapper>
 </template>
@@ -130,6 +143,12 @@ page {
 }
 
 @media screen and (min-width:600px) {
+  .article-index {
+    .swiper-box {
+      max-height: 590px !important;
+    }
+  }
+
   .article__comments {
     background-color: white;
     border-radius: 0 0 15px 15px;
@@ -139,5 +158,7 @@ page {
   .comment--title {
     display: none;
   }
+
+
 }
 </style>

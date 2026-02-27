@@ -1,10 +1,11 @@
 export interface DraftListItem {
-  id: number;
+  id?: number;
+  collection: number;
   title: string;
-  subTitle: string;
+  subtitle: string;
   content: string;
-  img: string[];
-  created_at: string;
+  image_urls?: string[];
+  created_at?: string;
   updatedAt?: string;
 }
 

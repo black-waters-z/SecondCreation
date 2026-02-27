@@ -24,4 +24,10 @@ function goBack() {
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (min-width:600px) {
+    .base--go-back-icon {
+        background: rgba(255, 255, 255, 0.8);
+    }
+}
 </style>

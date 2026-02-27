@@ -2,7 +2,8 @@
     <view class="w-full flex flex-column article">
         <view class="article__head">
             <image class="w-full article-img" :src="`${article?.image_urls[0]}`"
-                v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill" />
+                v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill"
+                :style="{ background: getRandomColor() }" />
             <!-- 视频之后再说，后端没发过来呢 -->
             <view class="w-full article-video-container" v-if="isVideo">
                 <navigator open-type="navigate" :url="`/pages/article/index?id=${article?.id}`">
@@ -55,16 +56,24 @@
 <script setup lang="ts">
 import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
-import { computed } from 'vue';
+import { computed, inject, ref, type Ref, watch } from 'vue';
 // import ClickIcon from "@/components/base/ClickIcon/index.vue"
 const props = defineProps<{ article: ArticleType }>();
+function getRandomColor() {
+    const colors = ['#808080', '#A52A2A', '#FF4500', '#0000FF', '#006400']; // 灰、棕、橘红、蓝
+    return colors[Math.floor(Math.random() * colors.length)]
+}
 
 const isVideo = computed(() => {
-    const fileExtension = props.article?.image_urls?.[0]?.split('.').pop().toLowerCase();
-    const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
-    if (videoExtensions.includes(fileExtension)) return true;
+    if (props.article?.image_urls?.[0]) {
+        const fileExtension = props.article.image_urls[0].split('.').pop().toLowerCase();
+        const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
+        if (videoExtensions.includes(fileExtension)) return true;
+    }
     return false;
 });
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -110,6 +119,7 @@ const isVideo = computed(() => {
         height: fit-content;
         box-sizing: border-box;
         position: relative;
+        // background-color: $uni-bg-color-grey;
     }
 
     &-video {
@@ -170,10 +180,15 @@ const isVideo = computed(() => {
         }
     }
 
+    &__head {
+        background: $uni-bg-color-grey;
+        border-radius: 15rpx;
+    }
+
     &-img {
         position: relative;
         max-height: 400rpx;
-        background-color: #fdcdd8;
+        // background-color: $uni-bg-color-grey;
         border-radius: 16rpx;
         display: block;
         vertical-align: top;
@@ -306,6 +321,10 @@ const isVideo = computed(() => {
 
         &-video {
             height: 150px;
+        }
+
+        &__head {
+            background-color: none;
         }
 
 

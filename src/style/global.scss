@@ -202,7 +202,6 @@ page {
 
 @media screen and (min-width: 600px) {
   .uni-app--showtabbar uni-page-wrapper {
-    height: 100%;
   }
 
   uni-content {
@@ -234,7 +233,7 @@ page {
     //  background: radial-gradient(circle at 70% 60%,#F8F8FF 100%, transparent 60%);
     // background-color: rgb(233, 230, 230);
     background-attachment: fixed;
-    height: calc(100% - 50px);
+    height: calc(100% - 70rpx);
     position: relative;
   }
 

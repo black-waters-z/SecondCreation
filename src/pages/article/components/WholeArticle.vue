@@ -22,6 +22,7 @@
           class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
           :size="26"></click-icon>
       </view>
+      <slot name="comment"></slot>
     </view>
   </view>
 </template>
@@ -132,15 +133,30 @@ const isVideo = (url: string) => {
 }
 
 @media screen and (min-width:600px) {
-  .whole-article__content {
-    padding: 0 30rpx;
-  }
 
   .whole-article {
+    flex-direction: row;
+    align-items: flex-start;
     border-radius: 30rpx 30rpx 0 0;
     box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
     background-color: white;
-    margin-top: 20px;
+    margin-top: 5px;
+    position: relative;
+
+    &__video {
+      max-width: 600px;
+      min-height: 400px;
+      border-radius: 15px;
+    }
+
+    .whole-article__content {
+      padding: 0 30rpx;
+      min-height: 100%;
+
+      &-content-text {
+        font-size: 18px;
+      }
+    }
   }
 }
 </style>

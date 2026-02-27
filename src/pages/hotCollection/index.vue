@@ -68,4 +68,10 @@ function changeTab(index: number) {
 page {
     height: 100%;
 }
+
+@media screen and (min-width:600px) {
+    .hot-collection__tab-container {
+        background: none;
+    }
+}
 </style>
