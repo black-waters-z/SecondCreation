@@ -98,7 +98,6 @@ defineProps<{
         background-color: white;
         box-shadow: $grey-shadow-01;
         border-radius: 20px;
-        margin-top: 10rpx;
     }
 
 }

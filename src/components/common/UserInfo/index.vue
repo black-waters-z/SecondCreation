@@ -3,7 +3,7 @@
         <image class="user-info-component__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
         <view class="user-info-component__name">{{ userInfo?.username }}</view>
         <SCButton class="article-author__bt" type="button" size="25rpx" @click="toggleAttentionFunc(userInfo.id)"
-            :color="has_attentioned ? 'grey' : 'red'">
+            v-if="!isMe" :color="has_attentioned ? 'grey' : 'red'">
             {{ has_attentioned ? '已关注' : '关注' }}</SCButton>
         <view class="user-info-component__info">
             <view class="user-info-component__info__item">
@@ -19,6 +19,7 @@ import { ref, watch } from 'vue';
 import { toggleAttention, type UserInfoWithFollow } from '@/api/userApi';
 const props = defineProps<{
     userInfo: UserInfoWithFollow;
+    isMe: boolean
 }>();
 
 const has_attentioned = ref(props.userInfo?.following)
@@ -70,6 +71,14 @@ async function toggleAttentionFunc(following_id: number) {
             color: white;
             text-shadow: 0 0 10rpx rgba(0, 0, 0, 0.259);
         }
+    }
+}
+
+@media screen and (min-width:600px) {
+    .user-info-component {
+        width: calc(100% - 200px);
+        box-sizing: border-box;
+        margin: 0 100px;
     }
 }
 </style>

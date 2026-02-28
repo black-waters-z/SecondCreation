@@ -29,4 +29,13 @@ defineProps<{
         padding: 0 20rpx;
     }
 }
+
+@media screen and (min-width:600px) {
+    .user-info-articles {
+        margin-top: 20rpx;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20rpx;
+    }
+}
 </style>

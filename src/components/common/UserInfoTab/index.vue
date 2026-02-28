@@ -71,4 +71,11 @@ const indicatorPosition = computed(() => {
     transition: left 0.3s ease;
     /* 平滑过渡效果 */
 }
+
+@media screen and (min-width:600px) {
+    .user-info-tab {
+        width: calc(100% - 200px);
+        margin: 0 100px;
+    }
+}
 </style>

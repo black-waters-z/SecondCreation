@@ -1,19 +1,33 @@
 <template>
     <view class="change-phone">
         <uni-section title="更改手机号" type="line"></uni-section>
-        <uni-easyinput v-model="phone" type="text" placeholder="输入手机号" class="change-phone__input" />
-        <SCButton type="button" size="26rpx" @click="changephone" class="change-phone__button">修改邮箱</SCButton>
+        <uni-easyinput v-model="formData.phone" type="text" placeholder="输入手机号" class="change-phone__input" />
+        <SCButton type="button" size="26rpx" @click="changePhone" class="change-phone__button">修改邮箱</SCButton>
     </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
+import { type UserChange } from '../icon/SettingComponent/type';
+const props = defineProps<{
+    modelValue: UserChange;
+}>();
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: UserChange): void;
+    (e: 'submit'): void;
+}>()
 
-const phone = ref('')
-
-function changephone() {
-    console.log('changePhone', phone.value);
+const formData = computed({
+    get() {
+        return props.modelValue
+    },
+    set(value) {
+        emit('update:modelValue', value)
+    }
+})
+function changePhone() {
+    // if (formData.value.email) emit('submit')
 }
 </script>
 

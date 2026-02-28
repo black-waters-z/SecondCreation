@@ -1,16 +1,17 @@
 <template>
     <view class="setting-component">
-        <view class="setting-component__avatar">
+        <view class="setting-component__avatar" @click="popShow = true; settingFormType = 'avatar';">
             <uni-icons fontFamily="CustomFont" color="white" size="24"> &#xe61c; </uni-icons>
+            <image :src="userInfo?.avatar_url" mode="aspectFill" class="setting-component__avatar-img"></image>
         </view>
-        <view class="setting-component__name">name</view>
+        <view class="setting-component__name">{{ userInfo?.username }}</view>
         <view class="setting-component__wallet">
             <text class="setting-component__wallet__item">积分：xxx</text>
             <text class="setting-component__wallet__item">余额：xxx</text>
         </view>
         <view class="setting-component__other-setting">
             <view class="setting-component__other-setting__item">绑定邮箱：
-                <text class="setting-component__other-setting__item-answer">1060827621@qq.com</text>
+                <text class="setting-component__other-setting__item-answer">{{ userInfo?.email }}</text>
                 <uni-icons type="compose" size="20" @click="popShow = true; settingFormType = 'email';"
                     class="setting-component__other-setting__item-edit"></uni-icons>
             </view>
@@ -38,10 +39,16 @@
 import SCButton from "@/components/common/SCButton/index.vue"
 import PopWrapper from "@/components/base/PopWrapper/index.vue"
 import SettingForm from "./SettingForm.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { getUserMeInfo, type UserInfoWithFollow } from "@/api/userApi";
 
 const popShow = ref(false)
-const settingFormType = ref<'email' | 'phone' | 'password'>('email')
+const settingFormType = ref<'email' | 'phone' | 'password' | 'avatar'>('email')
+const userInfo = ref<UserInfoWithFollow>();
+onMounted(async () => {
+    // console.log('setting component mounted')
+    userInfo.value = await getUserMeInfo()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +69,16 @@ const settingFormType = ref<'email' | 'phone' | 'password'>('email')
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+
+        &-img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+        }
     }
 
     .setting-component__wallet {

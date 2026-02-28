@@ -1,9 +1,11 @@
 <template>
     <view class="article-author">
-        <image class="article-author__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
+        <navigator :url="`/pages/user/info?id=${userInfo?.id}`" open-type="navigate">
+            <image class="article-author__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
+        </navigator>
         <text class="article-author__name">{{ userInfo?.username }}</text>
         <SCButton class="article-author__bt" type="button" size="25rpx" @click="toggleAttentionFunc(userInfo.id)"
-            :color="has_attentioned ? 'grey' : 'red'">
+            v-if="!isMe" :color="has_attentioned ? 'grey' : 'red'">
             {{ has_attentioned ? '已关注' : '关注' }}</SCButton>
     </view>
 </template>
@@ -14,6 +16,7 @@ import SCButton from '@/components/common/SCButton/index.vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
 import { toggleAttention } from "@/api/userApi"
+
 const props = defineProps<{ userInfo: UserInfo, has_attention?: boolean }>()
 
 const has_attentioned = ref(props.has_attention)
@@ -26,6 +29,9 @@ async function toggleAttentionFunc(following_id: number) {
     // 接入接口
     await toggleAttention(following_id)
 }
+
+
+
 </script>
 
 <style lang="scss" scoped>

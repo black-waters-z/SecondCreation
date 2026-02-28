@@ -1,7 +1,7 @@
 <template>
     <page-wrapper>
         <GoBackIcon style="position: fixed;z-index: 1000;left: 20rpx;top: 20rpx;"></GoBackIcon>
-        <UserInfo :user-info="userInfo"></UserInfo>
+        <UserInfo :is-me="isMe" :user-info="userInfo"></UserInfo>
         <user-info-tab class="w-full" v-model:current="current"></user-info-tab>
         <!-- 这里放tab -->
         <!-- 放分别内容、合集 -->
@@ -13,12 +13,13 @@
             </template>
             <template #b>
                 <ScrollContainer :enable_refresher="false">
-                    <UserInfoArticles :article-list="articleList" :user-info="userInfo"></UserInfoArticles>
+                    <UserInfoArticles :isMe="isMe" :article-list="articleList" :user-info="userInfo">
+                    </UserInfoArticles>
                 </ScrollContainer>
             </template>
             <template #c>
                 <ScrollContainer :enable_refresher="false">
-                    <UserInfoCollections :collection-list="collectionList"></UserInfoCollections>
+                    <UserInfoCollections :isMe="isMe" :collection-list="collectionList"></UserInfoCollections>
                 </ScrollContainer>
             </template>
         </swiper-wrapper>
@@ -42,6 +43,9 @@ import { onLoad } from '@dcloudio/uni-app';
 import type { CollectionData } from '@/components/common/UserInfoCollections/type';
 import { type ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 import { getUserMeInfo, type UserInfoWithFollow } from '@/api/userApi';
+import { getUserInfo } from '@/utils/security';
+
+const isMe = ref(false)
 
 const current = ref(2)
 // const userInfo = ref<UserInfo>()
@@ -58,8 +62,12 @@ onLoad(async (options) => {
         collectionList.value = await getUserInfoCollection(options.id);
         articleList.value = await getMineArticleList(1, 10, options.id);
     }
-
+    const { uid } = await getUserInfo()
+    if (userInfo.value.id === uid) {
+        isMe.value = true
+    }
 })
+
 </script>
 
 <style lang="scss">

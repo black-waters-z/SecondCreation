@@ -1,8 +1,10 @@
+import { type UserChange } from '@/components/icon/SettingComponent/type';
 import type { UserInfo } from '@/pages/user/type';
-import { get, post } from '@/utils/request';
+import { get, post, put } from '@/utils/request';
 
 // 获取当前用户信息
 export interface UserInfoWithFollow extends UserInfo {
+  email?: string;
   following: boolean;
 }
 export async function getUserMeInfo(user_id?: number): Promise<UserInfoWithFollow> {
@@ -33,4 +35,9 @@ export async function refreshToken(): Promise<string> {
   const token = uni.getStorageSync('token');
   const result = await get('/users/token/refresh-token?token=' + token);
   return result.access_token;
+}
+
+export async function changeUserFunc(formData: UserChange): Promise<{ message: string }> {
+  const result = await put(`/users`, formData);
+  return result;
 }

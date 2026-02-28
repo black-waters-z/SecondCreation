@@ -25,7 +25,7 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
   activeIndex.value = idx;
   if (isMobile) {
     uni.navigateTo({
-      url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${encodeURIComponent(goBackTitle)}`,
+      url: `/pages/iconNavigate/index?icon=${componentType}`,
     });
     return;
   } else {
