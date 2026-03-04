@@ -22,6 +22,7 @@ import { onLoad } from '@dcloudio/uni-app'
 import type { Collection } from '@/pages/post/index';;
 import { post } from '@/utils/request';
 import { getCollectionListInPost } from '@/api/collectionApi';
+import { deleteDraftById } from '@/api/draftApi';
 const articleData = ref<any>({});
 
 defineOptions({
@@ -43,6 +44,7 @@ const workTags = ref({
 const collection = ref<number>(0);
 const collectionList = ref<Collection[]>([]);
 const article_id = ref<number>(0);
+const draft_id = ref<number>(0);
 
 onLoad((options) => {
   uni.getStorage({
@@ -61,6 +63,7 @@ onLoad((options) => {
   });
   collection.value = Number(options?.collection)
   article_id.value = options?.article_id
+  draft_id.value = options?.draft_id
 });
 
 async function submit() {
@@ -79,6 +82,8 @@ async function submit() {
   const tagResult = await post('/tags/articleTags', result.data.tags);
   delete result.data.tags;
   const postResult = await post(article_id.value ? '/articles?article_id=' + article_id.value : '/articles', { ...result.data, tag_ids: tagResult.tag_ids });
+  // 删除草稿
+  if (draft_id.value) await deleteDraftById(draft_id.value);
   console.log('postResult', postResult);
 
   if (postResult) {

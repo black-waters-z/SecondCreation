@@ -1,7 +1,7 @@
 <template>
     <navigator class="user-info--collection__container"
         :url="`/pages/user/collectionArticles?collection_id=${collection?.id}`" open-type="navigate">
-        <view class="user-info--collection-author">
+        <view v-if="collection?.author_username" class="user-info--collection-author">
             <image class="user-info--collection-author__avatar"
                 :src="collection?.author_avatar_url ? collection?.author_avatar_url : '/static/images/avatar.png'"
                 mode="aspectFill"></image>
@@ -111,5 +111,14 @@ defineProps<{ collection: CollectionData, price: string, number: number }>();
         font-size: 26rpx;
         margin-top: 10rpx;
     }
+}
+
+@media screen and (min-width:600px) {
+    .user-info--collection {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: $grey-shadow-01;
+    }
+
 }
 </style>

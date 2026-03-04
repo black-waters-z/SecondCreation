@@ -24,13 +24,13 @@ defineProps<{ userInfo: UserInfo }>();
 }
 
 .user-bar-container {
-  width: 100%;
   border-radius: 16rpx;
   display: flex;
   flex-direction: row;
   padding-bottom: 20rpx;
   box-sizing: border-box;
   padding: 0 20rpx;
+  position: relative;
 
   &__avatar {
     width: 130rpx;
@@ -77,6 +77,12 @@ defineProps<{ userInfo: UserInfo }>();
         margin-left: 10rpx;
       }
     }
+  }
+}
+
+@media screen and (max-width:600px) {
+  .user-bar-container {
+    width: 100%;
   }
 }
 </style>

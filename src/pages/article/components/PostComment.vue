@@ -1,7 +1,8 @@
 <template>
   <view class="post-comment w-100">
-    <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment" placeholder="请输入内容"
-      autoHeight @focus="isFocus = !isFocus" @blur="isFocus = !isFocus"></up-textarea>
+    <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment"
+      :placeholder="'@' + commentToward.parent_name" autoHeight @focus="isFocus = !isFocus"
+      @blur="isFocus = !isFocus"></up-textarea>
     <SCButton type="button" @click="sendComment"><text>发送</text></SCButton>
   </view>
 </template>
@@ -9,7 +10,7 @@
 <script setup lang="ts">
 import SCButton from "@/components/common/SCButton/index.vue";
 import { ref, watch } from "vue";
-const props = defineProps<{ commentToward: { content: string, parent_id?: number, parent_name?: string, article_id: number } }>()
+const props = defineProps<{ commentToward: { content: string, parent_id?: number, parent_name?: string, article_id: number, comment_type: 'first' | 'second' | 'child' } }>()
 const emit = defineEmits(['sendComment', 'update:commentToward'])
 const comment = ref<string>();
 const isFocus = ref(false);
@@ -19,21 +20,26 @@ function sendComment() {
   comment.value = ''
 }
 
+function cleanMention(text: string, name: string): string {
+  if (!name) return text
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return text.replace(new RegExp(`@${escaped}\\s*`, 'g'), '')
+}
+
 watch(
-  () => props.commentToward.parent_name,
-  (newParentName) => {
-    if (newParentName) {
-      comment.value = `@${newParentName} ${comment.value || ''}` + `${comment.value || ''}`;
+  () => [comment.value, props.commentToward.comment_type],
+  ([newComment, newCommentType]) => {
+    if (newCommentType !== 'first') {
+      if (newComment?.includes(`@${props.commentToward.parent_name}`)) return;
+      comment.value = `@${props.commentToward.parent_name} ${comment.value || ''}` + `${comment.value || ''}`;
+    } else {
+      if (comment.value?.includes(`@${props.commentToward.parent_name}`)) {
+        comment.value = cleanMention(comment.value, `${props.commentToward.parent_name}`)
+      }
     }
-  },
-  { immediate: true }
+  }
 );
 
-watch(() => comment.value, (newValue) => {
-  if (!comment.value || (comment.value && props.commentToward.parent_name && !comment.value.includes(props.commentToward.parent_name))) {
-    emit('update:commentToward', { content: newValue, article_id: props.commentToward.article_id })
-  }
-})
 </script>
 
 <style lang="scss" scoped>

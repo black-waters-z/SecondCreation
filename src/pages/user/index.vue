@@ -1,7 +1,12 @@
 <template>
-  <view class="w-full index-container content">
-    <head-nav class="w-full"></head-nav>
-    <scroll-container class="w-full flex mh-0">
+  <PageWrapper class="user-index" show-head flex-row>
+    <!-- 大屏 -->
+    <view class="user-index__user">
+      <user-bar :user-info="userInfo" class="mobile-user-info"></user-bar>
+      <read-nav class="content__read-nav__article-manager mobile-user-info" :nav-items="readNavItems" color="black"
+        v-model:iconIndx="iconIndx"> </read-nav>
+    </view>
+    <template #scroll>
       <view class="content__user">
         <user-bar :user-info="userInfo"></user-bar>
         <support-pay></support-pay>
@@ -13,9 +18,10 @@
             <view class="content__read-nav__split"></view>
             <text class="content__read-nav__text">文章管理</text>
           </view>
-          <user-bar :user-info="userInfo" v-if="!isMobile"></user-bar>
-          <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"
-            v-model:iconIndx="iconIndx"> </read-nav>
+          <match-media max-width="600px">
+            <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"
+              v-model:iconIndx="iconIndx"> </read-nav>
+          </match-media>
           <view class="flex">
             <view class="content__read-nav__split" v-if="isMobile"></view>
             <text class="content__read-nav__text" v-if="isMobile">互动</text>
@@ -33,20 +39,19 @@
         <component :is="component" v-if="!isMobile" class="w-full"></component>
         <!-- #endif -->
       </view>
-    </scroll-container>
+    </template>
     <post-sheet class="w-full"></post-sheet>
     <post-sheet-show></post-sheet-show>
-  </view>
+  </PageWrapper>
 </template>
 
 <script setup lang="ts">
 import PostSheet from '@/components/common/PostSheet/index.vue';
+import PageWrapper from '@/components/container/PageContainer.vue';
 import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import UserBar from './components/UserBar.vue';
 import SupportPay from './components/SupportPay.vue';
 import ReadNav from './components/ReadNav.vue';
-import HeadNav from '@/components/common/HeadNav.vue';
-import ScrollContainer from '@/components/common/ScrollContainer/index.vue';
 import type { UserInfo } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
@@ -178,13 +183,60 @@ watch(iconIndx, (val) => {
   display: none;
 }
 
+@media screen and (max-width:600px) {
+  .mobile-user-info {
+    display: none !important;
+  }
+}
+
+
 @media screen and (min-width:600px) {
+  .user-index {
+
+    &__user {
+      margin-left: 100px;
+    }
+
+    .content.page-container {
+      .mobile-scroll {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .user-index {
+    .content.page-container {
+      flex-direction: row;
+    }
+
+    &__user {
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+    }
+  }
+
+
+
+  .user-index__user {
+    position: sticky;
+    top: 0;
+    width: 100px;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding: 10px 10px;
+    background-color: white;
+  }
+
   .content__user {
     display: none;
 
     .user-bar-container {
       width: 600rpx;
-
     }
 
     .support-pay-container {
@@ -193,9 +245,7 @@ watch(iconIndx, (val) => {
   }
 
   .content__read-nav {
-    margin: 0 60px;
-    margin-right: 60px;
-    width: 150rpx;
+    display: none;
   }
 
   .read-nav-container {
@@ -220,6 +270,10 @@ watch(iconIndx, (val) => {
 
   .iframe-content {
     display: block;
+  }
+
+  .mobile-user-info {
+    display: flex;
   }
 
 }

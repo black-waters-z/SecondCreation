@@ -4,7 +4,7 @@
             <sc-search></sc-search>
         </view>
         <view class="shopping-head--nav-wrapper">
-            <view v-for="(value, idx) in [shopTab.paint, shopTab.write, shopTab.toy, shopTab.comment]"
+            <view v-for="(value, idx) in [shopTab.paint, shopTab.write, shopTab.toy, shopTab.comment]" :key="idx"
                 class="shopping-head--nav" :class="{ 'active': activeIndex === idx }" @click="clickNav(idx, value)">
                 {{ value }}
             </view>
@@ -70,6 +70,9 @@ function clickNav(index: number, value: string) {
     .shopping-head--nav {
         max-width: 200rpx;
         cursor: pointer;
+        margin: 0 auto;
+        padding: 0 40rpx;
+        margin-top: 20rpx;
     }
 
 }

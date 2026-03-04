@@ -1,5 +1,5 @@
 // src/utils/request.ts
-
+import { refreshToken } from '@/api/userApi';
 // 定义请求配置类型
 interface RequestConfig {
   url: string;
@@ -20,7 +20,7 @@ const toFormUrlEncoded = (payload: Record<string, any>): string => {
 // 统一的请求方法
 export const request = <T = any>(config: RequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const { url, method = 'GET', data = {}, header = {}, timeout = 15000 } = config;
+    const { url, method = 'GET', data = {}, header = {}, timeout = 150000 } = config;
 
     // 处理完整的 URL
     const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
@@ -52,6 +52,7 @@ export const request = <T = any>(config: RequestConfig): Promise<T> => {
           const error = new Error(`HTTP Error: ${res.statusCode}`);
           (error as any).statusCode = res.statusCode;
           (error as any).response = res;
+          (error as any).originalRequest = config; // 加这里
           reject(error);
         }
       },
@@ -83,17 +84,34 @@ const responseInterceptor = {
     // 这里可以统一处理响应数据格式
     return response;
   },
-  error: (error: Error) => {
+  error: async (error: Error) => {
     // 统一错误处理
-    let errorMessage = '网络错误';
+    let errorMessage = '网络错误' + error;
 
     if (error.message.includes('HTTP Error')) {
       const statusCode = (error as any).statusCode;
       switch (statusCode) {
         case 401:
-          errorMessage = '未授权，请重新登录';
-          // 可以跳转到登录页
-          uni.navigateTo({ url: '/pages/user/login' });
+          try {
+            const newToken = await refreshToken();
+            if (newToken) {
+              // 更新本地 token
+              uni.setStorageSync('token', newToken);
+              // 重新发起原始请求
+              const originalRequest = (error as any).originalRequest;
+              originalRequest.header = originalRequest.header || {}; // 加这里
+              originalRequest.header.Authorization = `Bearer ${newToken}`;
+              return request(originalRequest); // 重新请求
+            }
+          } catch (refreshError) {
+            // 刷新失败，跳转登录页
+            errorMessage = '登录已过期，请重新登录' + refreshError;
+            uni.showToast({
+              title: errorMessage,
+              icon: 'error',
+            });
+            uni.navigateTo({ url: '/pages/user/login' });
+          }
           break;
         case 403:
           errorMessage = '拒绝访问';

@@ -16,7 +16,7 @@ import { ref } from 'vue';
 
 const waterfall = ref<InstanceType<typeof WaterFall> | null>(null);
 defineProps<{
-    articleList: Article[];
+    articleList: Article[] | undefined;
     type?: 'grid' | null;
 }>();
 

@@ -19,8 +19,15 @@ export async function getFilterArticle(page: number): Promise<Article[]> {
   return result;
 }
 
-export async function getFavoriteArticles(): Promise<Article[]> {
-  const result = await get('/articles/favorites?page=1');
+export async function getFavoriteArticles(page: number, page_size: number, user_id?: number): Promise<Article[]> {
+  if (!page || !page_size) return;
+  let path;
+  if (!user_id) {
+    path = `/articles/favorites?page=${page}&page_size=${page_size}`;
+  } else {
+    path = `/articles/favorites?page=${page}&page_size=${page_size}&user_id=${user_id}`;
+  }
+  const result = await get(path);
   return result;
 }
 

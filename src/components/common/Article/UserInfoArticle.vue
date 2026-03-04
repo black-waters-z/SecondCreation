@@ -92,4 +92,13 @@ defineProps<{
         }
     }
 }
+
+@media screen and (min-width:600px) {
+    .user-info-article {
+        background-color: white;
+        box-shadow: $grey-shadow-01;
+        border-radius: 20px;
+    }
+
+}
 </style>

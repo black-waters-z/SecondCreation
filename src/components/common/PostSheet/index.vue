@@ -1,10 +1,10 @@
 <!-- 发布 -->
 <template>
-  <view :class="visible ? `post-sheet-container active` : `post-sheet-container`">
+  <view :class="visible ? `post-sheet-container post-sheet-container__active` : `post-sheet-container`">
     <view class="post-sheet-container__view">
-      <view class="flex item-center" v-for="(row, rowIndex) in chunkedChoices" :key="rowIndex">
-        <post-choice class="flex-1 item-center justify-center" v-for="choice in row" :key="choice.text + choice.icon"
-          :text="choice.text" :backgroundcolor="choice.backgroundcolor" :url="choice.url" fontColor="grey">
+      <view class="flex item-center" v-for="(choice, rowIndex) in choices" :key="rowIndex">
+        <post-choice class="flex-1 item-center justify-center" :key="choice.text + choice.icon" :text="choice.text"
+          :backgroundcolor="choice.backgroundcolor" :url="choice.url" fontColor="grey">
           <template #icon>
             <uni-icons fontFamily="CustomFont" size="33" :color="choice?.color || '#000'">
               {{ choice.icon }}
@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
 import { usePostSheetStore } from '@/store/usePostSheet';
 import { storeToRefs } from 'pinia';
 import PostChoice from './PostChoice.vue';
@@ -42,23 +41,9 @@ const choices: Choice[] = [
   { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
 ];
 
-const chunkedChoices = computed(() => {
-  const chunkSize = 3;
-  const result: Choice[][] = [];
-
-  choices.forEach((choice, index) => {
-    const row = Math.floor(index / chunkSize);
-    if (!result[row]) {
-      result[row] = [];
-    }
-    result[row].push(choice);
-  });
-
-  return result;
-});
 </script>
 
-<style lang="less">
+<style lang="scss">
 @font-face {
   font-family: CustomFont;
   src: url('../../../static/iconfont.ttf');
@@ -67,26 +52,56 @@ const chunkedChoices = computed(() => {
 .post-sheet-container {
   width: 100%;
   position: fixed;
+  height: 100px;
   z-index: 500;
   bottom: 130rpx;
-  transform: translateY(70vh);
   display: flex;
   justify-content: center;
   transition: 0.5s ease-in-out;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(100% + 20rpx));
+
 
   &__view {
-    width: 80%;
+    width: 90%;
     padding: 20rpx;
     background-color: white;
     border-radius: 16px;
     box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(6, 100px);
+    overflow-x: auto;
+    position: relative;
+  }
+
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    right: 20rpx;
+    top: 0;
+    width: 50px;
+    height: 100px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 100%);
+    border-radius: 16px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    left: 20rpx;
+    top: 0;
+    width: 50px;
+    height: 100px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, white 100%);
+    border-radius: 16px;
   }
 }
 
-.active {
-  transform: translateY(0vh);
+.post-sheet-container__active {
+  transform: translateX(-50%);
 }
 
 .icon {
@@ -94,10 +109,25 @@ const chunkedChoices = computed(() => {
   height: 50%;
 }
 
-// #ifdef MP-WEIXIN
+@media screen and (min-width:600px) {
+  .post-sheet-container {
+    &__view {
+      width: 900px;
+      height: 100px;
+      padding: 20rpx;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15);
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      transform: translateY(20rpx);
+    }
 
-.post-sheet-container {
-  bottom: 40rpx;
+    &__active {
+      transform: translateX(-50%) translateY(-60rpx);
+    }
+  }
+
+
 }
-
-// #endif</style>
+</style>

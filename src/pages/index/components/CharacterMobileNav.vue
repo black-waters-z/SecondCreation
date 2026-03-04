@@ -43,7 +43,7 @@ const props = defineProps<{
 
 .character-mobile-nav-container {
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
   height: 100%;
   top: 0;
   background-color: white;

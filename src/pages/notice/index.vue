@@ -31,4 +31,8 @@ onLoad(async () => {
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+page {
+    height: 100%;
+}
+</style>

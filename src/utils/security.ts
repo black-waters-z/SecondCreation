@@ -8,3 +8,8 @@ export function parseToken(token: string) {
     uid: payload.uid,
   };
 }
+
+export async function getUserInfo(): Promise<{ sub: string; uid: number }> {
+  const token = uni.getStorageSync('token');
+  return await parseToken(token);
+}

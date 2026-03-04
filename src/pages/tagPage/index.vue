@@ -1,6 +1,6 @@
 <template>
     <page-wrapper>
-        <go-back class="w-full">
+        <go-back class="w-full" has-shadow>
             <template #right>
                 <Tag class="nav-tab__sticky--tag" @click="changeWorkTag" v-if="result?.navTags?.work_tags?.length"
                     :text="result?.navTags?.work_tags?.[workIndex]?.name" :closable="false" size="medium"

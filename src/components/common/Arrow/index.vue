@@ -18,5 +18,6 @@ const handleTap = (e: Event) => emit("click", e);
   justify-content: center;
   align-items: center;
   font-weight: 700;
+  cursor: pointer;
 }
 </style>

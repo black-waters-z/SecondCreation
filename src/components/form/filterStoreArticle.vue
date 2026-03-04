@@ -52,8 +52,7 @@ function maskClick(e) {
     console.log('maskClick事件:', e);
 }
 
-function iconClick(e) {
-    console.log('iconClick事件:', e);
+function iconClick() {
     if (!tagInput.value) return
     tagInputAll.value = [...tagInputAll.value, tagInput.value]
     tagInput.value = ''
@@ -69,18 +68,11 @@ function deleteTag(idx: number) {
 
 function startFilter() {
     emit('startFilter', {
-        checkedValue: checkedValue.value,
+        article_style: checkedValue.value,
         keyword: keyword.value,
         time_range: range.value,
-        tagInputAll: tagInputAll.value
+        tag_names: tagInputAll.value
     })
-    // console.log('开始筛选:', {
-    //     checkedValue: checkedValue.value,
-    //     keyword: keyword.value,
-    //     time_range: range.value,
-    //     tagInputAll: tagInputAll.value
-    // });
-
     // 筛选干脆根据每个表格不同在自己表格里筛选就好，传递回去只是通知对方关闭筛选界面
 }
 </script>

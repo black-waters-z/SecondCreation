@@ -1,24 +1,20 @@
 <template>
-  <view class="to-top-container" @click="scrollTop"
-    ><uni-icons type="arrow-up" color="white" size="24" />
+  <view class="to-top-container" @click="scrollTop">
+    <uni-icons type="arrow-up" color="white" size="24" />
   </view>
 </template>
 
 <script lang="ts" setup>
-const scrollTop = () => {
-  uni.pageScrollTo({
-    scrollTop: 0,
-    duration: 300,
-    success: () => {
-      console.log("滚动成功");
-    },
-  });
-};
+import { inject } from 'vue';
+import { ScrollViewKey, useScrollView } from '@/hooks/useScrollView';
+
+const injectedScrollView = inject(ScrollViewKey, null);
+const { scrollTop } = injectedScrollView ?? useScrollView();
 </script>
 
 <style scoped lang="scss">
 .to-top-container {
-  z-index: 2000;
+  z-index: 200;
   position: fixed;
   width: 100rpx;
   height: 100rpx;
@@ -30,5 +26,6 @@ const scrollTop = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 </style>

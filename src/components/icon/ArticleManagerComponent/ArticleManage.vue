@@ -35,7 +35,7 @@ defineProps<{ article: ManageArticle }>()
     box-sizing: border-box;
     padding: 20rpx;
     border-bottom: 1px dashed $border-color;
-    margin-bottom: 20rpx;
+    margin-top: 20rpx;
 
     &__title {
         display: flex;
@@ -78,5 +78,24 @@ defineProps<{ article: ManageArticle }>()
             color: $text-muted;
         }
     }
+}
+
+@media screen and (min-width:600px) {
+    .article-manage {
+        background-color: white;
+        box-shadow: $grey-shadow-01;
+        border-radius: 20rpx;
+        min-height: 130px;
+        display: flex;
+        flex-direction: column;
+
+        &__info {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+
+
 }
 </style>

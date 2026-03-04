@@ -26,13 +26,22 @@ import { onLoad } from '@dcloudio/uni-app';
 import { computed, provide, ref } from 'vue';
 import { usePostPicFile } from '@/hooks/usePostFile';
 import { getArticleById } from '@/api/articleApi';
-import type { Article } from '@/pages/tagPage/type';
+import { getDraftById } from '@/api/draftApi';
+import { type DraftListItem } from '@/components/icon/DraftComponent/type';
 type PostType = 'write' | 'paint' | 'video';
 const postType = ref<PostType>('write');
 
-const formData = ref<Article>();
+const formData = ref<DraftListItem>({
+  title: '',
+  subtitle: '',
+  content: '',
+  image_urls: [],
+  created_at: '',
+  updatedAt: '',
+  collection: 0
+});
 const article_id = ref<number>();
-onLoad((options) => {
+onLoad(async (options) => {
   // 假如传过来的地址有id号，首先查是否是该用户的文章，再获取用户的文章进行编辑
   if (options?.article_id) {
     // 查文章
@@ -41,6 +50,9 @@ onLoad((options) => {
       // 判断用户有无权限编辑此文章
       formData.value = res.article
     });
+  }
+  if (options?.draft_id) {
+    formData.value = await getDraftById(options.draft_id)
   }
   const typeParam = options?.type as PostType;
   if (['write', 'paint', 'video'].includes(typeParam)) {
@@ -69,7 +81,7 @@ provide('image_urls', imageUrls);
 
 <style lang="scss">
 page {
-  height: 100vh;
+  height: 100%;
 }
 
 .video-upload {

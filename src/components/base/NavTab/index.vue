@@ -1,6 +1,6 @@
 <template>
     <view class="w-full nav-tab">
-        <up-sticky class="w-full nav-tab__sticky" bgColor="#fff">
+        <up-sticky class="w-full nav-tab__sticky">
             <up-tabs :list="list" @change="toggleTab">
                 <template #right>
                     <view class="nav-tab__filter">
@@ -76,5 +76,14 @@ function startFilter(value: any) {
 
     }
 
+}
+
+@media screen and (min-width:600px) {
+    .nav-tab {
+        padding: 0 100px;
+        background-color: none;
+
+        &__sticky {}
+    }
 }
 </style>

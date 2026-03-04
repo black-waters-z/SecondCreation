@@ -1,8 +1,9 @@
 <template>
     <view class="image-wrapper" @tap.stop @click.stop @touchend.stop @touchmove.stop @touchstart.stop
-        :class="{ 'image-wrapper__active': show }">
-        <uni-icons class="image-wrapper__icon" @click="toggleShow" type="close" size="28" color="white"></uni-icons>
-        <view scroll-y="true" class="image-wrapper__scroll">
+        @click="toggleShow" :class="{ 'image-wrapper__active': show }">
+        <uni-icons class="image-wrapper__icon" @click.stop="toggleShow" @tap.stop type="close" size="28"
+            color="white"></uni-icons>
+        <view scroll-y="true" class="image-wrapper__scroll" @click.stop @tap.stop>
             <image class="image-wrapper__image" :class="{ 'image-wrapper__image__active': show }" :src="image"
                 mode="widthFix"></image>
         </view>
@@ -64,6 +65,14 @@ defineExpose({ toggleShow })
 
         &__active {
             transform: scale(1);
+        }
+    }
+}
+
+@media screen and (min-width:600px) {
+    .image-wrapper {
+        &__scroll {
+            width: 30%;
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <view class="oneComment" :style="{
-    transform: type === 'second' ? 'scale(0.95)' : 'scale(1)',
+    transform: type === 'child' || type === 'second' ? 'scale(0.95)' : 'scale(1)',
   }">
     <view class="oneComment__user">
       <view class="oneComment__user__avatar">
@@ -11,7 +11,7 @@
           <view class="oneComment__user__info__name">{{ comment?.user?.username }}</view>
           <view class="oneComment__user__info__time">{{
             new Date(comment?.created_at)?.toLocaleString()
-          }}</view>
+            }}</view>
 
         </view>
         <view class="oneComment__content">
@@ -45,7 +45,7 @@ import { ref } from "vue";
 import type { FirstComment } from "@/pages/article/type";
 const iconType = [["redo-filled"], ["hand-up", "hand-up-filled"]]
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     comment: FirstComment;
     type?: string;
@@ -59,8 +59,8 @@ const emit = defineEmits(["showSecondCommentClick", "commentReply"]);
 const showText = ref<string>("展开回复");
 
 function commentReply(commentId: number, parent_name?: string) {
-  console.log(commentId, parent_name);
-  emit("commentReply", commentId, parent_name);
+  // console.log(commentId, parent_name, props.type);
+  emit("commentReply", commentId, parent_name, props.type);
 }
 </script>
 
@@ -71,9 +71,8 @@ function commentReply(commentId: number, parent_name?: string) {
   width: 95%;
   padding: 20rpx;
   padding-bottom: 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid #f0f0f000;
   right: 0;
-  background-color: white;
   float: right;
   transform-origin: right top;
   /* 右上角为缩放中心 */

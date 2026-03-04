@@ -21,10 +21,6 @@ import GoBack from '@/components/common/GoBack.vue';
 import { onHide, onLoad, onShow } from '@dcloudio/uni-app';
 import { ref, shallowRef } from 'vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
-const goBackTitle = ref('');
-onLoad((options) => {
-  goBackTitle.value = decodeURIComponent(options?.goBackTitle);
-});
 
 // #ifdef H5
 import { componentMap, type componentKey } from './index';

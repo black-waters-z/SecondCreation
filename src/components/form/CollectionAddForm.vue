@@ -10,8 +10,6 @@
             <SCButton type="button" :size="'26rpx'" @click="submit" style="margin-top: 40rpx;margin-left: auto;">新建
             </SCButton>
         </view>
-
-
     </view>
 </template>
 

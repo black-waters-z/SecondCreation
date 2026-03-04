@@ -2,7 +2,7 @@ import { get, post } from '@/utils/request';
 import type { NavTabTag } from '@/components/base/NavTab/type';
 import type { TagPageData, Article } from '@/pages/tagPage/type';
 import type { Tag } from '@/pages/tagNav/type';
-
+import { TimeFilter } from '@/types';
 async function getTag(tagId: string): Promise<Tag> {
   const result = await get(`/tags/${tagId}`);
   return result;
@@ -18,12 +18,14 @@ export async function listTags(tagType: 'work' | 'character' | 'cross', all: boo
 }
 
 export interface queryArticleKey {
+  article_style?: 'write' | 'video' | 'image';
   keyword?: string;
   tag_ids?: number[];
+  tag_names?: string[];
   must_have_ids?: number[];
   order_by: '-total_score' | 'total_score';
   time_range?: Date[];
-  peroid?: 'all' | 'week' | 'month' | 'year' | 'newest' | 'recommend';
+  peroid?: TimeFilter;
   page: number;
   per_page: number;
 }

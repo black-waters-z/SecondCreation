@@ -9,16 +9,15 @@ interface FileReply {
   filename: string;
   fileSize: number;
 }
+export interface FileItem {
+  url: string;
+  coverUrl?: string;
+  status?: string;
+  message?: string;
+  [key: string]: any;
+}
 
 export function usePostPicFile() {
-  interface FileItem {
-    url: string;
-    coverUrl?: string;
-    status?: string;
-    message?: string;
-    [key: string]: any;
-  }
-
   const { loadVideo } = useLoadVideo();
 
   const fileList3 = ref<FileItem[]>([]);

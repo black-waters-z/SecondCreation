@@ -160,7 +160,8 @@ uni-scroll-view .uni-scroll-view::-webkit-scrollbar {
 }
 
 .uni-top-window {
-  height: 80px !important;
+  padding: 3px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 uni-layout {
@@ -185,9 +186,22 @@ uni-layout {
   width: 100% !important;
 }
 
+.uni-section-header__decoration.line {
+  background-color: $pink-400;
+}
+
+.is-focused {
+  border-color: $pink-400 !important;
+}
+
+// Pink themed page background gradient
+page {
+  background: white;
+  background-attachment: fixed;
+}
+
 @media screen and (min-width: 600px) {
   .uni-app--showtabbar uni-page-wrapper {
-    height: 100%;
   }
 
   uni-content {
@@ -197,21 +211,85 @@ uni-layout {
   .content {
     position: relative;
     box-sizing: border-box;
+    // padding: 10px 100px;
   }
 
   .uni-app--showleftwindow uni-main,
   uni-main {
     min-height: auto;
-    height: calc(100vh - 80px);
+    height: 100%;
     overflow: hidden;
   }
 
   page {
-    background-color: white;
-    height: 100% !important;
+    // background: linear-gradient(290deg,#F8F8FF 0%, #f6c6d3 30%, #F8F8FF 50%, #f6c6d3 80%,#F8F8FF 100%);
+    // background: url(http://localhost:8080/static/asset/background.png) no-repeat center;
+    background:
+      radial-gradient(520px 520px at 18% 28%, rgba(246, 198, 211, 0.5) 0%, rgba(246, 198, 211, 0.22) 55%, rgba(246, 198, 211, 0) 72%),
+      radial-gradient(560px 560px at 82% 72%, rgba(246, 198, 211, 0.45) 0%, rgba(246, 198, 211, 0.2) 55%, rgba(246, 198, 211, 0) 72%),
+      #ffffff;
+    // background-image: radial-gradient(circle,#f6c6d3 0%, #F8F8FF 100%);
+    // background: radial-gradient(circle at 30% 40%, #f6c6d3, transparent 60%),
+    //  background: radial-gradient(circle at 70% 60%,#F8F8FF 100%, transparent 60%);
+    // background-color: rgb(233, 230, 230);
+    background-attachment: fixed;
+    height: calc(100% - 70rpx);
+    position: relative;
   }
 
-  .nomobile-disappear {
-    display: none;
+  page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(520px 520px at 18% 28%, rgba(246, 198, 211, 0.7) 0%, rgba(246, 198, 211, 0.35) 55%, rgba(246, 198, 211, 0) 75%),
+      radial-gradient(560px 560px at 82% 72%, rgba(246, 198, 211, 0.65) 0%, rgba(246, 198, 211, 0.3) 55%, rgba(246, 198, 211, 0) 75%);
+    filter: blur(10px);
+    z-index: -1;
   }
+
+  page::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.253);
+    z-index: -1;
+  }
+
+  // page::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background: url(http://localhost:8080/static/asset/background.png) no-repeat center;
+  //   background-size: cover;
+  //   filter: blur(50px);
+  //   /* 调整模糊程度 */
+  //   z-index: -1;
+  //   /* 确保背景在内容下方 */
+  // }
+
+  //   page::after {
+  //     content: '';
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     background: rgba(255, 255, 255, 0.29);
+  //     /* 白色半透明遮罩 */
+  //     z-index: -1;
+  //   }
+
+  // .nomobile-disappear {
+  //   display: none;
+  // }
 }

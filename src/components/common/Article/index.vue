@@ -2,7 +2,8 @@
     <view class="w-full flex flex-column article">
         <view class="article__head">
             <image class="w-full article-img" :src="`${article?.image_urls[0]}`"
-                v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill" />
+                v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill"
+                :style="{ background: getRandomColor() }" />
             <!-- 视频之后再说，后端没发过来呢 -->
             <view class="w-full article-video-container" v-if="isVideo">
                 <navigator open-type="navigate" :url="`/pages/article/index?id=${article?.id}`">
@@ -19,9 +20,11 @@
                         }}</uni-icons>
                 </view>
             </view>
-            <text class="w-full article-content" v-if="!article?.image_urls?.[0] && !isVideo">
-                {{ article?.content }}
-            </text>
+            <view style="padding: 20rpx;" v-if="!article?.image_urls?.[0] && !isVideo">
+                <text class="w-full article-content">
+                    {{ article?.content }}
+                </text>
+            </view>
         </view>
         <view class="article-info flex-1">
             <navigator v-if="!isVideo" :url="`/pages/article/index?id=${article?.id}`" open-type="navigate"
@@ -53,16 +56,24 @@
 <script setup lang="ts">
 import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
-import { computed } from 'vue';
+import { computed, inject, ref, type Ref, watch } from 'vue';
 // import ClickIcon from "@/components/base/ClickIcon/index.vue"
 const props = defineProps<{ article: ArticleType }>();
+function getRandomColor() {
+    const colors = ['#808080', '#A52A2A', '#FF4500', '#0000FF', '#006400']; // 灰、棕、橘红、蓝
+    return colors[Math.floor(Math.random() * colors.length)]
+}
 
 const isVideo = computed(() => {
-    const fileExtension = props.article?.image_urls?.[0]?.split('.').pop().toLowerCase();
-    const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
-    if (videoExtensions.includes(fileExtension)) return true;
+    if (props.article?.image_urls?.[0]) {
+        const fileExtension = props.article.image_urls[0].split('.').pop().toLowerCase();
+        const videoExtensions = ['mp4', 'avi', 'mkv', 'webm', 'mov', 'flv', 'wmv'];
+        if (videoExtensions.includes(fileExtension)) return true;
+    }
     return false;
 });
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -108,6 +119,7 @@ const isVideo = computed(() => {
         height: fit-content;
         box-sizing: border-box;
         position: relative;
+        // background-color: $uni-bg-color-grey;
     }
 
     &-video {
@@ -168,10 +180,15 @@ const isVideo = computed(() => {
         }
     }
 
+    &__head {
+        background: $uni-bg-color-grey;
+        border-radius: 15rpx;
+    }
+
     &-img {
         position: relative;
         max-height: 400rpx;
-        background-color: #fdcdd8;
+        // background-color: $uni-bg-color-grey;
         border-radius: 16rpx;
         display: block;
         vertical-align: top;
@@ -189,17 +206,9 @@ const isVideo = computed(() => {
 
     &-content {
         display: block;
-        min-height: 300rpx;
-        max-height: 400rpx;
-        box-sizing: border-box;
-        padding: 20rpx;
         font-size: 25rpx;
         font-weight: 400;
         color: $text-muted;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: #f1f1f19f;
-        border-radius: 15rpx;
     }
 
     .text-ellipsis {
@@ -274,17 +283,48 @@ const isVideo = computed(() => {
     }
 }
 
+.article-content {
+    display: -webkit-box;
+    /* 1. 必须结合 box 模型使用 */
+    -webkit-box-orient: vertical;
+    /* 2. 设置伸缩盒子的子元素排列方式 */
+    -webkit-line-clamp: 8;
+    /* 3. 限制显示的行数 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    height: calc(8 * 1.5em);
+    box-sizing: border-box;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1.5em;
+        /* 遮挡最后一行的高度 */
+        background: linear-gradient(to bottom, transparent, white);
+        /* 渐变遮罩 */
+    }
+}
+
 @media screen and (min-width:600px) {
     .article {
         box-sizing: border-box;
-        width: 460rpx;
+        width: 500rpx;
+        box-shadow: $grey-shadow-02;
 
         .article-video-container {
-            height: 140px;
+            min-height: 150px;
         }
 
         &-video {
-            height: 140px;
+            height: 150px;
+        }
+
+        &__head {
+            background-color: none;
         }
 
 

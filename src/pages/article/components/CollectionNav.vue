@@ -53,4 +53,11 @@ defineProps<{ source?: ArticleCollectionInfo }>()
         opacity: 0.6;
     }
 }
+
+@media screen and (min-width:600px) {
+    .collection-nav {
+        margin-top: 40px;
+    }
+
+}
 </style>

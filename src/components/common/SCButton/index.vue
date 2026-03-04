@@ -2,6 +2,7 @@
   <button class="button" hover-class="button-hover" @click="$emit('click')" :class="{
     'button-bt': type === Button.button,
     'button-outline': type === Button.outline,
+    'button-simple': type === Button.simple
   }" :style="{ background: color, border: color, fontSize: size }">
     <text :style="{ lineHeight: 1 }">
       <slot></slot>
@@ -14,10 +15,17 @@
 enum Button {
   button = 'button',
   outline = 'outline',
+  simple = 'simple'
 }
 
 defineProps<{ type: string, color?: string, size?: string }>();
 defineEmits(['click']);
+
+defineOptions({
+  options: {
+    styleIsolation: 'shared', // 允许样式穿透（微信小程序）
+  },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -54,7 +62,6 @@ defineEmits(['click']);
 
 .button-outline {
   border: 2rpx solid $pink-400;
-
   color: $pink-400;
   background: none;
   transition: 0.3s ease;
@@ -68,7 +75,17 @@ defineEmits(['click']);
   }
 }
 
-:deep(.uni-button:after) {
+.button-simple {
+  border: none;
+  background: none;
+  color: $pink-400;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+}
+
+.button::after {
   border: none;
 }
 </style>

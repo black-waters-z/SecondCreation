@@ -1,20 +1,22 @@
 <template>
   <view class="favorite-component">
-    <GridArticlesContainer :article-list="articleList" type="grid">
+    <GridArticlesContainer :article-list="source?.length ? source : me_source" type="grid">
     </GridArticlesContainer>
   </view>
 </template>
 
 <script setup lang="ts">
-import GridArticlesContainer from "@/components/common/GridArticlesContainer/index.vue";
-import { onMounted, ref } from "vue";
-import type { Article } from '@/pages/tagPage/type'
 import { getFavoriteArticles } from "@/api/articleApi";
-// 查接口
-const articleList = ref<Article[]>([])
+import GridArticlesContainer from "@/components/common/GridArticlesContainer/index.vue";
+import type { Article } from '@/pages/tagPage/type'
+import { onMounted, ref } from "vue";
+defineProps<{ source: Article[] }>()
+const me_source = ref<Article[]>()
+
 onMounted(async () => {
-  articleList.value = await getFavoriteArticles()
-});
+  me_source.value = await getFavoriteArticles(1, 10)
+})
+
 </script>
 
 <style scoped lang="scss">

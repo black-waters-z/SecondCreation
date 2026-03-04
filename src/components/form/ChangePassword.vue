@@ -1,26 +1,37 @@
 <template>
     <view class="change-password">
         <uni-section title="修改密码" type="line"></uni-section>
-        <uni-easyinput v-model="passwordInput.passwordOld" type="text" placeholder="输入原密码"
-            class="change-password__input" />
-        <uni-easyinput v-model="passwordInput.passwordNew" type="text" placeholder="输入修改后密码"
+        <uni-easyinput v-model="formData.old_password" type="text" placeholder="输入原密码" class="change-password__input" />
+        <uni-easyinput v-model="formData.password_hash" type="text" placeholder="输入修改后密码"
             class="change-password__input" />
         <SCButton type="button" size="26rpx" @click="changePassword" class="change-password__button">修改邮箱</SCButton>
     </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
+import { type UserChange } from '../icon/SettingComponent/type';
+const props = defineProps<{
+    modelValue: UserChange;
+}>();
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: UserChange): void;
+    (e: 'submit'): void;
+}>()
 
-const passwordInput = ref({
-    passwordOld: '',
-    passwordNew: ''
-});
-
+const formData = computed({
+    get() {
+        return props.modelValue
+    },
+    set(value) {
+        emit('update:modelValue', value)
+    }
+})
 function changePassword() {
-    console.log('changePassword', passwordInput.value);
+    if (formData.value.password_hash && formData.value.old_password) emit('submit')
 }
+
 </script>
 
 <style lang="scss" scoped>

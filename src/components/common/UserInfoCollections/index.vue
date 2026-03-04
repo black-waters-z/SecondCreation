@@ -1,6 +1,6 @@
 <template>
     <view class="user-info-collections">
-        <view class="user-info-colletions__icon">
+        <view class="user-info-colletions__icon" v-if="isMe">
             <uni-icons type="plus" size="26" @click="togglePop"></uni-icons>
         </view>
         <collection v-for="(item, idx) in collectionLists" :key="idx" :collection="item"></collection>
@@ -17,7 +17,7 @@ import type { CollectionData } from "./type"
 import CollectionAddForm from '@/components/form/CollectionAddForm.vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
-const props = defineProps<{ collectionList: CollectionData[] }>()
+const props = defineProps<{ collectionList: CollectionData[], isMe: boolean }>()
 const collectionLists = ref(props.collectionList)
 
 watch(() => props.collectionList, (newVal) => {
@@ -40,6 +40,15 @@ function submit(collection: CollectionData) {
 
     .user-info-colletions__icon {
         padding: 0 20rpx;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .user-info-collections {
+        margin-top: 20rpx;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20rpx;
     }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
   <view class="read-nav-container">
+    <view class="read-nav-container__icon-background" v-if="!isMobile"
+      :style="{ transform: `translateY(${150 * activeIndex}rpx)` }">
+    </view>
     <view v-for="(item, idx) in navItems" :key="item.label" class="read-nav-container__icon"
       :class="{ 'icon_active': activeIndex === idx }" @click="goToIconNavigatePage(item?.type, item?.label, idx)">
       <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="21">
@@ -25,7 +28,7 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
   activeIndex.value = idx;
   if (isMobile) {
     uni.navigateTo({
-      url: `/pages/iconNavigate/index?icon=${componentType}&goBackTitle=${encodeURIComponent(goBackTitle)}`,
+      url: `/pages/iconNavigate/index?icon=${componentType}`,
     });
     return;
   } else {
@@ -46,10 +49,19 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
   width: 100%;
   border-radius: 16rpx;
   height: 150rpx;
-  background-color: white;
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
+
+  &__icon-background {
+    width: 100%;
+    height: 150rpx;
+    position: absolute;
+    background-color: $border-color;
+    border-radius: 15px;
+    transition: all 0.4s ease-in-out;
+  }
 
   &__icon {
     flex: 1;
@@ -64,6 +76,10 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
       margin-left: 4rpx;
       font-size: 24rpx;
       letter-spacing: 2rpx;
+    }
+
+    &:hover {
+      background: none !important;
     }
   }
 }
@@ -90,12 +106,12 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
 }
 
 @media screen and (min-width:600px) {
-  .icon_active {
-    background-color: $border-color;
-  }
+  // .icon_active {
+  //   background-color: $border-color;
+  // }
 
-  .icon-text {
-    margin-top: 10rpx;
-  }
+  // .icon-text {
+  //   margin-top: 10rpx;
+  // }
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
-  <view>
-    <navigation-bar
-      url="/pages/index/index"
-      open-type="navigate"
-      hover-class="navigator-hover"
-      >notFound!Please go to here!
-    </navigation-bar>
-  </view>
+  <page-wrapper show-head>
+    <template #scroll>
+      <not-found></not-found>
+    </template>
+  </page-wrapper>
 </template>
+
+<script setup lang="ts">
+import PageWrapper from "@/components/container/PageContainer.vue"
+import NotFound from "@/components/base/NotFound/index.vue"
+</script>

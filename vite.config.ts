@@ -8,6 +8,7 @@ export default defineConfig({
   publicDir: 'static',
   server: {
     // host: '192.168.43.15',
+    host: '127.0.0.1',
     port: 3000,
     proxy: {
       '/api': {
@@ -18,6 +19,10 @@ export default defineConfig({
       //   target: 'http://192.168.43.15:8080',
       //   changeOrigin: true,
       // },
+      // '/api': {
+      //   target: 'http://ar903201qs86.vicp.fun:8080',
+      //   changeOrigin: true,
+      // },
     },
   },
   resolve: {
@@ -25,4 +30,7 @@ export default defineConfig({
       '@vue/devtools-api': path.resolve(__dirname, 'src/shims/devtools.ts'),
     },
   },
+  base: '/',
+  outDir: 'dist',
+  assetsDir: 'static',
 });

@@ -72,9 +72,10 @@ const mountMenu = async () => {
 };
 
 const resetColumns = () => {
-  columnLists.forEach((column) => {
+  columnLists.map((column) => {
     column.value = [];
   });
+  console.log('resetColumns', columnLists);
 };
 
 const renderArticles = async () => {
@@ -97,6 +98,7 @@ watch(
 
 defineExpose({
   resetColumns,
+  renderArticles
 });
 </script>
 
@@ -127,5 +129,14 @@ defineExpose({
 .list-leave-to {
   opacity: 0;
   transform: translateY(20rpx);
+}
+
+@media screen and (min-width:600px) {
+  .waterfall__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 }
 </style>

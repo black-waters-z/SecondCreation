@@ -7,7 +7,7 @@
     </CommonSwiper>
     <view class="whole-article__content">
       <view class="whole-article__author w-full">
-        <article-author :user-info="userInfo" :has_attention="userInfo.has_been_followed"></article-author>
+        <article-author :user-info="userInfo" :has_attention="userInfo?.has_been_followed ?? false"></article-author>
       </view>
       <text class="whole-article__content-title">{{ article?.title }}</text>
       <view class="whole-article__content-content">
@@ -22,6 +22,7 @@
           class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
           :size="26"></click-icon>
       </view>
+      <slot name="comment"></slot>
     </view>
   </view>
 </template>
@@ -73,6 +74,8 @@ const isVideo = (url: string) => {
   flex-direction: column;
   align-items: center;
   letter-spacing: 1rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
 
   &__video {
     width: 100%;
@@ -83,7 +86,6 @@ const isVideo = (url: string) => {
     width: 100%;
     background-color: white;
     box-sizing: border-box;
-    padding: 0 20px;
 
     &-title {
       width: 100%;
@@ -128,5 +130,33 @@ const isVideo = (url: string) => {
     }
   }
 
+}
+
+@media screen and (min-width:600px) {
+
+  .whole-article {
+    flex-direction: row;
+    align-items: flex-start;
+    border-radius: 30rpx 30rpx 0 0;
+    box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-top: 5px;
+    position: relative;
+
+    &__video {
+      max-width: 600px;
+      min-height: 400px;
+      border-radius: 15px;
+    }
+
+    .whole-article__content {
+      padding: 0 30rpx;
+      min-height: 100%;
+
+      &-content-text {
+        font-size: 18px;
+      }
+    }
+  }
 }
 </style>

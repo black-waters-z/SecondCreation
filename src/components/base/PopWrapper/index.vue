@@ -1,7 +1,7 @@
 <template>
-    <view class="pop-wrapper" :class="{ 'pop-wrapper-active': popShow }" @click.stop @touchend.stop @touchmove.stop
-        @touchstart.stop>
-        <view class="pop-container" :class="{ 'pop-container-active': popShow }">
+    <view class="pop-wrapper" :class="{ 'pop-wrapper-active': popShow }">
+        <view class="pop-container" @click.stop @touchend.stop @touchmove.stop @touchstart.stop
+            :class="{ 'pop-container-active': popShow }">
             <ClickIcon class="pop-container--icon" :type="['closeempty']" color="#fff" :size="23" @click="changeActive">
             </ClickIcon>
             <view class="pop-container--form">
