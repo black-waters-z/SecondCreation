@@ -27,7 +27,7 @@
             </view>
         </view>
         <view class="setting-component__button">
-            <SCButton type="button" size="32rpx">退出登录</SCButton>
+            <SCButton type="button" size="32rpx" @click="loginOut">退出登录</SCButton>
         </view>
         <pop-wrapper v-model:popShow="popShow">
             <setting-form :type="settingFormType"></setting-form>
@@ -49,6 +49,25 @@ onMounted(async () => {
     // console.log('setting component mounted')
     userInfo.value = await getUserMeInfo()
 })
+
+function loginOut() {
+    uni.showModal(
+        {
+            title: '提示',
+            content: '是否退出登录？',
+            showCancel: true,
+            success: async ({ confirm, cancel }) => {
+                if (confirm) {
+                    await uni.removeStorageSync('token')
+                    uni.navigateTo({ url: '/pages/user/login' })
+                }
+                if (cancel) {
+                    return;
+                }
+            }
+        }
+    )
+}
 </script>
 
 <style lang="scss" scoped>

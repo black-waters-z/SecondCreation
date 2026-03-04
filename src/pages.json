@@ -153,6 +153,7 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
+  "onPageNotFound": "pages/NoFound/index",
   "easycom": {
     "autoscan": true,
     "custom": {

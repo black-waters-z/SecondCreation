@@ -8,14 +8,12 @@
 <script setup lang="ts">
 import TabBar from "@/components/common/TabBar/index.vue";
 import { usePcHeadBar } from "@/store/usePcHeadBar"
-import { watch } from "vue";
-
 
 const pcHeadBar = usePcHeadBar()
 
-watch(() => pcHeadBar.headActive, (newValue) => {
-  console.log(newValue, 'change')
-})
+// watch(() => pcHeadBar.headActive, (newValue) => {
+//   console.log(newValue, 'change')
+// })
 
 </script>
 <style scoped lang="scss">

@@ -8,11 +8,11 @@ export async function getCollectionListInPost(): Promise<Collection[]> {
 }
 
 // userInfo页面获取合集信息
-export async function getUserInfoCollection(user_id?: number): Promise<CollectionData[]> {
+export async function getUserInfoCollection(page: number, page_size: number, user_id?: number): Promise<CollectionData[]> {
   if (!user_id) {
-    return await get(`/collections?page=1&page_size=10`);
+    return await get(`/collections?page=${page}&page_size=${page_size}`);
   }
-  return await get(`/collections?page=1&page_size=10&input_user_id=${user_id}`);
+  return await get(`/collections?page=${page}&page_size=${page_size}&input_user_id=${user_id}`);
 }
 
 // 获取合集内部存放的articles

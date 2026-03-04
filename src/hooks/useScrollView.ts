@@ -2,7 +2,7 @@ import { type Article } from '@/pages/tagPage/type';
 import { nextTick } from 'vue';
 import { ref, type InjectionKey } from 'vue';
 import { usePcHeadBar } from '@/store/usePcHeadBar';
-import debounce from 'lodash/debounce';
+import { throttle } from 'lodash';
 
 enum RefreshType {
   PullDown = 'PullDown',
@@ -16,7 +16,7 @@ export function useScrollView(fetchData?: (page: number, page_size?: number) => 
   const scrollToTop = ref(0.01);
   const canLoadingMore = ref(true);
   const refreshType = ref<RefreshType>(RefreshType.PullDown);
-  const page = ref(2);
+  const page = ref(1);
   const page_size = ref(10);
   const scrollTopOld = ref(0);
   const onPulling = (e: Event) => {
@@ -44,22 +44,25 @@ export function useScrollView(fetchData?: (page: number, page_size?: number) => 
     console.log('onAbort');
   };
 
-  const onScroll = debounce((e) => {
+  const onScroll = throttle((e) => {
     const currentScrollTop = e.detail.scrollTop;
-    if (currentScrollTop > scrollTopOld.value) {
+    if (currentScrollTop > scrollTopOld.value + 50) {
       scrollTopOld.value = currentScrollTop;
       toggleHeadBar(false);
-    } else {
+    } else if (currentScrollTop < scrollTopOld.value - 50) {
       scrollTopOld.value = currentScrollTop;
       toggleHeadBar(true);
+    } else {
+      scrollTopOld.value = currentScrollTop;
     }
   }, 100);
 
   const onEnd = async () => {
-    console.log('onEnd', canLoadingMore.value);
+    // console.log('onEnd', canLoadingMore.value);
     if (!fetchData || !canLoadingMore.value) return;
     // isLoadingMore = true;
     const result = await fetchData(page.value + 1, page_size.value);
+    console.log('result', result);
     if (result?.length) {
       page.value += 1;
       canLoadingMore.value = true;

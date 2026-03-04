@@ -1,13 +1,12 @@
 <template>
-    <view class="shop-product">
+    <navigator :url="`/pages/buyGood/index?id=${goodInfo?.id ?? 0}`" open-type="navigate" hover-class="navigator-hover"
+        class="shop-product">
         <image :src="goodInfo?.goodImg ?? '#'" mode="aspectFill" class="shop-product--img" />
         <view class="shop-product--info">
-            <navigator :url="`/pages/buyGood/index?id=${goodInfo?.id ?? 0}`" open-type="navigate"
-                hover-class="navigator-hover">
-                <text class="shop-product--info-title">
-                    {{ goodInfo?.title ?? "【白正】AAA批发市场AAA批发市场AAA" }}
-                </text>
-            </navigator>
+
+            <text class="shop-product--info-title">
+                {{ goodInfo?.title ?? "【白正】AAA批发市场AAA批发市场AAA" }}
+            </text>
 
             <view class="shop-product--info-owner">
                 <image class="shop-product--info-owner__avatar" :src="goodInfo?.store?.avatar ?? ''"> </image>
@@ -15,7 +14,8 @@
                 <click-icon class="shop-product--info-owner__star" :type="type" :size="23"></click-icon>
             </view>
         </view>
-    </view>
+    </navigator>
+
 </template>
 
 <script setup lang="ts">
@@ -88,9 +88,16 @@ defineProps<{
     .shop-product {
         width: 450rpx;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        box-shadow: $grey-shadow-01;
 
         &--img {
             height: 300rpx;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: $grey-shadow-02;
         }
     }
 }

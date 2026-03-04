@@ -7,18 +7,18 @@
         <!-- 放分别内容、合集 -->
         <swiper-wrapper v-model:current="current">
             <template #a>
-                <ScrollContainer :enable_refresher="false">
+                <ScrollContainer :use_inject="false" :enable_refresher="false">
                     <favorite-component></favorite-component>
                 </ScrollContainer>
             </template>
             <template #b>
-                <ScrollContainer :enable_refresher="false">
+                <ScrollContainer :fetch-data="fetchUserInfoArticles" :use_inject="false" :enable_refresher="false">
                     <UserInfoArticles :isMe="isMe" :article-list="articleList" :user-info="userInfo">
                     </UserInfoArticles>
                 </ScrollContainer>
             </template>
             <template #c>
-                <ScrollContainer :enable_refresher="false">
+                <ScrollContainer :fetch-data="fetchUserCollection" :use_inject="false" :enable_refresher="false">
                     <UserInfoCollections :isMe="isMe" :collection-list="collectionList"></UserInfoCollections>
                 </ScrollContainer>
             </template>
@@ -55,11 +55,11 @@ const userInfo = ref<UserInfoWithFollow>() as Ref<UserInfoWithFollow>
 onLoad(async (options) => {
     if (!options?.id) {
         userInfo.value = await getUserMeInfo();
-        collectionList.value = await getUserInfoCollection();
+        collectionList.value = await getUserInfoCollection(1, 10);
         articleList.value = await getMineArticleList(1, 10);
     } else {
         userInfo.value = await getUserMeInfo(options.id);
-        collectionList.value = await getUserInfoCollection(options.id);
+        collectionList.value = await getUserInfoCollection(1, 10, options.id);
         articleList.value = await getMineArticleList(1, 10, options.id);
     }
     const { uid } = await getUserInfo()
@@ -67,6 +67,18 @@ onLoad(async (options) => {
         isMe.value = true
     }
 })
+
+async function fetchUserInfoArticles(page: number, page_size?: number) {
+    const result = await getMineArticleList(page, page_size ?? 10)
+    articleList.value = [...articleList.value, ...result];
+    return result
+}
+
+async function fetchUserCollection(page: number, page_size?: number) {
+    const result = await getUserInfoCollection(page, page_size ?? 10);
+    collectionList.value = [...collectionList.value, ...result];
+    return result
+}
 
 </script>
 

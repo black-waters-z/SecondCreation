@@ -7,12 +7,6 @@
     <view class="go-back-container__right">
       <slot name="right" style="width:100%"></slot>
       <!-- 这里是搜索的框 -->
-      <view class="flex" v-if="type">
-        <select-collection class="justify-center" v-model="index" :collection-list="collectionList">
-          <template #filterEnd><up-icon size="12" name="arrow-down" bold></up-icon> </template>
-        </select-collection>
-        <search-bar class="go-back-container__search" :type="type" @search="onSearchFromChild"></search-bar>
-      </view>
     </view>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
     <view class="go-back-container__title">{{ title }}</view>

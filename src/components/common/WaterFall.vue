@@ -72,10 +72,10 @@ const mountMenu = async () => {
 };
 
 const resetColumns = () => {
-  columnLists.forEach((column) => {
+  columnLists.map((column) => {
     column.value = [];
   });
-  console.log('resetColumns');
+  console.log('resetColumns', columnLists);
 };
 
 const renderArticles = async () => {

@@ -17,21 +17,25 @@ import { useScrollView, ScrollViewKey } from '@/hooks/useScrollView';
 import Refresh from '../Refresh/index.vue';
 import HaveNoMore from '@/components/base/HaveNoMore/index.vue'
 import { type Article } from '@/pages/tagPage/type';
-import { inject, watch } from 'vue';
+import { inject } from 'vue';
+import { type ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
+import { type CollectionData } from '../UserInfoCollections/type';
 const props = withDefaults(
   defineProps<{
     have_no_more?: boolean;
     enable_refresher?: boolean;
-    fetchData?: (page: number, page_size?: number) => Article[] | Promise<Article[]>;
+    use_inject?: boolean;
+    fetchData?: (page: number, page_size?: number) => Article[] | ManageArticle[] | CollectionData[] | Promise<Article[] | ManageArticle[] | CollectionData[]>;
   }>(),
   {
     have_no_more: false,
     enable_refresher: true,
+    use_inject: true,
   }
 );
 // 获取和按钮共享的scrollViewHook的实例
 const injectedScrollView = inject(ScrollViewKey, null);
-const scrollView = injectedScrollView ?? useScrollView(props.fetchData);
+const scrollView = (props.use_inject && injectedScrollView) ? injectedScrollView : useScrollView(props.fetchData);
 const { triggered, refreshType, scrollToTop, onEnd, onPulling, onRefresh, onAbort, onRestore, onScroll } = scrollView;
 
 </script>

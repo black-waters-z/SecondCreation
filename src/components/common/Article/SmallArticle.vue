@@ -93,19 +93,19 @@ defineProps<{
 @media (min-width: 600px) {
     .small-article {
         display: flex;
-        width: 160px;
-        max-height: 160px;
+        width: 150px;
+        max-height: 150px;
 
         .article-img {
             width: 100%;
-            height: 160px;
+            height: 150px;
             border-radius: 15px;
             box-shadow: $grey-shadow-02;
         }
 
         .article-content {
-            width: 320rpx;
-            height: 320rpx;
+            width: 150px;
+            height: 150px;
             border-radius: 15px;
             box-shadow: $grey-shadow-02;
         }

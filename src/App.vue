@@ -13,6 +13,17 @@ onLaunch(() => {
   });
   // #endif
 });
+
+uni.onPageNotFound(() => {
+  uni.redirectTo({
+    url: '/pages/NoFound/index',
+    fail: () => {
+      uni.showToast({
+        title: '404页面打开错误！'
+      })
+    },
+  })
+})
 onShow(() => {
   console.log('App Show');
 });

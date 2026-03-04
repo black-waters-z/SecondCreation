@@ -1,5 +1,5 @@
 <template>
-    <view class="user-info-component">
+    <view class="user-info-component" :class="{ 'user-info-component__active': !pcHeadBar.headActive }">
         <image class="user-info-component__avatar" :src="userInfo?.avatar_url" mode="aspectFill"></image>
         <view class="user-info-component__name">{{ userInfo?.username }}</view>
         <SCButton class="article-author__bt" type="button" size="25rpx" @click="toggleAttentionFunc(userInfo.id)"
@@ -17,6 +17,9 @@
 import SCButton from '@/components/common/SCButton/index.vue';
 import { ref, watch } from 'vue';
 import { toggleAttention, type UserInfoWithFollow } from '@/api/userApi';
+import { usePcHeadBar } from "@/store/usePcHeadBar"
+
+const pcHeadBar = usePcHeadBar()
 const props = defineProps<{
     userInfo: UserInfoWithFollow;
     isMe: boolean
@@ -43,14 +46,32 @@ async function toggleAttentionFunc(following_id: number) {
     align-items: center;
     background: $border-color;
     box-sizing: border-box;
+    height: 350rpx; // 初始明确高度
     padding: 20rpx;
+    transition: height 0.3s ease-in-out;
+
+    &__active {
+        // transform: translateY(-30px);
+        height: 260rpx;
+
+        .user-info-component__avatar {
+            display: none;
+        }
+
+        .user-info-component__name {
+            position: fixed;
+            top: 25rpx;
+            left: 100rpx;
+            font-weight: 400;
+            font-size: 36rpx;
+        }
+    }
 
     &__avatar {
         width: 130rpx;
         height: 130rpx;
         border-radius: 50%;
         background-color: $border-color;
-        margin-top: 40rpx;
     }
 
     &__name {
@@ -64,7 +85,8 @@ async function toggleAttentionFunc(following_id: number) {
         width: 100%;
         display: flex;
         justify-content: space-around;
-        margin-top: 40rpx;
+        flex: 1;
+        align-items: flex-end;
 
         &__item {
             font-size: 30rpx;

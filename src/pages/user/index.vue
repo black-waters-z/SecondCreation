@@ -1,5 +1,6 @@
 <template>
   <PageWrapper class="user-index" show-head flex-row>
+    <!-- 大屏 -->
     <view class="user-index__user">
       <user-bar :user-info="userInfo" class="mobile-user-info"></user-bar>
       <read-nav class="content__read-nav__article-manager mobile-user-info" :nav-items="readNavItems" color="black"

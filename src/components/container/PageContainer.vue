@@ -38,6 +38,7 @@ const props = withDefaults(defineProps<{
   enable_refresh: true,
 });
 
+// 朝内部provide了一个scrollView的hook
 const scrollView = useScrollView(props.fetchData);
 provide(ScrollViewKey, scrollView);
 

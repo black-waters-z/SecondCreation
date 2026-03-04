@@ -65,5 +65,6 @@ function goToPath(path: string, index: number) {
 
 .active {
   color: $pink-400;
+  transform: translateX(0);
 }
 </style>
