@@ -20,7 +20,7 @@ const toFormUrlEncoded = (payload: Record<string, any>): string => {
 // 统一的请求方法
 export const request = <T = any>(config: RequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const { url, method = 'GET', data = {}, header = {}, timeout = 15000 } = config;
+    const { url, method = 'GET', data = {}, header = {}, timeout = 150000 } = config;
 
     // 处理完整的 URL
     const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
@@ -86,7 +86,7 @@ const responseInterceptor = {
   },
   error: async (error: Error) => {
     // 统一错误处理
-    let errorMessage = '网络错误';
+    let errorMessage = '网络错误' + error;
 
     if (error.message.includes('HTTP Error')) {
       const statusCode = (error as any).statusCode;

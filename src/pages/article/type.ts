@@ -44,4 +44,5 @@ export interface FirstComment {
 
 export interface ChildComment extends FirstComment {
   parent_id: number;
+  childs?: ChildComment[];
 }

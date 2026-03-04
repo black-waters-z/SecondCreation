@@ -8,7 +8,7 @@
         <swiper-wrapper v-model:current="current">
             <template #a>
                 <ScrollContainer :use_inject="false" :enable_refresher="false">
-                    <favorite-component></favorite-component>
+                    <favorite-component :source="favoriteList"></favorite-component>
                 </ScrollContainer>
             </template>
             <template #b>
@@ -36,14 +36,16 @@ import SwiperWrapper from "@/components/base/SwiperWrapper/index.vue"
 import GoBackIcon from "@/components/base/GoBackIcon/index.vue"
 import UserInfoArticles from "@/components/common/UserInfoArticles/index.vue"
 import UserInfoCollections from "@/components/common/UserInfoCollections/index.vue"
+
 import { getUserInfoCollection } from "@/api/collectionApi";
-import { getMineArticleList } from "@/api/articleApi"
+import { getMineArticleList, getFavoriteArticles } from "@/api/articleApi"
 import { type Ref, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import type { CollectionData } from '@/components/common/UserInfoCollections/type';
 import { type ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 import { getUserMeInfo, type UserInfoWithFollow } from '@/api/userApi';
 import { getUserInfo } from '@/utils/security';
+import { type Article } from '../tagPage/type';
 
 const isMe = ref(false)
 
@@ -51,14 +53,17 @@ const current = ref(2)
 // const userInfo = ref<UserInfo>()
 const collectionList = ref<CollectionData[]>([])
 const articleList = ref<ManageArticle[]>([])
+const favoriteList = ref<Article[]>([])
 const userInfo = ref<UserInfoWithFollow>() as Ref<UserInfoWithFollow>
 onLoad(async (options) => {
     if (!options?.id) {
         userInfo.value = await getUserMeInfo();
+        favoriteList.value = await getFavoriteArticles(1, 10);
         collectionList.value = await getUserInfoCollection(1, 10);
         articleList.value = await getMineArticleList(1, 10);
     } else {
         userInfo.value = await getUserMeInfo(options.id);
+        favoriteList.value = await getFavoriteArticles(1, 10, options.id);
         collectionList.value = await getUserInfoCollection(1, 10, options.id);
         articleList.value = await getMineArticleList(1, 10, options.id);
     }

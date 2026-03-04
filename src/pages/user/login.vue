@@ -1,9 +1,12 @@
 <template>
   <page-wrapper show-head class="login-wrapper" :enable_refresh="false" flex-row>
     <!-- 引入轮播图 -->
-    <view class="swiper-container">
-      <common-swiper></common-swiper>
-    </view>
+    <match-media :min-width="600">
+      <view class="swiper-container">
+        <common-swiper></common-swiper>
+      </view>
+    </match-media>
+
     <template #scroll>
       <uni-forms class="login-wrapper__form" :modelValue="formData" label-position="top">
         <text>密码登录</text>|<text>用户注册</text>

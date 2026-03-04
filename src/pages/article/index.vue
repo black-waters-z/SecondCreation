@@ -7,8 +7,8 @@
           <collection-nav :source="returnArticle?.collection"></collection-nav>
         </template>
         <template #comment>
-          <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
           <match-media :min-width="600">
+            <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
             <text class="comment--title">评论</text>
             <view class="article__comments">
               <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment"
@@ -58,7 +58,7 @@ onLoad(async (options) => {
   returnArticle.value = await getArticleById(options?.id)
   comments.value = await getArticleCommentList(options?.id)
 })
-const commentData = ref<{ content: string, parent_id?: number, parent_name?: string, article_id: number }>({ content: '', article_id: 0 })
+const commentData = ref<{ content: string, parent_id?: number, parent_name?: string, article_id: number, comment_type: 'first' | 'second' | 'child' }>({ content: '', article_id: 0, comment_type: 'first' })
 
 // 发布评论
 async function sendComment(comment: string) {
@@ -114,9 +114,11 @@ async function sendComment(comment: string) {
   }
 }
 
-function replyComment(parent_id: number, parent_name: string) {
+function replyComment(parent_id: number, parent_name: string, comment_type: 'first' | 'second' | 'child') {
   commentData.value.parent_id = parent_id
   commentData.value.parent_name = parent_name
+  commentData.value.comment_type = comment_type
+  // console.log(parent_id, parent_name, comment_type)
 }
 
 watch(commentData.value, (newValue) => {

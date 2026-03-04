@@ -237,7 +237,6 @@ watch(iconIndx, (val) => {
 
     .user-bar-container {
       width: 600rpx;
-
     }
 
     .support-pay-container {
