@@ -12,6 +12,7 @@
           :fetch-data="fetchData">
           <slot name="scroll"></slot>
         </scroll-container>
+        <ai-character></ai-character>
         <slot name="bottom"></slot>
       </view>
     </view>
@@ -27,7 +28,7 @@ import { type Article } from '@/pages/tagPage/type';
 import { provide } from 'vue';
 import topWindow from '../responsive/top-window.vue';
 import { ScrollViewKey, useScrollView } from '@/hooks/useScrollView';
-
+import aiCharacter from "@/components/ai/aiCharacter/index.vue"
 const props = withDefaults(defineProps<{
   showHead?: boolean;
   have_no_more?: boolean;

@@ -7,7 +7,7 @@
           <collection-nav :source="returnArticle?.collection"></collection-nav>
         </template>
         <template #comment>
-          <match-media :min-width="600">
+          <match-media :min-width="600" v-if="!isMobile">
             <post-comment @send-comment="sendComment" v-model:commentToward="commentData"></post-comment>
             <text class="comment--title">评论</text>
             <view class="article__comments">
@@ -17,7 +17,7 @@
           </match-media>
         </template>
       </whole-article>
-      <match-media :max-width="600">
+      <match-media :max-width="600" v-if="isMobile">
         <text class="comment--title">评论</text>
         <view class="article__comments">
           <comment-vue v-for="(comment, index) in comments" :key="index" :comment="comment"
@@ -45,6 +45,7 @@ import { ref, watch } from "vue";
 import { getArticleById } from "@/api/articleApi";
 import { getArticleCommentList, postCommentFunction } from "@/api/articleCommentApi"
 import type { ArticlePageData, FirstComment } from "./type";
+import { isMobile } from "@/utils";
 const returnArticle = ref<ArticlePageData>({} as ArticlePageData)
 const comments = ref<FirstComment[]>([])
 const commentRefs = ref<Record<number, InstanceType<typeof CommentVue> | null>>({});
