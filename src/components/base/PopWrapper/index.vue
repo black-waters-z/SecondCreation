@@ -51,6 +51,8 @@ function changeActive() {
             background-color: white;
             border-radius: 10rpx;
             box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+            max-height: 600px;
+            overflow-y: auto;
         }
     }
 
@@ -62,5 +64,17 @@ function changeActive() {
 .pop-wrapper-active {
     z-index: 1000;
     opacity: 1;
+}
+
+@media screen and (min-width:600px) {
+    .pop-wrapper {
+        .pop-container {
+            width: 800px;
+
+            &--form {
+                border-radius: 15px;
+            }
+        }
+    }
 }
 </style>

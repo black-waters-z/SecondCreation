@@ -4,7 +4,7 @@
     <view class="content page-container w-full h-100">
       <head-nav v-if="showHead"></head-nav>
       <!-- #ifdef MP-WEIXIN -->
-      <head-nav></head-nav>
+      <head-nav v-if="!showHead"></head-nav>
       <!-- #endif -->
       <view class="flex w-full h-100" :class="{ 'flex-row': flexRow, 'flex-column': !flexRow }">
         <slot></slot>
@@ -12,7 +12,7 @@
           :fetch-data="fetchData">
           <slot name="scroll"></slot>
         </scroll-container>
-        <ai-character></ai-character>
+        <ai-character v-if="!isMobile"></ai-character>
         <slot name="bottom"></slot>
       </view>
     </view>
@@ -29,6 +29,7 @@ import { provide } from 'vue';
 import topWindow from '../responsive/top-window.vue';
 import { ScrollViewKey, useScrollView } from '@/hooks/useScrollView';
 import aiCharacter from "@/components/ai/aiCharacter/index.vue"
+import { isMobile } from '@/utils';
 const props = withDefaults(defineProps<{
   showHead?: boolean;
   have_no_more?: boolean;

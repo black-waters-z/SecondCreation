@@ -1,9 +1,9 @@
 <template>
-  <scroll-view scroll-y="true" class="mobile-scroll scroll-Y w-100" style="height: 100%; flex: 1; min-height: 0"
-    :scroll-top="scrollToTop" :refresher-enabled="enable_refresher" refresher-default-style="none" @scroll="onScroll"
-    :refresher-triggered="triggered" :refresher-threshold="120" refresher-background="rgb(248, 248, 248)"
-    @refresherpulling="onPulling" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherabort="onAbort"
-    @scrolltolower="onEnd" scroll-with-animation>
+  <scroll-view enable-flex scroll-y="true" class="mobile-scroll scroll-Y w-100"
+    style="height: 100%; flex: 1; min-height: 0" :scroll-top="scrollToTop" :refresher-enabled="enable_refresher"
+    refresher-default-style="none" @scroll="onScroll" :refresher-triggered="triggered" :refresher-threshold="120"
+    refresher-background="rgb(248, 248, 248)" @refresherpulling="onPulling" @refresherrefresh="onRefresh"
+    @refresherrestore="onRestore" @refresherabort="onAbort" @scrolltolower="onEnd" scroll-with-animation>
     <template v-if="enable_refresher" #refresher>
       <refresh class="w-100" :type="refreshType"></refresh>
     </template>

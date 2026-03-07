@@ -42,6 +42,7 @@ export function usePostPicFile() {
     console.error(`File list ${fileListKey} not found`);
   };
 
+  // 上传文件的promise包装
   const uploadFilePromise = (url: string, name: string) => {
     return new Promise((resolve, reject) => {
       let config = { url: import.meta.env.VITE_API_BASE + '/upload-image-file', name: 'image' };
@@ -67,6 +68,7 @@ export function usePostPicFile() {
     });
   };
 
+  // 临时读取文件，再上传文件
   const afterRead = async (event: { name: string; file: FileItem | FileItem[] }) => {
     // when multiple=true file is an array; otherwise it's a single object
     const lists: FileItem[] = Array.isArray(event.file) ? [...event.file] : [event.file];
@@ -87,10 +89,10 @@ export function usePostPicFile() {
         message: 'uploading',
       });
     });
-    console.log(lists);
+    // console.log(lists);
     for (let i = 0; i < lists.length; i++) {
       try {
-        // 首先上传数组内的文件
+        // 如果是图片文件，直接使用uni.uploadFile上传，如果是视频文件，使用另一个hook里面的多文件切片上传功能。
         const result = (await uploadFilePromise(lists[i].url, lists[i].name)) as string;
         const item = fileListRef.value[fileListLen + i];
 

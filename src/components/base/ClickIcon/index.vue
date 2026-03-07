@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue';
-const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string, iconType?: string }>()
+const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string, iconType?: string, clickFun?: () => void }>()
 const isShow = ref(false)
 
 watch(() => props.hasBeenLiked, () => {
@@ -42,8 +42,11 @@ watch(() => props.hasBeenLiked, () => {
 
 const isShaking = ref(false)
 
-const toggle = () => {
+const toggle = async () => {
     isShow.value = !isShow.value
+    if (props.clickFun) {
+        await props.clickFun()
+    }
     if (!isShow.value) {
         isShaking.value = false
         return

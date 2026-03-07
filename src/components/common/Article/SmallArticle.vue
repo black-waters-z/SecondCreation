@@ -26,22 +26,22 @@ defineProps<{
     width: 100%;
     margin-bottom: 20rpx;
     position: relative;
+    height: 180rpx;
 
     .article-img {
         width: 180rpx;
         height: 180rpx;
-        border-radius: 10upx;
+        border-radius: 10rpx;
         background-color: $uni-bg-color-grey;
 
         &-title {
+            width: 100%;
             position: absolute;
             left: 0;
             bottom: 0;
             font-size: 24rpx;
             height: 90rpx;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.523), rgba(8, 8, 8, 0.195), rgba(255, 255, 255, 0));
-            display: block;
-            width: 100%;
             letter-spacing: 2rpx;
             display: flex;
             align-items: flex-end;
@@ -49,7 +49,7 @@ defineProps<{
             padding: 10rpx 10rpx;
             color: white;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-            border-radius: 0 0 15px 15px;
+            border-radius: 0 0 10rpx 10rpx;
         }
     }
 
@@ -62,7 +62,6 @@ defineProps<{
         background-color: $uni-bg-color-grey;
         border-radius: 20rpx;
         box-sizing: border-box;
-        background-color: white;
         color: $text-muted;
         padding: 20rpx;
         line-height: 1.7;
@@ -108,6 +107,7 @@ defineProps<{
             height: 150px;
             border-radius: 15px;
             box-shadow: $grey-shadow-02;
+            background-color: white;
         }
 
         .article-title {

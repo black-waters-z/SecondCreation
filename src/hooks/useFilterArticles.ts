@@ -73,10 +73,10 @@ export function useFilterArticles(list: Record<string, any>[], gridArticle?: Ref
     result.value = (await getTagPageData(queryKey.value)) as TagPageData;
   }
 
-  return toRefs({
+  return {
     result,
     toggleArticle,
     startFilterArticles,
     changeTagArticle,
-  });
+  };
 }

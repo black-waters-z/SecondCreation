@@ -5,7 +5,9 @@
       <uni-icons fontFamily="CustomFont" color="white" size="24"> &#xe61c; </uni-icons>
     </image>
     <mobile-user-info :userInfo="userInfo"></mobile-user-info>
+    <!-- #ifdef H5 -->
     <not-mobile-user-info v-if="!isMobile" :userInfo="userInfo"></not-mobile-user-info>
+    <!-- #endif -->
   </view>
 </template>
 

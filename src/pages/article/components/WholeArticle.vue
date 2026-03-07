@@ -18,7 +18,7 @@
       <slot name="collection"></slot>
       <view class="whole-article__contact">
         <Tip></Tip>
-        <click-icon show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
+        <click-icon :clickFun="item.clickFun" show-text v-for="(item, index) in iconInfo" :key="index" :num="item.num"
           class="whole-article__contact-icon" :hasBeenLiked="item.hasBeenLiked" :type="item.type"
           :size="26"></click-icon>
       </view>
@@ -35,6 +35,7 @@ import type { UserInfo } from "@/pages/user/type";
 import { computed } from "vue";
 import CommonSwiper from "@/components/common/CommonSwiper.vue";
 import Tip from "./Tip.vue"
+import { changeArticleFavorite, changeArticleLike, insertUserViewRecord } from "@/api/articleApi";
 const props = defineProps<{
   article: ArticleType;
   userInfo: UserInfo
@@ -45,12 +46,18 @@ const iconInfo = computed(() => [{
 {
   type: ["heart", "heart-filled"],
   num: props.article?.favorite_count ?? 0,
-  hasBeenLiked: props.article?.has_favorited ?? false
+  hasBeenLiked: props.article?.has_favorited ?? false,
+  clickFun: async () => {
+    await changeArticleFavorite(props.article.id)
+  }
 },
 {
   type: ["hand-up", "hand-up-filled"],
   num: props.article?.like_count ?? 0,
-  hasBeenLiked: props.article?.has_liked ?? false
+  hasBeenLiked: props.article?.has_liked ?? false,
+  clickFun: async () => {
+    await changeArticleLike(props.article.id)
+  }
 }
 ])
 
