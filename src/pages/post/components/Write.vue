@@ -17,8 +17,8 @@
       </uni-forms-item>
     </uni-forms>
     <view class="write-container__button">
-      <SCButton @click="writeAddCraft" type="button">保存到草稿箱</SCButton>
-      <SCButton @click="writeSubmit" type="outline">发布</SCButton>
+      <SCButton @click="writeAddCraft" type="button" size="28rpx">保存到草稿箱</SCButton>
+      <SCButton @click="writeSubmit" type="outline" size="28rpx">发布</SCButton>
     </view>
   </view>
 </template>
@@ -83,6 +83,7 @@ const count = computed(() => {
 });
 function writeSubmit() {
   formData.value.image_urls = Array.isArray(images) ? images : unref(images);
+  console.log(formData.value);
   uni.setStorage({
     key: 'articleData',
     data: formData.value,
