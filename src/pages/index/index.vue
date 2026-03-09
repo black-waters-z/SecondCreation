@@ -1,5 +1,5 @@
 ﻿<template>
-  <page-wrapper have_no_more class="content w-full" :fetch-data="loadMoreArticles">
+  <page-wrapper have_no_more :fetch-data="loadMoreArticles">
     <!-- 首页头部 -->
     <!-- #ifdef MP-WEIXIN -->
     <head-nav></head-nav>

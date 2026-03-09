@@ -6,7 +6,7 @@
       <!-- #ifdef MP-WEIXIN -->
       <head-nav v-if="!showHead"></head-nav>
       <!-- #endif -->
-      <view class="flex w-full h-100" :class="{ 'flex-row': flexRow, 'flex-column': !flexRow }">
+      <view class="page-container__scroll" :class="{ 'flex-row': flexRow, 'flex-column': !flexRow }">
         <slot></slot>
         <scroll-container :have_no_more="have_no_more" class="w-full flex-1 mh-0" :enable_refresher="enable_refresh"
           :fetch-data="fetchData">
@@ -62,11 +62,21 @@ defineExpose({
   height: 100%;
 }
 
+.page-container {
+  position: relative;
+
+  &__scroll {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+}
+
 @media screen and (min-width:600px) {
   .page-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: 100%;
   }
 
   .page-container__box {

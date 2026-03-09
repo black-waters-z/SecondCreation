@@ -5,7 +5,7 @@
     </view>
     <view v-for="(item, idx) in navItems" :key="item.label" class="read-nav-container__icon"
       :class="{ 'icon_active': activeIndex === idx }" @click="goToIconNavigatePage(item?.type, item?.label, idx)">
-      <uni-icons fontFamily="CustomFont" :color="color || 'grey'" size="21">
+      <uni-icons fontFamily="CustomFont" :color="color ?? 'grey'" size="21" class="read-nav-container__icon-icon">
         {{ item.icon }}
       </uni-icons>
       <text class="icon-text" :style="{ color: 'grey' }"> {{ item.label }} </text>
@@ -88,19 +88,18 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
   .read-nav-container {
     height: fit-content;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     .read-nav-container__icon {
-      align-self: flex-start;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       line-height: 1.5;
       justify-content: center;
-      padding: 20rpx;
-      gap: 10rpx;
       align-items: center;
       font-size: 30rpx;
       box-sizing: border-box;
+      margin-bottom: 10px;
+
     }
   }
 }

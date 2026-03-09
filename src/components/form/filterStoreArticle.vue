@@ -28,7 +28,8 @@
             </Tag>
         </view>
         <view class="w-full flex justify-center">
-            <SCButton type="button" class="filter-store-article__button" @click="startFilter" color="$pink-400">确认
+            <SCButton type="button" class="filter-store-article__button" @click="startFilter" color="$pink-400">
+                &nbsp;确认&nbsp;
             </SCButton>
         </view>
     </view>

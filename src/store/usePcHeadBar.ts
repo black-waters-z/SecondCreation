@@ -5,10 +5,13 @@ import { ref } from 'vue';
 
 export const usePcHeadBar = defineStore('pcHeadBar', () => {
   const headActive = ref<boolean>(true);
-
+  const adActive = ref<boolean>(true);
   const toggleHeadBar = (status: boolean) => {
     headActive.value = status;
   };
+  const closeAdBar = () => {
+    adActive.value = false;
+  };
 
-  return { headActive, toggleHeadBar };
+  return { headActive, toggleHeadBar, closeAdBar, adActive };
 });

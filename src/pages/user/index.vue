@@ -160,7 +160,7 @@ watch(iconIndx, (val) => {
   }
 
   &__read-nav__article-manager {
-    padding: 20rpx 10rpx;
+    padding: 20rpx 0rpx;
   }
 
   &__read-nav__split {

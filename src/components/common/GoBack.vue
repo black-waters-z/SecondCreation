@@ -1,5 +1,6 @@
 <template>
-  <view class="go-back-container w-full">
+  <view class="go-back-container w-full"
+    :style="{ 'box-shadow': hasShadow && isMobile ? '0 0 10rpx rgba(0, 0, 0, 0.1)' : undefined }">
     <go-back-icon></go-back-icon>
     <text class="go-back-container__return-text">
       <slot></slot>
@@ -22,9 +23,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import SearchBar from './SearchBar.vue';
-import SelectCollection from '@/pages/post/components/SelectCollection.vue';
 import GoBackIcon from '@/components/base/GoBackIcon/index.vue';
+import { isMobile } from '@/utils';
 interface collection {
   id: number;
   name: string;
@@ -59,7 +59,6 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   box-sizing: border-box;
   padding: 10rpx;
   background-color: white;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
   left: 0;
   min-height: 80rpx;
 

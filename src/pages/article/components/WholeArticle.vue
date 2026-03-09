@@ -144,7 +144,7 @@ const isVideo = (url: string) => {
   .whole-article {
     flex-direction: row;
     align-items: flex-start;
-    border-radius: 30rpx 30rpx 0 0;
+    border-radius: 30rpx;
     box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
     background-color: white;
     margin-top: 5px;
