@@ -90,7 +90,6 @@ function startFilter() {
         font-size: 28rpx;
         margin-top: 100rpx;
         margin-bottom: 60rpx;
-        padding: 0 250rpx;
     }
 
     ::v-deep .uni-section .uni-section-header__decoration {

@@ -52,6 +52,7 @@ page {
   --content-margin-top: $content-margin-top;
   display: flex;
   flex-direction: column;
+  font-family: 'Microsoft Yahei';
   height: calc(100vh - 110rpx);
   // #ifdef MP-WEIXIN
   height: 100vh;

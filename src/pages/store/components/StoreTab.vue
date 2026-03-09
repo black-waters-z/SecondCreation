@@ -39,14 +39,23 @@ function changeTab({ value }: { value: TimeFilter }) {
 
 <style lang="scss" scoped>
 .store-tab {
+    font-weight: 550;
+
     &__filter {
         display: flex;
         align-items: center;
         justify-content: center;
+
     }
 
     ::v-deep .u-tabs__wrapper__nav__line {
         background-color: $pink-400;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .store-tab {
+        font-weight: 500;
     }
 }
 </style>

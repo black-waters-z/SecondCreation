@@ -248,9 +248,10 @@ const isVideo = computed(() => {
         }
 
         &__title {
-            font-size: 28rpx;
-            font-weight: 500;
+            font-size: 26rpx;
             letter-spacing: 1rpx;
+            font-weight: 550;
+            color: $text-main;
             white-space: 2lines;
         }
 
