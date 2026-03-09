@@ -212,7 +212,7 @@ watch(iconIndx, (val) => {
     &__user {
       position: sticky;
       top: 0;
-      z-index: 2000;
+      z-index: 300;
     }
   }
 

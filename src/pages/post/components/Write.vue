@@ -83,7 +83,6 @@ const count = computed(() => {
 });
 function writeSubmit() {
   formData.value.image_urls = Array.isArray(images) ? images : unref(images);
-  console.log(formData.value);
   uni.setStorage({
     key: 'articleData',
     data: formData.value,

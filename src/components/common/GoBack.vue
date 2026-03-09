@@ -1,11 +1,15 @@
 <template>
-  <view class="go-back-container w-full" :style="{ boxShadow: hasShadow ? '0 0 10px rgba(0, 0, 0, 0.1)' : undefined }">
+  <view class="go-back-container w-full">
     <go-back-icon></go-back-icon>
     <text class="go-back-container__return-text">
       <slot></slot>
     </text>
     <view class="go-back-container__right">
-      <slot name="right" style="width:100%"></slot>
+      <slot name="right"></slot>
+      <!-- 这里是搜索的框 -->
+    </view>
+    <view class="go-back-next">
+      <slot name="right-no-scroll"></slot>
       <!-- 这里是搜索的框 -->
     </view>
     <uni-icons type="cart-filled" class="cart-filled" size="20" v-if="showCart"></uni-icons>
@@ -55,16 +59,16 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   box-sizing: border-box;
   padding: 10rpx;
   background-color: white;
+  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
   left: 0;
   min-height: 80rpx;
 
   &__right {
-    justify-content: flex-end;
     box-sizing: border-box;
     margin: 10rpx 0;
     min-width: 0;
     overflow-x: auto;
-
+    display: flex;
   }
 
   &__logo {
@@ -105,11 +109,18 @@ const props = withDefaults(defineProps<{ title?: string; type?: string; collecti
   right: 20rpx;
 }
 
+.go-back-next {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (min-width: 600px) {
   .go-back-container {
     background: none;
     box-sizing: border-box;
     padding: 10px 100px;
+    box-shadow: none;
   }
 }
 </style>

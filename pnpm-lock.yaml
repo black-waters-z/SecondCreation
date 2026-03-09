@@ -101,6 +101,9 @@ importers:
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@4.9.5)(vue@3.5.23(typescript@4.9.5))
+      spark-md5:
+        specifier: ^3.0.2
+        version: 3.0.2
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -156,6 +159,9 @@ importers:
       '@types/qs':
         specifier: ^6.14.0
         version: 6.14.0
+      '@types/spark-md5':
+        specifier: ^3.0.5
+        version: 3.0.5
       '@vue/devtools-api':
         specifier: ^8.0.3
         version: 8.0.3
@@ -1789,6 +1795,9 @@ packages:
 
   '@types/qs@6.14.0':
     resolution: {integrity: sha512-eOunJqu0K1923aExK6y8p6fsihYEn/BYuQ4g0CxAAgFc4b/ZLN4CrsRZ55srTdqoiLzU2B2evC+apEIxprEzkQ==}
+
+  '@types/spark-md5@3.0.5':
+    resolution: {integrity: sha512-lWf05dnD42DLVKQJZrDHtWFidcLrHuip01CtnC2/S6AMhX4t9ZlEUj4iuRlAnts0PQk7KESOqKxeGE/b6sIPGg==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -4333,6 +4342,9 @@ packages:
   source-map@0.7.6:
     resolution: {integrity: sha512-i5uvt8C3ikiWeNZSVZNWcfZPItFQOsYTUAOkcUPGd8DqDy1uOUikjt5dG+uRlwyvR108Fb9DOd4GvXfT0N2/uQ==}
     engines: {node: '>= 12'}
+
+  spark-md5@3.0.2:
+    resolution: {integrity: sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==}
 
   speakingurl@14.0.1:
     resolution: {integrity: sha512-1POYv7uv2gXoyGFpBCmpDVSNV74IfsWlDW216UPjbWufNf+bSU6GdbDsxdcxtfwb4xlI3yxzOTKClUosxARYrQ==}
@@ -7233,6 +7245,8 @@ snapshots:
   '@types/prettier@2.7.3': {}
 
   '@types/qs@6.14.0': {}
+
+  '@types/spark-md5@3.0.5': {}
 
   '@types/stack-utils@2.0.3': {}
 
@@ -10151,6 +10165,8 @@ snapshots:
   source-map@0.6.1: {}
 
   source-map@0.7.6: {}
+
+  spark-md5@3.0.2: {}
 
   speakingurl@14.0.1: {}
 

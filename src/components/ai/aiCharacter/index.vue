@@ -17,7 +17,7 @@
                 <uni-easyinput type="textarea" v-model="askAiQuestion" @mousedown.stop placeholder="输入对话..."
                     placeholder-class="input-placeholder" @confirm="console.log('confirm')"
                     @click.stop="console.log('click')" @tap.stop class="ai-character__input" autoHeight></uni-easyinput>
-                <SCButton color="green" type="button" size="20rpx" @click.stop="askAiWithStream(askAiQuestion)">提问
+                <SCButton color="green" type="button" size="20rpx" @click="askAiWithStream(askAiQuestion)">提问
                 </SCButton>
             </view>
 

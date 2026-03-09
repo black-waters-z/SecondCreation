@@ -1,10 +1,10 @@
 <template>
     <view v-if="type && type?.length === 2 && !iconType">
-        <view class="icon-wrapper" v-if="!isShow" @click="toggle">
+        <view class="icon-wrapper" v-if="!isShow" @click.stop.prevent="toggle">
             <uni-icons :type="type[0]" :size="size" color="#bfbaba"></uni-icons>
             <text class="icon-wrapper__text" v-if="showText">{{ num ?? 0 }}</text>
         </view>
-        <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click="toggle"
+        <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click.stop.prevent="toggle"
             @animationend="isShaking = false">
             <uni-icons :type="type[1]" :size="size" color="#ff7aa0"></uni-icons>
             <text class="icon-wrapper__text" v-if="showText">{{ (num ?? 0) + 1 }}</text>
@@ -17,11 +17,11 @@
         </text>
     </view>
     <view v-else-if="iconType === 'uview'">
-        <view class="icon-wrapper" v-if="!isShow" @click="toggle">
+        <view class="icon-wrapper" v-if="!isShow" @click.stop="toggle">
             <slot name="icon1"></slot>
             <text v-if="showText">{{ num ?? 0 }}</text>
         </view>
-        <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click="toggle"
+        <view v-else class="icon-wrapper gradient-heart" :class="{ shake: isShaking }" @click.stop="toggle"
             @animationend="isShaking = false">
             <slot name="icon2"></slot>
             <text v-if="showText">{{ (num ?? 0) + 1 }}</text>

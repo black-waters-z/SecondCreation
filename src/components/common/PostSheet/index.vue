@@ -59,7 +59,7 @@ const choices: Choice[] = [
   justify-content: center;
   transition: 0.5s ease-in-out;
   left: 50%;
-  transform: translateX(-50%) translateY(calc(100% + 20rpx));
+  transform: translateX(-50%) translateY(calc(100% + 100rpx));
 
 
   &__view {
@@ -121,6 +121,11 @@ const choices: Choice[] = [
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       transform: translateY(20rpx);
+    }
+
+    &::after,
+    &::before {
+      display: none;
     }
 
     &__active {

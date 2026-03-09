@@ -1,8 +1,10 @@
 <template>
     <page-wrapper>
         <go-back class="w-full tag-page" has-shadow>
-            <template #right>
-                <!-- 这里加下拉组件 -->
+            <text v-if="!isMobile">
+                返回
+            </text>
+            <template #right-no-scroll>
                 <Tag class="nav-tab__sticky--tag" v-if="result?.navTags?.other_tag?.name"
                     :text="result?.navTags?.other_tag?.name" :closable="false" size="medium" :bg-color="'pink'">
                 </Tag>
@@ -10,10 +12,6 @@
                     <uni-data-select v-model="workIndex" :localdata="work_tags" :clear="false" @change="changeWorkTag"
                         mode="none"></uni-data-select>
                 </view>
-                <!-- <Tag class="nav-tab__sticky--tag" v-for="(item, idx) in result?.navTags?.work_tags" :key="idx"
-                    @click="changeWorkTag" :text="item.name" :closable="false" size="medium" :bg-color="'gray'">
-                </Tag> -->
-
             </template>
 
         </go-back>
@@ -37,6 +35,8 @@ import NavTab from '@/components/base/NavTab/index.vue';
 import GoBack from '@/components/common/GoBack.vue';
 import { useFilterArticles } from '@/hooks/useFilterArticles';
 import { computed, ref } from 'vue';
+import { template } from 'lodash';
+import { isMobile } from '@/utils';
 const list = [{ name: '最新', peroid: 'newest' }, { name: '推荐', peroid: 'recommend' }, { name: '本周', peroid: 'week' }, { name: '本月', peroid: 'month' }, { name: '本年', peroid: 'year' },]
 const gridArticle = ref<InstanceType<typeof GridArticlesContainer> | null>(null);
 const { result, toggleArticle,
@@ -67,10 +67,9 @@ page {
 
     &__work_tags {
         width: 300rpx;
-        position: fixed;
-        z-index: 2000;
-        top: 10rpx;
-        right: 10rpx;
+        position: relative;
+        top: 0;
+        margin-left: auto;
         font-size: 26rpx;
 
         ::v-deep .uni-stat-box {
@@ -91,5 +90,16 @@ page {
 
 .nav-tab__sticky--tag {
     margin-right: 8rpx;
+}
+
+@media screen and (min-width:600px) {
+    .tag-page {
+        position: relative;
+
+        &__work_tags {
+            position: relative;
+            margin-left: 0;
+        }
+    }
 }
 </style>

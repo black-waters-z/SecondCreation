@@ -13,6 +13,15 @@
           multiple :maxCount="1" accept="video">
           <!-- <video src=""></video> -->
         </up-upload>
+        <view class="upload__line" :style="{ width: uploadProgress + '%' }"></view>
+        <view class="upload__button">
+          <SCButton type="button" color="#99b0c3" size="23rpx" @click="stopUpload">停止上传</SCButton>
+          <SCButton type="button" color="pink" size="23rpx" @click="continueUpload">继续上传</SCButton>
+        </view>
+
+        <!-- <pop-wrapper v-model:popShow="popShow">
+          <view>上传进度: {{ uploadProgress }}%</view>
+        </pop-wrapper> -->
       </write>
     </template>
   </page-wrapper>
@@ -23,14 +32,14 @@ import GoBack from '@/components/common/GoBack.vue';
 import Write from './components/Write.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { computed, provide, ref } from 'vue';
+import SCButton from '@/components/common/SCButton/index.vue';
+import { computed, provide, ref, watch } from 'vue';
 import { usePostPicFile } from '@/hooks/usePostFile';
 import { getArticleById } from '@/api/articleApi';
 import { getDraftById } from '@/api/draftApi';
 import { type DraftListItem } from '@/components/icon/DraftComponent/type';
 type PostType = 'write' | 'paint' | 'video';
 const postType = ref<PostType>('write');
-
 const formData = ref<DraftListItem>({
   title: '',
   subtitle: '',
@@ -61,7 +70,7 @@ onLoad(async (options) => {
 
 });
 
-const { fileList3, deletePic, afterRead } = usePostPicFile();
+const { fileList3, deletePic, afterRead, uploadProgress, popShow, stopUpload, continueUpload } = usePostPicFile();
 
 const imageUrls = computed(() => {
   let list: string[] = [];
@@ -84,9 +93,24 @@ page {
   height: 100%;
 }
 
+.upload__button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.upload__line {
+  height: 1px;
+  background-color: $pink-400;
+  left: 0;
+}
+
 .video-upload {
+
+
   .u-upload__wrap__preview {
     width: 100%;
+    margin: 0;
   }
 
   ::v-deep .u-upload__button {
@@ -101,6 +125,10 @@ page {
     height: 190px !important;
     margin-right: 0;
     border-radius: 8px;
+  }
+
+  ::v-deep .u-upload__wrap__preview {
+    width: 100%;
   }
 
   .u-upload__wrap__preview__other {
