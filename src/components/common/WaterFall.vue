@@ -110,7 +110,7 @@ defineExpose({
   box-sizing: border-box;
 
   &__col {
-    flex: 1;
+    // flex: 1;
     display: flex;
     flex-direction: column;
 

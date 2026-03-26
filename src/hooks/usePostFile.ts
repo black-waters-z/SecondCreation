@@ -2,13 +2,6 @@ import { computed, ref, watch } from 'vue';
 import type { Ref } from 'vue';
 import { useLoadVideo } from './useLoadVideo';
 
-interface FileReply {
-  status: string;
-  message: string;
-  objectUrl: string;
-  filename: string;
-  fileSize: number;
-}
 export interface FileItem {
   url: string;
   coverUrl?: string;
@@ -18,8 +11,8 @@ export interface FileItem {
 }
 
 export function usePostPicFile() {
-  const { loadVideo } = useLoadVideo();
-
+  const { loadVideo, videoUpload, uploadProgress, stopUpload, continueUpload } = useLoadVideo();
+  const popShow = ref(false);
   const fileList3 = ref<FileItem[]>([]);
   const fileListPicture = ref<FileItem[]>([]);
   const fileListOther = ref<FileItem[]>([]);
@@ -42,6 +35,7 @@ export function usePostPicFile() {
     console.error(`File list ${fileListKey} not found`);
   };
 
+  // 上传文件的promise包装
   const uploadFilePromise = (url: string, name: string) => {
     return new Promise((resolve, reject) => {
       let config = { url: import.meta.env.VITE_API_BASE + '/upload-image-file', name: 'image' };
@@ -67,6 +61,7 @@ export function usePostPicFile() {
     });
   };
 
+  // 临时读取文件，再上传文件
   const afterRead = async (event: { name: string; file: FileItem | FileItem[] }) => {
     // when multiple=true file is an array; otherwise it's a single object
     const lists: FileItem[] = Array.isArray(event.file) ? [...event.file] : [event.file];
@@ -87,20 +82,29 @@ export function usePostPicFile() {
         message: 'uploading',
       });
     });
-    console.log(lists);
+    // console.log(lists);
     for (let i = 0; i < lists.length; i++) {
       try {
-        // 首先上传数组内的文件
-        const result = (await uploadFilePromise(lists[i].url, lists[i].name)) as string;
-        const item = fileListRef.value[fileListLen + i];
+        let result;
+        let item;
 
         // 判断文件是否是视频格式，是，则进入if判断生成封面图，push入数组
-        const extension = result.split('.').pop()?.toLowerCase();
+        // 如果是图片文件，直接使用uni.uploadFile上传，如果是视频文件，使用另一个hook里面的多文件切片上传功能。
         let res;
-        if (extension && ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(extension)) {
+        if (lists[i].type === 'video') {
+          popShow.value = true;
+          // console.log('file', lists[i].file.tempFile);
+          result = await videoUpload(lists[i].file.tempFile);
           // 开始生成封面图
+          if (!result) return;
           res = await loadVideo(import.meta.env.VITE_VIDEO_BASE + result);
           uni.showToast({ title: '生成封面图成功', icon: 'success' });
+          popShow.value = false;
+        } else if (lists[i].type === 'image') {
+          result = (await uploadFilePromise(lists[i].url, lists[i].name)) as string;
+          item = fileListRef.value[fileListLen + i];
+        } else {
+          throw new Error('未知文件类型');
         }
 
         fileListRef.value.splice(fileListLen + i, 1, {
@@ -131,5 +135,5 @@ export function usePostPicFile() {
     { deep: true },
   );
 
-  return { fileList3, fileListPicture, fileListOther, deletePic, afterRead };
+  return { fileList3, fileListPicture, fileListOther, deletePic, afterRead, uploadProgress, popShow, stopUpload, continueUpload };
 }

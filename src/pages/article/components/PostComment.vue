@@ -1,8 +1,8 @@
 <template>
   <view class="post-comment w-100">
     <up-textarea class="post-comment__textarea" :class="{ focus_border: isFocus }" v-model="comment"
-      :placeholder="'@' + commentToward.parent_name" autoHeight @focus="isFocus = !isFocus"
-      @blur="isFocus = !isFocus"></up-textarea>
+      :placeholder="commentToward.parent_name ? '@' + commentToward.parent_name : '请输入评论'" autoHeight
+      @focus="isFocus = !isFocus" @blur="isFocus = !isFocus"></up-textarea>
     <SCButton type="button" @click="sendComment"><text>发送</text></SCButton>
   </view>
 </template>

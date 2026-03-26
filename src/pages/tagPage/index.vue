@@ -1,14 +1,17 @@
 <template>
     <page-wrapper>
-        <go-back class="w-full" has-shadow>
-            <template #right>
-                <Tag class="nav-tab__sticky--tag" @click="changeWorkTag" v-if="result?.navTags?.work_tags?.length"
-                    :text="result?.navTags?.work_tags?.[workIndex]?.name" :closable="false" size="medium"
-                    :bg-color="'gray'">
-                </Tag>
+        <go-back class="w-full tag-page" has-shadow>
+            <text v-if="!isMobile">
+                返回
+            </text>
+            <template #right-no-scroll>
                 <Tag class="nav-tab__sticky--tag" v-if="result?.navTags?.other_tag?.name"
                     :text="result?.navTags?.other_tag?.name" :closable="false" size="medium" :bg-color="'pink'">
                 </Tag>
+                <view class="tag-page__work_tags" v-if="result?.navTags?.work_tags.length">
+                    <uni-data-select v-model="workIndex" :localdata="work_tags" :clear="false" @change="changeWorkTag"
+                        mode="none"></uni-data-select>
+                </view>
             </template>
 
         </go-back>
@@ -31,18 +34,27 @@ import GridArticlesContainer from '@/components/common/GridArticlesContainer/ind
 import NavTab from '@/components/base/NavTab/index.vue';
 import GoBack from '@/components/common/GoBack.vue';
 import { useFilterArticles } from '@/hooks/useFilterArticles';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { template } from 'lodash';
+import { isMobile } from '@/utils';
 const list = [{ name: '最新', peroid: 'newest' }, { name: '推荐', peroid: 'recommend' }, { name: '本周', peroid: 'week' }, { name: '本月', peroid: 'month' }, { name: '本年', peroid: 'year' },]
 const gridArticle = ref<InstanceType<typeof GridArticlesContainer> | null>(null);
 const { result, toggleArticle,
     startFilterArticles, changeTagArticle } = useFilterArticles(list, gridArticle);
 
 const workIndex = ref(0);
+
+const work_tags = computed(() => {
+    if (!result.value?.navTags?.work_tags?.length) return [];
+    return result.value?.navTags?.work_tags.map((item, idx) => {
+        return { value: idx, text: item.name }
+    })
+});
 function changeWorkTag() {
     if (!result.value?.navTags?.work_tags?.length) return;
-    workIndex.value = (workIndex.value + 1) % result.value?.navTags?.work_tags?.length;
-    changeTagArticle.value(result.value?.navTags?.work_tags?.[workIndex.value]?.id);
+    changeTagArticle(result.value?.navTags?.work_tags?.[workIndex.value]?.id);
 }
+
 </script>
 
 <style lang="scss">
@@ -50,7 +62,44 @@ page {
     height: 100%;
 }
 
+.tag-page {
+    position: relative;
+
+    &__work_tags {
+        width: 300rpx;
+        position: relative;
+        top: 0;
+        margin-left: auto;
+        font-size: 26rpx;
+
+        ::v-deep .uni-stat-box {
+            background-color: rgba($color: $pink-50, $alpha: 0.5);
+            border-radius: 100px;
+            padding-left: 10px;
+        }
+
+        ::v-deep .uni-select__input-text {
+            color: pink;
+        }
+
+        ::v-deep .uni-icons {
+            color: pink !important;
+        }
+    }
+}
+
 .nav-tab__sticky--tag {
     margin-right: 8rpx;
+}
+
+@media screen and (min-width:600px) {
+    .tag-page {
+        position: relative;
+
+        &__work_tags {
+            position: relative;
+            margin-left: 0;
+        }
+    }
 }
 </style>

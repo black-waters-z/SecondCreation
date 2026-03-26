@@ -55,6 +55,13 @@ const { fetchData, filterArticles, articleList, toggleData } = useFilterStoreArt
 }
 
 .store {
+  .page-container {
+    .page-container__scroll {
+      height: calc(100% - 40px);
+    }
+
+  }
+
   .grid-articles-container {
     .waterfall {
       padding-top: 0 !important;
@@ -72,6 +79,12 @@ const { fetchData, filterArticles, articleList, toggleData } = useFilterStoreArt
 @media screen and (min-width: 600px) {
   .content {
     align-items: flex-start;
+  }
+
+  .store {
+    .page-container__scroll {
+      height: 100%;
+    }
   }
 
   .store-content {

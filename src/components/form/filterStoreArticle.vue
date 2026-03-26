@@ -28,7 +28,8 @@
             </Tag>
         </view>
         <view class="w-full flex justify-center">
-            <SCButton type="button" class="filter-store-article__button" @click="startFilter" color="$pink-400">确认
+            <SCButton type="button" class="filter-store-article__button" @click="startFilter" color="$pink-400">
+                &nbsp;确认&nbsp;
             </SCButton>
         </view>
     </view>
@@ -90,7 +91,6 @@ function startFilter() {
         font-size: 28rpx;
         margin-top: 100rpx;
         margin-bottom: 60rpx;
-        padding: 0 250rpx;
     }
 
     ::v-deep .uni-section .uni-section-header__decoration {

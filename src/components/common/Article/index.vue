@@ -1,54 +1,55 @@
 <template>
-    <view class="w-full flex flex-column article">
-        <view class="article__head">
-            <image class="w-full article-img" :src="`${article?.image_urls[0]}`"
-                v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill"
-                :style="{ background: getRandomColor() }" />
-            <!-- 视频之后再说，后端没发过来呢 -->
-            <view class="w-full article-video-container" v-if="isVideo">
-                <navigator open-type="navigate" :url="`/pages/article/index?id=${article?.id}`">
-                    <image :src="article?.image_urls?.[1]" class="article-video"></image>
-                    <view class="article-video--info">
-                        <text class="article-video__title">{{ article?.title }}</text>
-                        <text class="article-video__author">{{ article?.author?.username }}</text>
-                    </view>
-                </navigator>
+    <view class="article-wrapper">
+        <view class="w-full flex flex-column article">
+            <view class="article__head">
+                <image class="w-full article-img" :src="`${article?.image_urls[0]}`"
+                    v-if="article?.image_urls?.[0] && !isVideo" mode="aspectFill"
+                    :style="{ background: getRandomColor() }" />
+                <!-- 视频之后再说，后端没发过来呢 -->
+                <view class="w-full article-video-container" v-if="isVideo">
+                    <navigator open-type="navigate" :url="`/pages/article/index?id=${article?.id}`">
+                        <image :src="article?.image_urls?.[1]" class="article-video"></image>
+                        <view class="article-video--info">
+                            <text class="article-video__title">{{ article?.title }}</text>
+                            <text class="article-video__author">{{ article?.author?.username }}</text>
+                        </view>
+                    </navigator>
 
-                <view class="article-video__play">
-                    <uni-icons class="article-video__play--icon" fontFamily="CustomFont" :size="23" color="white">{{
-                        '\ue89d'
+                    <view class="article-video__play">
+                        <uni-icons class="article-video__play--icon" fontFamily="CustomFont" :size="23" color="white">{{
+                            '\ue89d'
                         }}</uni-icons>
+                    </view>
+                </view>
+                <view style="padding: 20rpx;" v-if="!article?.image_urls?.[0] && !isVideo">
+                    <text class="w-full article-content">
+                        {{ article?.content }}
+                    </text>
                 </view>
             </view>
-            <view style="padding: 20rpx;" v-if="!article?.image_urls?.[0] && !isVideo">
-                <text class="w-full article-content">
-                    {{ article?.content }}
-                </text>
+            <view class="article-info flex-1">
+                <navigator v-if="!isVideo" :url="`/pages/article/index?id=${article?.id}`" open-type="navigate"
+                    hover-class="navigator-hover">
+                    <text class="article-info__title text-ellipsis">{{ article?.title }}</text>
+                </navigator>
+                <view v-if="!isVideo" class="article-info__scroll-view flex flex-row">
+                    <bottom-tag :tag-list="article?.tags" class="article-info__tag flex-1"></bottom-tag>
+                    <view class="article-info__author">
+                        <image class="article-info__author--avatar" :src="article?.author?.avatar_url"
+                            mode="aspectFill">
+                        </image>
+                        <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
+                    </view>
+                </view>
             </view>
         </view>
-        <view class="article-info flex-1">
-            <navigator v-if="!isVideo" :url="`/pages/article/index?id=${article?.id}`" open-type="navigate"
-                hover-class="navigator-hover">
-                <text class="article-info__title text-ellipsis">{{ article?.title }}</text>
-            </navigator>
-            <view v-if="!isVideo" class="article-info__scroll-view flex flex-row">
-                <bottom-tag :tag-list="article?.tags" class="article-info__tag flex-1"></bottom-tag>
-                <view class="article-info__author">
-                    <image class="article-info__author--avatar" :src="article?.author?.avatar_url" mode="aspectFill">
-                    </image>
-                    <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
-                </view>
+        <view class="video-article-info" v-if="isVideo">
+            <bottom-tag :tag-list="article?.tags" class="article-info__tag flex-1"></bottom-tag>
+            <view class="article-info__author">
+                <image class="article-info__author--avatar" :src="article?.author?.avatar_url" mode="aspectFill">
+                </image>
+                <text class="article-info__author--author-name">{{ article?.author?.username }}</text>
             </view>
-            <!-- <view class="article__click-icon__container">
-                <view class="article__click-icon--left">
-                    <click-icon class="article__click-icon--left-icon" :type="['eye-filled']" :size="18">{{
-                        article?.view_count ?? 0 }}</click-icon>
-                    <click-icon class="article__click-icon--left-icon" :type="['hand-up']" :size="18">{{
-                        article?.like_count ?? 0 }}</click-icon>
-                </view>
-                <click-icon class="article__click-icon" :type="['heart', 'heart-filled']" :size="16"
-                    :has-been-liked="article?.has_favorited"></click-icon>
-            </view> -->
         </view>
     </view>
 </template>
@@ -77,6 +78,13 @@ const isVideo = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+.article-wrapper {
+    .video-article-info {
+        width: 350rpx;
+        display: flex;
+    }
+}
+
 .article {
     width: 350rpx;
     background: white;
@@ -84,7 +92,7 @@ const isVideo = computed(() => {
     box-sizing: border-box;
     border-radius: 16rpx;
     // border: 1px solid #fdcdd8;
-    padding: 0 0 5rpx 0;
+    // padding: 0 0 5rpx 0;
 
     &__click-icon {
         position: relative;
@@ -236,12 +244,14 @@ const isVideo = computed(() => {
         &__scroll-view {
             width: 100%;
             margin-top: 6rpx;
+            padding-bottom: 10rpx;
         }
 
         &__title {
-            font-size: 28rpx;
-            font-weight: 500;
+            font-size: 26rpx;
             letter-spacing: 1rpx;
+            font-weight: 550;
+            color: $text-main;
             white-space: 2lines;
         }
 
@@ -310,6 +320,13 @@ const isVideo = computed(() => {
 }
 
 @media screen and (min-width:600px) {
+    .article-wrapper {
+        .video-article-info {
+            width: 500rpx;
+            display: flex;
+        }
+    }
+
     .article {
         box-sizing: border-box;
         width: 500rpx;

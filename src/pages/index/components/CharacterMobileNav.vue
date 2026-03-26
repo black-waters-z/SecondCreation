@@ -28,6 +28,7 @@ const characters = [
   { name: '火热合集', avatar: '/src/static/avatar/avatar1.jpg', navigatorUrl: '/pages/hotCollection/index' },
   { name: '官方公告', icon: '\ue600', navigatorUrl: '/pages/notice/index' },
   { name: '搜索', icon: '\ue60d', navigatorUrl: '/pages/search/index' },
+  { name: '智能体角色', navigatorUrl: '/pages/iconNavigate/index?icon=AITalk' },
 ];
 
 const props = defineProps<{

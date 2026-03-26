@@ -2,6 +2,10 @@
   letter-spacing: 4rpx;
 }
 
+text,view{
+  // font-family: 'SimSun';
+}
+
 .content {
   width: 100%;
   display: flex;
@@ -52,6 +56,9 @@
 
 .h-100 {
   height: 100%;
+  // #ifdef MP-WEIXIN
+  height: 100vh;
+  // #endif
 }
 
 .flex {
@@ -129,6 +136,14 @@ ul {
 
 li {
   list-style: none;
+}
+
+.uni-tabbar .uni-tabbar__text {
+  font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif !important;
+}
+
+.uni-tabbar__item {
+  font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif !important;
 }
 
 uni-scroll-view .uni-scroll-view::-webkit-scrollbar {

@@ -63,3 +63,20 @@ export async function getMineArticleList(page: number, page_size: number, user_i
   const result = await get(`/articles/mine/statistics?page=${page}&page_size=${page_size}&user_id=${user_id}&get_content=true`);
   return result.items;
 }
+
+// 插入用户浏览记录
+
+interface InsertUserViewRecordParams {
+  articleId: number;
+  duration: number;
+}
+export async function insertUserViewRecord(dataIn: InsertUserViewRecordParams) {
+  console.log('insertUserViewRecord', dataIn);
+  await post(`/articles/history`, dataIn);
+}
+
+// 获取浏览记录
+export async function getUserViewRecord(page: number): Promise<Article[]> {
+  const result = await get(`/articles/history?page=${page}`);
+  return result;
+}

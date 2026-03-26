@@ -57,12 +57,6 @@
       }
     },
     {
-      "path": "pages/aiPlay/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/post/index",
       "style": {
         "navigationStyle": "custom"
@@ -163,7 +157,7 @@
     }
   },
   "tabBar": {
-    "color": "#000000",
+    "color": "#8d8d8d",
     "selectedColor": "#db639b",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
@@ -185,8 +179,8 @@
       {
         "pagePath": "pages/shopping/index",
         "text": "购物",
-        "iconPath": "static/icon/notice-grey.png",
-        "selectedIconPath": "static/icon/notice-pink.png"
+        "iconPath": "static/icon/buy-grey.png",
+        "selectedIconPath": "static/icon/buy-pink.png"
       },
       {
         "pagePath": "pages/user/index",
@@ -198,9 +192,9 @@
     "midButton": {
       "iconPath": "/static/icon/post.png",
       "iconWidth": "40px",
-      "height": "60px",
-      "text": "发布",
-      "top": "-40px",
+      "width": "80px",
+      "height": "50px",
+      "top": "0px",
       "backgroundImage": "/static/icon/circle.png",
       "circle": true
     }

@@ -50,19 +50,27 @@ const navigationOptions = [
 @media screen and (min-width:600px) {
   .tab-bar-container {
     .logo {
-      height: 44px;
+      height: 60px;
+    }
+
+    .tab-bar-item {
+      &__image {
+        width: 70px;
+        height: 60px;
+        margin-left: 80px;
+      }
     }
   }
 
   .tab-bar-container-02 {
     background-color: white;
     width: 100%;
-    height: 44px;
+    height: 60px;
     position: relative;
 
     &__image {
       width: 100%;
-      height: 44px;
+      height: 60px;
     }
 
     &__text-02 {

@@ -4,14 +4,15 @@
     <view class="content page-container w-full h-100">
       <head-nav v-if="showHead"></head-nav>
       <!-- #ifdef MP-WEIXIN -->
-      <head-nav></head-nav>
+      <head-nav v-if="!showHead"></head-nav>
       <!-- #endif -->
-      <view class="flex w-full h-100" :class="{ 'flex-row': flexRow, 'flex-column': !flexRow }">
+      <view class="page-container__scroll" :class="{ 'flex-row': flexRow, 'flex-column': !flexRow }">
         <slot></slot>
         <scroll-container :have_no_more="have_no_more" class="w-full flex-1 mh-0" :enable_refresher="enable_refresh"
           :fetch-data="fetchData">
           <slot name="scroll"></slot>
         </scroll-container>
+        <ai-character v-if="!isMobile"></ai-character>
         <slot name="bottom"></slot>
       </view>
     </view>
@@ -27,7 +28,8 @@ import { type Article } from '@/pages/tagPage/type';
 import { provide } from 'vue';
 import topWindow from '../responsive/top-window.vue';
 import { ScrollViewKey, useScrollView } from '@/hooks/useScrollView';
-
+import aiCharacter from "@/components/ai/aiCharacter/index.vue"
+import { isMobile } from '@/utils';
 const props = withDefaults(defineProps<{
   showHead?: boolean;
   have_no_more?: boolean;
@@ -60,11 +62,21 @@ defineExpose({
   height: 100%;
 }
 
+.page-container {
+  position: relative;
+
+  &__scroll {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+}
+
 @media screen and (min-width:600px) {
   .page-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: 100%;
   }
 
   .page-container__box {

@@ -8,7 +8,7 @@
                 {{ goodInfo?.title ?? "【白正】AAA批发市场AAA批发市场AAA" }}
             </text>
 
-            <view class="shop-product--info-owner">
+            <view class="shop-product--info-owner" @click.stop="">
                 <image class="shop-product--info-owner__avatar" :src="goodInfo?.store?.avatar ?? ''"> </image>
                 <text class="shop-product--info-owner__name">{{ goodInfo?.store?.name ?? 'aaa批发市场' }}</text>
                 <click-icon class="shop-product--info-owner__star" :type="type" :size="23"></click-icon>
@@ -86,17 +86,19 @@ defineProps<{
 
 @media screen and (min-width:600px) {
     .shop-product {
-        width: 450rpx;
+        box-sizing: border-box;
+        margin: 0 auto;
+        width: 100%;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
         box-shadow: $grey-shadow-01;
+        border: 10rpx solid white;
 
         &--img {
-            height: 300rpx;
+            height: 400rpx;
         }
 
         &:hover {
-            transform: scale(1.05);
             box-shadow: $grey-shadow-02;
         }
     }

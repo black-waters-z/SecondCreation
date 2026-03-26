@@ -33,8 +33,8 @@ import SearchBar from './SearchBar.vue';
 import { ref } from 'vue';
 // #ifdef H5
 import CharacterMobileNav from '@/pages/index/components/CharacterMobileNav.vue';
-import { onHide } from '@dcloudio/uni-app';
 // #endif
+import { onHide } from '@dcloudio/uni-app';
 defineOptions({
   options: {
     styleIsolation: 'shared',

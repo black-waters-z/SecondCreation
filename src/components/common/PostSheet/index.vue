@@ -35,10 +35,9 @@ type Choice = {
 const choices: Choice[] = [
   { text: '发布文章', icon: '\ue649', backgroundcolor: 'white', url: '../post/index?type=write', color: '#737373' },
   { text: '发布图片', icon: '\ue668', backgroundcolor: 'white', url: '../post/index?type=paint', color: '#737373' },
-  { text: '汉化组', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
   { text: '上传视频', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index?type=video', color: '#737373' },
-  { text: '创建聊天室', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
-  { text: '发布商品', icon: '\ue64a', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
+  { text: '创建聊天室', icon: '\ue621', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
+  { text: '发布商品', icon: '\ue650', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
 ];
 
 </script>
@@ -59,7 +58,7 @@ const choices: Choice[] = [
   justify-content: center;
   transition: 0.5s ease-in-out;
   left: 50%;
-  transform: translateX(-50%) translateY(calc(100% + 20rpx));
+  transform: translateX(-50%) translateY(calc(100% + 100rpx));
 
 
   &__view {
@@ -121,6 +120,11 @@ const choices: Choice[] = [
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       transform: translateY(20rpx);
+    }
+
+    &::after,
+    &::before {
+      display: none;
     }
 
     &__active {

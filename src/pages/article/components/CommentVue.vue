@@ -42,6 +42,7 @@ const showSecondCommentClick = async (parent_id: number) => {
 
 const showSecondCommentOpen = () => {
   showSecondComment.value = true;
+  console.log('showSecondCommentOpen', showSecondComment.value)
 };
 
 defineProps<{
@@ -57,7 +58,7 @@ function commentReply(parent_id: number, parent_name: string, comment_type: 'fir
 
 const insertChild = (child: ChildComment) => {
   childs.value.push(child)
-  console.log('push', child)
+  console.log('push', childs.value)
 }
 
 defineExpose({

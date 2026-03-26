@@ -30,7 +30,7 @@ defineOptions({
 
 <style lang="scss" scoped>
 .button {
-  border-radius: 100px;
+  border-radius: 10px;
   box-sizing: border-box;
   box-sizing: border-box;
   display: block;
@@ -40,14 +40,14 @@ defineOptions({
   width: fit-content;
   justify-content: center;
   align-items: center;
-  padding: 5rpx 30rpx;
+  padding: 5rpx 20rpx;
   line-height: 2;
   box-shadow: 0 0 10px $pink-shadow-01;
 }
 
 .button-bt {
   border: none;
-  background: $pink-linear-gradient-02;
+  background: $pink-400;
   color: white;
   transition: 0.3s ease;
 
