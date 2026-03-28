@@ -3,8 +3,8 @@
     'button-bt': type === Button.button,
     'button-outline': type === Button.outline,
     'button-simple': type === Button.simple
-  }" :style="{ background: color, border: color, fontSize: size }">
-    <text :style="{ lineHeight: 1 }">
+  }" :style="{ background: bgcolor, border: `1px solid ${color}`, fontSize: size }">
+    <text :style="{ lineHeight: 1, color: color }">
       <slot></slot>
     </text>
   </button>
@@ -18,7 +18,7 @@ enum Button {
   simple = 'simple'
 }
 
-defineProps<{ type: string, color?: string, size?: string }>();
+defineProps<{ type: string, color?: string, size?: string, bgcolor?: string }>();
 defineEmits(['click']);
 
 defineOptions({
@@ -43,6 +43,7 @@ defineOptions({
   padding: 5rpx 20rpx;
   line-height: 2;
   box-shadow: 0 0 10px $pink-shadow-01;
+  height: fit-content;
 }
 
 .button-bt {

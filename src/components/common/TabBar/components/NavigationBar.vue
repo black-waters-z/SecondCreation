@@ -41,6 +41,7 @@ function goToPath(path: string, index: number) {
   align-items: center;
   cursor: pointer;
   padding-right: 50px;
+  padding-left: 100px;
 
   .navigation-bar-container {
     height: 100%;
@@ -48,17 +49,19 @@ function goToPath(path: string, index: number) {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 300;
+    font-weight: 540;
     letter-spacing: 3rpx;
     text-decoration: 1px dashed $pink-400 underline;
-    padding: 0 20px;
+    padding: 0 0px;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 16px;
 
     &:hover {
       // background-color: $pink-200;
-      color: $pink-300;
+      // color: $pink-300;
+      font-weight: 550;
+      color: $text-muted;
     }
   }
 }

@@ -7,7 +7,7 @@ export const useAiAskStore = defineStore('aiAsk', () => {
   //   比如说，在这里放置gif的链接ref，放置角色的ref，然后传入到提问之中
   //   接入清空之前对话的功能
   // 获取AI的答案
-  const has_ask_first = ref(false);
+  const has_ask_first = ref(uni.getStorageSync('has_ask_first') === 'true');
   const dialogs = ref<string>();
   const askAiQuestion = ref('');
   const size = 150; // 组件宽高(px)
@@ -158,8 +158,8 @@ export const useAiAskStore = defineStore('aiAsk', () => {
 
   onMounted(async () => {
     if (has_ask_first.value) return;
+    uni.setStorageSync('has_ask_first', 'true');
     askAiWithStream('不准输出()（）内文字，模仿恩奇都的语气说话，只说话，例如：(心理描写)（描写）,你不应该输出这些');
-    has_ask_first.value = true;
   });
 
   return {

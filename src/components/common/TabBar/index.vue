@@ -1,13 +1,17 @@
 <template>
   <view class="tab-bar-container">
-    <view class="tab-bar-container__navigation">
-      <navigation-bar :navigation-options="navigationOptions"></navigation-bar>
-    </view>
     <view class="logo">
       <navigator url="/pages/index/index" open-type="switchTab" hover-class="navigator-hover" class="tab-bar-item">
         <image src="/src/static/logo.png" class="tab-bar-item__image" mode="aspectFit"></image>
       </navigator>
     </view>
+    <view class="tab-bar-container__navigation">
+      <navigation-bar :navigation-options="navigationOptions"></navigation-bar>
+    </view>
+    <navigator url="/pages/user/login" open-type="navigate">
+      <SCButton type="button" size="29rpx" style="margin-right: 50px;">登录/注册</SCButton>
+    </navigator>
+
   </view>
   <view class="tab-bar-container-02">
     <image :src="`${apiUrl}/static/asset/headBar.png`" mode="aspectFill" class="tab-bar-container-02__image"></image>
@@ -18,6 +22,7 @@
 
 <script setup lang="ts">
 import NavigationBar from "./components/NavigationBar.vue";
+import SCButton from "@/components/common/SCButton/index.vue"
 const apiUrl = import.meta.env.VITE_API_BASE;
 const navigationOptions = [
   { title: "标签", path: "/pages/tagNav/index" },
@@ -30,7 +35,6 @@ const navigationOptions = [
 <style lang="scss" scoped>
 .tab-bar-container {
   display: flex;
-  flex-direction: row-reverse;
 
   .logo {
     flex: 1;
@@ -49,13 +53,22 @@ const navigationOptions = [
 
 @media screen and (min-width:600px) {
   .tab-bar-container {
+    align-items: center;
+
     .logo {
+      flex: none;
       height: 60px;
+    }
+
+    &__navigation {
+      display: flex;
+      flex: 1;
+      justify-content: flex-start;
     }
 
     .tab-bar-item {
       &__image {
-        width: 70px;
+        width: 88px;
         height: 60px;
         margin-left: 80px;
       }

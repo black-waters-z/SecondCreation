@@ -21,7 +21,6 @@ function changeTab(idx: number) {
 .simple-tab {
     display: flex;
     justify-content: space-around;
-    letter-spacing: 10rpx;
     padding: 10px 0;
     font-size: 26rpx;
     position: sticky;

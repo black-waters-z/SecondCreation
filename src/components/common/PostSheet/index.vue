@@ -68,7 +68,7 @@ const choices: Choice[] = [
     border-radius: 16px;
     box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-columns: repeat(6, 100px);
+    grid-template-columns: repeat(5, 100px);
     overflow-x: auto;
     position: relative;
   }
@@ -118,7 +118,7 @@ const choices: Choice[] = [
       border-radius: 16px;
       box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15);
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       transform: translateY(20rpx);
     }
 

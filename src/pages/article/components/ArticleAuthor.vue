@@ -5,7 +5,7 @@
         </navigator>
         <text class="article-author__name">{{ userInfo?.username }}</text>
         <SCButton class="article-author__bt" type="button" size="25rpx" @click="toggleAttentionFunc(userInfo.id)"
-            v-if="!isMe" :color="has_attentioned ? 'grey' : 'red'">
+            v-if="!isMe" color="white" :bgcolor="has_attentioned ? 'grey' : 'red'">
             {{ has_attentioned ? '已关注' : '关注' }}</SCButton>
     </view>
 </template>

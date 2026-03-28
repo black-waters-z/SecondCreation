@@ -1,9 +1,9 @@
-<template>
-  <PageWrapper class="user-index" show-head flex-row>
+﻿<template>
+  <PageWrapper class="user-index" show-head flex-row :enable_refresh="false">
     <!-- 大屏 -->
     <view class="user-index__user">
       <user-bar :user-info="userInfo" class="mobile-user-info"></user-bar>
-      <read-nav class="content__read-nav__article-manager mobile-user-info" :nav-items="readNavItems" color="black"
+      <read-nav class="content__read-nav__article-manager mobile-user-info" :nav-items="readNavItemsPc" color="black"
         v-model:iconIndx="iconIndx"> </read-nav>
     </view>
     <template #scroll>
@@ -13,27 +13,21 @@
       </view>
       <view class="w-full flex ">
         <view class="content__read-nav">
+          <hide-nav text="互动管理">
+            <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_1" color="gray">
+            </read-nav>
+          </hide-nav>
 
-          <view class="flex" v-if="isMobile">
-            <view class="content__read-nav__split"></view>
-            <text class="content__read-nav__text">文章管理</text>
-          </view>
-          <match-media max-width="600px">
-            <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="black"
-              v-model:iconIndx="iconIndx"> </read-nav>
-          </match-media>
-          <view class="flex">
-            <view class="content__read-nav__split" v-if="isMobile"></view>
-            <text class="content__read-nav__text" v-if="isMobile">互动</text>
-          </view>
-          <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_1" color="black">
-          </read-nav>
-          <view class="flex">
-            <view class="content__read-nav__split" v-if="isMobile"></view>
-            <text class="content__read-nav__text" v-if="isMobile">用户管理</text>
-          </view>
-          <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_2" color="black">
-          </read-nav>
+          <hide-nav text="文章管理">
+            <match-media max-width="600px">
+              <read-nav class="content__read-nav__article-manager" :nav-items="readNavItems" color="#e65ca0"
+                v-model:iconIndx="iconIndx"> </read-nav>
+            </match-media>
+          </hide-nav>
+          <hide-nav text="用户管理">
+            <read-nav class="content__read-nav__user-manager" v-if="isMobile" :nav-items="readNavItems_2" color="black">
+            </read-nav>
+          </hide-nav>
         </view>
         <!-- #ifdef H5 -->
         <component :is="component" v-if="!isMobile" class="w-full"></component>
@@ -52,6 +46,7 @@ import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import UserBar from './components/UserBar.vue';
 import SupportPay from './components/SupportPay.vue';
 import ReadNav from './components/ReadNav.vue';
+import HideNav from "@/components/base/HideNav/index.vue"
 import type { UserInfo } from './type';
 import { onLoad } from '@dcloudio/uni-app';
 import { navigateToLogin } from '@/utils/navigate';
@@ -85,14 +80,25 @@ enum NavLabelEnum {
   USER_COMMENT_FAVORITE = '用户收藏的评论',
 }
 
+const readNavItemsPc = [
+
+  { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent', },
+  { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
+  { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent', },
+  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE, type: 'ArticleManagerComponent', },
+  { icon: '\ue64f', label: NavLabelEnum.DRAFT, type: 'DraftComponent' },
+  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA, type: 'ArticleDataComponent', },
+];
+
+
 const readNavItems = [
 
-  { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent' },
-  { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent' },
-  { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent' },
-  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE, type: 'ArticleManagerComponent' },
+  { icon: '\ue63b', label: NavLabelEnum.HISTORY, type: 'HistoryComponent', iconPath: '/static/svg/history.svg' },
+  { icon: '\ue634', label: NavLabelEnum.FAVORITE, type: 'FavoriteComponent', iconPath: '/static/svg/star.svg' },
+  { icon: '\ue635', label: NavLabelEnum.LIKE, type: 'LikeComponent', iconPath: '/static/svg/heart.svg' },
+  { icon: '\ue652', label: NavLabelEnum.ARTICLE_MANAGE, type: 'ArticleManagerComponent', iconPath: '/static/svg/article_manage.svg' },
   { icon: '\ue64f', label: NavLabelEnum.DRAFT, type: 'DraftComponent' },
-  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA, type: 'ArticleDataComponent' },
+  { icon: '\ue627', label: NavLabelEnum.ARTICLE_DATA, type: 'ArticleDataComponent', iconPath: '/static/svg/analytics.svg' },
 ];
 
 const iconIndx = ref(0);
@@ -136,6 +142,12 @@ watch(iconIndx, (val) => {
 </style>
 
 <style lang="scss">
+.user-index {
+  .page-container__scroll {
+    background-color: #a9a9a90a;
+  }
+}
+
 .content {
   &__user {
     width: 100%;
@@ -150,8 +162,7 @@ watch(iconIndx, (val) => {
   &__read-nav {
     display: flex;
     flex-direction: column;
-    width: 700rpx;
-    margin: 20rpx auto;
+    width: 100%;
     box-sizing: border-box;
   }
 
@@ -166,7 +177,6 @@ watch(iconIndx, (val) => {
   &__read-nav__split {
     width: 12rpx;
     height: 20px;
-    background-color: $pink-400;
     border-radius: 100px;
   }
 
@@ -175,6 +185,8 @@ watch(iconIndx, (val) => {
     height: 20px;
     font-size: 26rpx;
     margin-left: 20rpx;
+    font-weight: 550;
+    color: $text-main;
   }
 
 }

@@ -132,6 +132,10 @@ defineExpose({
 }
 
 @media screen and (min-width:600px) {
+  .waterfall {
+    gap: 10rpx;
+  }
+
   .waterfall__inner {
     display: flex;
     flex-direction: column;

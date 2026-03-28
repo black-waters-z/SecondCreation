@@ -5,10 +5,12 @@
     </view>
     <view v-for="(item, idx) in navItems" :key="item.label" class="read-nav-container__icon"
       :class="{ 'icon_active': activeIndex === idx }" @click="goToIconNavigatePage(item?.type, item?.label, idx)">
-      <uni-icons fontFamily="CustomFont" :color="color ?? 'grey'" size="21" class="read-nav-container__icon-icon">
+      <uni-icons v-if="!item.iconPath" fontFamily="CustomFont" :color="color ?? 'grey'" size="21"
+        class="read-nav-container__icon-icon">
         {{ item.icon }}
       </uni-icons>
-      <text class="icon-text" :style="{ color: 'grey' }"> {{ item.label }} </text>
+      <image v-else :src="item.iconPath" mode="aspectFit" class="read-nav-container__icon-image"></image>
+      <text class="icon-text" :style="{ color: 'black' }"> {{ item.label }} </text>
     </view>
   </view>
 </template>
@@ -20,6 +22,7 @@ interface NavItems {
   icon: string;
   label: string;
   type?: string;
+  iconPath?: string;
 }
 defineProps<{ navItems: NavItems[]; color?: string; iconIndx?: number }>();
 const emit = defineEmits(['update:iconIndx'])
@@ -76,6 +79,11 @@ const goToIconNavigatePage = (componentType: string | undefined, goBackTitle: st
       margin-left: 4rpx;
       font-size: 24rpx;
       letter-spacing: 2rpx;
+    }
+
+    .read-nav-container__icon-image {
+      width: 24px;
+      height: 24px;
     }
 
     &:hover {

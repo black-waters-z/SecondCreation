@@ -10,6 +10,7 @@
         <article-author :user-info="userInfo" :has_attention="userInfo?.has_been_followed ?? false"></article-author>
       </view>
       <text class="whole-article__content-title">{{ article?.title }}</text>
+      <text class="whole-article__content-subtitle">{{ article?.subtitle }}</text>
       <view class="whole-article__content-content">
         <view class="whole-article__content-content-subtitle" v-if="article?.subtitle">{{ article?.subtitle
         }}</view>
@@ -143,25 +144,39 @@ const isVideo = (url: string) => {
 
   .whole-article {
     flex-direction: row;
+    width: fit-content;
+    margin: 0 auto;
     align-items: flex-start;
+    justify-content: center;
     border-radius: 30rpx;
     box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
     background-color: white;
     margin-top: 5px;
     position: relative;
 
+
     &__video {
-      max-width: 600px;
+      width: 600px;
       min-height: 400px;
       border-radius: 15px;
     }
 
     .whole-article__content {
+      width: 700px;
       padding: 0 30rpx;
       min-height: 100%;
 
+      &-title {
+        text-align: center;
+      }
+
+      &-subtitle {
+        text-align: center;
+      }
+
       &-content-text {
         font-size: 18px;
+        box-sizing: border-box;
       }
     }
   }
