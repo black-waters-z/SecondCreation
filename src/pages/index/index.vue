@@ -4,6 +4,7 @@
     <head-nav show-search class="position-sticky top-0 z-100"></head-nav>
     <!-- #ifdef MP-WEIXIN -->
     <up-line></up-line>
+    <up-swiper :list="list2" keyName="image" showTitle :autoplay="false" circular></up-swiper>
     <!-- #endif -->
     <match-media :min-width="600">
       <SimpleSearch v-model="searchKey"></SimpleSearch>
@@ -14,9 +15,10 @@
         <view class="content__head">
           <common-swiper></common-swiper>
         </view>
-        <!-- #endif -->
         <!-- 这里插入商品信息 -->
         <home-product :source="goods"></home-product>
+        <!-- #endif -->
+
         <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
       </match-media>
       <match-media :min-width="600" class="w-full">
@@ -38,11 +40,11 @@ import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
 import WaterFall from '@/components/common/WaterFall.vue';
 import HomeProduct from './components/HomeProduct.vue';
-import SimpleSearch from "@/components/base/ScSearch/SimpleSearch.vue"
+import SimpleSearch from '@/components/base/ScSearch/SimpleSearch.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
-import { getGoodsInfo } from "@/api/shopApi"
+import { getGoodsInfo } from '@/api/shopApi';
 import { onLoad } from '@dcloudio/uni-app';
-import { getRecommenedArticles } from '@/api/articleApi'
+import { getRecommenedArticles } from '@/api/articleApi';
 import type { Article } from '../tagPage/type';
 import type { goodInfo } from '../shopping/type';
 
@@ -52,25 +54,41 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   console.log('生产环境');
 }
-const articleList = ref<Article[]>([])
+const articleList = ref<Article[]>([]);
 
 const searchKey = ref('');
-const waterfallRef = ref<InstanceType<typeof WaterFall> | null>(null)
+const waterfallRef = ref<InstanceType<typeof WaterFall> | null>(null);
 const articleSearchList = ref<Article[]>([]);
 
-watch(() => searchKey.value, () => {
-  waterfallRef.value.resetColumns()
-  if (searchKey.value === '') {
-    articleSearchList.value = articleList.value
-  }
-  if (searchKey.value) {
-    articleSearchList.value = articleList.value.filter((item) =>
-      searchKey.value && item?.title.includes(searchKey.value)
-    )
-  }
-  // console.log('articleList', articleList.value.length);
-  // console.log('articleSearchList', articleSearchList.value.length);
-})
+watch(
+  () => searchKey.value,
+  () => {
+    waterfallRef.value.resetColumns();
+    if (searchKey.value === '') {
+      articleSearchList.value = articleList.value;
+    }
+    if (searchKey.value) {
+      articleSearchList.value = articleList.value.filter((item) => searchKey.value && item?.title.includes(searchKey.value));
+    }
+    // console.log('articleList', articleList.value.length);
+    // console.log('articleSearchList', articleSearchList.value.length);
+  },
+);
+
+const list2 = [
+  {
+    image: 'https://uviewui.com/swiper/swiper2.png',
+    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+  },
+  {
+    image: 'https://uviewui.com/swiper/swiper1.png',
+    title: '身无彩凤双飞翼，心有灵犀一点通',
+  },
+  {
+    image: 'https://uviewui.com/swiper/swiper3.png',
+    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
+  },
+];
 
 defineOptions({
   options: {
@@ -81,18 +99,15 @@ const goods = ref<goodInfo[]>([]);
 const loadMoreArticles = async () => {
   const next = await getRecommenedArticles();
   articleList.value = [...articleList.value, ...next];
-  articleSearchList.value = articleList.value
-}
+  articleSearchList.value = articleList.value;
+};
 onLoad(async () => {
-  articleList.value = await getRecommenedArticles()
-  articleSearchList.value = articleList.value
-  await getGoodsInfo(1, 10).then(res => {
-    goods.value = res
-  })
-})
-
-
-
+  articleList.value = await getRecommenedArticles();
+  articleSearchList.value = articleList.value;
+  await getGoodsInfo(1, 10).then((res) => {
+    goods.value = res;
+  });
+});
 </script>
 
 <style lang="scss">
@@ -119,7 +134,6 @@ onLoad(async () => {
   }
 }
 
-
 // #ifdef H5
 .content__head {
   order: 2;
@@ -131,11 +145,9 @@ onLoad(async () => {
 
 // #endif
 
-@media screen and (min-width:600px) {
+@media screen and (min-width: 600px) {
   .content__head {
     display: none;
   }
-
 }
-
 </style>

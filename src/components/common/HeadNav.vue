@@ -3,9 +3,7 @@
     <!-- #ifdef MP-WEIXIN -->
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
-        <navigator open-type="switchTab" url="/pages/index/index" hover-class="navigator-hover">
-          <image src="/src/static/logo.png" mode="scaleToFill" class="logo" />
-        </navigator>
+        <text v-for="(item,idx) in ['首页','tag导航','搜索','智能ai']" :key="idx" class="status_bar__bt" :class="{'status_bar__bt-active':idx===0}">{{item}}</text>
       </view>
     </view>
     <!-- #endif -->
@@ -59,7 +57,21 @@ onHide(() => {
   height: 80rpx;
   background: white;
   left: 0;
-  padding-bottom: 6rpx;
+  display: flex;
+  gap: 20rpx;
+
+  &__bt{
+    font-size: 30rpx;
+    color: #000;
+    font-weight: 400;
+    padding: 0rpx 20rpx;
+
+    &-active{
+      font-weight: 600;
+      font-size: 32rpx;
+      color:rgb(230, 92, 160);
+    }
+  }  
 
   &__logo-search {
     display: flex;

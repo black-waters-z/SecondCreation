@@ -2,7 +2,7 @@
   <view class="user-bar-container">
     <image class="user-bar-container__avatar" :src="userInfo?.avatar_url" mode="aspectFill"
       :class="{ 'no-login-grey': !userInfo?.avatar_url }">
-      <uni-icons fontFamily="CustomFont" color="white" size="24"> &#xe61c; </uni-icons>
+      <uni-icons fontFamily="CustomFont" color="white" size="24" v-if="!userInfo?.avatar_url"> &#xe61c; </uni-icons>
     </image>
     <mobile-user-info :userInfo="userInfo"></mobile-user-info>
     <!-- #ifdef H5 -->

@@ -8,7 +8,7 @@
     </view>
     <template #scroll>
       <view class="content__user">
-        <user-bar :user-info="userInfo"></user-bar>
+        <user-bar :user-info="userInfo" class="w-full"></user-bar>
         <support-pay></support-pay>
       </view>
       <view class="w-full flex ">

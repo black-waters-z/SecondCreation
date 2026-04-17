@@ -25,61 +25,70 @@ defineProps<{
 </script>
 
 <style lang="scss" scoped>
-.user-bar-container {
+.user-info {
+    margin: 20rpx 0 0 20rpx;
+    flex: 1;
 
-    &__avatar {
-        width: 130rpx;
-        height: 130rpx;
-        background-color: antiquewhite;
-        border-radius: 1000rpx;
+    &__name {
+        font-weight: 700;
+        font-size: 40rpx;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: first baseline;
+        position: relative;
+
+        &__icon {
+            margin-right: 40rpx;
+            top: 10rpx;
+        }
     }
 
-    .no-login-grey {
-        background-color: grey;
-        opacity: 0.5;
-        cursor: pointer;
+    &__go-to-user-page {
+        font-size: 20rpx;
+        font-style: italic;
+        text-decoration: underline;
+        color: red;
+        margin-left: auto;
     }
 
-    .user-info {
-        margin: 20rpx 0 0 20rpx;
-        flex: 1;
+    &__other {
+        display: flex;
+        font-size: 18rpx;
+        margin-top: 20rpx;
+        flex-wrap: wrap;
 
-        &__go-to-user-page {
-            font-size: 20rpx;
-            font-style: italic;
-            text-decoration: underline;
-            color: red;
-            margin-left: auto;
-        }
-
-        &__name {
-            font-weight: 700;
-            font-size: 40rpx;
-            display: flex;
-            align-items: first baseline;
-            position: relative;
-
-            &__icon {
-                margin-right: 40rpx;
-                top: 10rpx;
-            }
-        }
-
-        &__other {
-            display: flex;
-            font-size: 18rpx;
-            margin-top: 20rpx;
-
-            &__tag {
-                background-color: rgb(239, 236, 236);
-                padding: 5rpx 10rpx;
-                border-radius: 1000px;
-                margin-right: 10rpx;
-            }
+        &__tag {
+            background-color: rgb(239, 236, 236);
+            padding: 5rpx 10rpx;
+            border-radius: 1000px;
+            margin-right: 10rpx;
+            margin-bottom: 5rpx;
+            white-space: nowrap;
         }
     }
 }
+
+/* WeChat Mini Program specific styles */
+/* #ifdef MP-WEIXIN */
+.user-info {
+    &__name {
+        font-weight: 700 !important;
+        font-size: 40rpx !important;
+    }
+
+    &__go-to-user-page {
+        font-size: 20rpx !important;
+        color: red !important;
+    }
+
+    &__other {
+        font-size: 18rpx !important;
+
+        &__tag {
+            background-color: rgb(239, 236, 236) !important;
+            padding: 5rpx 10rpx !important;
+            border-radius: 1000px !important;
+        }
+    }
+}
+/* #endif */
 </style>
