@@ -6,7 +6,6 @@
         <navigator open-type="switchTab" url="/pages/index/index" hover-class="navigator-hover">
           <image src="/src/static/logo.png" mode="scaleToFill" class="logo" />
         </navigator>
-        <SearchBar class="w-100 status_bar__search" width="300rpx" height="75rpx"></SearchBar>
       </view>
     </view>
     <!-- #endif -->
@@ -60,6 +59,7 @@ onHide(() => {
   height: 80rpx;
   background: white;
   left: 0;
+  padding-bottom: 6rpx;
 
   &__logo-search {
     display: flex;
@@ -126,4 +126,10 @@ onHide(() => {
     display: none;
   }
 }
+
+//  #ifdef MP-WEIXIN
+.head-nav{
+  box-shadow: none !important;
+}
+//  #endif
 </style>

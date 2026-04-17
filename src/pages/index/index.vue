@@ -1,10 +1,10 @@
 ﻿<template>
   <page-wrapper have_no_more :fetch-data="loadMoreArticles">
     <!-- 首页头部 -->
-    <!-- #ifdef MP-WEIXIN -->
-    <head-nav></head-nav>
-    <!-- #endif -->
     <head-nav show-search class="position-sticky top-0 z-100"></head-nav>
+    <!-- #ifdef MP-WEIXIN -->
+    <up-line></up-line>
+    <!-- #endif -->
     <match-media :min-width="600">
       <SimpleSearch v-model="searchKey"></SimpleSearch>
     </match-media>
@@ -137,4 +137,5 @@ onLoad(async () => {
   }
 
 }
+
 </style>

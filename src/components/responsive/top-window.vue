@@ -5,11 +5,13 @@
         <tab-bar></tab-bar>
       </view>
     </view>
+    <!-- #ifdef H5  -->
     <view class="top-window-container__ad" v-if="pcHeadBar.adActive">
       <text>欢迎进站，现在充值可享9折优惠，买一件商品赠送99积分。</text>
       <uni-icons type="close" color="white" size="24" style="margin-left: auto;cursor: pointer;"
         @click="pcHeadBar.closeAdBar" />
     </view>
+    <!-- #endif -->
   </view>
 
 </template>
