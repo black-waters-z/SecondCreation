@@ -14,7 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import SCButton from '@/components/common/SCButton/index.vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import SCButton from '@/components/common/SCButton/index.vue';
 import { ref, watch } from 'vue';
 import { toggleAttention, type UserInfoWithFollow } from '@/api/userApi';
 import { usePcHeadBar } from "@/store/usePcHeadBar"

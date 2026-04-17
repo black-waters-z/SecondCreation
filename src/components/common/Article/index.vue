@@ -55,7 +55,13 @@
 </template>
 
 <script setup lang="ts">
-import BottomTag from '@/components/base/BottomTag/index.vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
 import { computed, inject, ref, type Ref, watch } from 'vue';
 // import ClickIcon from "@/components/base/ClickIcon/index.vue"

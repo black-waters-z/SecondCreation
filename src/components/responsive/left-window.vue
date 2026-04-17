@@ -5,7 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import CharacterNav from "@/pages/index/components/CharacterNav.vue";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import CharacterNav from "@/pages/index/components/CharacterNav.vue";
 </script>
 
 <style scoped lang="scss">

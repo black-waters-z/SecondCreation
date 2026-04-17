@@ -6,7 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import { getFavoriteArticles } from "@/api/articleApi";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { getFavoriteArticles } from "@/api/articleApi";
 import GridArticlesContainer from "@/components/common/GridArticlesContainer/index.vue";
 import type { Article } from '@/pages/tagPage/type'
 import { onMounted, ref } from "vue";

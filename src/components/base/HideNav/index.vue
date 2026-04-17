@@ -11,7 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import { isMobile } from '@/utils';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { isMobile } from '@/utils';
 import { ref } from 'vue';
 defineProps<{ text: string }>()
 const type = ['down', 'up']

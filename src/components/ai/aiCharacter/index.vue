@@ -31,7 +31,13 @@
 </template>
 
 <script setup lang="ts">
-import aiDialog from '@/components/ai/aiDialog/index.vue'
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import aiDialog from '@/components/ai/aiDialog/index.vue'
 import SCButton from '@/components/common/SCButton/index.vue'
 import PopWrapper from "@/components/base/PopWrapper/index.vue"
 import AiSetting from '@/components/form/AiSetting.vue';

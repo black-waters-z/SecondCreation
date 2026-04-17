@@ -7,7 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from 'lodash'
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { debounce } from 'lodash'
 defineProps<{
     modelValue: boolean
 }>()

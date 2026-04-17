@@ -14,7 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 withDefaults(
   defineProps<{
     height?: string;

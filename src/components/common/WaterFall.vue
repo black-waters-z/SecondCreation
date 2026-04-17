@@ -20,6 +20,7 @@ const instance = getCurrentInstance();
 defineOptions({
   options: {
     styleIsolation: 'shared', // 允许样式穿透（微信小程序）
+    virtualHost: true,
   },
 });
 

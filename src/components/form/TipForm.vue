@@ -19,7 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import ClickIcon from "@/components/base/ClickIcon/index.vue"
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import ClickIcon from "@/components/base/ClickIcon/index.vue"
 import SCButton from "@/components/common/SCButton/index.vue"
 import { ref } from "vue"
 import PopWrapper from "@/components/base/PopWrapper/index.vue"

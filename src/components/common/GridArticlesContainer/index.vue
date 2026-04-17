@@ -25,6 +25,12 @@ function reset() {
 }
 
 defineExpose({ reset })
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style scoped lang="scss"></style>

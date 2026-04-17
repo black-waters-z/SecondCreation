@@ -3,7 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import GridArticleContainer from "@/components/common/GridArticlesContainer/index.vue"
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import GridArticleContainer from "@/components/common/GridArticlesContainer/index.vue"
 import { getLikeArticles } from "@/api/articleApi"
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";

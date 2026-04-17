@@ -40,6 +40,12 @@ const choices: Choice[] = [
   { text: '发布商品', icon: '\ue650', backgroundcolor: 'white', url: '../post/index', color: '#737373' },
 ];
 
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
+
 </script>
 
 <style lang="scss">

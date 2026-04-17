@@ -11,7 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 
 defineProps<{ image: string }>()
 const show = ref(false)

@@ -7,7 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Article } from '@/pages/tagPage/type'
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import type { Article } from '@/pages/tagPage/type'
 import SmallArticle from '../Article/SmallArticle.vue';
 defineProps<{
     articleList: Article[];

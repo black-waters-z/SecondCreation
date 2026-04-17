@@ -7,7 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 import SCButton from "@/components/common/SCButton/index.vue"
 import FormBase from "@/components/form/base/index.vue"
 import type { FormBaseType } from '@/components/form/base/type';

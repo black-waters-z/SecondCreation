@@ -38,6 +38,7 @@ import { onHide } from '@dcloudio/uni-app';
 defineOptions({
   options: {
     styleIsolation: 'shared',
+    virtualHost: true,
   },
 });
 

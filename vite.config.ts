@@ -33,4 +33,19 @@ export default defineConfig({
   base: '/',
   outDir: 'dist',
   assetsDir: 'static',
+  configureWebpack: {
+    pluginOptions: {
+      uniApp: {
+        // 全局配置微信小程序自定义组件的 options
+        weapp: {
+          componentOptions: {
+            virtualHost: true,
+            styleIsolation: 'isolated', // 全局样式隔离
+            multipleSlots: true, // 全局启用多 slot
+            addGlobalClass: true, // 允许页面样式影响组件
+          },
+        },
+      },
+    },
+  },
 });

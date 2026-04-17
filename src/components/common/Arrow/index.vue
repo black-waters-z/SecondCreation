@@ -6,6 +6,12 @@
 <script setup lang="ts">
 const emit = defineEmits(["click"]);
 const handleTap = (e: Event) => emit("click", e);
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 <style lang="scss" scoped>
 .product-arrow-view {

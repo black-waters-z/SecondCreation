@@ -31,6 +31,13 @@
 
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue';
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
+
 const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string, iconType?: string, clickFun?: () => void }>()
 const isShow = ref(false)
 

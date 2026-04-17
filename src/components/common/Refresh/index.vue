@@ -18,7 +18,13 @@
   </view>
 </template>
 <script setup lang="ts">
-withDefaults(defineProps<{ type: string }>(), { type: 'Restore' });
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});withDefaults(defineProps<{ type: string }>(), { type: 'Restore' });
 </script>
 <style scoped lang="scss">
 .refresh-container {

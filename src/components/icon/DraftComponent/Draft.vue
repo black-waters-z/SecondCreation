@@ -13,7 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { deleteDraftById } from "@/api/draftApi";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { deleteDraftById } from "@/api/draftApi";
 import type { DraftListItem } from "./type";
 import { ref } from "vue";
 

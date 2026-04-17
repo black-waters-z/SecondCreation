@@ -11,7 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import collection from './collection.vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import collection from './collection.vue';
 import PopWrapper from "@/components/base/PopWrapper/index.vue"
 import type { CollectionData } from "./type"
 import CollectionAddForm from '@/components/form/CollectionAddForm.vue';

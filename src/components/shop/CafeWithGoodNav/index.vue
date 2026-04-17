@@ -12,7 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import goodNav from './goodNav.vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import goodNav from './goodNav.vue';
 import type { storeInfo } from './type'
 
 defineProps<{ source: storeInfo }>();

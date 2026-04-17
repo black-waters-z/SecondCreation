@@ -14,7 +14,13 @@
 
 </template>
 <script setup lang="ts">
-import TabBar from "@/components/common/TabBar/index.vue";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import TabBar from "@/components/common/TabBar/index.vue";
 import { usePcHeadBar } from "@/store/usePcHeadBar"
 
 const pcHeadBar = usePcHeadBar()

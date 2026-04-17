@@ -4,7 +4,13 @@
     </view>
 </template>
 <script setup lang="ts">
-function navToCart() {
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});function navToCart() {
     uni.navigateTo({
         url: '/pages/shoppingCart/index'
     })

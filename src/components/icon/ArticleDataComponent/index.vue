@@ -5,7 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { onLoad } from "@dcloudio/uni-app";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { onLoad } from "@dcloudio/uni-app";
 import ArticleData from "./ArticleData.vue"
 import type { ArticleDatas } from "./type";
 import { getArticleData } from "@/api/chartDataApi"

@@ -7,7 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 defineProps<{ tabs: Record<'name', string>[] }>();
 const active = ref(0)
 const emit = defineEmits(['changeTab'])

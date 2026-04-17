@@ -17,6 +17,7 @@ defineProps<{
 defineOptions({
     options: {
         styleIsolation: 'shared',
+        virtualHost: true,
     },
 });
 </script>

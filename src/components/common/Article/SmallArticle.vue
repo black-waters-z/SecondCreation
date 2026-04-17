@@ -17,6 +17,12 @@ import type { Article } from "@/pages/tagPage/type";
 defineProps<{
     article: Article;
 }>();
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

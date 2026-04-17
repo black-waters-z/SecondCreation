@@ -26,6 +26,12 @@ const type = ['star', 'star-filled']
 defineProps<{
     goodInfo: goodInfoType
 }>()
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

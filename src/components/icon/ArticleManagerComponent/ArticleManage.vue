@@ -26,7 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ManageArticle } from "./type"
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import type { ManageArticle } from "./type"
 defineProps<{ article: ManageArticle }>()
 </script>
 

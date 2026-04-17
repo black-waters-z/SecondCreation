@@ -8,7 +8,13 @@
 </template>
 
 <script setup lang="ts">
-import ChangeEmail from '@/components/form/ChangeEmail.vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import ChangeEmail from '@/components/form/ChangeEmail.vue';
 import ChangePassword from '@/components/form/ChangePassword.vue';
 import ChangePhone from '@/components/form/ChangePhone.vue';
 import ChangeAvatar from '@/components/form/ChangeAvatar.vue';

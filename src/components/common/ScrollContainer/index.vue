@@ -13,7 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { useScrollView, ScrollViewKey } from '@/hooks/useScrollView';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { useScrollView, ScrollViewKey } from '@/hooks/useScrollView';
 import Refresh from '../Refresh/index.vue';
 import HaveNoMore from '@/components/base/HaveNoMore/index.vue'
 import { type Article } from '@/pages/tagPage/type';

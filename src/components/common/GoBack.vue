@@ -22,7 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 import GoBackIcon from '@/components/base/GoBackIcon/index.vue';
 import { isMobile } from '@/utils';
 interface collection {

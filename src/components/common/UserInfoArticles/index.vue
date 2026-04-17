@@ -6,7 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import UserInfoArticle from '../Article/UserInfoArticle.vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import UserInfoArticle from '../Article/UserInfoArticle.vue';
 import type { ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 import type { UserInfo } from '@/pages/user/type';
 

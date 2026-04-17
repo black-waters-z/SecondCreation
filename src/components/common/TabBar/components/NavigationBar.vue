@@ -14,7 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { useTabBarStore } from "@/store/useNav";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { useTabBarStore } from "@/store/useNav";
 import { storeToRefs } from "pinia";
 interface TabBarNavigation {
   title: string;

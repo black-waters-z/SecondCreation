@@ -5,7 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref, watch, } from 'vue';
 const props = defineProps<{
     content: string;
 }>();

@@ -3,7 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { UserSpeaker } from "./index";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { UserSpeaker } from "./index";
 withDefaults(defineProps<{ source: UserSpeaker }>(), {
   source: () => ({
     name: "张三",

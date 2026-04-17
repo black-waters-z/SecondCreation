@@ -6,7 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { onMounted } from 'vue';
 import ContactToMe from './ContactToMe.vue';
 import { getContactNewData, type ContactReturn } from "@/api/contactApi"
 import { ref } from 'vue';

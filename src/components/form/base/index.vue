@@ -12,7 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { computed, watch } from 'vue';
 import { usePostPicFile } from '@/hooks/usePostFile';
 
 import type { FormBaseType, FormValue } from './type';

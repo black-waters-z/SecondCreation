@@ -9,7 +9,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from "vue";
 import { usePostSheetStore } from "@/store/usePostSheet";
 const postSheetStore = usePostSheetStore();
 const buttonText = ref("+");

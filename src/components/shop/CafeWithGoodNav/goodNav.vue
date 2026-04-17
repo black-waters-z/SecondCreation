@@ -8,7 +8,13 @@
     </view>
 </template>
 <script setup lang="ts">
-import type { goodInfo } from "@/pages/shopping/type";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import type { goodInfo } from "@/pages/shopping/type";
 defineProps<{ source: goodInfo[] }>()
 </script>
 

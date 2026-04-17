@@ -8,9 +8,9 @@
             </navigator>
         </view>
         <view class="user-info__other">
-            <view class="user-info__other__tag">总点击数 {{ userInfo?.clickedPoints || 0 }} </view>
-            <view class="user-info__other__tag">总被收藏数 {{ userInfo?.favoritedPoints || 0 }} </view>
-            <view class="user-info__other__tag">总粉丝 {{ userInfo?.fans || 0 }} </view>
+            <text class="user-info__other__tag">总点击数 {{ userInfo?.clickedPoints || 0 }} </text>
+            <text class="user-info__other__tag">总被收藏数 {{ userInfo?.favoritedPoints || 0 }} </text>
+            <text class="user-info__other__tag">总粉丝 {{ userInfo?.fans || 0 }} </text>
         </view>
     </view>
 </template>

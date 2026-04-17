@@ -36,7 +36,13 @@
 </template>
 
 <script setup lang="ts">
-import SCButton from "@/components/common/SCButton/index.vue"
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import SCButton from "@/components/common/SCButton/index.vue"
 import PopWrapper from "@/components/base/PopWrapper/index.vue"
 import SettingForm from "./SettingForm.vue";
 import { onMounted, ref } from "vue";

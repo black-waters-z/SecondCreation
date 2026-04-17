@@ -30,7 +30,13 @@
 </template>
 
 <script setup lang="ts">
-import type { CollectionData } from './type';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import type { CollectionData } from './type';
 defineProps<{ collection: CollectionData, price: string, number: number }>();
 
 

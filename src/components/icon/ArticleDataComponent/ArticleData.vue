@@ -17,7 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 import ChooseTab from "@/components/base/ChooseTab/index.vue"
 import { type ArticleDataDict } from "@/components/icon/ArticleDataComponent/type"
 import { useChart } from "@/hooks/useChart"

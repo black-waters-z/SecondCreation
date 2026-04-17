@@ -4,7 +4,13 @@
 </template>
 
 <script setup lang="ts">
-import { getUserViewRecord } from "@/api/articleApi";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { getUserViewRecord } from "@/api/articleApi";
 import GridArticlesContainer from "@/components/common/GridArticlesContainer/index.vue";
 import type { ArticleType } from "@/types/index";
 import { onLoad } from "@dcloudio/uni-app";

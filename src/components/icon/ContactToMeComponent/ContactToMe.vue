@@ -26,7 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ContactToMeData } from './type';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import type { ContactToMeData } from './type';
 defineProps<{ source: ContactToMeData }>()
 </script>
 

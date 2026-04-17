@@ -5,5 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import AICharacter from "@/components/ai/aiCharacter/index.vue"
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import AICharacter from "@/components/ai/aiCharacter/index.vue"
 </script>

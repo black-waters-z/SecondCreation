@@ -9,7 +9,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { computed } from 'vue';
 import SCButton from '@/components/common/SCButton/index.vue';
 import { type UserChange } from '../icon/SettingComponent/type';
 const props = defineProps<{

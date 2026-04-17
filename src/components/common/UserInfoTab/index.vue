@@ -13,7 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref, watch } from 'vue';
 import { computed } from 'vue';
 
 const props = defineProps<{ current: number }>()

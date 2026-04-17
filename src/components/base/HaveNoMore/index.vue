@@ -5,7 +5,13 @@
     </view>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
+</script>
 
 <style lang="scss" scoped>
 .have-no-more {

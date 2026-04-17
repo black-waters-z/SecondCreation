@@ -9,6 +9,12 @@
 <script lang="ts" setup>
 import NavWithIcon from './NavWithIcon.vue';
 defineProps<{ type: string }>();
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style lang="scss">

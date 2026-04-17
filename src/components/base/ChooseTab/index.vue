@@ -7,7 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref } from 'vue';
 const isActiveIdx = ref<'week' | 'month' | 'date'>('date')
 const emit = defineEmits(['choose'])
 function choose(idx: 'week' | 'month' | 'date') {

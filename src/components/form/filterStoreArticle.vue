@@ -36,7 +36,13 @@
 </template>
 
 <script setup lang="ts">
-import SCButton from '@/components/common/SCButton/index.vue'
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import SCButton from '@/components/common/SCButton/index.vue'
 import Tag from '@/components/common/Tag/index.vue'
 import { ref } from 'vue';
 

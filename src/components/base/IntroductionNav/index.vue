@@ -10,7 +10,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ navigatorHref?: String }>();
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});defineProps<{ navigatorHref?: String }>();
 </script>
 
 <style lang="scss" scoped>

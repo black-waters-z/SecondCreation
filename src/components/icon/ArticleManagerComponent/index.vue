@@ -14,6 +14,12 @@ onMounted(async () => {
     articleList.value = await getManageArticleList(1, 10);
 
 })
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

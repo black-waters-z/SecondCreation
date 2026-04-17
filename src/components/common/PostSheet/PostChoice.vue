@@ -8,7 +8,13 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ text?: string; backgroundcolor: string; url: string; fontColor: string }>(), {
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});const props = withDefaults(defineProps<{ text?: string; backgroundcolor: string; url: string; fontColor: string }>(), {
   backgroundcolor: 'antiquewhite',
   fontColor: 'black',
 });

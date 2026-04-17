@@ -25,6 +25,12 @@ defineProps<{
     user: UserInfo;
     article: ManageArticle;
 }>();
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

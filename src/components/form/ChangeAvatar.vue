@@ -23,7 +23,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { ref, onMounted, computed } from 'vue';
 import PopWrapper from "@/components/base/PopWrapper/index.vue"
 import { type UserChange } from '../icon/SettingComponent/type';
 import SCButton from '@/components/common/SCButton/index.vue';

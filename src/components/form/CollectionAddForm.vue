@@ -14,7 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { usePostPicFile } from '@/hooks/usePostFile';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { usePostPicFile } from '@/hooks/usePostFile';
 import { type CreateCollection, postCollection } from '@/api/collectionApi';
 import { computed, ref } from 'vue';
 import SCButton from "@/components/common/SCButton/index.vue"

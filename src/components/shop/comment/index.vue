@@ -26,7 +26,13 @@
     </view>
 </template>
 <script setup lang="ts">
-import type { CommentInfo } from './type';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import type { CommentInfo } from './type';
 import CafeWithGoodNav from '@/components/shop/CafeWithGoodNav/index.vue';
 import ClickIcon from '@/components/base/ClickIcon/index.vue';
 import { watch } from 'vue';

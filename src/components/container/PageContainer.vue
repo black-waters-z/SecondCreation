@@ -21,7 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import { TimeFilter } from '@/types';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { TimeFilter } from '@/types';
 import HeadNav from '../common/HeadNav.vue';
 import ScrollContainer from '../common/ScrollContainer/index.vue';
 import { type Article } from '@/pages/tagPage/type';

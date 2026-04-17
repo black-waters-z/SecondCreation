@@ -21,7 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import NavigationBar from "./components/NavigationBar.vue";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import NavigationBar from "./components/NavigationBar.vue";
 import SCButton from "@/components/common/SCButton/index.vue"
 const apiUrl = import.meta.env.VITE_API_BASE;
 const navigationOptions = [

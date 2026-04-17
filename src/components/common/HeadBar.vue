@@ -71,6 +71,12 @@ const navigatorHiddenStyle: CSSProperties = {
   fontSize: "0",
   overflow: "hidden",
 };
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style scoped lang="scss">

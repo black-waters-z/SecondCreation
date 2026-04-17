@@ -20,6 +20,7 @@ withDefaults(defineProps<{
 defineOptions({
   options: {
     styleIsolation: 'shared',
+    virtualHost: true,
   },
 });
 const emit = defineEmits(['closeTag', 'click']);

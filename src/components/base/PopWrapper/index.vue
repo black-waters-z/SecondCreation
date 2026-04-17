@@ -12,7 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import ClickIcon from "@/components/base/ClickIcon/index.vue";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import ClickIcon from "@/components/base/ClickIcon/index.vue";
 const props = defineProps<{ popShow: boolean }>();
 const emit = defineEmits(["update:popShow"])
 function changeActive() {

@@ -9,7 +9,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import { computed } from 'vue';
 import ScButton from "@/components/common/SCButton/index.vue"
 const props = defineProps<{
     modelValue?: string;

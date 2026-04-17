@@ -10,7 +10,13 @@
 </template>
 
 <script setup lang="ts">
-</script>
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});</script>
 
 <style lang="scss" scoped>
 .notFoundIcon {

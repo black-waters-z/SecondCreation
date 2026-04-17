@@ -6,7 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import ArticleAuthor from "@/pages/article/components/ArticleAuthor.vue";
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});import ArticleAuthor from "@/pages/article/components/ArticleAuthor.vue";
 import { type UserInfo } from "@/pages/user/type";
 import { onMounted, ref } from "vue";
 import { getUserFollows } from "@/api/userApi";

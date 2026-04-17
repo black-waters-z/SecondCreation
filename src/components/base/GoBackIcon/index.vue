@@ -5,7 +5,13 @@
 </template>
 
 <script setup lang="ts">
-function goBack() {
+
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});function goBack() {
     uni.navigateBack();
 }
 </script>

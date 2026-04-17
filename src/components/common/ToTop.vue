@@ -10,6 +10,12 @@ import { ScrollViewKey, useScrollView } from '@/hooks/useScrollView';
 
 const injectedScrollView = inject(ScrollViewKey, null);
 const { scrollTop } = injectedScrollView ?? useScrollView();
+
+defineOptions({
+  options: {
+    virtualHost: true,
+  },
+});
 </script>
 
 <style scoped lang="scss">
