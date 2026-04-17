@@ -9,8 +9,6 @@
 </template>
 
 <script setup lang="ts">
-
-
 defineOptions({
   options: {
     virtualHost: true,
@@ -18,18 +16,18 @@ defineOptions({
 });import { ref } from "vue";
 import { usePostSheetStore } from "@/store/usePostSheet";
 const postSheetStore = usePostSheetStore();
-const buttonText = ref("+");
+const buttonText = ref("<");
 const { toggle } = postSheetStore;
 const clickMiddleButton = function () {
   toggle();
-  buttonText.value = buttonText.value == "+" ? "-" : "+";
+  buttonText.value = buttonText.value == ">" ? "<" : ">";
 };
 </script>
 
 <style lang="scss" scoped>
 .middle-button {
   position: fixed;
-  right: -20rpx;
+  right: 20rpx;
   bottom: 150rpx;
   transform: translateY(50%);
   z-index: 2000;
@@ -42,6 +40,7 @@ const clickMiddleButton = function () {
   text-align: center;
   border-radius: 1000rpx;
   background-color: white;
+  box-shadow: $grey-shadow-02;
 }
 
 .middle-button:active {

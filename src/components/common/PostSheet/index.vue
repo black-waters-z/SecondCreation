@@ -59,12 +59,12 @@ defineOptions({
   position: fixed;
   height: 100px;
   z-index: 500;
-  bottom: 130rpx;
+  bottom: calc(130rpx - 50px);
   display: flex;
   justify-content: center;
   transition: 0.5s ease-in-out;
   left: 50%;
-  transform: translateX(-50%) translateY(calc(100% + 100rpx));
+  margin-left: -50%;
 
 
   &__view {
@@ -106,7 +106,7 @@ defineOptions({
 }
 
 .post-sheet-container__active {
-  transform: translateX(-50%);
+  margin-left: 0;
 }
 
 .icon {
@@ -134,10 +134,33 @@ defineOptions({
     }
 
     &__active {
-      transform: translateX(-50%) translateY(-60rpx);
+      margin-left: -50%;
     }
   }
-
-
 }
+
+// #ifdef MP-WEIXIN
+.post-sheet-container {
+  /* WeChat Mini Program specific positioning */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-left: 100%;
+
+  &__active {
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width:600px) {
+  .post-sheet-container {
+    left: 50%;
+    margin-left: calc(100% + 50%);
+
+    &__active {
+      margin-left: -50%;
+    }
+  }
+}
+//  #endif
 </style>
