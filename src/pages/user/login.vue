@@ -90,7 +90,7 @@ function encodeForm(data: Record<string, string>) {
 
 <style lang="scss">
 page {
-    height: 100%;
+  height: 100%;
 }
 .login-wrapper {
   &__form {
@@ -121,7 +121,7 @@ page {
       cursor: pointer;
     }
   }
-  .login-form-father__wrapper{
+  .login-form-father__wrapper {
     height: 100%;
     display: flex;
     align-items: center;
@@ -137,7 +137,7 @@ page {
     box-sizing: border-box;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       box-shadow: 0px 0px 10px rgba($color: #838383, $alpha: 0.3);
     }
 
@@ -258,7 +258,7 @@ page {
   }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   .login-wrapper__image {
     position: absolute;
     z-index: 0;
@@ -290,7 +290,7 @@ page {
     max-width: 650rpx;
     margin: 0 auto;
 
-    .button-bt{
+    .button-bt {
       width: 80%;
       align-self: center;
     }
@@ -393,15 +393,15 @@ page {
         background-color: #f1f3f4;
       }
 
-      &[type="weixin"] {
+      &[type='weixin'] {
         color: #52c41a;
       }
 
-      &[type="qq"] {
+      &[type='qq'] {
         color: #1890ff;
       }
 
-      &[type="weibo"] {
+      &[type='weibo'] {
         color: #ff4d4f;
       }
     }
@@ -415,4 +415,167 @@ page {
     padding: 0 10rpx;
   }
 }
+
+// #ifdef MP-WEIXIN
+.login-wrapper {
+  height: 100%;
+}
+.login-wrapper__image {
+  display: none;
+}
+
+.login-form-father__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  width: 100%;
+
+  .button-bt {
+    width: 100% !important;
+  }
+}
+
+.qr-code {
+  display: none;
+}
+
+.login-wrapper__form {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 650rpx;
+  margin: 0 auto;
+
+  .button-bt {
+    width: 80%;
+    align-self: center;
+  }
+}
+
+.uni-forms {
+  .uni-easyinput {
+    margin-bottom: 24rpx;
+
+    &__content-input {
+      font-size: 32rpx;
+      padding: 16rpx 0;
+
+      .uni-easyinput__placeholder-class {
+        font-size: 28rpx;
+        color: #999;
+      }
+    }
+  }
+
+  .simple-tab {
+    margin-bottom: 32rpx;
+    font-size: 34rpx;
+
+    &__active {
+      font-weight: 600;
+      color: $uni-color-primary;
+    }
+  }
+}
+
+.login-form__wrapper--item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+  border-bottom: 1rpx solid $border-color;
+  padding: 8rpx 0;
+
+  .uni-easyinput {
+    flex: 1;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  &-text {
+    color: $uni-color-primary;
+    font-size: 28rpx;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    padding-left: 16rpx;
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+}
+
+.login-wrapper__form--button {
+  margin: 40rpx 0 24rpx 0;
+
+  .sc-button {
+    height: 88rpx;
+    border-radius: 44rpx;
+    font-size: 32rpx;
+    font-weight: 600;
+    box-shadow: 0 4rpx 16rpx rgba($uni-color-primary, 0.3);
+
+    &:active {
+      transform: translateY(2rpx);
+      box-shadow: 0 2rpx 8rpx rgba($uni-color-primary, 0.2);
+    }
+  }
+}
+
+.u-divider {
+  margin: 32rpx 0;
+
+  &__text {
+    font-size: 26rpx;
+    color: #999;
+  }
+}
+
+.login-type-container {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+  margin: 24rpx 0 32rpx 0;
+
+  &__icon {
+    background-color: #f8f9fa;
+    padding: 20rpx;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:active {
+      transform: scale(0.95);
+      background-color: #f1f3f4;
+    }
+
+    &[type='weixin'] {
+      color: #52c41a;
+    }
+
+    &[type='qq'] {
+      color: #1890ff;
+    }
+
+    &[type='weibo'] {
+      color: #ff4d4f;
+    }
+  }
+}
+
+.login-form__wrapper--foot {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.5;
+  padding: 0 10rpx;
+}
+// #endif
 </style>
