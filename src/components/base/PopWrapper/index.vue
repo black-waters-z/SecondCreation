@@ -2,7 +2,8 @@
     <view class="pop-wrapper" :class="{ 'pop-wrapper-active': popShow }">
         <view class="pop-container" @click.stop @touchend.stop @touchmove.stop @touchstart.stop
             :class="{ 'pop-container-active': popShow }">
-            <ClickIcon class="pop-container--icon" :type="['closeempty']" color="#fff" :size="23" @click="changeActive">
+            <ClickIcon class="pop-container--icon" :type="['closeempty']" color="#fff" :size="23" @click="changeActive"
+                @tap="changeActive">
             </ClickIcon>
             <view class="pop-container--form">
                 <slot></slot>
@@ -15,13 +16,14 @@
 
 
 defineOptions({
-  options: {
-    virtualHost: true,
-  },
-});import ClickIcon from "@/components/base/ClickIcon/index.vue";
+    options: {
+        virtualHost: true,
+    },
+}); import ClickIcon from "@/components/base/ClickIcon/index.vue";
 const props = defineProps<{ popShow: boolean }>();
 const emit = defineEmits(["update:popShow"])
 function changeActive() {
+    console.log(props.popShow)
     emit("update:popShow", !props.popShow)
 }
 
@@ -71,6 +73,18 @@ function changeActive() {
     z-index: 1000;
     opacity: 1;
 }
+
+// #ifdef MP-WEIXIN
+.pop-wrapper-active {
+    z-index: 100;
+    opacity: 1;
+
+    .pop-container--form {
+        z-index: 200;
+    }
+}
+
+// #endif
 
 @media screen and (min-width:600px) {
     .pop-wrapper {

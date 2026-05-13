@@ -20,7 +20,8 @@
             <uni-easyinput :inputBorder="false" type="text" v-model="formData.username" placeholder="请输入姓名" />
             <uni-easyinput :inputBorder="false" v-model="formData.password" type="password" placeholder="请输入密码" />
             <view class="login-form__wrapper--item">
-              <uni-easyinput :inputBorder="false" v-model="formData.code" type="text" /><text class="login-form__wrapper--item-text">获取短信验证码</text>
+              <uni-easyinput :inputBorder="false" v-model="formData.code" type="text" /><text
+                class="login-form__wrapper--item-text">获取短信验证码</text>
             </view>
 
             <view class="w-full flex flex-column login-wrapper__form--button">
@@ -92,6 +93,7 @@ function encodeForm(data: Record<string, string>) {
 page {
   height: 100%;
 }
+
 .login-wrapper {
   &__form {
     width: 600rpx;
@@ -121,6 +123,7 @@ page {
       cursor: pointer;
     }
   }
+
   .login-form-father__wrapper {
     height: 100%;
     display: flex;
@@ -420,6 +423,7 @@ page {
 .login-wrapper {
   height: 100%;
 }
+
 .login-wrapper__image {
   display: none;
 }
@@ -577,5 +581,5 @@ page {
   line-height: 1.5;
   padding: 0 10rpx;
 }
-// #endif
-</style>
+
+// #endif</style>

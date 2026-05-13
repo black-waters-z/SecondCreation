@@ -3,7 +3,8 @@
     <!-- #ifdef MP-WEIXIN -->
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
-        <text v-for="(item,idx) in ['首页','tag导航','搜索','智能ai']" :key="idx" class="status_bar__bt" :class="{'status_bar__bt-active':idx===0}">{{item}}</text>
+        <text v-for="(item, idx) in ['创作域', 'tag导航', '搜索', '智能ai']" :key="idx" class="status_bar__bt"
+          :class="{ 'status_bar__bt-active': idx === 0 }">{{ item }}</text>
       </view>
     </view>
     <!-- #endif -->
@@ -60,18 +61,18 @@ onHide(() => {
   display: flex;
   gap: 20rpx;
 
-  &__bt{
+  &__bt {
     font-size: 30rpx;
     color: #000;
     font-weight: 400;
     padding: 0rpx 20rpx;
 
-    &-active{
+    &-active {
       font-weight: 600;
-      font-size: 32rpx;
-      color:rgb(230, 92, 160);
+      font-size: 39rpx;
+      color: rgb(230, 92, 160);
     }
-  }  
+  }
 
   &__logo-search {
     display: flex;
@@ -140,8 +141,8 @@ onHide(() => {
 }
 
 //  #ifdef MP-WEIXIN
-.head-nav{
+.head-nav {
   box-shadow: none !important;
 }
-//  #endif
-</style>
+
+//  #endif</style>

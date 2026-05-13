@@ -10,6 +10,14 @@
       <LikeComponent class="w-full" v-if="componentKey === 'LikeComponent'"></LikeComponent>
       <history-component class="w-full" v-if="componentKey === 'HistoryComponent'"></history-component>
       <DraftComponent class="w-full" v-if="componentKey === 'DraftComponent'"></DraftComponent>
+      <ArticleManagerComponent class="w-full" v-if="componentKey === 'ArticleManagerComponent'">
+      </ArticleManagerComponent>
+      <ArticleDataComponent class="w-full" v-if="componentKey === 'ArticleDataComponent'"></ArticleDataComponent>
+      <SettingComponent class="w-full" v-if="componentKey === 'SettingComponent'"></SettingComponent>
+      <ProblemReplyComponent class="w-full" v-if="componentKey === 'ProblemReplyComponent'"></ProblemReplyComponent>
+      <ContactToMeComponent class="w-full" v-if="componentKey === 'ContactToMeComponent'"></ContactToMeComponent>
+      <AttentionComponent class="w-full" v-if="componentKey === 'AttentionComponent'"></AttentionComponent>
+      <AITalk class="w-full" v-if="componentKey === 'AITalk'"></AITalk>
       <!-- #endif -->
     </template>
 
@@ -49,7 +57,14 @@ import FavoriteComponent from '@/components/icon/FavoriteComponent/index.vue';
 import LikeComponent from '@/components/icon/LikeComponent/index.vue';
 import HistoryComponent from '@/components/icon/HistoryComponent/index.vue';
 import DraftComponent from '@/components/icon/DraftComponent/index.vue';
-let componentKey = ref('');
+import ArticleManagerComponent from '@/components/icon/ArticleManagerComponent/index.vue';
+import ArticleDataComponent from '@/components/icon/ArticleDataComponent/index.vue';
+import SettingComponent from '@/components/icon/SettingComponent/index.vue';
+import ProblemReplyComponent from '@/components/icon/ProblemReplyComponent/index.vue';
+import ContactToMeComponent from '@/components/icon/ContactToMeComponent/index.vue';
+import AttentionComponent from '@/components/icon/AttentionComponent/index.vue';
+import AITalk from '@/components/icon/AITalk/index.vue';
+const componentKey = ref('');
 onLoad((options) => {
   componentKey.value = options?.icon;
   console.log(componentKey.value);

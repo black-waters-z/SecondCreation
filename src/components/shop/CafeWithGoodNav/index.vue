@@ -15,10 +15,10 @@
 
 
 defineOptions({
-  options: {
-    virtualHost: true,
-  },
-});import goodNav from './goodNav.vue';
+    options: {
+        virtualHost: true,
+    },
+}); import goodNav from './goodNav.vue';
 import type { storeInfo } from './type'
 
 defineProps<{ source: storeInfo }>();
@@ -48,7 +48,9 @@ defineProps<{ source: storeInfo }>();
                 bottom: 0;
                 width: 100%;
                 height: 100rpx;
+                // #ifdef H5
                 background: linear-gradient(to top, #000 0%, transparent 70%);
+                // #endif
                 color: #f8f6f6;
                 font-size: 23rpx;
                 box-sizing: border-box;

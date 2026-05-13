@@ -4,21 +4,13 @@
     <head-nav show-search class="position-sticky top-0 z-100"></head-nav>
     <!-- #ifdef MP-WEIXIN -->
     <up-line></up-line>
-    <up-swiper :list="list2" keyName="image" showTitle :autoplay="false" circular></up-swiper>
+    <!-- <up-swiper :list="list2" keyName="image" showTitle :autoplay="false" circular></up-swiper> -->
     <!-- #endif -->
     <match-media :min-width="600">
       <SimpleSearch v-model="searchKey"></SimpleSearch>
     </match-media>
     <template #scroll>
       <match-media :max-width="599" class="w-full">
-        <!-- #ifdef H5 -->
-        <view class="content__head">
-          <common-swiper></common-swiper>
-        </view>
-        <!-- 这里插入商品信息 -->
-        <home-product :source="goods"></home-product>
-        <!-- #endif -->
-
         <water-fall :waterFallColNum="2" :article-lists="articleList"></water-fall>
       </match-media>
       <match-media :min-width="600" class="w-full">
@@ -75,20 +67,6 @@ watch(
   },
 );
 
-const list2 = [
-  {
-    image: 'https://uviewui.com/swiper/swiper2.png',
-    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
-  },
-  {
-    image: 'https://uviewui.com/swiper/swiper1.png',
-    title: '身无彩凤双飞翼，心有灵犀一点通',
-  },
-  {
-    image: 'https://uviewui.com/swiper/swiper3.png',
-    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
-  },
-];
 
 defineOptions({
   options: {
@@ -96,13 +74,24 @@ defineOptions({
   },
 });
 const goods = ref<goodInfo[]>([]);
-const loadMoreArticles = async () => {
-  const next = await getRecommenedArticles();
-  articleList.value = [...articleList.value, ...next];
-  articleSearchList.value = articleList.value;
+const loadMoreArticles = async (page: number = 1, page_size: number = 10) => {
+  // 使用支持分页的接口
+  // const next = await getRecommenedArticles();
+  // if (page === 1) {
+  //   // 第一页，替换数据
+  //   articleList.value = next;
+  // } else {
+  //   // 后续页，追加数据
+  //   articleList.value = [...articleList.value, ...next];
+  // }
+  // articleSearchList.value = articleList.value;
+  // return next; // 返回结果，让 useScrollView 判断是否还有更多数据
+  return []
 };
 onLoad(async () => {
-  articleList.value = await getRecommenedArticles();
+  // 使用分页接口加载第一页数据
+  const firstPage = await getRecommenedArticles();
+  articleList.value = firstPage;
   articleSearchList.value = articleList.value;
   await getGoodsInfo(1, 10).then((res) => {
     goods.value = res;
@@ -150,4 +139,9 @@ onLoad(async () => {
     display: none;
   }
 }
-</style>
+
+// #ifdef MP-WEIXIN
+
+
+
+//</style>

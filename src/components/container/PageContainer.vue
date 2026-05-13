@@ -27,7 +27,7 @@ defineOptions({
   options: {
     virtualHost: true,
   },
-});import { TimeFilter } from '@/types';
+}); import { TimeFilter } from '@/types';
 import HeadNav from '../common/HeadNav.vue';
 import ScrollContainer from '../common/ScrollContainer/index.vue';
 import { type Article } from '@/pages/tagPage/type';
@@ -70,12 +70,22 @@ defineExpose({
 
 .page-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   &__scroll {
     width: 100%;
     height: 100%;
     display: flex;
   }
+
+  // #ifdef MP-WEIXIN
+
+  &__scroll {
+    height: calc(100vh - 80rpx);
+  }
+
+  // #endif
 }
 
 @media screen and (min-width:600px) {

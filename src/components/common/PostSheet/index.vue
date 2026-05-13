@@ -109,6 +109,19 @@ defineOptions({
   margin-left: 0;
 }
 
+// #ifdef H5
+
+.post-sheet-container {
+  margin-left: 50%;
+  margin-bottom: 100rpx;
+}
+
+.post-sheet-container__active {
+  margin-left: -50%;
+}
+
+// #endif
+
 .icon {
   width: 50%;
   height: 50%;
@@ -162,5 +175,5 @@ defineOptions({
     }
   }
 }
-//  #endif
-</style>
+
+//  #endif</style>

@@ -4,7 +4,8 @@ import type { ArticlePageData } from '@/pages/article/type';
 import type { ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 import type { queryArticleKey } from './tagApi';
 export async function getRecommenedArticles(): Promise<Article[]> {
-  const result = await get('/articles/recommendations');
+  // const timestamp = Date.now();
+  const result = await get(`/articles/recommendations?limit=10`);
   return result;
 }
 
