@@ -24,14 +24,10 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-// #ifdef H5
-import CommonSwiper from '@/components/common/CommonSwiper.vue';
-// #endif
 import PostSheet from '@/components/common/PostSheet/index.vue';
 import PostSheetShow from '@/components/common/PostSheet/PostSheetShow.vue';
 import HeadNav from '@/components/common/HeadNav.vue';
 import WaterFall from '@/components/common/WaterFall.vue';
-import HomeProduct from './components/HomeProduct.vue';
 import SimpleSearch from '@/components/base/ScSearch/SimpleSearch.vue';
 import PageWrapper from '@/components/container/PageContainer.vue';
 import { getGoodsInfo } from '@/api/shopApi';
@@ -55,7 +51,7 @@ const articleSearchList = ref<Article[]>([]);
 watch(
   () => searchKey.value,
   () => {
-    waterfallRef.value.resetColumns();
+    waterfallRef.value?.resetColumns();
     if (searchKey.value === '') {
       articleSearchList.value = articleList.value;
     }
@@ -74,20 +70,13 @@ defineOptions({
   },
 });
 const goods = ref<goodInfo[]>([]);
-const loadMoreArticles = async (page: number = 1, page_size: number = 10) => {
-  // 使用支持分页的接口
-  // const next = await getRecommenedArticles();
-  // if (page === 1) {
-  //   // 第一页，替换数据
-  //   articleList.value = next;
-  // } else {
-  //   // 后续页，追加数据
-  //   articleList.value = [...articleList.value, ...next];
-  // }
-  // articleSearchList.value = articleList.value;
-  // return next; // 返回结果，让 useScrollView 判断是否还有更多数据
-  return []
+const loadMoreArticles = async () => {
+  const next = await getRecommenedArticles();
+  articleList.value = next;
+  return next; // 返回结果，让 useScrollView 判断是否还有更多数据
 };
+
+
 onLoad(async () => {
   // 使用分页接口加载第一页数据
   const firstPage = await getRecommenedArticles();

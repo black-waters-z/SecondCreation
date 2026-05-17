@@ -3,9 +3,9 @@ import type { Article } from '@/pages/tagPage/type';
 import type { ArticlePageData } from '@/pages/article/type';
 import type { ManageArticle } from '@/components/icon/ArticleManagerComponent/type';
 import type { queryArticleKey } from './tagApi';
-export async function getRecommenedArticles(): Promise<Article[]> {
+export async function getRecommenedArticles(page: number = 1, page_size: number = 10): Promise<Article[]> {
   // const timestamp = Date.now();
-  const result = await get(`/articles/recommendations?limit=10`);
+  const result = await get(`/articles/recommendations?page=${page}&limit=${page_size}`);
   return result;
 }
 

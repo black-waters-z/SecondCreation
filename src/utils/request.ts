@@ -20,7 +20,7 @@ const toFormUrlEncoded = (payload: Record<string, any>): string => {
 // 统一的请求方法
 export const request = <T = any>(config: RequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const { url, method = 'GET', data = {}, header = {}, timeout = 150000 } = config;
+    const { url, method = 'GET', data = {}, header = {}, timeout = 1500000 } = config;
 
     // 处理完整的 URL
     const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
