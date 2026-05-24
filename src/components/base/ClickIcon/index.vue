@@ -10,7 +10,7 @@
             <text class="icon-wrapper__text" v-if="showText">{{ (num ?? 0) + 1 }}</text>
         </view>
     </view>
-    <view v-else-if="type && type.length === 1 && !iconType" class="icon-wrapper">
+    <view v-else-if="type && type.length === 1 && !iconType" class="icon-wrapper" @click="handleClick">
         <uni-icons :type="type[0]" :size="size" :color="color ?? '#747272'"></uni-icons>
         <text class="icon-wrapper__text">
             <slot></slot>
@@ -33,12 +33,13 @@
 import { nextTick, ref, watch } from 'vue';
 
 defineOptions({
-  options: {
-    virtualHost: true,
-  },
+    options: {
+        virtualHost: true,
+    },
 });
 
 const props = defineProps<{ type: string[], size: number, num?: number, showText?: boolean, hasBeenLiked?: boolean, color?: string, iconType?: string, clickFun?: () => void }>()
+const emit = defineEmits(['click'])
 const isShow = ref(false)
 
 watch(() => props.hasBeenLiked, () => {
@@ -61,6 +62,10 @@ const toggle = async () => {
     isShaking.value = false
     nextTick(() => { isShaking.value = true })
 }
+
+function handleClick() {
+    emit('click')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,14 +82,8 @@ const toggle = async () => {
 
 .shake {
     animation: shake 0.2s ease-in-out;
-    transform-origin: center bottom; // shake around the bottom
+    transform-origin: center bottom;
 }
-
-// .gradient-heart :deep(.uni-icons) {
-//     background: radial-gradient(circle at 50% 50%, #ff2b40 0%, #ff2b40 40%, #b30026 70%, #2a0008 100%) !important;
-//     -webkit-background-clip: text;
-//     color: transparent;
-// }
 
 @keyframes shake {
     0% {

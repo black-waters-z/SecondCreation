@@ -18,7 +18,7 @@
                     <view class="article-video__play">
                         <uni-icons class="article-video__play--icon" fontFamily="CustomFont" :size="23" color="white">{{
                             '\ue89d'
-                        }}</uni-icons>
+                            }}</uni-icons>
                     </view>
                 </view>
                 <view style="padding: 20rpx;" v-if="!article?.image_urls?.[0] && !isVideo">
@@ -58,10 +58,10 @@
 
 
 defineOptions({
-  options: {
-    virtualHost: true,
-  },
-});import BottomTag from '@/components/base/BottomTag/index.vue';
+    options: {
+        virtualHost: true,
+    },
+}); import BottomTag from '@/components/base/BottomTag/index.vue';
 import type { ArticleType } from './type';
 import { computed, inject, ref, type Ref, watch } from 'vue';
 // import ClickIcon from "@/components/base/ClickIcon/index.vue"
@@ -270,6 +270,7 @@ const isVideo = computed(() => {
                 height: 35rpx;
                 border-radius: 50%;
                 margin-left: 10rpx;
+                background-color: bisque;
             }
 
             &--author-name {

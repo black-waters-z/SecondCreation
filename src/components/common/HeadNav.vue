@@ -3,8 +3,9 @@
     <!-- #ifdef MP-WEIXIN -->
     <view class="status_bar w-100">
       <view class="status_bar__logo-search" v-if="showSearch">
-        <text v-for="(item, idx) in ['创作域', 'tag导航', '搜索', '智能ai']" :key="idx" class="status_bar__bt"
-          :class="{ 'status_bar__bt-active': idx === 0 }">{{ item }}</text>
+        <navigator v-for="(item, idx) in navigate_datas" :key="idx" open-type="navigate" :url="item.url">
+          <text class="status_bar__bt" :class="{ 'status_bar__bt-active': idx === 0 }">{{ item.text }}</text>
+        </navigator>
       </view>
     </view>
     <!-- #endif -->
@@ -27,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import SearchBar from './SearchBar.vue';
 import { ref } from 'vue';
 // #ifdef H5
 import CharacterMobileNav from '@/pages/index/components/CharacterMobileNav.vue';
@@ -40,10 +40,24 @@ defineOptions({
   },
 });
 
+const navigate_datas = ref([
+  { text: '创作域', url: '/pages/index/index' },
+  { text: 'tag导航', url: '/pages/tagNav/index' },
+  { text: '搜索', url: '/pages/search/index' },
+  { text: '智能ai', url: '/pages/iconNavigate/index?icon=AITalk' }
+]);
+
 defineProps<{ showSearch?: boolean }>();
 const showMobileNav = ref(false);
+
 function toggleMobileNav() {
   showMobileNav.value = !showMobileNav.value;
+}
+
+function navigateTo(url: string) {
+  uni.navigateTo({
+    url: url
+  });
 }
 
 onHide(() => {
@@ -145,4 +159,5 @@ onHide(() => {
   box-shadow: none !important;
 }
 
-//  #endif</style>
+//  #endif
+</style>
